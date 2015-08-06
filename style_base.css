@@ -25,6 +25,17 @@ font-family: Verdana;
 
 }
 
+.ok
+{
+font-size:18px;
+color:green;
+}
+.nok
+{
+font-size:18px;
+color:red;
+}
+
 /* alternance des couleurs des lignes dans résultats du tableau*/
 
 .trheadcolor
@@ -45,13 +56,6 @@ font-weight:bold
 background-color:#A7EA95;
 color:black;
 font-weight:bold
-}
-
-nav
-{
-display: inline-block;
-width: 200px;
-vertical-align: top;
 }
 
 section
