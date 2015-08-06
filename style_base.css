@@ -1,0 +1,91 @@
+/* Feuille de style de base du site Stats by Djibdev*/
+
+/* vertclair #A7EA95, vertfoncé #426A38, gris du logo #E3DDE2 */
+
+
+h1
+{
+  background: #A7EA95;
+  background-image: -webkit-linear-gradient(top, #A7EA95, #426A38);
+  background-image: -moz-linear-gradient(top, #A7EA95, #426A38);
+  background-image: -ms-linear-gradient(top, #A7EA95, #426A38);
+  background-image: -o-linear-gradient(top, #A7EA95, #426A38);
+  background-image: linear-gradient(to bottom, #A7EA95, #426A38);
+font-size: 30px;
+color:#E3DDE2;
+font-family: Verdana;
+}
+
+h2
+{
+background: #A7EA95;
+font-size: 20px;
+color:#black;
+font-family: Verdana;
+
+}
+
+/* alternance des couleurs des lignes dans résultats du tableau*/
+
+.trheadcolor
+{
+background-color:#E3DDE2;
+color:black;
+}
+
+.trcolor0
+{
+background-color:#426A38;
+color:white;
+font-weight:bold
+}
+
+.trcolor1
+{
+background-color:#A7EA95;
+color:black;
+font-weight:bold
+}
+
+nav
+{
+display: inline-block;
+width: 200px;
+vertical-align: top;
+}
+
+section
+{
+display: inline-block;
+vertical-align: top;
+} 
+
+.btn {
+  background: #A7EA95;
+  background-image: -webkit-linear-gradient(top, #A7EA95, #426A38);
+  background-image: -moz-linear-gradient(top, #A7EA95, #426A38);
+  background-image: -ms-linear-gradient(top, #A7EA95, #426A38);
+  background-image: -o-linear-gradient(top, #A7EA95, #426A38);
+  background-image: linear-gradient(to bottom, #A7EA95, #426A38);
+  -webkit-border-radius: 30;
+  -moz-border-radius: 30;
+  border-radius: 30px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  border: solid #426A38 2px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #E3DDE2;
+  background-image: -webkit-linear-gradient(top, #E3DDE2, #A7EA95);
+  background-image: -moz-linear-gradient(top, #E3DDE2, #A7EA95);
+  background-image: -ms-linear-gradient(top, #E3DDE2, #A7EA95);
+  background-image: -o-linear-gradient(top, #E3DDE2, #A7EA95);
+  background-image: linear-gradient(to bottom, #E3DDE2, #A7EA95);
+  text-decoration: none;
+  color:black;
+}
+
