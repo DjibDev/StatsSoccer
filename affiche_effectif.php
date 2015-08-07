@@ -6,19 +6,18 @@
 	<link rel="stylesheet" href="style_base.css"/>
 </head>
 
-
 <body>
 	
-		<h2>Effectif</h2>	
-
- <?php
+<h2>L'effectif</h2>
+	
+<?php
    
   
     require "fonctions_utiles.php";
 	
 	try
 	{
-		$bdd = new PDO('mysql:host=localhost;dbname=stats;charset=utf8', 'root', 'root');
+		$bdd = new PDO('mysql:host=localhost;dbname=stats;charset=utf8','root', 'root');
 	}
 	catch (Exception $e)
 	{
