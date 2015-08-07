@@ -2,6 +2,12 @@
 
 /* vertclair #A7EA95, vertfoncé #426A38, gris du logo #E3DDE2 */
 
+#bloc_page
+{
+    width: 900px;
+    margin: auto;
+}
+
 
 h1
 {
@@ -18,11 +24,23 @@ font-family: Verdana;
 
 h2
 {
-background: #A7EA95;
+  background: #A7EA95;
+  background-image: -webkit-linear-gradient(top, #A7EA95, #426A38);
+  background-image: -moz-linear-gradient(top, #A7EA95, #426A38);
+  background-image: -ms-linear-gradient(top, #A7EA95, #426A38);
+  background-image: -o-linear-gradient(top, #A7EA95, #426A38);
+  background-image: linear-gradient(to bottom, #A7EA95, #426A38);
 font-size: 20px;
-color:#black;
+color:#E3DDE2;
 font-family: Verdana;
+}
 
+p
+{
+background: #A7EA95;
+font-size: 14px;
+color:#black;
+font-family: Verdana;	
 }
 
 .ok
@@ -58,11 +76,34 @@ color:black;
 font-weight:bold
 }
 
-section
+
+#banniere_image
 {
-display: inline-block;
-vertical-align: top;
-} 
+margin-top: 15px;
+height: 200px;
+border-radius: 5px;
+background: url('images/stade.jpg') no-repeat;
+position: relative;
+box-shadow: 0px 4px 4px #1c1a19;
+margin-bottom: 25px;
+}
+
+#banniere_description
+{
+position: absolute;
+bottom: 0;
+border-radius: 0px 0px 5px 5px;
+width: 99.5%;
+height: 33px;
+padding-top: 15px;
+padding-left: 4px;
+background-color: rgb(24,24,24); /* Pour les anciens navigateurs */
+background-color: rgba(24,24,24,0.8);
+color: white;
+font-size: 0.8em;
+}
+
+
 
 .btn {
   background: #A7EA95;
@@ -76,7 +117,7 @@ vertical-align: top;
   border-radius: 30px;
   font-family: Arial;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 12px;
   padding: 10px 20px 10px 20px;
   border: solid #426A38 2px;
   text-decoration: none;
@@ -93,3 +134,44 @@ vertical-align: top;
   color:black;
 }
 
+.btn img
+{
+border: 0;
+} 
+
+article, aside
+{
+    display: inline-block;
+    vertical-align: top;
+    text-align: justify;
+}
+
+article
+{
+    position: relative;
+    width: 600px;
+    margin-right: 15px;
+    background-color: white;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-size: 0.9em;
+}
+
+article p
+{
+    font-size: 0.8em;
+}
+
+aside
+{
+    position: relative;
+    width: 250px;
+    background-color: white;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-size: 0.9em;
+}	
