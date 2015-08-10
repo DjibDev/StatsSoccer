@@ -13,43 +13,34 @@
 		<h1>Saison 2015-2016</h1>	
 		<div id="banniere_description">	
 				<a class="btn" href="index.php">Accueil</a>
-				<a class="btn" href="affiche_effectif.php">Effectif</a>
-				<a class="btn" href="#section">Championnat</a>
-				<a class="btn" href="#section">Coupe</a>
-				<a class="btn" href="#section">Statistiques d'équipe</a>
-				<a class="btn" href="#section">Statistiques individuelles</a>
+				<a class="btn" href="#section">Résultats/Calendrier</a>
+				<a class="btn" href="affiche_effectif.php">Effectif</a></a>
+				<a class="btn" href="#section">Statistiques</a>
 				<a class="btn" href="http://jgefootlb.free.fr">Forum</a>
 				<a class="btn" href="http://jgefoot.com">Site officiel</a>
-				<a class="btn" href="log_admin.php">Administrer</a></p>
+				<a class="btn" href="administrer.php">Administrer</a></p>
 		</div>
 	</div>
 		
-		
+
+<section>	
+		<article>
 	
-<h2>L'effectif</h2>
 	
-<?php
-   
-  
+	<?php
+  	
 	include ('fonctions_utiles.php');
+	require ('connexion.php');
 	
-	try
-	{
-		$bdd = new PDO('mysql:host=localhost;dbname=stats;charset=utf8','root', 'root');
-	}
-	catch (Exception $e)
-	{
-        die('Erreur détectée: ' . $e->getMessage());
-	}
+	echo '<h2>L\'effectif</h2>';
 	
-	
-	$reponse=$bdd->query('SELECT * from effectif');
+	$reponse=$bdd->query('SELECT * from effectif order by nom ASC');
 	
 	$x=0;
 	$altern=$x % 2;
 		
 		
-	echo '<table border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Pseudo</th><th>Age</th><th>Poste</th></tr>';
+	echo '<table border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Nom</th><th>Prénom</th><th>Age</th><th>Poste</th><th>Num. Maillot</th><th>Stats</th></tr>';
 	
 	
 	while ($resultats=$reponse->fetch())
@@ -69,9 +60,12 @@
 			}
 			
 			echo '<tr class=trcolor'.$altern.'>';
-			echo '<td>'.$resultats['pseudo'].'</td>';
+			echo '<td>'.$resultats['nom'].'</td>';
+			echo '<td>'.$resultats['prenom'].'</td>';
 			echo '<td>'.$age.'</td>';
 			echo '<td>'.$resultats['poste'].'</td>';
+			echo '<td>'.$resultats['num_maillot'].'</td>';
+			echo '<td><a href="stats_player_'.$resultats['ID_joueur'].'.php">Voir</a></td>';
 			echo '</tr>';
 			$x++;
 	}
@@ -82,5 +76,18 @@
                 
     ?>
                 
+		
+	
+		</article>	
+	
+		<aside>
+			<center>
+				<img src="images/petit_logo.png"/>
+			</center>
+			
+		</aside>
+	</section>
+	
+
 </body>
 </html>
