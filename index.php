@@ -13,14 +13,12 @@
 		<h1>Saison 2015-2016</h1>	
 		<div id="banniere_description">	
 				<a class="btn" href="index.php">Accueil</a>
-				<a class="btn" href="affiche_effectif.php">Effectif</a>
-				<a class="btn" href="#section">Championnat</a>
-				<a class="btn" href="#section">Coupe</a>
-				<a class="btn" href="#section">Statistiques d'équipe</a>
-				<a class="btn" href="#section">Statistiques individuelles</a>
+				<a class="btn" href="#section">Résultats/Calendrier</a>
+				<a class="btn" href="affiche_effectif.php">Effectif</a></a>
+				<a class="btn" href="#section">Statistiques</a>
 				<a class="btn" href="http://jgefootlb.free.fr">Forum</a>
 				<a class="btn" href="http://jgefoot.com">Site officiel</a>
-				<a class="btn" href="log_admin.php">Administrer</a></p>
+				<a class="btn" href="administrer.php">Administrer</a></p>
 		</div>
 	</div>
 		
@@ -34,7 +32,7 @@
 			<center>
 				<img src="images/petit_logo.png"/>
 			</center>
-			<img
+			
 		</aside>
 	</section>
 	
