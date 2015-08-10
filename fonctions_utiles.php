@@ -11,7 +11,7 @@ $difference = $dateNais->diff($dateJour);
 return $difference->format('%y');
 } 
 
-function FormatDateFR($dateMySQL)d
+function FormatDateFR($dateMySQL)
 {
     $dateMySQL=strtotime($dateMySQL);
     $dateFR=date("d/m/Y",$dateMySQL);

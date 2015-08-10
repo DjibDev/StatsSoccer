@@ -1,19 +1,37 @@
 <html>
 
 <head>
-	<title>Les statistiques</title>
+	<title>Les stats des loisirs</title>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="style_base.css"/>
 </head>
 
 <body>
 	
+<div id="bloc_page">
+<div id="banniere_image">
+		<h1>Saison 2015-2016</h1>	
+		<div id="banniere_description">	
+				<a class="btn" href="index.php">Accueil</a>
+				<a class="btn" href="affiche_effectif.php">Effectif</a>
+				<a class="btn" href="#section">Championnat</a>
+				<a class="btn" href="#section">Coupe</a>
+				<a class="btn" href="#section">Statistiques d'équipe</a>
+				<a class="btn" href="#section">Statistiques individuelles</a>
+				<a class="btn" href="http://jgefootlb.free.fr">Forum</a>
+				<a class="btn" href="http://jgefoot.com">Site officiel</a>
+				<a class="btn" href="log_admin.php">Administrer</a></p>
+		</div>
+	</div>
+		
+		
+	
 <h2>L'effectif</h2>
 	
 <?php
    
   
-    require "fonctions_utiles.php";
+	include ('fonctions_utiles.php');
 	
 	try
 	{
