@@ -24,24 +24,17 @@
 
 		<?php
 		
-		if (isset($_POST['player']) and isset($_POST['player']))
+		if (isset($_POST['player']))
 		{
 				
 			require ('connexion.php');
 			
-			$date_naiss=$_POST['annee'].'-'.$_POST['mois'].'-'.$_POST['jour'];
-			$player=$_POST['player'];
-			
-			$req = $bdd->prepare('UPDATE effectif SET birthday = :nv_birthday WHERE ID_joueur = :player');
-			$req->execute(array(
-			'nv_birthday' => $date_naiss,
-			'player'=> $_player
-			));
+			$birthday=$_POST['annee'].'-'.$_POST['mois'].'-'.$_POST['jour'];
+			$ID_joueur=$_POST['player'];
+						
+			$req = $bdd->prepare('UPDATE effectif SET birthday=? WHERE ID_joueur=? ');
+			$req->execute(array($birthday,$ID_joueur)); 
 
-					
-			echo $player;
-			echo '<br>';
-			echo $date_naiss;	
 			echo '<p class="ok">Enregistrement bien effectué !</p>';
 		}
 		
