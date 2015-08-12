@@ -1,5 +1,6 @@
 <?php
 
+
 function CalculerAge($date)
 {
 //On déclare les dates à comparer
@@ -18,6 +19,7 @@ function FormatDateFR($dateMySQL)
     return $dateFR;
 }
 
+
 function NumMaillotDispo()
 {
 	require ('connexion.php');
@@ -35,13 +37,12 @@ function NumMaillotDispo()
 	
 	$reponse->closeCursor();
 	
-	/* recupere le nombre d'element dans le tableau */
+	//recupere le nombre d'element dans le tableau 
+	
 	$nb=$x+1;
 	
-	
-	/* Test la condition si le numero est déja pris par un autre joueur */
-	
-	
+	// Test la condition si le numero est déja pris par un autre joueur
+		
 	for ($y=1;$y < 100;$y++)
 	{
 		$doublon=false;
@@ -64,6 +65,8 @@ function NumMaillotDispo()
 		}
 	}
 
-}		
+}	
+
+/* 	
 
 ?> 

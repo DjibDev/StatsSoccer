@@ -40,6 +40,11 @@
 			$req->execute(array($birthday,$poste,$num_maillot,$ID_joueur)); 
 
 			echo '<p class="ok">Enregistrement bien effectué !</p>';
+			echo '<br>';
+			echo '<p>Récapitulatif : </p>';
+			echo '<p>'.$birthday.'</p>';
+			echo '<p>'.$poste.'</p>';
+			echo '<p>'.$num_maillot.'</p>';
 		}
 		
 		else

@@ -23,7 +23,7 @@
 	</div>
 		
 	<section>	
-								
+		<article>						
 		<form method="post" action="trait_modif_player.php">
 			
 		<?php require_once ('fonctions_utiles.php'); ?>
@@ -167,7 +167,41 @@
 		
 		</fieldset>
 		</form>
-		
+	</article>
+	<br>
+	<br>
+	<article>
+		<form method="post" action="trait_suppr_player.php">
+		<fieldset>
+		<Legend>Supprimer un joueur</Legend>		
+			<label for="player">Nom du joueur : <br></label>
+			<select required name="player" id="player">
+				<option selected disabled value="">Sélectionnez</option>
+						
+				<?php 
+				require ('connexion.php');
+			
+				$reponse=$bdd->query('SELECT * from effectif order by nom ASC');
+	
+				while ($resultats=$reponse->fetch())
+				{
+					echo '<option value="'.$resultats['ID_joueur'].'">'.$resultats['nom'].' '.$resultats['prenom'].'</option>';
+				}
+			
+				$reponse->closeCursor();
+				
+				?>
+        	
+        	</select>
+			
+			<br>
+			<br>
+				<input type="reset" value="Annuler"/>
+				<input type="submit" value="Supprimer"/> 	
+			</fieldset>
+			</form>
+	</article>		
+	
 	</section>
 	
 </div>		
