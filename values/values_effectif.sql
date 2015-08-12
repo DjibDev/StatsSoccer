@@ -1,6 +1,4 @@
-
-insert into effectif(poste,num_maillot,nom,prenom) values 
-('GAR',30,'DUPE','Maxime'),
+insert into effectif(poste,num_maillot,nom,prenom) values ('GAR',30,'DUPE','Maxime'),
 ('GAR',1,'RIOU','Rémy'),
 ('DEF',26,'DJIDJI','Koffi'),
 ('DEF',3, 'DJILOBODJI','Papy Mison'),
