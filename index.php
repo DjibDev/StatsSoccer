@@ -14,6 +14,7 @@
 		<div id="banniere_description">	
 				<a class="btn" href="index.php">Accueil</a>
 				<a class="btn" href="#section">Résultats/Calendrier</a>
+				<a class="btn" href="affiche_classement.php">Classement</a>
 				<a class="btn" href="affiche_effectif.php">Effectif</a></a>
 				<a class="btn" href="#section">Statistiques</a>
 				<a class="btn" href="http://jgefootlb.free.fr">Forum</a>
