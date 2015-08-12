@@ -14,7 +14,8 @@
 		<div id="banniere_description">	
 				<a class="btn" href="index.php">Accueil</a>
 				<a class="btn" href="#section">Résultats/Calendrier</a>
-				<a class="btn" href="affiche_effectif.php">Effectif</a></a>
+				<a class="btn" href="affiche_classement.php">Classement</a>
+				<a class="btn" href="affiche_effectif.php">Effectif</a>
 				<a class="btn" href="#section">Statistiques</a>
 				<a class="btn" href="http://jgefootlb.free.fr">Forum</a>
 				<a class="btn" href="http://jgefoot.com">Site officiel</a>
@@ -40,7 +41,7 @@
 	$altern=$x % 2;
 		
 		
-	echo '<table border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Nom</th><th>Prénom</th><th>Date de naissance</th><th>Age</th><th>Poste</th><th>Num. Maillot</th><th>Stats</th></tr>';
+	echo '<table border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Nom</th><th>Prénom</th><th>Age</th><th>Poste</th><th>Numéro</th><th>Stats</th></tr>';
 	
 	
 	while ($resultats=$reponse->fetch())
@@ -62,10 +63,9 @@
 			echo '<tr class=trcolor'.$altern.'>';
 			echo '<td>'.$resultats['nom'].'</td>';
 			echo '<td>'.$resultats['prenom'].'</td>';
-			echo '<td>'.$resultats['birthday'].'</td>';
 			echo '<td>'.$age.'</td>';
 			echo '<td>'.$resultats['poste'].'</td>';
-			echo '<td>'.$resultats['num_maillot'].'</td>';
+			echo '<td align=center>'.$resultats['num_maillot'].'</td>';
 			echo '<td><a href="stats_player_'.$resultats['ID_joueur'].'.php">Voir</a></td>';
 			echo '</tr>';
 			$x++;
