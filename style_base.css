@@ -11,12 +11,12 @@
 
 h1
 {
-  background: #A7EA95;
-  background-image: -webkit-linear-gradient(top, #A7EA95, #426A38);
-  background-image: -moz-linear-gradient(top, #A7EA95, #426A38);
-  background-image: -ms-linear-gradient(top, #A7EA95, #426A38);
-  background-image: -o-linear-gradient(top, #A7EA95, #426A38);
-  background-image: linear-gradient(to bottom, #A7EA95, #426A38);
+background: #A7EA95;
+background-image: -webkit-linear-gradient(top, #A7EA95, #426A38);
+background-image: -moz-linear-gradient(top, #A7EA95, #426A38);
+background-image: -ms-linear-gradient(top, #A7EA95, #426A38);
+background-image: -o-linear-gradient(top, #A7EA95, #426A38);
+background-image: linear-gradient(to bottom, #A7EA95, #426A38);
 font-size: 30px;
 color:#E3DDE2;
 font-family: Verdana;
@@ -24,12 +24,12 @@ font-family: Verdana;
 
 h2
 {
-  background: #A7EA95;
-  background-image: -webkit-linear-gradient(top, #A7EA95, #426A38);
-  background-image: -moz-linear-gradient(top, #A7EA95, #426A38);
-  background-image: -ms-linear-gradient(top, #A7EA95, #426A38);
-  background-image: -o-linear-gradient(top, #A7EA95, #426A38);
-  background-image: linear-gradient(to bottom, #A7EA95, #426A38);
+background: #A7EA95;
+background-image: -webkit-linear-gradient(top, #A7EA95, #426A38);
+background-image: -moz-linear-gradient(top, #A7EA95, #426A38);
+background-image: -ms-linear-gradient(top, #A7EA95, #426A38);
+background-image: -o-linear-gradient(top, #A7EA95, #426A38);
+background-image: linear-gradient(to bottom, #A7EA95, #426A38);
 font-size: 20px;
 color:#E3DDE2;
 font-family: Verdana;
@@ -37,7 +37,6 @@ font-family: Verdana;
 
 p
 {
-background: #A7EA95;
 font-size: 14px;
 color:#black;
 font-family: Verdana;	
@@ -77,17 +76,27 @@ font-weight:bold
 }
 
 /* couleur des liens */
-a {
-  text-decoration: underline;
-  color: white;
+
+a 
+{
+text-decoration: underline;
+color: white;
 }
-a:visited {
-  color: white;
+
+a:visited 
+{
+color: white;
 }
-a:hover, a:focus, a:active {
-  text-decoration: none;
-  color: white;
-  background: black;
+a:hover, a:focus, a:active 
+{
+text-decoration: none;
+color: white;
+background: black;
+}
+
+.adm
+{
+color:#426A38;
 }
 
 #banniere_image
