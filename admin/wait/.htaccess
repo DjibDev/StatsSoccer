@@ -1,0 +1,4 @@
+AuthName "Page d'administration protégée"
+AuthType Basic
+AuthUserFile "/var/www/Stats/admin/wait/.htpasswd.php"
+Require valid-user 
