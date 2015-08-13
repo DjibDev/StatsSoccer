@@ -1,6 +1,6 @@
 /* Feuille de style de base du site Stats by Djibdev*/
 
-/* vertclair #A7EA95, vertfoncé #426A38, gris du logo #E3DDE2 */
+/* vertclair #A7EA95, vertfoncé #426A38, gris du logo #E3DDE2 , jaune #FFDE00*/
 
 #bloc_page
 {
@@ -71,6 +71,13 @@ font-weight:bold
 .trcolor1
 {
 background-color:#A7EA95;
+color:black;
+font-weight:bold
+}
+
+.trcolorspecial
+{
+background-color:#ECF528;
 color:black;
 font-weight:bold
 }
