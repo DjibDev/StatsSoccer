@@ -67,6 +67,47 @@ function NumMaillotDispo()
 
 }	
 
+function RefuserDoublonMatch($journee,$match)
+{
+	require ('connexion.php');
+	
+	$reponse=$bdd->query('SELECT * from matchs where journee_id='.$journee.' and coupe=0 ');
+	
+	$matchs_existants=Array();
+	$x=0;
+	
+	
+	while ($resultats=$reponse->fetch())
+	{
+		$confrontation=$resultats['equipe_dom_id'].'versus'.$resultats['equipe_vis_id'];
+		$matchs_existants[$x]=$confrontation;
+		$x++;
+	}	
+	
+	$reponse->closeCursor();
+	
+	//recupere le nombre d'element dans le tableau 
+	
+	$nb=$x+1;
+	
+	// Test la condition si la confrontation pour cette journée existe deja dans la table matchs
+	
+	$doublon=false;
+		
+	for ($z=0;$z<$nb;$z++)
+	{
+		if ($matchs_existants[$z] == $match)
+		{
+			$doublon= true;
 
-
+		}
+		else
+		{
+			$doublon=false;
+		}
+	} 
+	
+	return $doublon;
+	
+}	
 ?> 

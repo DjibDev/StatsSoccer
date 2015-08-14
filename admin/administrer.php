@@ -21,7 +21,7 @@
 			<fieldset>
 				<legend>Statistiques individuelles</legend>
 				<li><a class="adm" href="admin_stats_modif_player.php">Modifier</a></li>
-				<li><a class="adm" href="admin_stats_	ajout_player.php">Ajouter</a></li>	
+				<li><a class="adm" href="admin_stats_ajout_player.php">Ajouter</a></li>	
 			</fieldset>
 			
 		</article>		
@@ -29,7 +29,7 @@
 		<aside>
 			<fieldset>
 				<legend>Calendrier/Résultats</legend>
-				<li><a class="adm" href="admin_calendrier.php">Calendrier</a></li>
+				<li><a class="adm" href="admin_ajout_calendrier.php">Calendrier</a></li>
 				<li><a class="adm" href="admin_resulats.php">Résultats</a></li>
 			</fieldset>
 			<fieldset>
