@@ -20,19 +20,40 @@
 		{
 			// test si n'existe pas de doublon matchs pour la journée choisie
 			
-			require ('fonctions_utiles');
+			require ('fonctions_utiles.php');
+			require ('connexion.php');
+							
+			$reponse=$bdd->query('SELECT equipe_dom_id, equipe_vis_id FROM matchs');
+			$matchs_existants=Array();
+			$x=0;
 			
+			while ($resultats=$reponse->fetch())
+			{
+				$confrontation=$resultats['equipe_dom_id'].'versus'.$resultats['equipe_vis_id'];
+				$matchs_existants[$x]=$confrontation;
+				$x++;
+			}
+			$reponse->closeCursor();
+			//recupere le nombre d'element dans le tableau 
+			$nb=$x+1;
+			// Test la condition si la confrontation pour cette journée existe deja dans la table matchs
+	
 			$match=$_POST['equipe1'].'versus'.$_POST['equipe2'];
 			$journee_id=$_POST['journee'];
-		
-			$doublon_match=RechDoublonMatch($journee_id,$match);
 						
-			if ($doublon_match == true)
+			$doublon=false;
+						
+			for ($z=0;$z<$nb;$z++)
 			{
-				echo '<p class="nok">L\'enregistrement a été annulé, car le match a deja été rentré pour cette journée</p>';
+				if ($matchs_existants[$z] == $match)
+				{
+					$doublon= true;
+				} 
 			}
-			else
-			{ 
+			
+			if ($doublon == false)
+			{
+						
 				$equipe_dom_id=$_POST['equipe1'];
 				$equipe_vis_id=$_POST['equipe2'];
 						
@@ -45,7 +66,11 @@
 				$stmt->execute();
 
 				echo '<p class="ok">Enregistrement bien effectué !</p>';
-			}*/
+			}
+			else
+			{
+				echo '<p class="nok">ce match existe déja !!! </p>';
+			}	
 		}
 		else
 		{

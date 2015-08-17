@@ -13,6 +13,8 @@
 	include('banniere_menu.php');
 ?>	
 <section>	
+
+
     		
 	<?php
   	
@@ -23,12 +25,14 @@
 	
 	$reponse=$bdd->query('SELECT numero, date FROM journees WHERE saison="2015/2016" ORDER BY numero ASC');
 	
+	
 	while ($resultats=$reponse->fetch())
 	{		
+		
 		$dateFR=FormatDateFR($resultats['date']);
 		$num_journee=$resultats['numero'];
 		
-		echo '<p><b><u>Journée n° '.$num_journee.' - le '.$dateFR.'</u></b></p>';
+		echo '<h4><b><u>Journée n° '.$num_journee.' - le '.$dateFR.'</u></b></h4>';
 				
 		$reponse2=$bdd->query('SELECT e1.nom equi1, e2.nom equi2, e1.favorite fav1, e2.favorite fav2 
 		FROM matchs, journees, equipes e1, equipes e2
@@ -39,11 +43,27 @@
 	
 		while ($resultats2=$reponse2->fetch())
 		{
-			echo '<p>'.$resultats2['equi1'].' - '.$resultats2['equi2'].'</p>';
-		}	
+				
+			if ($resultats2['fav1'] == true)
+			{
+				echo '<p><b>'.$resultats2['equi1'].'</b> - '.$resultats2['equi2'].'</p>';
+			}
+			else	
+			{
+				if  ($resultats2['fav2'] == true)
+				{
+					echo '<p>'.$resultats2['equi1'].' - <b>'.$resultats2['equi2'].'</b></p>';
+				}	
+				else
+				{
+					echo '<p>'.$resultats2['equi1'].' - '.$resultats2['equi2'].'</p>';
+				}
+			}		
+			
+		}
 		$reponse2->closeCursor(); 
-		
-			echo '<br>'; 
+
+		echo '<br>';
 	}
 	
 	$reponse->closeCursor();

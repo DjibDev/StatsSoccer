@@ -168,7 +168,7 @@ font-size: 0.8em;
 border: 0;
 } 
 
-article, aside
+article, aside, vignettes
 {
     display: inline-block;
     vertical-align: top;
@@ -204,3 +204,4 @@ aside
     color: black;
     font-size: 0.9em;
 }	
+
