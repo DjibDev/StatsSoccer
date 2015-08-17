@@ -10,6 +10,7 @@
 	<div id="bloc_page">
 <?php
 	include('banniere_menu.php');
+	require('connexion.php');
 ?>	
 		<section>	
 				
@@ -19,21 +20,9 @@
 			<label for="journee">Sélectionner la date : </label>
 			<select required name="journee" id="journee">
 				<option selected disabled value="">Sélectionnez</option>
-						
 				<?php 
-				require ('connexion.php');
 				require ('fonctions_utiles.php');
-			
-				$reponse=$bdd->query('SELECT * from journees order by numero ASC');
-	
-				while ($resultats=$reponse->fetch())
-				{
-					$dateFR=FormatDateFR($resultats['date']);
-					echo '<option value="'.$resultats['ID_journee'].'">Journée N°'.$resultats['numero'].' - '.$dateFR.'</option>';
-				}
-			
-				$reponse->closeCursor();
-				
+				NbrMatchAtteint();
 				?>
            	</select>
            	<br>
@@ -42,7 +31,7 @@
 				<option selected disabled value="">Sélectionnez</option>
 						
 				<?php 
-						
+									
 				$reponse=$bdd->query('SELECT * from equipes order by nom ASC');
 	
 				while ($resultats=$reponse->fetch())

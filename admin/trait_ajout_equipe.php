@@ -32,11 +32,8 @@
 			$stmt->execute();
 			
 			echo '<p class="ok">Enregistrement bien effectué !</p>';
-			echo '<br>';
-			echo '<p>Récapitulatif : </p>';
-			echo '<p>'.$nom_club.'</p>';
-			echo '<p>'.$ville.'</p>';
-			echo '<p>'.$stade.'</p>';
+			echo '<center><p>Souhaitez-vous rajouter une autre équipe ? </p>';
+			echo '<p><a class="btn" href="admin_ajout_equipe.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p></center>';
 			
 		}
 		else

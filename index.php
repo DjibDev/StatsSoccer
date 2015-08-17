@@ -22,7 +22,6 @@
 			<center>
 				<img src="images/petit_logo.png"/>
 			</center>
-			
 		</aside>
 	</section>
 	

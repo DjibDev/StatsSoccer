@@ -15,12 +15,12 @@
 		<article>
 				<fieldset>
 				<legend>Statistiques de l'équipe</legend>
-				<li><a class="adm" href="admin_stats_modif_equipe.php">Modifier</a></li>
+				<li><a class="adm" href="admin_stats_modif_equipe.php">Modifier/Supprimer</a></li>
 				<li><a class="adm" href="admin_stats_ajout_equipe.php">Ajouter</a></li>	
 			</fieldset>	
 			<fieldset>
 				<legend>Statistiques individuelles</legend>
-				<li><a class="adm" href="admin_stats_modif_player.php">Modifier</a></li>
+				<li><a class="adm" href="admin_stats_modif_player.php">Modifier/Supprimer</a></li>
 				<li><a class="adm" href="admin_stats_ajout_player.php">Ajouter</a></li>	
 			</fieldset>
 			
@@ -34,12 +34,12 @@
 			</fieldset>
 			<fieldset>
 				<legend>Effectif</legend>
-				<li><a class="adm" href="admin_modif_player.php">Modifier</a></li>
+				<li><a class="adm" href="admin_modif_player.php">Modifier/Supprimer</a></li>
 				<li><a class="adm" href="admin_ajout_player.php">Ajouter</a></li>	
 			</fieldset>
 			<fieldset>
 				<legend>Equipe</legend>
-				<li><a class="adm" href="admin_modif_equipe.php">Modifier</a></li>
+				<li><a class="adm" href="admin_modif_equipe.php">Modifier/Supprimer</a></li>
 				<li><a class="adm" href="admin_ajout_equipe.php">Ajouter</a></li>	
 			</fieldset>
 		</aside>	

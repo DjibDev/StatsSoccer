@@ -1,4 +1,4 @@
-insert into equipes(nom,commune,stade) values ('Angers SCO', ' ', ' '),
+insert into equipes(nom,ville,stade) values ('Angers SCO', ' ', ' '),
 ('AS Monaco', ' ', ' '),
 ('SC Bastia', ' ', ' '),
 ('Stade de Reims', ' ', ' '),

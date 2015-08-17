@@ -20,7 +20,6 @@
 		{
 			// test si n'existe pas de doublon matchs pour la journée choisie
 			
-			require ('fonctions_utiles.php');
 			require ('connexion.php');
 							
 			$reponse=$bdd->query('SELECT equipe_dom_id, equipe_vis_id FROM matchs');
@@ -65,11 +64,14 @@
 				$stmt->bindParam(3, $journee_id);
 				$stmt->execute();
 
-				echo '<p class="ok">Enregistrement bien effectué !</p>';
+				echo '<p class="ok">Enregistrement bien effectué !</p><br>';
+				echo '<center><p>Souhaitez-vous rajouter une confrontation ? </p>';
+				echo '<p><a class="btn" href="admin_ajout_calendrier.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p></center>';
 			}
 			else
 			{
 				echo '<p class="nok">ce match existe déja !!! </p>';
+				echo '<p><a class="btn" href="admin_ajout_calendrier.php">Recommencez !</a></p>';
 			}	
 		}
 		else
