@@ -67,11 +67,11 @@ function NumMaillotDispo()
 
 }	
 
-function RefuserDoublonMatch($journee,$match)
+function RechDoublonMatch($journee,$match)
 {
 	require ('connexion.php');
 	
-	$reponse=$bdd->query('SELECT * from matchs where journee_id='.$journee.' and coupe=0 ');
+	$reponse=$bdd->query('SELECT equipe_dom_id, equipe_vis_id FROM matchs');
 	
 	$matchs_existants=Array();
 	$x=0;
@@ -100,14 +100,11 @@ function RefuserDoublonMatch($journee,$match)
 		{
 			$doublon= true;
 
-		}
-		else
-		{
-			$doublon=false;
-		}
-	} 
+		} 
+	}
 	
 	return $doublon;
 	
 }	
+
 ?> 

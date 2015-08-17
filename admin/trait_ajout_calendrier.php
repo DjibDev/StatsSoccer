@@ -20,17 +20,19 @@
 		{
 			// test si n'existe pas de doublon matchs pour la journée choisie
 			
+			require ('fonctions_utiles');
+			
 			$match=$_POST['equipe1'].'versus'.$_POST['equipe2'];
 			$journee_id=$_POST['journee'];
-			
-			/*$bool=RefuserDoublonMatch($journee_id,$match)
-			
-			if ($bool == true)
+		
+			$doublon_match=RechDoublonMatch($journee_id,$match);
+						
+			if ($doublon_match == true)
 			{
 				echo '<p class="nok">L\'enregistrement a été annulé, car le match a deja été rentré pour cette journée</p>';
 			}
 			else
-			{ */
+			{ 
 				$equipe_dom_id=$_POST['equipe1'];
 				$equipe_vis_id=$_POST['equipe2'];
 						
@@ -42,8 +44,8 @@
 				$stmt->bindParam(3, $journee_id);
 				$stmt->execute();
 
-			echo '<p class="ok">Enregistrement bien effectué !</p>';
-			//}
+				echo '<p class="ok">Enregistrement bien effectué !</p>';
+			}*/
 		}
 		else
 		{

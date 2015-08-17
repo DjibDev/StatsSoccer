@@ -15,7 +15,7 @@
 				
 		<form method="post" action="trait_ajout_calendrier.php">	
 		<fieldset>
-		<Legend>Ajout d'une confrontation</Legend>		
+		<Legend>Ajout d'une confrontation dans le calendrier</Legend>		
 			<label for="journee">Sélectionner la date : </label>
 			<select required name="journee" id="journee">
 				<option selected disabled value="">Sélectionnez</option>
