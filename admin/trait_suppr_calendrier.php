@@ -15,19 +15,19 @@
 
 		<?php
 		
-		if (isset($_POST['player']))
+		if (isset($_POST['journee_suppr']))
 		{
 				
 			require ('connexion.php');
 			
-			$ID_joueur=$_POST['player'];	
+			$journee_id=$_POST['journee_suppr'];	
 						
-			$req = $bdd->prepare('DELETE FROM effectif WHERE ID_joueur=? ');
-			$req->execute(array($ID_joueur)); 
+			$req = $bdd->prepare('DELETE FROM matchs WHERE journee_id=? ');
+			$req->execute(array($journee_id)); 
 
 			echo '<p class="ok">Suppression bien effectuée!</p>';
-			echo '<center><p>Souhaitez-vous supprimer un autre joueur ? </p>';
-			echo '<p><a class="btn" href="admin_modif_player.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p></center>';
+			echo '<center><p>Souhaitez-vous supprimer un autre calendrier ? </p>';
+			echo '<p><a class="btn" href="admin_calendrier.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p></center>';
 		}
 		
 		else

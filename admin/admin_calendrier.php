@@ -70,7 +70,36 @@
 			<input type="submit" value="Ajouter"/> 	
         </fieldset>
 		</form>
-		
+		<br>
+		<form method="post" action="trait_suppr_calendrier.php">	
+		<fieldset>
+		<Legend>Supprimer tous les matchs d'une journée</Legend>		
+			<label for="journee_suppr">Sélectionner la date : </label>
+			<select required name="journee_suppr" id="journee_suppr">
+				<option selected disabled value="">Sélectionnez</option>
+				
+				<?php
+				
+				$reponse3=$bdd->query('SELECT numero, date, ID_journee
+				FROM journees
+				ORDER BY numero ASC');
+	
+	
+				while ($resultats3=$reponse3->fetch())
+				{
+				$dateFR=FormatDateFR($resultats3['date']);
+				echo '<option value='.$resultats3['ID_journee'].'>Journée N°'.$resultats3['numero'].' - '.$dateFR.'</option>';
+				}
+				$reponse3->closeCursor();
+	
+				?>
+			</select>
+			<br>
+			<br>
+			<input type="reset" value="Annuler"/>
+			<input type="submit" value="Supprimer"/> 	
+        </fieldset>
+        </form>
 		</section>
 		
 </div>		

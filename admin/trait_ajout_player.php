@@ -36,17 +36,13 @@
 			$stmt->execute();
 			
 			echo '<p class="ok">Enregistrement bien effectué !</p>';
-			echo '<br>';
-			echo '<p>Récapitulatif : </p>';
-			echo '<p>'.$nom.'</p>';
-			echo '<p>'.$prenom.'</p>';
-			echo '<p>'.$birthday.'</p>';
-			echo '<p>'.$poste.'</p>';
-			echo '<p>'.$num_maillot.'</p>';
+			echo '<center><p>Souhaitez-vous rajouter un joueur ? </p>';
+			echo '<p><a class="btn" href="admin_ajout_player.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p></center>';
 		}
 		else
 		{
 			echo '<p class="nok">Une erreur s\'est produite !</p>';
+			echo '<p><a class="btn" href="admin_calendrier.php">Retour</a></p>';
 		}
 		?>
 	</section>

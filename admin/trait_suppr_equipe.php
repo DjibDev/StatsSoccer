@@ -26,11 +26,14 @@
 			$req->execute(array($ID_equipe)); 
 
 			echo '<p class="ok">Suppression bien effectuée!</p>';
+			echo '<center><p>Souhaitez-vous supprimer une autre équipe ? </p>';
+			echo '<p><a class="btn" href="admin_modif_equipe.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p></center>';
 		}
 		
 		else
 		{
 			echo '<p class="nok">Une erreur s\'est produite !</p>';
+			echo '<p><a class="btn" href="admin_calendrier.php">Retour</a></p>';
 		}
 
 		?>

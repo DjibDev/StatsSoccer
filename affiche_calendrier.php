@@ -19,13 +19,13 @@
 	require ('connexion.php');
 	
 	echo '<h2>Calendrier et Résultats</h2>';
-	echo '<table align="center" border="0" cellspacing="3">';
+	echo '<center><table border="0" cellspacing="3">';
 	echo '<tr class="trcolor0"><td><a href="#match1">Journée 1</a></td><td><a href=#match2>Journée 2</a></td><td><a href=#match3>Journée 3</a></td><td><a href=#match4>Journée 4</a></td><td><a href=#match5>Journée 5</a></td><td><a href=#match6>Journée 6</a></td><td><a href=#match7>Journée 7</a></td><td><a href=#match8>Journée 8</a></td></tr>';
 	echo '<tr class="trcolor0"><td><a href=#match9>Journée 9</a></td><td><a href=#match10>Journée 10</a></td><td><a href=#match11>Journée 11</a></td><td><a href=#match12>Journée 12</a></td><td><a href=#match13>Journée 13</a></td><td><a href=#match14>Journée 14</a></td><td><a href=#match15>Journée 15</a></td><td><a href=#match16>Journée 16</a></td></tr>';
 	echo '<tr class="trcolor0"><td><a href=#match17>Journée 17</a></td><td><a href=#match18>Journée 18</a></td><td><a href=#match19>Journée 19</a></td><td><a href=#match20>Journée 20</a></td><td><a href=#match21>Journée 21</a></td><td><a href=#match22>Journée 22</a></td><td><a href=#match23>Journée 23</a></td><td><a href=#match24>Journée 24</a></td></tr>';
 	echo '<tr class="trcolor0"><td><a href=#match25>Journée 25</a></td><td><a href=#match26>Journée 26</a></td><td><a href=#match27>Journée 27</a></td><td><a href=#match28>Journée 28</a></td><td><a href=#match29>Journée 29</a></td><td><a href=#match30>Journée 30</a></td><td><a href=#match31>Journée 31</a></td><td><a href=#match32>Journée 32</a></td></tr>';
 	echo '<tr class="trcolor0"><td><a href=#match33>Journée 33</a></td><td><a href=#match34>Journée 34</a></td><td><a href=#match35>Journée 35</a></td><td><a href=#match36>Journée 36</a></td><td><a href=#match37>Journée 37</a></td><td><a href=#match38>Journée 38</a></td></tr>';
-	echo '</table>';
+	echo '</table></center>';
 	echo '<br>';
 	
 	$reponse=$bdd->query('SELECT numero, date FROM journees WHERE saison="2015/2016" ORDER BY numero ASC');
@@ -37,10 +37,8 @@
 		$dateFR=FormatDateFR($resultats['date']);
 		$num_journee=$resultats['numero'];
 		
-		
 		echo '<div id=match'.$num_journee.'></div>';
-		
-		echo '<table cellspacing="4" cellspading="4"><tr><th colspan="2"><a href="#bloc_page"><img src="images/fleche_haut.jpg"></a><b><u>Journée n° '.$num_journee.' - le '.$dateFR.'</u></b></th></tr>';
+		echo '<center><table cellspacing="4" cellspading="4"><tr><th colspan="2"><a href="#bloc_page"><img src="images/fleche_haut.jpg"></a><b><u>Journée n° '.$num_journee.' - le '.$dateFR.'</u></b></th></tr>';
 	
 				
 		$reponse2=$bdd->query('SELECT e1.nom equi1, e2.nom equi2, e1.favorite fav1, e2.favorite fav2, but_equipe_dom, but_equipe_vis 
@@ -72,13 +70,14 @@
 		}
 		$reponse2->closeCursor(); 
 
-		echo '</table>';
+		
+		echo '</table></center>';
 		echo '<br>';
 		
 	}
 	
 	$reponse->closeCursor();
-                
+
     ?>
 
 </section>

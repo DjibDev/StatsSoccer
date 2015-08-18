@@ -39,11 +39,14 @@
 			$req->execute(array($ville,$stade,$favorite,$ID_equipe)); 
 
 			echo '<p class="ok">Enregistrement bien effectué !</p>';
+			echo '<center><p>Souhaitez-vous modifier une autre équipe ? </p>';
+			echo '<p><a class="btn" href="admin_modif_equipe.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p></center>';
 		}
 		
 		else
 		{
 			echo '<p class="nok">Une erreur s\'est produite !</p>';
+			echo '<p><a class="btn" href="admin_calendrier.php">Retour</a></p>';
 		}
 
 		?>
