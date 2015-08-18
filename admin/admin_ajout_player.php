@@ -28,7 +28,7 @@
 			<br>
 			
 			<label for="poste">Poste : </label>
-        	<select required name="poste" id="poste">
+        	<select name="poste" id="poste">
 				<option selected disabled value="">Sélectionnez</option>
 				<option value="GAR">Gardien</option>
 				<option value="DEF">Défenseur</option>
@@ -37,7 +37,7 @@
         	</select>
 			
 			<label for="jour">Date de naissance : </label>
-			<select required name="jour" id="jour">
+			<select name="jour" id="jour">
 					<option selected disabled value="">Sélectionnez</option>
 					<option value="01">01</option>
 					<option value="02">02</option>
@@ -71,7 +71,7 @@
 					<option value="30">30</option>
 					<option value="31">31</option>
 			</select> 
-			<select required name="mois" id="mois">
+			<select name="mois" id="mois">
 					<option selected disabled value="">Sélectionnez</option>
 					<option value="01">Janvier</option>
 					<option value="02">Février</option>
@@ -87,7 +87,7 @@
 					<option value="12">Décembre</option>
 			</select>
 	   
-			<select required name="annee" id="annee">
+			<select name="annee" id="annee">
 				<option selected disabled value="">Sélectionnez</option>
 				<option value="1970">1970</option>
 				<option value="1971">1971</option>
@@ -125,7 +125,7 @@
 		<br>
 		
 		<label for="num_maillot">Numéro de maillot :</label>	
-		<select required name="num_maillot" id="num_maillot">
+		<select name="num_maillot" id="num_maillot">
 			<option selected disabled value="">Sélectionnez</option>
 			<?php NumMaillotDispo(); ?>
 		</select>
