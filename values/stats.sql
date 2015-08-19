@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mer 19 Août 2015 à 09:36
+-- Généré le: Mer 19 Août 2015 à 16:46
 -- Version du serveur: 5.5.44
 -- Version de PHP: 5.4.41-0+deb7u1
 
@@ -19,6 +19,27 @@ SET time_zone = "+00:00";
 --
 -- Base de données: `stats`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `classement`
+--
+
+CREATE TABLE IF NOT EXISTS `classement` (
+  `ID_classement` int(11) NOT NULL AUTO_INCREMENT,
+  `nb_journees` int(2) NOT NULL,
+  `nb_victoires` int(2) NOT NULL,
+  `nb_nuls` int(2) NOT NULL,
+  `nb_defaites` int(2) NOT NULL,
+  `nb_buts_pour` int(3) NOT NULL,
+  `nb_buts_contre` int(3) NOT NULL,
+  `diff` int(3) NOT NULL,
+  `points` int(11) NOT NULL,
+  `equipe_id` int(11) NOT NULL,
+  PRIMARY KEY (`ID_classement`),
+  KEY `fk4_equipe_id` (`equipe_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -83,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `matchs` (
   `journee_id` int(11) NOT NULL,
   PRIMARY KEY (`ID_match`),
   KEY `fk_journee_id` (`journee_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
 
 -- --------------------------------------------------------
 
@@ -106,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `stats_collectives` (
   PRIMARY KEY (`ID_stat_collec`),
   KEY `fk2_journee_id` (`journee_id`),
   KEY `fk_equipe_id` (`equipe_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 -- --------------------------------------------------------
 
@@ -136,6 +157,12 @@ CREATE TABLE IF NOT EXISTS `stats_individuelles` (
 --
 
 --
+-- Contraintes pour la table `classement`
+--
+ALTER TABLE `classement`
+  ADD CONSTRAINT `fk4_equipe_id` FOREIGN KEY (`equipe_id`) REFERENCES `equipes` (`ID_equipe`);
+
+--
 -- Contraintes pour la table `matchs`
 --
 ALTER TABLE `matchs`
@@ -145,6 +172,7 @@ ALTER TABLE `matchs`
 -- Contraintes pour la table `stats_collectives`
 --
 ALTER TABLE `stats_collectives`
+  ADD CONSTRAINT `fk3_equipe_id` FOREIGN KEY (`equipe_id`) REFERENCES `equipes` (`ID_equipe`),
   ADD CONSTRAINT `fk2_journee_id` FOREIGN KEY (`journee_id`) REFERENCES `journees` (`ID_journee`),
   ADD CONSTRAINT `fk_equipe_id` FOREIGN KEY (`equipe_id`) REFERENCES `equipes` (`ID_equipe`);
 

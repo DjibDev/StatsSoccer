@@ -17,74 +17,20 @@
 <section>	
 		<article>
 	
-	
 	<?php
-  	
-	include ('fonctions_utiles.php');
+  
+	require ('admin/MAJ_Classement.php');
 	require ('connexion.php');
 	
-	echo '<h2>Le classement</h2>';
+	// appel de la fonction 
+	MAJ_Classement();
+
+	/*echo '<h2>Le classement</h2>';
 	
-	//requete qui retourne le nombre de journee présentent dans stats_collectives
-	$req2=$bdd->query('SELECT COUNT(DISTINCT journee_id) AS nb_journee
-	FROM stats_collectives');
-	
-	while ($resultats2=$req2->fetch())
-	{
-		$nb_journee=$resultats2['nb_journee'];
-	}
-	$req2->closeCursor();
-	
-	// calculs cumulatifs 
-					
-	$cumul_v=Array();
-	$cumul_n=Array();
-	$cumul_d=Array();
-	$cumul_bp=Array();
-	$cumul_bc=Array();
-	$cumul_diff=Array();
-	$cumul_pts=Array();
-			
-	for ($x=0;$x < $nb_journee;$x++)
-	{		
-		
-		$req1=$bdd->query('SELECT nom, favorite, victoire, defaite, nul, buts_pour, buts_contre, diff, points
-		FROM equipes, stats_collectives
-		WHERE  equipes.ID_equipe = stats_collectives.equipe_id
-		AND equipe_id='.$equipe_id.'
-		ORDER BY points DESC, diff DESC, buts_pour ASC ');
-	
-		if ($victoire == true)
-		{
-				$v="1";
-		}
-		else
-		{
-				$v="0";
-		}
-		
-		if ($nul == true)
-		{
-				$n="1";
-		}
-		else
-		{
-				$n="0";
-		}	
-		
-		if ($defaite == true)
-		{
-				$d="1";
-		}
-		else
-		{
-				$d="0";
-		}
-		
-		$cumul_v[$x]=$cumul_v[$x]+1;
-			
-	
-	
+	$req1=$bdd->query('SELECT nom_equipe, favorite, victoire, defaite, nul, buts_pour, buts_contre, diff, points
+	FROM equipes, stats_collectives
+	WHERE  equipes.ID_equipe = stats_collectives.equipe_id
+	ORDER BY points DESC, diff DESC, buts_pour ASC ');
 	
 	$x=0;
 	echo '<table border=2 cellspacing=2 cellspadding=2>';
@@ -92,11 +38,11 @@
 	
 		while ($resultats=$req1->fetch())
 		{		
-			/* le calcul du modulo de "$x" permet d'alterner le resultat : soit "0" soit "1" */
+			/* le calcul du modulo de "$x" permet d'alterner le resultat : soit "0" soit "1" 
 			$x++;
 			$altern=$x % 2;
 			
-			/* affichage différent si s'agit de l'équipe favorite */
+			/* affichage différent si s'agit de l'équipe favorite 
 			
 			if ($resultats['favorite'] == true)
 			{
@@ -106,14 +52,12 @@
 			{	
 				$altern=$x % 2;
 			}
-			
-		}
-		$req1->closeCursor();
-					
+		
+							
 			echo '<tr class=trcolor'.$altern.'>';
 			echo '<td>'.$x.'</td>';
 			echo '<td>'.$resultats['nom'].'</td>';
-			echo '<td>'.$nb_journee.'</td>';
+			echo '<td>'.$x.'</td>';
 			echo '<td>'.$resultats['victoire'].'</td>';
 			echo '<td>'.$resultats['nul'].'</td>';
 			echo '<td>'.$resultats['defaite'].'</td>';
@@ -122,7 +66,13 @@
 			echo '<td>'.$resultats['diff'].'</td>';
 			echo '<td>'.$resultats['points'].'</td></tr>';
 			
-			echo '</table>';	
+		}
+		$req1->closeCursor();
+
+			
+			echo '</table>';	*/
+			
+			
                 
     ?>
         
