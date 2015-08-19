@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Jeu 13 Août 2015 à 12:15
+-- Généré le: Mer 19 Août 2015 à 09:36
 -- Version du serveur: 5.5.44
 -- Version de PHP: 5.4.41-0+deb7u1
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données: `stats`
 --
-CREATE DATABASE `stats` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `stats`;
 
 -- --------------------------------------------------------
 
@@ -38,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `effectif` (
   `poste` varchar(3) CHARACTER SET utf8 NOT NULL DEFAULT 'XXX',
   `num_maillot` varchar(2) NOT NULL,
   PRIMARY KEY (`ID_joueur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=54 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=74 ;
 
 -- --------------------------------------------------------
 
@@ -53,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `equipes` (
   `stade` varchar(100) CHARACTER SET utf8 NOT NULL,
   `favorite` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID_equipe`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
 
 -- --------------------------------------------------------
 
@@ -67,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `journees` (
   `saison` varchar(9) CHARACTER SET utf8 NOT NULL DEFAULT '2015/2016',
   `numero` int(11) NOT NULL,
   PRIMARY KEY (`ID_journee`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=77 ;
 
 -- --------------------------------------------------------
 
@@ -85,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `matchs` (
   `journee_id` int(11) NOT NULL,
   PRIMARY KEY (`ID_match`),
   KEY `fk_journee_id` (`journee_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 -- --------------------------------------------------------
 
@@ -95,13 +93,13 @@ CREATE TABLE IF NOT EXISTS `matchs` (
 
 CREATE TABLE IF NOT EXISTS `stats_collectives` (
   `ID_stat_collec` int(11) NOT NULL AUTO_INCREMENT,
-  `victoires` int(11) NOT NULL DEFAULT '0',
-  `defaites` int(11) NOT NULL DEFAULT '0',
-  `nuls` int(11) NOT NULL DEFAULT '0',
+  `victoire` tinyint(1) NOT NULL DEFAULT '0',
+  `defaite` tinyint(1) NOT NULL DEFAULT '0',
+  `nul` tinyint(1) NOT NULL DEFAULT '0',
   `buts_pour` int(11) NOT NULL DEFAULT '0',
   `buts_contre` int(11) NOT NULL DEFAULT '0',
   `diff` int(2) NOT NULL DEFAULT '0',
-  `points` int(2) NOT NULL DEFAULT '0',
+  `points` int(1) NOT NULL DEFAULT '0',
   `domicile` tinyint(1) NOT NULL,
   `journee_id` int(11) NOT NULL,
   `equipe_id` int(11) NOT NULL,
