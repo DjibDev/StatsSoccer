@@ -26,18 +26,7 @@
 				<option selected disabled value="">Sélectionnez</option>
 			
 				<?php 
-							
-					$reponse=$bdd->query('SELECT numero, date, ID_journee
-					FROM journees
-					ORDER BY numero ASC');
-					
-					while ($resultats=$reponse->fetch())
-					{
-						$dateFR=FormatDateFR($resultats['date']);
-						echo '<option value='.$resultats['ID_journee'].'>Journée N°'.$resultats['numero'].' - '.$dateFR.'</option>';
-					}
-					$reponse->closeCursor();
-				
+					ResultatsDejaRentres();
 				?>
            	</select>
 		</fieldset>

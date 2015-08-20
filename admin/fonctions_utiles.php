@@ -115,15 +115,56 @@ function NbrMatchAtteint()
 	$reponse2->closeCursor();
 }
 
+
+
+
 function ResultatsDejaRentres()
 {
 	require ('connexion.php');
-	
-	$reponse=$bdd->query('SELECT DISTINCT numero, date
+
+	$reponse=$bdd->query('SELECT DISTINCT numero
 	FROM stats_collectives, journees
 	WHERE stats_collectives.journee_id = journees.ID_journee ');
 	
+	$deja_fait=Array();
+	$x=0;
+		
+	while ($resultats=$reponse->fetch())
+	{
+		$deja_fait[$x]=$resultats['numero'];
+		$x++;
+	}
+	$reponse->closeCursor();
 	
+	$reponse2=$bdd->query('SELECT numero, date, ID_journee
+	FROM journees
+	ORDER BY numero ASC');
+	
+	$nb_elements=$x+1;
+	$indice=0;
+	
+	while ($resultats2=$reponse2->fetch())
+	{
+			
+		while ($indice < $nb_elements)
+		{	
+				if ($deja_fait[$indice] == $resultats2['numero'])
+				{
+					$dateFR=FormatDateFR($resultats2['date']);
+					echo '<option disabled value='.$resultats2['ID_journee'].'>Journée N°'.$resultats2['numero'].' - '.$dateFR.'</option>';
+				}
+				else
+				{
+					$dateFR=FormatDateFR($resultats2['date']);
+					echo '<option value='.$resultats2['ID_journee'].'>Journée N°'.$resultats2['numero'].' - '.$dateFR.'</option>';
+				}	
+				
+				$indice++;	
+		
+		}
+		$reponse->closeCursor();
+			
+	}				
 	
 }	
 
