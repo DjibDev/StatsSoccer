@@ -28,7 +28,7 @@
 			<br>
 			
 			<label for="poste">Poste : </label>
-        	<select name="poste" id="poste">
+        	<select required name="poste" id="poste">
 				<option selected disabled value="">Sélectionnez</option>
 				<option value="GAR">Gardien</option>
 				<option value="DEF">Défenseur</option>
@@ -37,7 +37,7 @@
         	</select>
 			
 			<label for="jour">Date de naissance : </label>
-			<select name="jour" id="jour">
+			<select required name="jour" id="jour">
 					<option selected disabled value="">Sélectionnez</option>
 					<option value="01">01</option>
 					<option value="02">02</option>
@@ -71,7 +71,7 @@
 					<option value="30">30</option>
 					<option value="31">31</option>
 			</select> 
-			<select name="mois" id="mois">
+			<select required name="mois" id="mois">
 					<option selected disabled value="">Sélectionnez</option>
 					<option value="01">Janvier</option>
 					<option value="02">Février</option>
@@ -87,7 +87,7 @@
 					<option value="12">Décembre</option>
 			</select>
 	   
-			<select name="annee" id="annee">
+			<select required name="annee" id="annee">
 				<option selected disabled value="">Sélectionnez</option>
 				<option value="1970">1970</option>
 				<option value="1971">1971</option>
@@ -100,7 +100,7 @@
 				<option value="1978">1978</option>
 				<option value="1979">1979</option>
 				<option value="1980">1980</option>
-				<option value="1981	">1981</option>
+				<option value="1981">1981</option>
 				<option value="1982">1982</option>
 				<option value="1983">1983</option>
 				<option value="1984">1984</option>

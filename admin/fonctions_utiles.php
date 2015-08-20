@@ -115,4 +115,17 @@ function NbrMatchAtteint()
 	$reponse2->closeCursor();
 }
 
+function ResultatsDejaRentres()
+{
+	require ('connexion.php');
+	
+	$reponse=$bdd->query('SELECT DISTINCT numero, date
+	FROM stats_collectives, journees
+	WHERE stats_collectives.journee_id = journees.ID_journee ');
+	
+	
+	
+}	
+
+
 ?> 

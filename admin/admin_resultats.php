@@ -18,15 +18,15 @@
 	{
 ?>	
 	<section>	
-	<article>
 	<form method="post" action="admin_resultats.php">	
 		<fieldset>
 		<Legend>Ajout des résultats de la journée</Legend>		
 			<label for="journee">Sélectionner la date : </label>
 			<select required name="journee" id="journee" onchange="submit();">
 				<option selected disabled value="">Sélectionnez</option>
+			
 				<?php 
-								
+							
 					$reponse=$bdd->query('SELECT numero, date, ID_journee
 					FROM journees
 					ORDER BY numero ASC');
@@ -85,7 +85,8 @@
 				
 	}
 	?>
-		
+	
+</section>		
 </div>		
 	
 </body>
