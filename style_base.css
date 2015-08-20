@@ -65,23 +65,21 @@ color:black;
 {
 background-color:#426A38;
 color:white;
-font-weight:bold
 }
 
 .trcolor1
 {
 background-color:#A7EA95;
 color:black;
-font-weight:bold
 }
 
 .trcolorspecial
 {
 background-color:#ECF528;
 color:black;
-font-weight:bold
 }
 
+/* font-weight:bold */
 /* couleur des liens */
 
 a 

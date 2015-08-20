@@ -15,34 +15,29 @@
 		
 
 <section>	
-		<article>
+	<article>
 	
 	<?php
-  
-	require ('admin/MAJ_Classement.php');
-	require ('connexion.php');
+	require('connexion.php');
 	
-	// appel de la fonction 
-	MAJ_Classement();
-
-	/*echo '<h2>Le classement</h2>';
+	echo '<h2>Le classement</h2>';
 	
-	$req1=$bdd->query('SELECT nom_equipe, favorite, victoire, defaite, nul, buts_pour, buts_contre, diff, points
-	FROM equipes, stats_collectives
-	WHERE  equipes.ID_equipe = stats_collectives.equipe_id
-	ORDER BY points DESC, diff DESC, buts_pour ASC ');
+	$req1=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points
+	FROM equipes, classement
+	WHERE  equipes.ID_equipe = classement.equipe_id
+	ORDER BY points DESC, diff DESC, nb_buts_pour ASC ');
 	
 	$x=0;
 	echo '<table border=2 cellspacing=2 cellspadding=2>';
-	echo '<tr class=trheadcolor><th></th><th></th><th>J</th><th>V</th><th>N</th><th>D</th><th>Bp</th><th>Bc</th><th>Diff</th><th>Pts</th></tr>';
+	echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th width="30">Bp</th><th>Bc</th><th width="30">Diff</th><th width="30">Stats</th></tr>';
 	
 		while ($resultats=$req1->fetch())
 		{		
-			/* le calcul du modulo de "$x" permet d'alterner le resultat : soit "0" soit "1" 
+			// le calcul du modulo de "$x" permet d'alterner le resultat : soit "0" soit "1" 
 			$x++;
 			$altern=$x % 2;
 			
-			/* affichage différent si s'agit de l'équipe favorite 
+			// affichage différent si s'agit de l'équipe favorite 
 			
 			if ($resultats['favorite'] == true)
 			{
@@ -57,22 +52,20 @@
 			echo '<tr class=trcolor'.$altern.'>';
 			echo '<td>'.$x.'</td>';
 			echo '<td>'.$resultats['nom'].'</td>';
-			echo '<td>'.$x.'</td>';
-			echo '<td>'.$resultats['victoire'].'</td>';
-			echo '<td>'.$resultats['nul'].'</td>';
-			echo '<td>'.$resultats['defaite'].'</td>';
-			echo '<td>'.$resultats['buts_pour'].'</td>';
-			echo '<td>'.$resultats['buts_contre'].'</td>';
-			echo '<td>'.$resultats['diff'].'</td>';
-			echo '<td>'.$resultats['points'].'</td></tr>';
+			echo '<td>'.$resultats['points'].'</td>';
+			echo '<td>'.$resultats['nb_journees'].'</td>';
+			echo '<td>'.$resultats['nb_victoires'].'</td>';
+			echo '<td>'.$resultats['nb_nuls'].'</td>';
+			echo '<td>'.$resultats['nb_defaites'].'</td>';
+			echo '<td>'.$resultats['nb_buts_pour'].'</td>';
+			echo '<td>'.$resultats['nb_buts_contre'].'</td>';
+			echo '<td>'.$resultats['diff'].'</td>';			
+			echo '<td><a href="stats_equipe_'.$resultats['ID_equipe'].'.php">Voir</a></td></tr>';
 			
 		}
 		$req1->closeCursor();
-
-			
-			echo '</table>';	*/
-			
-			
+		
+		echo '</table>';		
                 
     ?>
         

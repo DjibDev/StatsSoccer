@@ -135,11 +135,20 @@
 			$req3->execute();
 		}
 			
+		// appel de la fonction MAJ_classement, pour générer le nouveau classement	
+		require('MAJ_Classement.php');
+		MAJ_Classement();	
+		
 		echo '<p class="ok">Enregistrement bien effectué !</p>';
 		echo '<center><p>Souhaitez-vous rentrer d\'autres scores ? </p>';
-		echo '<p><a class="btn" href="admin_resultats.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p></center>';
+		echo '<p><a class="btn" href="admin_resultats.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p>';
+		echo '<br>';
+		echo '<p><a class="btn" href="../affiche_classement.php">Nouveau classement !</a></p></center>';
+		
 	
 		?>
+		
+		
 	</section>
 	
 </div>

@@ -2,11 +2,12 @@
 
 function MAJ_Classement()
 {
+  
 	require ('connexion.php');
 	
 	// Vide le classement
 	$req1=$bdd->query('DELETE FROM classement');
-	$req1->execute();
+	$req1->execute(); 
 		
 	// requete qui retourne le nombre de journees présentes dans stats_collectives
 	$req2=$bdd->query('SELECT COUNT(DISTINCT journee_id) AS nb_journee
@@ -33,8 +34,10 @@ function MAJ_Classement()
 	$nb_equipe=$indice+1;
 	
 	// calculs cumulatifs par equipe
-
-	for ($indice=O; $indice < $nb_equipe; $indice++)
+	
+	$x=0;
+	
+	while ($x < $nb_equipe)
 	{
 		$nb_victoires=0;
 		$nb_nuls=0;
@@ -43,14 +46,13 @@ function MAJ_Classement()
 		$nb_buts_contre=0;
 		$diff=0;
 		$points=0;
-		$equipe_id=$tab_id_equipe[$indice];	
+		$equipe_id=$tab_id_equipe[$x];	
 			
 			
 		// requete faite par equipe
 		$req4=$bdd->query('SELECT victoire, defaite, nul ,buts_pour, buts_contre, diff, points
 		FROM stats_collectives
-		WHERE stats_collectives.equipe_id='.$equipe_id.' ');
-
+		WHERE equipe_id='.$equipe_id.'');
 							
 		while ($resultats4=$req4->fetch())
 		{
@@ -72,13 +74,12 @@ function MAJ_Classement()
 					
 			$nb_buts_pour=$nb_buts_pour+$resultats4['buts_pour'];
 			$nb_buts_contre=$nb_buts_contre+$resultats4['buts_contre'];
-			$diff=$nb_buts_pour-$nb_buts_contre;
+			$diff=$diff+$resultats4['diff'];
 			$points=$points+$resultats4['points'];
 		}
-		$req4->closeCursor();
-		
-		
-		// requete pour écrire le nouveau classement
+		$req4->closeCursor(); 
+	
+		//requete pour écrire le nouveau classement
 		
 		$req5=$bdd->prepare("INSERT INTO classement (nb_journees, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points, equipe_id)
 		VALUES (?,?,?,?,?,?,?,?,?)");
@@ -91,10 +92,12 @@ function MAJ_Classement()
 		$req5->bindParam(7, $diff); 
 		$req5->bindParam(8, $points);
 		$req5->bindParam(9, $equipe_id);
-		$req5->execute();
-				
-	}
+		$req5->execute(); 
+		
+		$x++;		
+	}	
 			
 }	
+
 ?>
 	
