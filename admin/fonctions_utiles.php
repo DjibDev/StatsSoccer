@@ -176,11 +176,5 @@ function ResultatsDejaRentres()
 	
 }	
 
-function FicheStatsPlayer($id_joueur)
-{
-	
-
-}	
-
 
 ?> 

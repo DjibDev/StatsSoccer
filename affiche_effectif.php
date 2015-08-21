@@ -65,10 +65,7 @@
 	$reponse->closeCursor();
                 
     ?>
-                
-		
-	
-		</article>	
+  		</article>	
 	
 		<aside>
 			<center>

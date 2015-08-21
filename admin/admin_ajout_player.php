@@ -125,7 +125,7 @@
 		<br>
 		
 		<label for="num_maillot">Numéro de maillot :</label>	
-		<select name="num_maillot" id="num_maillot">
+		<select required name="num_maillot" id="num_maillot">
 			<option selected disabled value="">Sélectionnez</option>
 			<?php NumMaillotDispo(); ?>
 		</select>
