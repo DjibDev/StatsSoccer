@@ -20,7 +20,7 @@
 		</article>	
 		<aside>
 			<center>
-				<img src="images/petit_logo.png"/>
+				<a href="http://jgefoot.com"><img src="images/petit_logo.png"/></a>
 			</center>
 		</aside>
 	</section>

@@ -15,7 +15,7 @@
 
 	<?php
   	
-	include ('fonctions_utiles.php');
+	include ('fonctions_utiles_users.php');
 	require ('connexion.php');
 	
 	echo '<h2>Calendrier et Résultats</h2>';

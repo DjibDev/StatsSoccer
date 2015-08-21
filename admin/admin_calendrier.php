@@ -12,8 +12,9 @@
 	include('banniere_menu.php');
 	require('connexion.php');
 ?>	
-		<section>	
-				
+
+<div id="ajout_team">	
+		<section>		
 		<form method="post" action="trait_ajout_calendrier.php">	
 		<fieldset>
 		<Legend>Ajout d'une confrontation dans le calendrier</Legend>		
@@ -27,7 +28,8 @@
            	</select>
            	<br>
            	<br>
-         	<select required name="equipe1" id="equipe1">
+            <label for="equipe1">Equipe à domicile</label><br>
+         	<select required size="21" name="equipe1" id="equipe1">
 				<option selected disabled value="">Sélectionnez</option>
 						
 				<?php 
@@ -45,9 +47,7 @@
 				?>
            	</select>
            	
-           	<?php echo ' contre '; ?>
-           	
-			<select required name="equipe2" id="equipe2">
+			<select required size="21" name="equipe2" id="equipe2">
 				<option selected disabled value="">Sélectionnez</option>
 						
 				<?php 
@@ -101,7 +101,7 @@
         </fieldset>
         </form>
 		</section>
-		
+</div>		
 </div>		
 	
 </body>

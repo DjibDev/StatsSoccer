@@ -158,6 +158,7 @@
 		</fieldset>
 		</form>
 	<br>
+	<div id="suppr">
 		<form method="post" action="trait_suppr_player.php">
 		<fieldset>
 		<Legend>Supprimer un joueur</Legend>		
@@ -187,6 +188,7 @@
 				<input type="submit" value="Supprimer"/> 	
 			</fieldset>
 			</form>
+			</div>
 
 	</section>
 	

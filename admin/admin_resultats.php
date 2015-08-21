@@ -23,8 +23,7 @@
 		<Legend>Ajout des résultats de la journée</Legend>		
 			<label for="journee">Sélectionner la date : </label>
 			<select required name="journee" id="journee" onchange="submit();">
-				<option selected disabled value="">Sélectionnez</option>
-			
+				<option selected disabled value="">Sélectionnez</option>	
 				<?php 
 					ResultatsDejaRentres();
 				?>
@@ -58,9 +57,9 @@
 				echo '<input type="hidden" name="e1_'.$ligne.'" value="'.$resultats2['equipe_dom_id'].'" >';
 				echo '<input type="hidden" name="e2_'.$ligne.'" value="'.$resultats2['equipe_vis_id'].'" >';
 				echo '<td>'.$resultats2['equi1'].' - '.$resultats2['equi2'].'</td>';
-				echo '<td><b><input type="text" size ="2" maxlength="2" name="but_dom'.$ligne.'" required /></td>';
+				echo '<td width="30"><b><input type="number" min="0" max=10 name="but_dom'.$ligne.'" required /></td>';
 				echo '<td> - </td>';
-				echo '<td><input type="text" size ="2" maxlength="2" name="but_vis'.$ligne.'" required /></td></b>';
+				echo '<td width="30"><input type="number" min="0" max=10 name="but_vis'.$ligne.'" required /></td></b>';
 				echo '</tr>';
 				$ligne++;					
 			}

@@ -27,7 +27,7 @@
 
 			echo '<p class="ok">Suppression bien effectuée!</p>';
 			echo '<center><p>Souhaitez-vous supprimer un autre joueur ? </p>';
-			echo '<p><a class="btn" href="admin_modif_player.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p></center>';
+			echo '<p><a class="btn" href="admin_modif_player.php#suppr">Oui</a> - <a class="btn" href=administrer.php>Non</a></p></center>';
 		}
 		
 		else

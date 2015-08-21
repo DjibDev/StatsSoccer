@@ -141,31 +141,45 @@ function ResultatsDejaRentres()
 	ORDER BY numero ASC');
 	
 	$nb_elements=$x+1;
-	$indice=0;
+		
 	
 	while ($resultats2=$reponse2->fetch())
 	{
-			
+		$indice=0;
+		$adesactiver=false;
+		$dateFR=FormatDateFR($resultats2['date']);
+		
+		
 		while ($indice < $nb_elements)
 		{	
 				if ($deja_fait[$indice] == $resultats2['numero'])
 				{
-					$dateFR=FormatDateFR($resultats2['date']);
-					echo '<option disabled value='.$resultats2['ID_journee'].'>Journée N°'.$resultats2['numero'].' - '.$dateFR.'</option>';
-				}
-				else
-				{
-					$dateFR=FormatDateFR($resultats2['date']);
-					echo '<option value='.$resultats2['ID_journee'].'>Journée N°'.$resultats2['numero'].' - '.$dateFR.'</option>';
-				}	
+					$adesactiver=true;
 				
-				$indice++;	
+				}
+				$indice++;		
+		}		
+				
+		if ($adesactiver == true)
+		{
+				
+				echo '<option value='.$resultats2['ID_journee'].' disabled >Journée N°'.$resultats2['numero'].' - '.$dateFR.'</option>';
+		}			
+		else
+		{
+				echo '<option value='.$resultats2['ID_journee'].'>Journée N°'.$resultats2['numero'].' - '.$dateFR.'</option>';
+		}						
 		
-		}
-		$reponse->closeCursor();
-			
-	}				
+	}
+	$reponse->closeCursor();
+							
 	
+}	
+
+function FicheStatsPlayer($id_joueur)
+{
+	
+
 }	
 
 

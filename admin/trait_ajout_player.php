@@ -26,6 +26,7 @@
 			$birthday=$_POST['annee'].'-'.$_POST['mois'].'-'.$_POST['jour'];
 			$poste=$_POST['poste'];
 			$num_maillot=$_POST['num_maillot'];
+			$filename='..\stats_files\players\stats_player_'.$nom.'.php';
 									
 			$stmt = $bdd->prepare("INSERT INTO effectif (nom,prenom,birthday,poste,num_maillot) VALUES (?,?,?,?,?)");
 			$stmt->bindParam(1, $nom);
@@ -35,6 +36,10 @@
 			$stmt->bindParam(5, $num_maillot); 
 			$stmt->execute();
 			
+			//appel de la fonction qui permet de créer le fichier stat du joueur tout juste ajouté
+			$fichier = fopen($filename,"w+"); 
+			
+			echo $filename;
 			echo '<p class="ok">Enregistrement bien effectué !</p>';
 			echo '<center><p>Souhaitez-vous rajouter un joueur ? </p>';
 			echo '<p><a class="btn" href="admin_ajout_player.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p></center>';

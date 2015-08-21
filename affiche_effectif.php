@@ -19,7 +19,7 @@
 	
 	<?php
   	
-	include ('fonctions_utiles.php');
+	include ('fonctions_utiles_users.php');
 	require ('connexion.php');
 	
 	echo '<h2>L\'effectif</h2>';
@@ -55,7 +55,7 @@
 			echo '<td>'.$age.'</td>';
 			echo '<td>'.$resultats['poste'].'</td>';
 			echo '<td align=center>'.$resultats['num_maillot'].'</td>';
-			echo '<td><a href="stats_player_'.$resultats['ID_joueur'].'.php">Voir</a></td>';
+			echo '<td><a href="stats_files/players/stats_player_'.$resultats['ID_joueur'].'.php">Voir</a></td>';
 			echo '</tr>';
 			$x++;
 	}

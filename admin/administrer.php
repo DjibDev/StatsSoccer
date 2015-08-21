@@ -29,7 +29,7 @@
 		<aside>
 			<fieldset>
 				<legend>Calendrier/Résultats</legend>
-				<li><a class="adm" href="admin_calendrier.php">Calendrier</a></li>
+				<li><a class="adm" href="admin_calendrier.php#ajout_team">Calendrier</a></li>
 				<li><a class="adm" href="admin_resultats.php">Résultats</a></li>
 			</fieldset>
 			<fieldset>

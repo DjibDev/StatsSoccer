@@ -66,12 +66,12 @@
 
 				echo '<p class="ok">Enregistrement bien effectué !</p><br>';
 				echo '<center><p>Souhaitez-vous rajouter une confrontation ? </p>';
-				echo '<p><a class="btn" href="admin_calendrier.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p></center>';
+				echo '<p><a class="btn" href="admin_calendrier.php#ajout_team">Oui</a> - <a class="btn" href=administrer.php>Non</a></p></center>';
 			}
 			else
 			{
 				echo '<p class="nok">ce match existe déja !!! </p>';
-				echo '<p><a class="btn" href="admin_calendrier.php">Retour</a></p>';
+				echo '<p><a class="btn" href="admin_calendrier.php#ajout_team">Retour</a></p>';
 			}	
 		}
 		else
