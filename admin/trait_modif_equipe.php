@@ -18,7 +18,7 @@
 		
 		if (isset($_POST['equipe']))
 		{
-			// tets si la case equipe a suivre a été cochée
+			// test si la case equipe a suivre a été cochée
 			if (isset($_POST['equipe_fav']))
 			{
 					$favorite=true;

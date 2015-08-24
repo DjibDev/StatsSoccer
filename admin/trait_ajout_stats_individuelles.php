@@ -14,18 +14,74 @@
 
 	<section>	
 	
-	
-	<?php		
-			//creation du fichier stats du joueur et appel de la fonction pour écrire dedans
-			$filename='../stats_files/players/stats_player_'.$id_joueur.'.php';
-			$fichier_stats = fopen($filename,"a+") or die("Impossible de créer le fichier Stats du joueur !"); 
-			$script_complet='<html><head><title>Statistique de joueur</title><meta charset="utf-8" /><link rel="stylesheet" href="style_base.css"/>
-			</head><body><section><h2>ID du joueur: </h2></section></body></html>';
-			fputs($fichier_stats, $script_complet);
-			fclose($fichier_stats); 
+	<?php
+
+	if (isset($_POST['player']))
+	{
+		
+		require ('connexion.php');
 			
-	?>
+		$joueur_id=$_POST['player'];
+		$journee_id=$_POST['journee'];
+		$buts=$_POST['buts'];
+		$passes=$_POST['passes'];
+		
+		$cleansheet=false;
+		if (isset($_POST['clean']))
+		{
+			$cleansheet=true;
+		}
+		
+		$csc=$_POST['csc'];
+		$peno_rate=$_POST['peno_rate'];			
+		$peno_arrete=$_POST['peno_arret'];		
+		
+		$faits_marquants=false;
+		if (isset($_POST['faits']))
+		{
+			$cleansheet=true;
+		}
+		
+		
+		$description_faitmarquant=$_POST['details_faits'];
+		
+		
+		echo $joueur_id.'<br>';
+		echo $buts.'<br>';
+		echo $passes.'<br>';
+		echo $cleansheet.'<br>';
+		echo $csc.'<br>';
+		echo $peno_rate.'<br>';
+		echo $peno_arrete.'<br>';
+		echo $faits_marquants.'<br>';
+		echo $journee_id.'<br>';
+		
+		
+		$stmt = $bdd->prepare("INSERT INTO stats_individuelles(joueur_id, buts, passes, cleansheet, peno_rate, peno_arrete, csc, faits_marquants, description_faitmarquant, journee_id) VALUES (?,?,?,?,?,?,?,?,?,?)");
+		$stmt->bindParam(1, $joueur_id);
+		$stmt->bindParam(2, $buts); 
+		$stmt->bindParam(3, $passes);
+		$stmt->bindParam(4, $cleansheet);
+		$stmt->bindParam(5, $csc); 
+		$stmt->bindParam(6, $peno_rate);
+		$stmt->bindParam(7, $peno_arrete);
+		$stmt->bindParam(8, $faits_marquants); 
+		$stmt->bindParam(9, $description_faitmarquant);
+		$stmt->bindParam(10, $journee_id);
+		$stmt->execute(); 
+		
+			echo '<p class="ok">Enregistrement bien effectué !</p>';
+			echo '<center><p>Souhaitez-vous rajouter une autre stat joueur ? </p>';
+			echo '<p><a class="btn" href="admin_ajout_stats_individuelles.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p></center>';
+			
+	}
+	else
+	{
+			echo '<p class="nok">Une erreur s\'est produite !</p>';
+			echo '<p><a class="btn" href="administrer.php">Retour</a></p>';
+	}
 	
+	?>
 	</section>
 	
 </div>		

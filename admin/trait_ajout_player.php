@@ -43,7 +43,7 @@
 		else
 		{
 			echo '<p class="nok">Une erreur s\'est produite !</p>';
-			echo '<p><a class="btn" href="admin_calendrier.php">Retour</a></p>';
+			echo '<p><a class="btn" href="administrer.php">Retour</a></p>';
 		}
 		?>
 	</section>
