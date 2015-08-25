@@ -21,21 +21,21 @@
 			<fieldset>
 				<Legend> Ajouter un joueur</Legend>		
 				<label for="nom">Nom :</label>	
-				<input type="text" name="nom" id="nom" >
+				<input type="text" name="nom" id="nom" value="N.C." />
 				<label for="prenom">Prénom :</label>	
-				<input type="text" name="prenom" id="prenom">
+				<input type="text" name="prenom" id="prenom" value="N.C." />
 				<br>
 				<br>
 				<label for="pseudo">Pseudo* :</label>	
 				<input required type="text" name="pseudo" id="pseudo">
 				<label for="pseudo">Email :</label>
-				<input type="email" name="user_email">
+				<input type="email" name="user_email" value="no_email@email.fr" />
 			<br>
 			<br>
 			
 			<label for="poste">Poste : </label>
         	<select name="poste" id="poste">
-				<option selected disabled >Sélectionnez</option>
+				<option selected value="XXX">Sélectionnez</option>
 				<option value="GAR">Gardien</option>
 				<option value="DEF">Défenseur</option>
 				<option value="MIL">Milieu</option>
@@ -44,7 +44,7 @@
 			
 			<label for="jour">Date de naissance : </label>
 			<select name="jour" id="jour">
-					<option selected disabled >Sélectionnez</option>
+					<option selected value="00">Sélectionnez</option>
 					<option value="01">01</option>
 					<option value="02">02</option>
 					<option value="03">03</option>
@@ -78,7 +78,7 @@
 					<option value="31">31</option>
 			</select> 
 			<select name="mois" id="mois">
-					<option selected disabled >Sélectionnez</option>
+					<option selected value="00">Sélectionnez</option>
 					<option value="01">Janvier</option>
 					<option value="02">Février</option>
 					<option value="03">Mars</option>
@@ -94,7 +94,7 @@
 			</select>
 	   
 			<select name="annee" id="annee">
-				<option selected disabled >Sélectionnez</option>
+				<option selected value="0000">Sélectionnez</option>
 				<option value="1970">1970</option>
 				<option value="1971">1971</option>
 				<option value="1972">1972</option>
@@ -132,7 +132,7 @@
 		
 		<label for="num_maillot">Numéro de maillot :</label>	
 		<select name="num_maillot" id="num_maillot">
-			<option selected disabled >Sélectionnez</option>
+			<option selected value="00">Sélectionnez</option>
 			<?php NumMaillotDispo(); ?>
 		</select>
 		

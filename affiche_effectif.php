@@ -30,7 +30,7 @@
 	$altern=$x % 2;
 		
 		
-	echo '<table border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Nom</th><th>Prénom</th><th>Age</th><th>Poste</th><th>Numéro</th><th>Stats</th></tr>';
+	echo '<table border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Pseudo</th><th>Nom</th><th>Prénom</th><th>Age</th><th>Poste</th><th>Numéro</th><th>Stats</th></tr>';
 	
 	
 	while ($resultats=$reponse->fetch())
@@ -50,6 +50,7 @@
 			}
 			
 			echo '<tr class=trcolor'.$altern.'>';
+			echo '<td>'.$resultats['pseudo'].'</td>';
 			echo '<td>'.$resultats['nom'].'</td>';
 			echo '<td>'.$resultats['prenom'].'</td>';
 			echo '<td>'.$age.'</td>';

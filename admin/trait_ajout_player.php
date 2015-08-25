@@ -30,7 +30,8 @@
 			$email=$_POST['user_email'];
 			$poste=$_POST['poste'];
 			$num_maillot=$_POST['num_maillot'];
-									
+			
+							
 			$stmt = $bdd->prepare("INSERT INTO effectif (pseudo, nom, prenom, birthday, email, poste, num_maillot) VALUES (?,?,?,?,?,?,?) ");
 			$stmt->bindParam(1, $pseudo);
 			$stmt->bindParam(2, $nom);
