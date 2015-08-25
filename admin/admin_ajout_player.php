@@ -21,15 +21,21 @@
 			<fieldset>
 				<Legend> Ajouter un joueur</Legend>		
 				<label for="nom">Nom :</label>	
-				<input required type="text" name="nom" id="nom">
+				<input type="text" name="nom" id="nom" >
 				<label for="prenom">Prénom :</label>	
-				<input required type="text" name="prenom" id="prenom">
+				<input type="text" name="prenom" id="prenom">
+				<br>
+				<br>
+				<label for="pseudo">Pseudo* :</label>	
+				<input required type="text" name="pseudo" id="pseudo">
+				<label for="pseudo">Email :</label>
+				<input type="email" name="user_email">
 			<br>
 			<br>
 			
 			<label for="poste">Poste : </label>
-        	<select required name="poste" id="poste">
-				<option selected disabled value="">Sélectionnez</option>
+        	<select name="poste" id="poste">
+				<option selected disabled >Sélectionnez</option>
 				<option value="GAR">Gardien</option>
 				<option value="DEF">Défenseur</option>
 				<option value="MIL">Milieu</option>
@@ -37,8 +43,8 @@
         	</select>
 			
 			<label for="jour">Date de naissance : </label>
-			<select required name="jour" id="jour">
-					<option selected disabled value="">Sélectionnez</option>
+			<select name="jour" id="jour">
+					<option selected disabled >Sélectionnez</option>
 					<option value="01">01</option>
 					<option value="02">02</option>
 					<option value="03">03</option>
@@ -71,8 +77,8 @@
 					<option value="30">30</option>
 					<option value="31">31</option>
 			</select> 
-			<select required name="mois" id="mois">
-					<option selected disabled value="">Sélectionnez</option>
+			<select name="mois" id="mois">
+					<option selected disabled >Sélectionnez</option>
 					<option value="01">Janvier</option>
 					<option value="02">Février</option>
 					<option value="03">Mars</option>
@@ -87,8 +93,8 @@
 					<option value="12">Décembre</option>
 			</select>
 	   
-			<select required name="annee" id="annee">
-				<option selected disabled value="">Sélectionnez</option>
+			<select name="annee" id="annee">
+				<option selected disabled >Sélectionnez</option>
 				<option value="1970">1970</option>
 				<option value="1971">1971</option>
 				<option value="1972">1972</option>
@@ -125,8 +131,8 @@
 		<br>
 		
 		<label for="num_maillot">Numéro de maillot :</label>	
-		<select required name="num_maillot" id="num_maillot">
-			<option selected disabled value="">Sélectionnez</option>
+		<select name="num_maillot" id="num_maillot">
+			<option selected disabled >Sélectionnez</option>
 			<?php NumMaillotDispo(); ?>
 		</select>
 		

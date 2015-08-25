@@ -63,6 +63,7 @@
 			<option value="6">6</option>
 		</select></td>
 		<td></td>
+		<td></td>
 		<td align="right"><label for="passes">Passe(s) décisive(s)</label></td>
 		<td align="left"><select required name="passes" id="passes">
 			<option selected value="0">0</option>
@@ -74,9 +75,7 @@
 			<option value="6">6</option>
 		</select></td>
 		<td></td></tr>
-		
-		<tr></tr>
-		
+				
 		<tr><td align="right"><label for="csc">Csc ?</label></td>
 		<td align="left"><select required name="csc" id="csc">
 			<option selected value="0">0</option>
@@ -84,18 +83,20 @@
 			<option value="2">2</option>
 			<option value="3">3</option>
 			</select></td>
-		
+		<td></td>
+		<td></td>
 		<td align="right"><label for="clean">Cleansheet ?</label></td>
-		<td align="left"><input type="checkbox" name="clean"/></td>
+		<td align="left"><input type="checkbox" name="clean"/></td></tr>
 		
-		<td align="right"><label for="peno_rate">Péno(s). raté(s) ?</label></td>
+		<tr><td align="right"><label for="peno_rate">Péno(s). raté(s) ?</label></td>
 		<td align="left"><select required name="peno_rate" id="peno_rate">
 			<option selected value="0">0</option>
 			<option value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
 			</select></td>
-		
+		<td></td>	
+		<td></td>
 		<td align="right"><label for="peno_arret">Péno.(s) arreté(s) ?</label></td>
 		<td align="left"><select required name="peno_arret" id="peno_arret">
 			<option selected value="0">0</option>
@@ -103,14 +104,14 @@
 			<option value="2">2</option>
 			<option value="3">3</option>
 			</select></td></tr>
+		</table>
 		
-		<tr></tr>
-		
+		<table border="0" cellspacing="4">
 		<tr><td align="right"><label for="faits">Fait(s) marquant(s) ?</label></td>
 		<td align="left"><input type="checkbox" name="faits"/></td>
 		
 		<td align="right"><label for="détails_faits">Détails du(es) fait(s) marquant(s)</label></td>
-		<td colspan="5" align="left"><TEXTAREA rows="4" cols="60" name="details_faits"></TEXTAREA></td></tr>
+		<td colspan="3" align="left"><TEXTAREA rows="4" cols="60" name="details_faits"></TEXTAREA></td></tr>
 		
 		</table>
 		<br>

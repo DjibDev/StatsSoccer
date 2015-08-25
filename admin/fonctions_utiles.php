@@ -176,6 +176,32 @@ function ResultatsDejaRentres()
 	
 }	
 
+function DoublonStatsPlayer($a,$b)
+{
+	require ('connexion.php');
+		
+	$reponse=$bdd->query('SELECT count(*) as Existe	
+	FROM stats_individuelles
+	WHERE stats_individuelles.journee_id = '.$a.'
+	AND stats_individuelles.joueur_id = '.$b.' ');
+		
+	while ($resultats=$reponse->fetch())
+	{
+		$doublon=$resultats['Existe'];
+	}
+	$reponse->closeCursor();
+	
+	if ($doublon == 1)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}	
+}
+
+
 
 
 ?> 
