@@ -16,12 +16,24 @@ function CreerFicheStatsPlayer($a)
 			<body>
 			<div id="bloc_page">
 				<?php 
-				include("../../banniere_menu.php"); 
-				require("../../connexion.php");
+				include("../banniere_menu_fiche.php"); 
 				?>	
 				<section>
-				<h2>ID du joueur:'.$a.' </h2>
+				<article>
+				
+				<?php
+					
+					require ("../fonctions_affiche_stats.php");
+					AfficheStatsPlayer('.$a.');
 
+				?>
+				
+				</article>
+				<aside>
+					<center>
+					<img src="../../images/petit_logo.png"/>
+					</center>
+				</aside>
 				</section>
 			</div>
 			</body>
@@ -33,6 +45,52 @@ function CreerFicheStatsPlayer($a)
 			fclose($fichier_stats); 
 
 }
+
+function CreerFicheStatsEquipe($a)
+{
+			// création du fichier stats du joueur et appel de la fonction pour écrire dedans
+			$filename='../stats_files/equipes/stats_equipe_'.$a.'.php';
+			$fichier_stats = fopen($filename,"a+") or die("Impossible de créer le fichier Stats du joueur !"); 
+			
+			$script_complet='<html>
+			<head>
+				<title>Statistique d\'équipe</title>
+				<meta charset="utf-8" />
+				<link rel="stylesheet" href="../../style_base.css"/>
+			</head>
+			<body>
+			<div id="bloc_page">
+				<?php 
+				include("../banniere_menu_fiche.php"); 
+				?>	
+				<section>
+				<article>
+				
+				<?php
+					
+					require ("../fonctions_affiche_stats.php");
+					AfficheStatsEquipe'.$a.');
+
+				?>
+				
+				</article>
+				<aside>
+					<center>
+					<img src="../../images/petit_logo.png"/>
+					</center>
+				</aside>
+				</section>
+			</div>
+			</body>
+			</html>';
+			
+			// écriture dans le fichier
+			fputs($fichier_stats, $script_complet);
+			// fermeture du fichier
+			fclose($fichier_stats); 
+
+}
+
 
 
 ?>

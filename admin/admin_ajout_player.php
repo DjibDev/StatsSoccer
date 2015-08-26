@@ -21,9 +21,9 @@
 			<fieldset>
 				<Legend> Ajouter un joueur</Legend>		
 				<label for="nom">Nom :</label>	
-				<input type="text" name="nom" id="nom" value="N.C." />
+				<input required type="text" name="nom" id="nom" />
 				<label for="prenom">Prénom :</label>	
-				<input type="text" name="prenom" id="prenom" value="N.C." />
+				<input required type="text" name="prenom" id="prenom" />
 				<br>
 				<br>
 				<label for="pseudo">Pseudo* :</label>	
