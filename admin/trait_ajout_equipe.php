@@ -31,6 +31,12 @@
 			$stmt->bindParam(3, $stade);
 			$stmt->execute();
 			
+			//recupere l'id_joueur tout juste créé
+			$id_equipe=$bdd->lastInsertId();
+						
+			//appel de la fonction qui permet de creer la structure de la fiche stats du joueur
+			CreerFicheStatsEquipe($id_equipe);
+			
 			echo '<p class="ok">Enregistrement bien effectué !</p>';
 			echo '<center><p>Souhaitez-vous rajouter une autre équipe ? </p>';
 			echo '<p><a class="btn" href="admin_ajout_equipe.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p></center>';

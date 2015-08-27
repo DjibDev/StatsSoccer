@@ -5,10 +5,6 @@ function MAJ_Classement()
   
 	require ('connexion.php');
 	
-	// Vide le classement
-	$req1=$bdd->query('DELETE FROM classement');
-	$req1->execute(); 
-		
 	// requete qui retourne le nombre de journees présentes dans stats_collectives
 	$req2=$bdd->query('SELECT COUNT(DISTINCT journee_id) AS nb_journee
 	FROM stats_collectives');
@@ -96,8 +92,74 @@ function MAJ_Classement()
 		
 		$x++;		
 	}	
-			
 }	
 
+
+function MAJ_Classement_players()
+{
+	require ('connexion.php');
+		
+	// requete qui retourne le nombre de journees présentes dans stats_individuelles
+	$req2=$bdd->query('SELECT COUNT(DISTINCT journee_id) AS nb_journee
+	FROM stats_individuelles');
+	
+	while ($resultats2=$req2->fetch())
+	{
+		$nb_journees=$resultats2['nb_journee'];
+	}
+	$req2->closeCursor();
+
+	
+	// extraction des differents id_joueur et mise en tableau
+	$tab_id_player=Array();
+	$indice=0;
+	
+	$req3=$bdd->query('SELECT ID_joueur FROM effectif');
+	
+	while ($resultats3=$req3->fetch())
+	{
+		$tab_id_player[$indice]=$resultats3['ID_joueur'];
+		$indice++;
+	}
+	$req3->closeCursor();
+	
+	$nb_joueur=$indice+1;
+	
+	// calculs cumulatifs par equipe
+	
+	$x=0;
+	
+	while ($x < $nb_joueur)
+	{
+		$nb_buts=0;
+		$nb_passes=0;
+		$joueur_id=$tab_id_player[$x];	
+			
+		// requete faite par joueur
+		$req4=$bdd->query('SELECT buts, passes
+		FROM stats_individuelles
+		WHERE joueur_id='.$joueur_id.'');
+							
+		while ($resultats4=$req4->fetch())
+		{
+			$nb_buts=$nb_buts+$resultats['buts'];
+			$nb_passes=$nb_passes+$resultats4['passes'];
+		
+		}
+		$req4->closeCursor(); 
+	
+		//requete pour écrire le nouveau classement		
+		$req5=$bdd->prepare("INSERT INTO classement_players (nb_journees, nb_buts, nb_passes, joueur_id)
+		VALUES (?,?,?,?)");
+		$req5->bindParam(1, $nb_journees); 
+		$req5->bindParam(2, $nb_buts);
+		$req5->bindParam(3, $nb_passes);
+		$req5->bindParam(4, $joueur_id);
+		$req5->execute(); 
+		$x++;		
+		
+	}	
+}
+	
 ?>
 	

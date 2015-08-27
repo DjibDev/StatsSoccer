@@ -25,6 +25,7 @@
 	$req1=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points
 	FROM equipes, classement
 	WHERE  equipes.ID_equipe = classement.equipe_id
+	AND nb_journees = (SELECT MAX(nb_journees) FROM classement) 
 	ORDER BY points DESC, diff DESC, nb_buts_pour DESC, nom ASC ');
 	
 	$x=0;

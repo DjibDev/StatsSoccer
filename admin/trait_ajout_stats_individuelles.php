@@ -68,10 +68,15 @@
 			$stmt->bindParam(9, $description_faitmarquant);
 			$stmt->bindParam(10, $journee_id);
 			$stmt->execute(); 
-		
+			
 			echo '<p class="ok">Enregistrement bien effectué !</p>';
 			echo '<center><p>Souhaitez-vous rajouter une autre stat joueur ? </p>';
 			echo '<p><a class="btn" href="admin_ajout_stats_individuelles.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p></center>';
+		
+			// appel de la fonction MAJ_classement, pour générer le nouveau classement	
+			require('MAJ_Classement.php');
+			MAJ_Classement_players();	
+		
 		}
 	}
 	else
