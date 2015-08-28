@@ -74,6 +74,8 @@ function NbrMatchAtteint()
 	$reponse=$bdd->query('SELECT count(*) AS nb, numero, date, ID_journee
 	FROM matchs, journees
 	WHERE journees.ID_journee = matchs.journee_id
+	AND saison="2015/2016"
+	AND journees.coupe="0"
 	GROUP BY ID_journee
 	ORDER BY numero ASC');
 	
@@ -82,7 +84,7 @@ function NbrMatchAtteint()
 	
 	while ($resultats=$reponse->fetch())
 	{
-		if ($resultats['nb'] == 10)
+		if ($resultats['nb'] == 10) 
 		{	
 			$tab_match[$resultats['ID_journee']]=true;
 		}
@@ -96,6 +98,8 @@ function NbrMatchAtteint()
 	
 	$reponse2=$bdd->query('SELECT numero, date, ID_journee
 	FROM journees
+	WHERE saison="2015/2016"
+	AND coupe="0"
 	ORDER BY numero ASC');
 	
 	
@@ -124,7 +128,9 @@ function ResultatsDejaRentres()
 
 	$reponse=$bdd->query('SELECT DISTINCT numero
 	FROM stats_collectives, journees
-	WHERE stats_collectives.journee_id = journees.ID_journee ');
+	WHERE stats_collectives.journee_id = journees.ID_journee
+	AND saison="2015/2016"
+	AND coupe="0" ');
 	
 	$deja_fait=Array();
 	$x=0;
@@ -138,6 +144,8 @@ function ResultatsDejaRentres()
 	
 	$reponse2=$bdd->query('SELECT numero, date, ID_journee
 	FROM journees
+	WHERE saison="2015/2016"
+	AND coupe="0"
 	ORDER BY numero ASC');
 	
 	$nb_elements=$x+1;

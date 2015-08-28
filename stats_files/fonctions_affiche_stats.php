@@ -67,19 +67,23 @@ function AfficheStatsEquipe($a)
 					AND stats_collectives.journee_id = journees.ID_journee
 					ORDER BY numero ASC ');
 					
-					echo '<table border="2" cellspacing="4"><tr><th>Journée</th><th>V.</th><th>N.</th><th>D.</th>
+					echo '<table border="2" cellspacing="4"><tr class=trheadcolor><th>J.</th><th>V.</th><th>N.</th><th>D.</th>
 					<th>Bp</th><th>Bc</th><th>Diff.</th><th>Points</th></tr>';						
 					
 					while ($resultats2=$req2->fetch())
 					{
-						echo '<tr><td>'.$resultats2['numero'].'</td>';
-						echo '<td>'.$resultats2['victoire'].'</td>';
-						echo '<td>'.$resultats2['nul'].'</td>';
-						echo '<td>'.$resultats2['defaite'].'</td>';
-						echo '<td>'.$resultats2['buts_pour'].'</td>';
-						echo '<td>'.$resultats2['buts_contre'].'</td>';
-						echo '<td>'.$resultats2['diff'].'</td>';
-						echo '<td>'.$resultats2['points'].'</td></tr>';	
+						/* le calcul du modulo de "$x" permet d'alterner le resultat : soit "0" soit "1" */
+						$altern=$x % 2;	
+						
+						echo '<tr class=trcolor'.$altern.'><td>'.$resultats2['numero'].'</td>';
+						echo '<td align=center>'.$resultats2['victoire'].'</td>';
+						echo '<td align=center>'.$resultats2['nul'].'</td>';
+						echo '<td align=center>'.$resultats2['defaite'].'</td>';
+						echo '<td align=center>'.$resultats2['buts_pour'].'</td>';
+						echo '<td align=center>'.$resultats2['buts_contre'].'</td>';
+						echo '<td align=center>'.$resultats2['diff'].'</td>';
+						echo '<td align=center>'.$resultats2['points'].'</td></tr>';	
+						$x++;
 											
 					}	
 					$req2->closeCursor();

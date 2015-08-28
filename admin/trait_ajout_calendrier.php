@@ -16,7 +16,7 @@
 
 		<?php
 		
-		if (isset($_POST['equipe1']))
+		if ($_POST['equipe1'] != $_POST['equipe2'])
 		{
 			// test si n'existe pas de doublon matchs pour la journée choisie
 			
@@ -38,6 +38,7 @@
 			// Test la condition si la confrontation pour cette journée existe deja dans la table matchs
 	
 			$match=$_POST['equipe1'].'versus'.$_POST['equipe2'];
+		
 			$journee_id=$_POST['journee'];
 						
 			$doublon=false;
@@ -76,7 +77,8 @@
 		}
 		else
 		{
-			echo '<p class="nok">Une erreur s\'est produite !</p>';
+			echo '<p class="nok">Une équipe ne peut pas jouer contre elle-même !</p>';
+			echo '<center><p><a class="btn" href="admin_calendrier.php#ajout_team">Recommencer !</a></center>';
 		}
 
 		?>

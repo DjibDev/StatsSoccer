@@ -69,7 +69,7 @@ function CreerFicheStatsEquipe($a)
 				<?php
 					
 					require ("../fonctions_affiche_stats.php");
-					AfficheStatsEquipe'.$a.');
+					AfficheStatsEquipe('.$a.');
 
 				?>
 				

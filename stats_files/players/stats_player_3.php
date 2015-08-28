@@ -15,7 +15,7 @@
 				<?php
 					
 					require ("../fonctions_affiche_stats.php");
-					AfficheStatsPlayer(1);
+					AfficheStatsPlayer(3);
 
 				?>
 				
