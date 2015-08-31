@@ -116,30 +116,27 @@ function MAJ_Classement_players($joueur_id)
 	// calculs cumulatifs par joueur
 	
 	$x=0;
-	$journee_id=1;
-	
+
 	while ($x < $nb_journees)
 	{
 		$nb_buts=0;
 		$nb_passes=0;
-							
+								
 		// requete faite par joueur
-		$req2=$bdd->query('SELECT buts, passes
+		$req3=$bdd->query('SELECT buts, passes
 		FROM stats_individuelles
-		WHERE joueur_id='.$joueur_id.'
-		AND journee_id='.$journee_id.' ');
+		WHERE joueur_id='.$joueur_id.' ');
 							
-		while ($resultats2=$req2->fetch())
+		while ($resultats3=$req3->fetch())
 		{
-			$nb_buts=$nb_buts+$resultats2['buts'];
-			$nb_passes=$nb_passes+$resultats2['passes'];
+			$nb_buts=$nb_buts+$resultats3['buts'];
+			$nb_passes=$nb_passes+$resultats3['passes'];
 		
 		}
-		$req2->closeCursor(); 
+		$req3->closeCursor(); 
 		
 		$x++;		
-		$journee_id++;
-		
+
 	}
 	
 	

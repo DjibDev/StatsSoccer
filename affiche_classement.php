@@ -55,10 +55,9 @@
 				$altern=$x % 2;
 			}
 		
-							
 			echo '<tr class=trcolor'.$altern.'>';
 			echo '<td>'.$x.'</td>';
-			echo '<td>'.$resultats['nom'].'</td>';
+			echo '<td><b>'.$resultats['nom'].'</b></td>';
 			echo '<td align="center"><b>'.$resultats['points'].'</b></td>';
 			echo '<td align="center">'.$resultats['nb_journees'].'</td>';
 			echo '<td align="center">'.$resultats['nb_victoires'].'</td>';
@@ -80,12 +79,69 @@
                 
     ?>    
 		</article>	
-	
+		
 		<aside>
-			<center>
-				<img src="images/petit_logo.png"/>
-			</center>
+		<?php
 			
+		echo '<h2>Buteurs</h2>';
+		
+		echo '<table border=2 cellspacing=2 cellspadding=2 >';
+		echo '<tr class=trheadcolor><th></th><th>Pseudo</th><th>Buts</th>';
+		
+		$req2=$bdd->query('SELECT pseudo, nb_buts 
+		FROM classement_players, effectif
+		WHERE classement_players.joueur_id = effectif.ID_joueur
+		AND nb_buts > "0"
+		ORDER BY nb_buts DESC, pseudo ASC
+		LIMIT 0, 10 ');
+		
+		$x=0;
+		while ($resultats2=$req2->fetch())
+		{
+			$x++;
+			$altern=$x % 2;
+			echo '<tr class=trcolor'.$altern.'>';
+			echo '<td>'.$x.'</td>';
+			echo '<td><b>'.$resultats2['pseudo'].'</b></td>';
+			echo '<td align="center"><b>'.$resultats2['nb_buts'].'</b></td></tr>';
+		}
+		$req2->closeCursor();
+		
+		echo '</table>';
+		echo '<br>';
+		
+		echo '<h2>Passeurs</h2>';
+		
+		echo '<table border=2 cellspacing=2 cellspadding=2 >';
+		echo '<tr class=trheadcolor><th></th><th>Pseudo</th><th>Passes</th>';
+				
+		$req3=$bdd->query('SELECT pseudo, nb_passes
+		FROM classement_players, effectif 
+		WHERE classement_players.joueur_id = effectif.ID_joueur
+		AND nb_passes > "0"
+		ORDER BY nb_passes DESC, pseudo ASC
+		LIMIT 0, 10 ');
+		
+		$x=0;
+		
+		while ($resultats3=$req3->fetch())
+		{
+			$x++;
+			$altern=$x % 2;
+			echo '<tr class=trcolor'.$altern.'>';
+			echo '<td>'.$x.'</td>';
+			echo '<td><b>'.$resultats3['pseudo'].'</b></td>';
+			echo '<td align="center"><b>'.$resultats3['nb_passes'].'</b></td></tr>';
+		
+		}
+		$req3->closeCursor();
+		
+		echo '</table>';
+		
+		?>
+			
+			
+						
 		</aside>
 	</section>
 	

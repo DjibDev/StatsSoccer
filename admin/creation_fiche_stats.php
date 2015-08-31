@@ -18,8 +18,6 @@ function CreerFicheStatsPlayer($a)
 				<?php 
 				include("../banniere_menu_fiche.php"); 
 				?>	
-				<section>
-				<article>
 				
 				<?php
 					
@@ -28,13 +26,6 @@ function CreerFicheStatsPlayer($a)
 
 				?>
 				
-				</article>
-				<aside>
-					<center>
-					<img src="../../images/petit_logo.png"/>
-					</center>
-				</aside>
-				</section>
 			</div>
 			</body>
 			</html>';
@@ -48,7 +39,7 @@ function CreerFicheStatsPlayer($a)
 
 function CreerFicheStatsEquipe($a)
 {
-			// création du fichier stats du joueur et appel de la fonction pour écrire dedans
+			// création du fichier stats de l'équipe et appel de la fonction pour écrire dedans
 			$filename='../stats_files/equipes/stats_equipe_'.$a.'.php';
 			$fichier_stats = fopen($filename,"a+") or die("Impossible de créer le fichier Stats du joueur !"); 
 			
@@ -63,8 +54,6 @@ function CreerFicheStatsEquipe($a)
 				<?php 
 				include("../banniere_menu_fiche.php"); 
 				?>	
-				<section>
-				<article>
 				
 				<?php
 					
@@ -73,13 +62,6 @@ function CreerFicheStatsEquipe($a)
 
 				?>
 				
-				</article>
-				<aside>
-					<center>
-					<img src="../../images/petit_logo.png"/>
-					</center>
-				</aside>
-				</section>
 			</div>
 			</body>
 			</html>';

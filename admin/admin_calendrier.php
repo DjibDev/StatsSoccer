@@ -46,7 +46,7 @@
 				
 				?>
            	</select>
-           	
+           	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<select required size="21" name="equipe2" id="equipe2">
 				<option selected disabled value="">Sélectionnez</option>
 						

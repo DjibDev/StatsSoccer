@@ -79,7 +79,6 @@ background-color:#ECF528;
 color:black;
 }
 
-/* font-weight:bold */
 /* couleur des liens */
 
 a 
@@ -176,7 +175,7 @@ article, aside, vignettes
 article
 {
     position: relative;
-    width: 650px;
+    width: 550px;
     margin-right: 15px;
     background-color: white;
     box-shadow: 0px 2px 5px #1c1a19;
@@ -194,7 +193,7 @@ article p
 aside
 {
     position: relative;
-    width: 190px;
+    width: 290px;
     background-color: white;
     box-shadow: 0px 2px 5px #1c1a19;
     border-radius: 5px;
