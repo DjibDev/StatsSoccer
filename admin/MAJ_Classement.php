@@ -95,9 +95,13 @@ function MAJ_Classement()
 }	
 
 
-function MAJ_Classement_players()
+function MAJ_Classement_players($joueur_id)
 {
 	require ('connexion.php');
+	
+	//suppression du classement du joueur
+	$req=$bdd->query('DELETE FROM classement_players
+	WHERE joueur_id='.$joueur_id.' ');
 		
 	// requete qui retourne le nombre de journees présentes dans stats_individuelles
 	$req2=$bdd->query('SELECT COUNT(DISTINCT journee_id) AS nb_journee
@@ -109,46 +113,37 @@ function MAJ_Classement_players()
 	}
 	$req2->closeCursor();
 
-	
-	// extraction des differents id_joueur et mise en tableau
-	$tab_id_player=Array();
-	$indice=0;
-	
-	$req3=$bdd->query('SELECT ID_joueur FROM effectif');
-	
-	while ($resultats3=$req3->fetch())
-	{
-		$tab_id_player[$indice]=$resultats3['ID_joueur'];
-		$indice++;
-	}
-	$req3->closeCursor();
-	
-	$nb_joueur=$indice+1;
-	
-	// calculs cumulatifs par equipe
+	// calculs cumulatifs par joueur
 	
 	$x=0;
+	$journee_id=1;
 	
-	while ($x < $nb_joueur)
+	while ($x < $nb_journees)
 	{
 		$nb_buts=0;
 		$nb_passes=0;
-		$joueur_id=$tab_id_player[$x];	
-			
-		// requete faite par joueur
-		$req4=$bdd->query('SELECT buts, passes
-		FROM stats_individuelles
-		WHERE joueur_id='.$joueur_id.'');
 							
-		while ($resultats4=$req4->fetch())
+		// requete faite par joueur
+		$req2=$bdd->query('SELECT buts, passes
+		FROM stats_individuelles
+		WHERE joueur_id='.$joueur_id.'
+		AND journee_id='.$journee_id.' ');
+							
+		while ($resultats2=$req2->fetch())
 		{
-			$nb_buts=$nb_buts+$resultats['buts'];
-			$nb_passes=$nb_passes+$resultats4['passes'];
+			$nb_buts=$nb_buts+$resultats2['buts'];
+			$nb_passes=$nb_passes+$resultats2['passes'];
 		
 		}
-		$req4->closeCursor(); 
+		$req2->closeCursor(); 
+		
+		$x++;		
+		$journee_id++;
+		
+	}
 	
-		//requete pour écrire le nouveau classement		
+	
+		//requete pour écrire le nouveau classement	joueur	
 		$req5=$bdd->prepare("INSERT INTO classement_players (nb_journees, nb_buts, nb_passes, joueur_id)
 		VALUES (?,?,?,?)");
 		$req5->bindParam(1, $nb_journees); 
@@ -156,9 +151,8 @@ function MAJ_Classement_players()
 		$req5->bindParam(3, $nb_passes);
 		$req5->bindParam(4, $joueur_id);
 		$req5->execute(); 
-		$x++;		
-		
-	}	
+	
+			
 }
 	
 ?>

@@ -51,7 +51,7 @@
 		if ($doublon == true)
 		{
 			echo '<center><p class="nok">Enregistrement impossible ! Les données de ce joueur pour cette journée ont déjà été saisis !</p>';
-			echo '<p><a class="btn" href="administrer.php">Retour</a></p></center>';
+			echo '<p><a class="btn" href="admin_ajout_stats_individuelles.php">Retour</a></p></center>';
 		}	
 		else
 		{
@@ -75,7 +75,7 @@
 		
 			// appel de la fonction MAJ_classement, pour générer le nouveau classement	
 			require('MAJ_Classement.php');
-			MAJ_Classement_players();	
+			MAJ_Classement_players($joueur_id);	
 		
 		}
 	}

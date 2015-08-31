@@ -40,6 +40,8 @@
 			<?php	
 				$reponse2=$bdd->query('SELECT numero, date, ID_journee
 				FROM journees
+				WHERE saison = "2015/2016"
+				AND coupe="0"
 				ORDER BY numero ASC');
 				
 				while ($resultats2=$reponse2->fetch())
