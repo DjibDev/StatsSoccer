@@ -74,7 +74,98 @@
 		echo '</table><br>';		
 		
 		echo '<div id="adomicile"></div>';
+		
+		$req2=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points
+		FROM equipes, classement_domicile
+		WHERE  equipes.ID_equipe = classement_domicile.equipe_id
+		AND nb_journees = (SELECT MAX(nb_journees) FROM classement_domicile) 
+		ORDER BY points DESC, diff DESC, nb_buts_pour DESC, nom ASC ');
+	
+		$x=0;
+		echo '<table border=2 cellspacing=2 cellspadding=2 >';
+		echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th width="30">Bp</th><th>Bc</th><th width="30">Diff</th><th width="30">Stats</th></tr>';
+	
+		while ($resultats2=$req2->fetch())
+		{		
+			// le calcul du modulo de "$x" permet d'alterner le resultat : soit "0" soit "1" 
+			$x++;
+			$altern=$x % 2;
+			
+			// affichage différent si s'agit de l'équipe favorite 
+			
+			if ($resultats2['favorite'] == true)
+			{
+				$altern='special';
+			}
+			else
+			{	
+				$altern=$x % 2;
+			}
+		
+			echo '<tr class=trcolor'.$altern.'>';
+			echo '<td>'.$x.'</td>';
+			echo '<td><b>'.$resultats2['nom'].'</b></td>';
+			echo '<td align="center"><b>'.$resultats2['points'].'</b></td>';
+			echo '<td align="center">'.$resultats2['nb_journees'].'</td>';
+			echo '<td align="center">'.$resultats2['nb_victoires'].'</td>';
+			echo '<td align="center">'.$resultats2['nb_nuls'].'</td>';
+			echo '<td align="center">'.$resultats2['nb_defaites'].'</td>';
+			echo '<td align="center">'.$resultats2['nb_buts_pour'].'</td>';
+			echo '<td align="center">'.$resultats2['nb_buts_contre'].'</td>';
+			echo '<td align="center">'.$resultats2['diff'].'</td>';			
+			echo '<td align="center"><a href="stats_files/equipes/stats_equipe_'.$resultats2['ID_equipe'].'.php">Voir</a></td></tr>';
+			
+		}
+		$req2->closeCursor();
+		
+		echo '</table><br>';	
+		
 		echo '<div id="alexterieur"></div>';
+		
+		$req3=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points
+		FROM equipes, classement_domicile
+		WHERE  equipes.ID_equipe = classement_domicile.equipe_id
+		AND nb_journees = (SELECT MAX(nb_journees) FROM classement_domicile) 
+		ORDER BY points DESC, diff DESC, nb_buts_pour DESC, nom ASC ');
+	
+		$x=0;
+		echo '<table border=2 cellspacing=2 cellspadding=2 >';
+		echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th width="30">Bp</th><th>Bc</th><th width="30">Diff</th><th width="30">Stats</th></tr>';
+	
+		while ($resultats3=$req3->fetch())
+		{		
+			// le calcul du modulo de "$x" permet d'alterner le resultat : soit "0" soit "1" 
+			$x++;
+			$altern=$x % 2;
+			
+			// affichage différent si s'agit de l'équipe favorite 
+			
+			if ($resultats3['favorite'] == true)
+			{
+				$altern='special';
+			}
+			else
+			{	
+				$altern=$x % 2;
+			}
+		
+			echo '<tr class=trcolor'.$altern.'>';
+			echo '<td>'.$x.'</td>';
+			echo '<td><b>'.$resultats3['nom'].'</b></td>';
+			echo '<td align="center"><b>'.$resultats3['points'].'</b></td>';
+			echo '<td align="center">'.$resultats3['nb_journees'].'</td>';
+			echo '<td align="center">'.$resultats3['nb_victoires'].'</td>';
+			echo '<td align="center">'.$resultats3['nb_nuls'].'</td>';
+			echo '<td align="center">'.$resultats3['nb_defaites'].'</td>';
+			echo '<td align="center">'.$resultats3['nb_buts_pour'].'</td>';
+			echo '<td align="center">'.$resultats3['nb_buts_contre'].'</td>';
+			echo '<td align="center">'.$resultats3['diff'].'</td>';			
+			echo '<td align="center"><a href="stats_files/equipes/stats_equipe_'.$resultats3['ID_equipe'].'.php">Voir</a></td></tr>';
+			
+		}
+		$req3->closeCursor();
+		
+		echo '</table><br>';	
 		
                 
     ?>    

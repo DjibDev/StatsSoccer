@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Ven 21 Août 2015 à 10:20
+-- Généré le: Mar 01 Septembre 2015 à 15:51
 -- Version du serveur: 5.5.44
 -- Version de PHP: 5.4.41-0+deb7u1
 
@@ -20,69 +20,51 @@ SET time_zone = "+00:00";
 -- Base de données: `stats`
 --
 
--- --------------------------------------------------------
-
---
--- Structure de la table `matchs`
---
-
-CREATE TABLE IF NOT EXISTS `matchs` (
-  `ID_match` int(11) NOT NULL AUTO_INCREMENT,
-  `equipe_dom_id` int(11) NOT NULL,
-  `equipe_vis_id` int(11) NOT NULL,
-  `but_equipe_dom` int(2) NOT NULL DEFAULT '0',
-  `but_equipe_vis` int(2) NOT NULL DEFAULT '0',
-  `coupe` tinyint(1) NOT NULL DEFAULT '0',
-  `journee_id` int(11) NOT NULL,
-  PRIMARY KEY (`ID_match`),
-  KEY `fk_journee_id` (`journee_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=52 ;
-
 --
 -- Contenu de la table `matchs`
 --
 
 INSERT INTO `matchs` (`ID_match`, `equipe_dom_id`, `equipe_vis_id`, `but_equipe_dom`, `but_equipe_vis`, `coupe`, `journee_id`) VALUES
-(21, 39, 28, 0, 1, 0, 39),
-(22, 30, 32, 0, 0, 0, 39),
-(23, 36, 23, 1, 2, 0, 39),
-(24, 40, 29, 0, 1, 0, 39),
-(25, 24, 37, 2, 1, 0, 39),
-(26, 27, 38, 1, 0, 0, 39),
-(27, 41, 22, 0, 2, 0, 39),
-(28, 35, 25, 1, 2, 0, 39),
-(29, 26, 34, 2, 1, 0, 39),
-(30, 33, 31, 0, 0, 0, 39),
-(31, 23, 39, 0, 0, 0, 40),
-(32, 34, 35, 1, 1, 0, 40),
-(33, 30, 36, 3, 3, 0, 40),
-(34, 38, 33, 0, 1, 0, 40),
-(35, 37, 41, 1, 0, 0, 40),
-(36, 22, 27, 0, 0, 0, 40),
-(37, 29, 26, 1, 0, 0, 40),
-(38, 25, 40, 1, 0, 0, 40),
-(39, 31, 24, 1, 1, 0, 40),
-(40, 28, 32, 2, 0, 0, 40),
-(41, 41, 28, 0, 0, 0, 41),
-(42, 33, 37, 0, 0, 0, 41),
-(43, 36, 29, 0, 0, 0, 41),
-(44, 27, 25, 0, 0, 0, 41),
-(45, 24, 38, 0, 0, 0, 41),
-(46, 26, 23, 0, 0, 0, 41),
-(47, 32, 22, 0, 0, 0, 41),
-(48, 39, 35, 0, 0, 0, 41),
-(49, 31, 34, 0, 0, 0, 41),
-(51, 40, 30, 0, 0, 0, 41);
-
---
--- Contraintes pour les tables exportées
---
-
---
--- Contraintes pour la table `matchs`
---
-ALTER TABLE `matchs`
-  ADD CONSTRAINT `fk_journee_id` FOREIGN KEY (`journee_id`) REFERENCES `journees` (`ID_journee`);
+(1, 18, 7, 0, 1, 0, 1),
+(2, 9, 11, 0, 0, 0, 1),
+(3, 15, 2, 1, 2, 0, 1),
+(4, 19, 8, 0, 1, 0, 1),
+(5, 3, 16, 2, 1, 0, 1),
+(6, 6, 17, 1, 0, 0, 1),
+(7, 20, 1, 0, 2, 0, 1),
+(8, 14, 4, 1, 2, 0, 1),
+(9, 5, 13, 2, 1, 0, 1),
+(10, 12, 10, 0, 0, 0, 1),
+(11, 2, 18, 0, 0, 0, 2),
+(12, 13, 14, 1, 1, 0, 2),
+(13, 9, 15, 3, 3, 0, 2),
+(14, 17, 12, 0, 1, 0, 2),
+(15, 16, 20, 1, 0, 0, 2),
+(16, 1, 6, 0, 0, 0, 2),
+(17, 8, 5, 1, 0, 0, 2),
+(18, 4, 19, 1, 0, 0, 2),
+(19, 10, 3, 1, 1, 0, 2),
+(20, 7, 11, 2, 0, 0, 2),
+(21, 20, 7, 0, 1, 0, 3),
+(22, 12, 16, 1, 2, 0, 3),
+(23, 5, 2, 1, 1, 0, 3),
+(24, 11, 1, 0, 2, 0, 3),
+(25, 15, 8, 2, 1, 0, 3),
+(26, 6, 4, 1, 0, 0, 3),
+(27, 3, 17, 3, 0, 0, 3),
+(28, 18, 14, 0, 0, 0, 3),
+(29, 10, 13, 0, 1, 0, 3),
+(30, 19, 9, 6, 0, 0, 3),
+(31, 17, 19, 2, 0, 0, 4),
+(32, 8, 12, 0, 4, 0, 4),
+(33, 18, 11, 1, 0, 0, 4),
+(34, 1, 15, 1, 1, 0, 4),
+(35, 16, 5, 3, 1, 0, 4),
+(36, 9, 20, 0, 0, 0, 4),
+(37, 4, 10, 4, 1, 0, 4),
+(38, 13, 3, 2, 1, 0, 4),
+(39, 14, 6, 2, 0, 0, 4),
+(40, 2, 7, 0, 3, 0, 4);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

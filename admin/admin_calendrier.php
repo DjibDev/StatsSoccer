@@ -28,7 +28,7 @@
            	</select>
            	<br>
            	<br>
-            <label for="equipe1">Equipe à domicile</label><br>
+            <label for="equipe1">Domicile</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="equipe2">Extérieur</label><br>
          	<select required size="21" name="equipe1" id="equipe1">
 				<option selected disabled value="">Sélectionnez</option>
 						
@@ -46,7 +46,7 @@
 				
 				?>
            	</select>
-           	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           	<span class="marge"></span>
 			<select required size="21" name="equipe2" id="equipe2">
 				<option selected disabled value="">Sélectionnez</option>
 						

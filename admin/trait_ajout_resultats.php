@@ -10,6 +10,7 @@
 <div id="bloc_page">
 <?php
 	include('banniere_menu.php');
+	
 ?>	
 		
 	<section>	
@@ -28,18 +29,15 @@
 			$but_equipe_dom=$_POST['but_dom'.$ligne];
 			$but_equipe_vis=$_POST['but_vis'.$ligne];
 							
-			/* ajout dans la table matchs des résultats */									
+			// ajout dans la table matchs des résultats									
 			$req = $bdd->prepare('UPDATE matchs SET but_equipe_dom=?, but_equipe_vis=? 
 			WHERE journee_id=? 
 			AND equipe_dom_id=? 
 			AND equipe_vis_id=? ');
 			$req->execute(array($but_equipe_dom, $but_equipe_vis,$journee_id,$equipe_dom_id,$equipe_vis_id));
-			
-			
-			/* ajout dans la table stats_collectives des résultats pour générer le classement */
-			
-			/* tratement pour l'équipe a domicile */
-			
+				
+			// tratement pour l'équipe a domicile
+				
 			$equipe_id=$equipe_dom_id;
 			$buts_pour=$but_equipe_dom;
 			$buts_contre=$but_equipe_vis;
@@ -86,7 +84,8 @@
 			$req2->bindParam(10, $equipe_id);
 			$req2->execute();
 			
-			/* traitement pour equipe visiteur */
+		
+			// traitement pour equipe visiteur
 			
 			$equipe_id=$equipe_vis_id; 
 			$buts_pour=$but_equipe_vis;
@@ -133,6 +132,7 @@
 			$req3->bindParam(9, $journee_id);
 			$req3->bindParam(10, $equipe_id);
 			$req3->execute();
+
 		}
 			
 
@@ -146,7 +146,7 @@
 		// appel de la fonction MAJ_classement, pour générer le nouveau classement	
 		require('MAJ_Classement.php');
 		MAJ_Classement();	
-	
+
 		?>
 		
 		
