@@ -99,16 +99,9 @@ function MAJ_Classement_domicile()
   
 	require ('connexion.php');
 	
-	// requete qui retourne le nombre de journees présentes dans stats_collectives
-	$req2=$bdd->query('SELECT COUNT(DISTINCT journee_id) AS nb_journee
-	FROM stats_collectives');
-	
-	while ($resultats2=$req2->fetch())
-	{
-		$nb_journees=$resultats2['nb_journee'];
-	}
-	$req2->closeCursor();
-	
+	// requete qui vide le classement a domicile
+	$req=$bdd->prepare('DELETE FROM classement_domicile ');
+	$req->execute();
 	
 	// extraction des differents id_equipe et mise en tableau
 	$tab_id_equipe=Array();
@@ -143,7 +136,7 @@ function MAJ_Classement_domicile()
 		$req4=$bdd->query('SELECT victoire, defaite, nul ,buts_pour, buts_contre, diff, points
 		FROM stats_collectives
 		WHERE equipe_id='.$equipe_id.'
-		AND domicile="1" ');
+		AND domicile=true ');
 							
 		while ($resultats4=$req4->fetch())
 		{
@@ -167,9 +160,22 @@ function MAJ_Classement_domicile()
 			$nb_buts_contre=$nb_buts_contre+$resultats4['buts_contre'];
 			$diff=$diff+$resultats4['diff'];
 			$points=$points+$resultats4['points'];
+
 		}
 		$req4->closeCursor(); 
-	
+		
+		// requete pour définir le nombre de journées que cette equipe a joué à domicile
+		$req6=$bdd->query('SELECT count(*) AS nb_journees
+		FROM stats_collectives
+		WHERE equipe_id='.$equipe_id.'
+		AND domicile=true ');
+		
+		while ($resultats6=$req6->fetch())
+		{
+			$nb_journees=$resultats6['nb_journees'];
+		}	
+		$req6->closeCursor();
+		
 		//requete pour écrire le nouveau classement
 		
 		$req5=$bdd->prepare("INSERT INTO classement_domicile (nb_journees, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points, equipe_id)
@@ -187,6 +193,7 @@ function MAJ_Classement_domicile()
 		
 		$x++;		
 	}	
+	
 }	
 
 
@@ -195,17 +202,11 @@ function MAJ_Classement_exterieur()
   
 	require ('connexion.php');
 	
-	// requete qui retourne le nombre de journees présentes dans stats_collectives
-	$req2=$bdd->query('SELECT COUNT(DISTINCT journee_id) AS nb_journee
-	FROM stats_collectives');
+	// requete qui vide le classement a l'extérieur
+	$req=$bdd->prepare('DELETE FROM classement_exterieur ');
+	$req->execute();
 	
-	while ($resultats2=$req2->fetch())
-	{
-		$nb_journees=$resultats2['nb_journee'];
-	}
-	$req2->closeCursor();
-	
-	
+
 	// extraction des differents id_equipe et mise en tableau
 	$tab_id_equipe=Array();
 	$indice=0;
@@ -239,7 +240,7 @@ function MAJ_Classement_exterieur()
 		$req4=$bdd->query('SELECT victoire, defaite, nul ,buts_pour, buts_contre, diff, points
 		FROM stats_collectives
 		WHERE equipe_id='.$equipe_id.'
-		AND domicile="0" ');
+		AND domicile=false ');
 							
 		while ($resultats4=$req4->fetch())
 		{
@@ -265,6 +266,18 @@ function MAJ_Classement_exterieur()
 			$points=$points+$resultats4['points'];
 		}
 		$req4->closeCursor(); 
+		
+		// requete pour définir le nombre de journées que cette equipe a joué à l'extérieur
+		$req6=$bdd->query('SELECT count(*) AS nb_journees
+		FROM stats_collectives
+		WHERE equipe_id='.$equipe_id.'
+		AND domicile=false ');
+		
+		while ($resultats6=$req6->fetch())
+		{
+			$nb_journees=$resultats6['nb_journees'];
+		}	
+		$req6->closeCursor();
 	
 		//requete pour écrire le nouveau classement
 		
@@ -283,6 +296,7 @@ function MAJ_Classement_exterieur()
 		
 		$x++;		
 	}	
+	
 }	
 
 

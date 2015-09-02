@@ -23,6 +23,7 @@
 				<legend>Championnat</legend>
 				<li><a class="adm" href="admin_calendrier.php#ajout_team">Calendrier</a></li>
 				<li><a class="adm" href="admin_resultats.php">Résultats</a></li>
+				<li><a class="adm" href="trait_maj_classements.php">Mise à jour des classements</a></li>
 			</fieldset>
 			<br>
 			<fieldset>
