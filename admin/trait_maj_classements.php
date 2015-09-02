@@ -12,15 +12,16 @@
 	include('banniere_menu.php');
 	require('MAJ_Classement.php');
 	
-	// la mise a jour du classement général est traité dans la validation des résultats de la journée
-				
-	echo '<center><p class="nok">La mise à jour des classements s\'est correctement déroulée!</p>';
-	echo '<p><a class="btn" href="administrer.php">Retour</a></p></center>';
-	
+		
 	// mise a jour du classement à domicile
-	MAJ_Classement_exterieur();
 	MAJ_Classement_domicile();
 
+	// mise a jour du classement à l'extérieur
+	MAJ_Classement_exterieur();
+	
+	// la mise a jour du classement général est traité dans la validation des résultats de la journée
+	echo '<center><p class="ok">La mise à jour du classement à domicile s\'est bien déroulée!</p>';			
+	echo '<p><a class="btn" href="administrer.php">Retour</a></p></center>';
 ?>	
 
 

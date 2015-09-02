@@ -4,13 +4,18 @@ function AfficheStatsPlayer($a)
 {
 					require ('connexion.php');
 					
-					$req=$bdd->query('SELECT pseudo, nom , prenom
+					$req=$bdd->query('SELECT pseudo, nom , prenom, poste, num_maillot
 					FROM effectif
 					WHERE ID_joueur= '.$a.' ');
 					
 					while ($resultats=$req->fetch())
 					{
 						echo '<h2>Fiche stat de '.$resultats['pseudo'].' </h2>';
+						echo '<p>Nom: <b>'.$resultats['nom'].'</b></p>';
+						echo '<p>Prénom: <b>'.$resultats['prenom'].'</b></p>';
+						echo '<p>Poste: <b>'.$resultats['poste'].'</b></p>';
+						echo '<p>Numéro maillot: <b>'.$resultats['num_maillot'].'</b></p>';
+						echo '<br>';
 					}
 					$req->closeCursor();
 					
@@ -19,8 +24,9 @@ function AfficheStatsPlayer($a)
 					WHERE stats_individuelles.joueur_id = '.$a.'
 					AND stats_individuelles.joueur_id = effectif.ID_joueur
 					AND stats_individuelles.journee_id = journees.ID_journee
+					AND saison = "2015/2016"
 					ORDER BY numero ASC ');
-					
+												
 					echo '<table border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>J.</th><th>Date</th><th>Buts</th><th>Passes Déc.</th><th>Cleansheet</th>
 					<th>Pénalty manqué</th><th>Pénalty arrêté</th><th>Csc</th><th>Faits marquants</th></tr>';						
 					

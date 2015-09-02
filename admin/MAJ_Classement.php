@@ -75,8 +75,7 @@ function MAJ_Classement()
 		}
 		$req4->closeCursor(); 
 	
-		//requete pour écrire le nouveau classement
-		
+		//requete pour écrire le nouveau classement	
 		$req5=$bdd->prepare("INSERT INTO classement (nb_journees, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points, equipe_id)
 		VALUES (?,?,?,?,?,?,?,?,?)");
 		$req5->bindParam(1, $nb_journees); 
@@ -89,9 +88,11 @@ function MAJ_Classement()
 		$req5->bindParam(8, $points);
 		$req5->bindParam(9, $equipe_id);
 		$req5->execute(); 
-		
+	
 		$x++;		
 	}	
+
+	
 }	
 
 function MAJ_Classement_domicile()
@@ -193,6 +194,8 @@ function MAJ_Classement_domicile()
 		
 		$x++;		
 	}	
+	
+
 	
 }	
 
@@ -297,6 +300,7 @@ function MAJ_Classement_exterieur()
 		$x++;		
 	}	
 	
+		
 }	
 
 

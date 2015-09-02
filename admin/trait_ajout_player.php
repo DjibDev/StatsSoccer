@@ -44,7 +44,7 @@
 			
 			//recupere l'id_joueur tout juste créé
 			$id_player=$bdd->lastInsertId();
-						
+							
 			//appel de la fonction qui permet de creer la structure de la fiche stats du joueur
 			CreerFicheStatsPlayer($id_player);
 			
