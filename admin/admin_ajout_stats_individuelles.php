@@ -9,8 +9,10 @@
 <body>	
 	<div id="bloc_page">
 <?php
-	include('banniere_menu.php');
+	include ('banniere_menu.php');
 	require ('connexion.php');
+	require ('fonctions_utiles.php');
+	
 ?>			
 
 	<section>	
@@ -43,10 +45,11 @@
 				WHERE saison = "2015/2016"
 				AND coupe="0"
 				ORDER BY numero ASC');
-				
+								
 				while ($resultats2=$reponse2->fetch())
 				{
-					echo '<option value="'.$resultats2['ID_journee'].'">Journéee n° '.$resultats2['numero'].' - le '.$resultats2['date'].'</option>';
+					$dateFR=FormatDateFR($resultats2['date']);
+					echo '<option value="'.$resultats2['ID_journee'].'">Journéee n° '.$resultats2['numero'].' - le '.$dateFR.'</option>';
 				}
 				$reponse2->closeCursor();
 			?>

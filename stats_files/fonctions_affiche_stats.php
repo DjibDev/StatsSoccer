@@ -3,8 +3,9 @@
 function AfficheStatsPlayer($a)
 {
 					require ('connexion.php');
+					require ('../fonctions_utiles_users.php');
 					
-					$req=$bdd->query('SELECT pseudo, nom , prenom, poste, num_maillot
+					$req=$bdd->query('SELECT pseudo, nom , prenom, birthday, poste, num_maillot
 					FROM effectif
 					WHERE ID_joueur= '.$a.' ');
 					
@@ -13,6 +14,8 @@ function AfficheStatsPlayer($a)
 						echo '<h2>Fiche stat de '.$resultats['pseudo'].' </h2>';
 						echo '<p>Nom: <b>'.$resultats['nom'].'</b></p>';
 						echo '<p>Prénom: <b>'.$resultats['prenom'].'</b></p>';
+						$date_naiss=FormatDateFR($resultats['birthday']);
+						echo '<p>Date de naissance: <b>'.$date_naiss.'</b></p>';
 						echo '<p>Poste: <b>'.$resultats['poste'].'</b></p>';
 						echo '<p>Numéro maillot: <b>'.$resultats['num_maillot'].'</b></p>';
 						echo '<br>';
@@ -56,13 +59,16 @@ function AfficheStatsEquipe($a)
 {
 					require ('connexion.php');
 					
-					$req=$bdd->query('SELECT nom
+					$req=$bdd->query('SELECT *
 					FROM equipes
 					WHERE ID_equipe= '.$a.' ');
 					
 					while ($resultats=$req->fetch())
 					{
 						echo '<h2>Fiche stat de '.$resultats['nom'].' </h2>';
+						echo '<p>ville: <b>'.$resultats['ville'].'</b></p>';
+						echo '<p>Stade: <b>'.$resultats['stade'].'</b></p>';
+						echo '<br>';
 					}
 					$req->closeCursor();
 					
@@ -71,6 +77,7 @@ function AfficheStatsEquipe($a)
 					WHERE stats_collectives.equipe_id = '.$a.'
 					AND stats_collectives.equipe_id = equipes.ID_equipe
 					AND stats_collectives.journee_id = journees.ID_journee
+					AND saison = "2015/2016"
 					ORDER BY numero ASC ');
 					
 					echo '<table border="2" cellspacing="4"><tr class=trheadcolor><th>J.</th><th>V.</th><th>N.</th><th>D.</th>
@@ -95,6 +102,73 @@ function AfficheStatsEquipe($a)
 					$req2->closeCursor();
 					
 					echo '</table>';
+					echo '<br>';
 					
 }
+
+function CreateJPGraphEquipe($a)
+{
+	require_once ('jpgraph/jpgraph.php');
+	require_once ('jpgraph/jpgraph_line.php');
+	require_once ('connexion.php');
+
+	// requete que retourne la position au classement, axe des ordonnées
+	$datay1=Array(16,17,15,10);
+	
+	// requete compte le nombre de journees, axe des abscisses
+	$req=$bdd->query('SELECT count(DISTINCT journee_id) AS nb_journees, nom 
+	FROM stats_collectives, equipes
+	WHERE stats_collectives.equipe_id = equipes.ID_equipe
+	AND equipes.ID_equipe = '.$a.' ');
+	
+	while ($resultats=$req->fetch())
+	{
+		$nb_journees=$resultats['nb_journees'];
+		$nom_equipe=$resultats['nom'];
+	}
+	$req->closeCursor();
+
+	/*
+	$datay2 = Array();
+	for ($x=0; $x < $nb_journees; $x++)
+	{
+		$datay2[$x]=$x++;
+	}
+	*/
+	
+	// initialisation du graph
+	$graph = new Graph(300,250);
+	$graph->SetScale("textlin");
+
+	$theme_class=new UniversalTheme;
+
+	$graph->SetTheme($theme_class);
+	$graph->img->SetAntiAliasing(false);
+	$graph->title->Set('Evolution dans le classement');
+	$graph->SetBox(false);
+
+	$graph->img->SetAntiAliasing();
+
+	$graph->yaxis->HideZeroLabel();
+	$graph->yaxis->HideLine(false);
+	$graph->yaxis->HideTicks(false,false);
+
+	$graph->xgrid->Show();
+	$graph->xgrid->SetLineStyle("solid");
+	$graph->xaxis->SetTickLabels(array('A','B','C','D'));
+	$graph->xgrid->SetColor('#E3DDE2');
+
+	// tracage de la courbe
+	$p1 = new LinePlot($datay1);
+	$graph->Add($p1);
+	$p1->SetColor("#426A38");
+	$p1->SetLegend($nom_equipe);
+
+	$graph->legend->SetFrameWeight(1);
+
+	// finalisation du graph
+	$graph->Stroke();
+
+}
+
 ?>					

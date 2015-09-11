@@ -88,40 +88,43 @@ function MAJ_Classement()
 		$req5->bindParam(8, $points);
 		$req5->bindParam(9, $equipe_id);
 		$req5->execute(); 
-	
+
 		$x++;		
 	}	
-
 	
+
 }	
+
+
 
 function MAJ_Classement_domicile()
 {
   
-	require ('connexion.php');
+	require_once ('connexion.php');
 	
 	// requete qui vide le classement a domicile
 	$req=$bdd->prepare('DELETE FROM classement_domicile ');
 	$req->execute();
 	
 	// extraction des differents id_equipe et mise en tableau
-	$tab_id_equipe=Array();
+	$tab_id_equipe_dom=Array();
 	$indice=0;
 	$req3=$bdd->query('SELECT ID_equipe FROM equipes');
+	
 	while ($resultats3=$req3->fetch())
 	{
-		$tab_id_equipe[$indice]=$resultats3['ID_equipe'];
+		$tab_id_equipe_dom[$indice]=$resultats3['ID_equipe'];
 		$indice++;
 	}
 	$req3->closeCursor();
 	
-	$nb_equipe=$indice+1;
+	$nb_equipe_dom=$indice+1;
 	
 	// calculs cumulatifs par equipe
 	
 	$x=0;
 	
-	while ($x < $nb_equipe)
+	while ($x < $nb_equipe_dom)
 	{
 		$nb_victoires=0;
 		$nb_nuls=0;
@@ -130,7 +133,7 @@ function MAJ_Classement_domicile()
 		$nb_buts_contre=0;
 		$diff=0;
 		$points=0;
-		$equipe_id=$tab_id_equipe[$x];	
+		$equipe_id=$tab_id_equipe_dom[$x];	
 			
 			
 		// requete faite par equipe
@@ -190,20 +193,18 @@ function MAJ_Classement_domicile()
 		$req5->bindParam(7, $diff); 
 		$req5->bindParam(8, $points);
 		$req5->bindParam(9, $equipe_id);
-		$req5->execute(); 
-		
+		$req5->execute() or die ( print_r($req5->errorInfo()) );; 
+
 		$x++;		
 	}	
-	
 
-	
 }	
 
 
 function MAJ_Classement_exterieur()
 {
   
-	require ('connexion.php');
+	require_once ('connexion.php');
 	
 	// requete qui vide le classement a l'extérieur
 	$req=$bdd->prepare('DELETE FROM classement_exterieur ');
@@ -211,23 +212,23 @@ function MAJ_Classement_exterieur()
 	
 
 	// extraction des differents id_equipe et mise en tableau
-	$tab_id_equipe=Array();
+	$tab_id_equipe_ext=Array();
 	$indice=0;
 	$req3=$bdd->query('SELECT ID_equipe FROM equipes');
 	while ($resultats3=$req3->fetch())
 	{
-		$tab_id_equipe[$indice]=$resultats3['ID_equipe'];
+		$tab_id_equipe_ext[$indice]=$resultats3['ID_equipe'];
 		$indice++;
 	}
 	$req3->closeCursor();
 	
-	$nb_equipe=$indice+1;
+	$nb_equipe_ext=$indice+1;
 	
 	// calculs cumulatifs par equipe
 	
 	$x=0;
 	
-	while ($x < $nb_equipe)
+	while ($x < $nb_equipe_ext)
 	{
 		$nb_victoires=0;
 		$nb_nuls=0;
@@ -236,7 +237,7 @@ function MAJ_Classement_exterieur()
 		$nb_buts_contre=0;
 		$diff=0;
 		$points=0;
-		$equipe_id=$tab_id_equipe[$x];	
+		$equipe_id=$tab_id_equipe_ext[$x];	
 			
 			
 		// requete faite par equipe
@@ -282,7 +283,7 @@ function MAJ_Classement_exterieur()
 		}	
 		$req6->closeCursor();
 	
-		//requete pour écrire le nouveau classement
+		//requete pour écrire le nouveau classement extérieur
 		
 		$req5=$bdd->prepare("INSERT INTO classement_exterieur (nb_journees, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points, equipe_id)
 		VALUES (?,?,?,?,?,?,?,?,?)");
@@ -296,11 +297,11 @@ function MAJ_Classement_exterieur()
 		$req5->bindParam(8, $points);
 		$req5->bindParam(9, $equipe_id);
 		$req5->execute(); 
-		
+
 		$x++;		
 	}	
-	
-		
+
+
 }	
 
 

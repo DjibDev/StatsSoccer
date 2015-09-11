@@ -15,12 +15,9 @@
 		
 	// mise a jour du classement à domicile
 	MAJ_Classement_domicile();
-
-	// mise a jour du classement à l'extérieur
-	MAJ_Classement_exterieur();
 	
-	// la mise a jour du classement général est traité dans la validation des résultats de la journée
-	echo '<center><p class="ok">La mise à jour du classement à domicile s\'est bien déroulée!</p>';			
+
+	echo '<center><p class="ok">La mise à jour des classements à domicile et extérieur s\'est bien déroulée!</p>';			
 	echo '<p><a class="btn" href="administrer.php">Retour</a></p></center>';
 ?>	
 
