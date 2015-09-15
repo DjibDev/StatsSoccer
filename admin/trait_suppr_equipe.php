@@ -24,6 +24,9 @@
 						
 			$req = $bdd->prepare('DELETE FROM equipes WHERE ID_equipe=? ');
 			$req->execute(array($ID_equipe)); 
+			
+			require ('suppr_fiche_stats.php');
+			SupprStatsEquipe($ID_equipe);
 
 			echo '<p class="ok">Suppression bien effectuée!</p>';
 			echo '<center><p>Souhaitez-vous supprimer une autre équipe ? </p>';

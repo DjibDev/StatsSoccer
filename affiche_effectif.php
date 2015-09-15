@@ -67,9 +67,15 @@
 	
 		<aside>
 			<center>
-				<p>Faire une fonction ici pour afficher le nombre de joueur, l'âge moyen, le nombre de défenseurs, milieux, attaquants ...</p>
+			<p><i>En quelques chiffres...</i></p>
+			<p>Effectif:<b> <?php echo NombreEffectif(); ?>.</b></p>
+			<p>Age moyen:<b> <?php echo AgeAVG(); ?>.</b> </p>
+			<p><b><?php echo NbGAR(); ?> </b> gardien(s).</p>
+			<p><b><?php echo NbDEF(); ?> </b> défenseur(s). </p>
+			<p><b><?php echo NbMIL(); ?> </b> milieu(x). </p>
+			<p><b><?php echo NbATT(); ?> </b> attaquant(s).</p>
+			<p><b><?php echo NbINC(); ?> </b> inclassable(s).</p>
 			</center>
-			
 		</aside>
 	</section>
 	
