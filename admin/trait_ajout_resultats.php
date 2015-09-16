@@ -35,6 +35,11 @@
 			AND equipe_dom_id=? 
 			AND equipe_vis_id=? ');
 			$req->execute(array($but_equipe_dom, $but_equipe_vis,$journee_id,$equipe_dom_id,$equipe_vis_id));
+			
+			// mise a jour de la table journees, pour passer la journee en cours en 'finished'
+			$req4 = $bdd->prepare('UPDATE journees SET finished=1 
+			WHERE journee_id=? ');
+			$req4->execute(array($journee_id));
 				
 			// tratement pour l'équipe a domicile
 				
@@ -83,6 +88,7 @@
 			$req2->bindParam(9, $journee_id);
 			$req2->bindParam(10, $equipe_id);
 			$req2->execute();
+			
 			
 		
 			// traitement pour equipe visiteur

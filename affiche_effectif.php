@@ -75,6 +75,7 @@
 			<p><b><?php echo NbMIL(); ?> </b> milieu(x). </p>
 			<p><b><?php echo NbATT(); ?> </b> attaquant(s).</p>
 			<p><b><?php echo NbINC(); ?> </b> inclassable(s).</p>
+			
 			</center>
 		</aside>
 	</section>

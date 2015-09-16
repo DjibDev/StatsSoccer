@@ -95,8 +95,8 @@
 	$req->closeCursor();
 
 	echo '</tr></table></center>';
-	echo '<br>';
-
+	echo '<p>* si une équipe n\'apparait pas, c\'est qu\'elle est exempte.</p>';
+	
 	
 	$reponse=$bdd->query('SELECT numero, date FROM journees WHERE saison="2015/2016" AND coupe="0" ORDER BY numero ASC');
 	
@@ -116,7 +116,7 @@
 		WHERE numero='.$num_journee.'
 		AND journees.ID_journee=matchs.journee_id
 		AND matchs.equipe_dom_id = e1.ID_equipe
-		AND matchs.equipe_vis_id=e2.ID_equipe');
+		AND matchs.equipe_vis_id = e2.ID_equipe');
 	
 		while ($resultats2=$reponse2->fetch())
 		{

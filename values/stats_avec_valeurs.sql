@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mer 16 Septembre 2015 à 11:15
+-- Généré le: Mer 16 Septembre 2015 à 11:13
 -- Version du serveur: 5.5.44
 -- Version de PHP: 5.4.41-0+deb7u1
 
@@ -153,6 +153,23 @@ CREATE TABLE IF NOT EXISTS `equipes` (
   PRIMARY KEY (`ID_equipe`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
+--
+-- Contenu de la table `equipes`
+--
+
+INSERT INTO `equipes` (`ID_equipe`, `nom`, `ville`, `stade`, `favorite`) VALUES
+(21, 'Nantes Chu As', '', '', 0),
+(22, 'Nantes Footeux', '', '', 0),
+(23, 'Nantes St-felix Ccs', '', '', 0),
+(24, 'Nantes Metallo Sport', '', '', 0),
+(25, 'Nantes Sud 98 2', '', '', 0),
+(26, 'Nantes Jet Fc', '', '', 0),
+(27, 'JGE', '', '', 1),
+(28, 'Ste-luce/loire Us 2', '', '', 0),
+(29, 'Orvault Nacional Fc', '', '', 0),
+(30, 'Orvault Bugalliere', '', '', 0),
+(31, 'Orvault Rc', '', '', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -168,6 +185,34 @@ CREATE TABLE IF NOT EXISTS `journees` (
   `finished` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID_journee`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=79 ;
+
+--
+-- Contenu de la table `journees`
+--
+
+INSERT INTO `journees` (`ID_journee`, `date`, `saison`, `numero`, `coupe`, `finished`) VALUES
+(57, '2015-09-18', '2015/2016', 1, 0, 1),
+(58, '2015-09-25', '2015/2016', 2, 0, 0),
+(59, '2015-10-02', '2015/2016', 3, 0, 0),
+(60, '2015-10-09', '2015/2016', 4, 0, 0),
+(61, '2015-10-23', '2015/2016', 5, 0, 0),
+(62, '2015-10-30', '2015/2016', 6, 0, 0),
+(63, '2015-11-06', '2015/2016', 7, 0, 0),
+(64, '2015-11-20', '2015/2016', 8, 0, 0),
+(65, '2015-11-27', '2015/2016', 9, 0, 0),
+(66, '2015-12-11', '2015/2016', 10, 0, 0),
+(67, '2016-01-15', '2015/2016', 11, 0, 0),
+(68, '2016-01-22', '2015/2016', 12, 0, 0),
+(69, '2016-01-29', '2015/2016', 13, 0, 0),
+(70, '2016-02-26', '2015/2016', 14, 0, 0),
+(71, '2016-03-04', '2015/2016', 15, 0, 0),
+(72, '2016-03-11', '2015/2016', 16, 0, 0),
+(73, '2016-03-18', '2015/2016', 17, 0, 0),
+(74, '2016-04-08', '2015/2016', 18, 0, 0),
+(75, '2016-04-15', '2015/2016', 19, 0, 0),
+(76, '2016-04-22', '2015/2016', 20, 0, 0),
+(77, '2016-04-29', '2015/2016', 21, 0, 0),
+(78, '2016-05-20', '2015/2016', 22, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -186,6 +231,22 @@ CREATE TABLE IF NOT EXISTS `matchs` (
   PRIMARY KEY (`ID_match`),
   KEY `fk_journee_id` (`journee_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=56 ;
+
+--
+-- Contenu de la table `matchs`
+--
+
+INSERT INTO `matchs` (`ID_match`, `equipe_dom_id`, `equipe_vis_id`, `but_equipe_dom`, `but_equipe_vis`, `coupe`, `journee_id`) VALUES
+(45, 21, 25, 0, 0, 0, 57),
+(46, 29, 27, 0, 0, 0, 57),
+(47, 26, 23, 0, 0, 0, 57),
+(49, 22, 28, 0, 0, 0, 57),
+(50, 24, 30, 0, 0, 0, 57),
+(51, 23, 21, 0, 0, 0, 58),
+(52, 31, 22, 0, 0, 0, 58),
+(53, 27, 26, 0, 0, 0, 58),
+(54, 30, 29, 0, 0, 0, 58),
+(55, 28, 25, 0, 0, 0, 58);
 
 -- --------------------------------------------------------
 

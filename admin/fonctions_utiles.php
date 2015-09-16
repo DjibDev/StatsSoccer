@@ -67,10 +67,26 @@ function NumMaillotDispo()
 
 }	
 
+
 function NbrMatchAtteint()
 {
 	require ('connexion.php');
+
+	// calcul du nombre de matchs par journee maximum, selon le nombre d'équipes inscrites
 	
+	$reponse2=$bdd->query('SELECT count(*) AS Nb_equipes
+	FROM equipes');
+	while ($resultats2=$reponse2->fetch())
+	{
+			$nb_equipes=$resultats2['Nb_equipes'];
+	}		
+	$reponse2->closeCursor();
+	
+	$matchs_max=$nb_equipes/2;
+	$matchs_max=floor($matchs_max); // arrondi à l'entier inférieur
+	
+		
+	// calcul du nombre de matchs par journees rentrés
 	$reponse=$bdd->query('SELECT count(*) AS nb, numero, date, ID_journee
 	FROM matchs, journees
 	WHERE journees.ID_journee = matchs.journee_id
@@ -79,12 +95,13 @@ function NbrMatchAtteint()
 	GROUP BY ID_journee
 	ORDER BY numero ASC');
 	
+	//mise en tableau des résultat de la requête
 	$tab_match=Array();
 	$i=0;
 	
 	while ($resultats=$reponse->fetch())
 	{
-		if ($resultats['nb'] == 10) 
+		if ($resultats['nb'] == $matchs_max) 
 		{	
 			$tab_match[$resultats['ID_journee']]=true;
 		}
@@ -96,27 +113,26 @@ function NbrMatchAtteint()
 	}	
 	$reponse->closeCursor();
 	
-	$reponse2=$bdd->query('SELECT numero, date, ID_journee
+	$reponse3=$bdd->query('SELECT numero, date, ID_journee
 	FROM journees
 	WHERE saison="2015/2016"
 	AND coupe="0"
 	ORDER BY numero ASC');
-	
-	
-	while ($resultats2=$reponse2->fetch())
-	{
-		$dateFR=FormatDateFR($resultats2['date']);
 		
-		if ($tab_match[$resultats2['ID_journee']] == true)
+	while ($resultats3=$reponse3->fetch())
+	{
+		$dateFR=FormatDateFR($resultats3['date']);
+		
+		if ($tab_match[$resultats3['ID_journee']] == true)
 		{	
-			echo '<option value='.$resultats2['ID_journee'].' disabled >Journée N°'.$resultats2['numero'].' - '.$dateFR.'</option>';
+			echo '<option value='.$resultats3['ID_journee'].' disabled >Journée N°'.$resultats3['numero'].' - '.$dateFR.'</option>';
 		}
 		else
 		{
-			echo '<option value='.$resultats2['ID_journee'].'>Journée N°'.$resultats2['numero'].' - '.$dateFR.'</option>';
+			echo '<option value='.$resultats3['ID_journee'].'>Journée N°'.$resultats3['numero'].' - '.$dateFR.'</option>';
 		}	
 	}
-	$reponse2->closeCursor();
+	$reponse3->closeCursor();
 }
 
 
@@ -125,61 +141,30 @@ function NbrMatchAtteint()
 function ResultatsDejaRentres()
 {
 	require ('connexion.php');
-
-	$reponse=$bdd->query('SELECT DISTINCT numero
-	FROM stats_collectives, journees
-	WHERE stats_collectives.journee_id = journees.ID_journee
-	AND saison="2015/2016"
-	AND coupe="0" ');
 	
-	$deja_fait=Array();
-	$x=0;
-		
-	while ($resultats=$reponse->fetch())
-	{
-		$deja_fait[$x]=$resultats['numero'];
-		$x++;
-	}
-	$reponse->closeCursor();
-	
-	$reponse2=$bdd->query('SELECT numero, date, ID_journee
+	$req=$bdd->query('SELECT numero, date, ID_journee, finished
 	FROM journees
 	WHERE saison="2015/2016"
 	AND coupe="0"
 	ORDER BY numero ASC');
 	
-	$nb_elements=$x+1;
-		
 	
-	while ($resultats2=$reponse2->fetch())
+	while ($resultats=$req->fetch())
 	{
-		$indice=0;
-		$adesactiver=false;
-		$dateFR=FormatDateFR($resultats2['date']);
-		
-		
-		while ($indice < $nb_elements)
-		{	
-				if ($deja_fait[$indice] == $resultats2['numero'])
-				{
-					$adesactiver=true;
+		$dateFR=FormatDateFR($resultats['date']);
 				
-				}
-				$indice++;		
-		}		
-				
-		if ($adesactiver == true)
+		if ($resultats['finished'] == true)
 		{
 				
-				echo '<option value='.$resultats2['ID_journee'].' disabled >Journée N°'.$resultats2['numero'].' - '.$dateFR.'</option>';
+				echo '<option value='.$resultats['ID_journee'].' disabled >Journée N°'.$resultats['numero'].' - '.$dateFR.'</option>';
 		}			
 		else
 		{
-				echo '<option value='.$resultats2['ID_journee'].'>Journée N°'.$resultats2['numero'].' - '.$dateFR.'</option>';
+				echo '<option value='.$resultats['ID_journee'].'>Journée N°'.$resultats['numero'].' - '.$dateFR.'</option>';
 		}						
 		
 	}
-	$reponse->closeCursor();
+	$req->closeCursor();
 							
 	
 }	

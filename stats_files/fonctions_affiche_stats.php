@@ -57,7 +57,7 @@ function AfficheStatsPlayer($a)
 
 function AfficheStatsEquipe($a)
 {
-					require ('connexion.php');
+					require_once ('connexion.php');
 					
 					$req=$bdd->query('SELECT *
 					FROM equipes
@@ -104,6 +104,27 @@ function AfficheStatsEquipe($a)
 					echo '</table>';
 					echo '<br>';
 					
+}
+
+function AfficheHistoMatchs($a)
+{
+	require_once ('connexion.php');
+					
+	$req=$bdd->query('SELECT e1.nom equipe1, e2.nom equipe2, but_equipe_dom, but_equipe_vis , date, numero
+	FROM equipes e1, equipes e2, matchs, journees
+	WHERE matchs.equipe_dom_id = e1.ID_equipe
+	AND matchs.equipe_vis_id = e2.ID_equipe
+	AND journees.ID_journee=matchs.journee_id
+    AND journees.coupe=0
+    AND journees.finished=0
+	GROUP BY e1.ID_equipe='.$a.', e2.ID_equipe='.$a.'
+	ORDER BY numero ASC ');
+					
+	while ($resultats=$req->fetch())
+	{
+			echo $resultats['equipe1']. ' - '.$resultats['equipe2'];
+	}
+	$req->closeCursor();
 }
 
 function CreateJPGraphEquipe($a)
