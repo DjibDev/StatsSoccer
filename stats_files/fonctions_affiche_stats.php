@@ -110,21 +110,30 @@ function AfficheHistoMatchs($a)
 {
 	require_once ('connexion.php');
 					
-	$req=$bdd->query('SELECT e1.nom equipe1, e2.nom equipe2, but_equipe_dom, but_equipe_vis , date, numero
+	$req3=$bdd->query('SELECT e1.nom equipe1, e2.nom equipe2, but_equipe_dom, but_equipe_vis, date, numero
 	FROM equipes e1, equipes e2, matchs, journees
 	WHERE matchs.equipe_dom_id = e1.ID_equipe
 	AND matchs.equipe_vis_id = e2.ID_equipe
-	AND journees.ID_journee=matchs.journee_id
+	AND journees.ID_journee = matchs.journee_id
     AND journees.coupe=0
-    AND journees.finished=0
-	GROUP BY e1.ID_equipe='.$a.', e2.ID_equipe='.$a.'
-	ORDER BY numero ASC ');
+	AND e1.ID_equipe='.$a.'
+	UNION
+	SELECT e1.nom equipe1, e2.nom equipe2, but_equipe_dom, but_equipe_vis, date, numero
+	FROM equipes e1, equipes e2, matchs, journees
+	WHERE matchs.equipe_dom_id = e1.ID_equipe
+	AND matchs.equipe_vis_id = e2.ID_equipe
+	AND journees.ID_journee = matchs.journee_id
+    AND journees.coupe=0
+	AND e2.ID_equipe='.$a.'
+    ORDER BY numero ');
 					
-	while ($resultats=$req->fetch())
+	echo '<p><u>Historique des matchs:</u></p>';					
+					
+	while ($resultats3=$req3->fetch())
 	{
-			echo $resultats['equipe1']. ' - '.$resultats['equipe2'];
+			echo '<p>'.$resultats3['numero'].'. '.$resultats3['equipe1']. ' - '.$resultats3['equipe2'].'</p>';
 	}
-	$req->closeCursor();
+	$req3->closeCursor();
 }
 
 function CreateJPGraphEquipe($a)
