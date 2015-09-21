@@ -5,6 +5,6 @@
 			}
 			catch (Exception $e)
 			{
-			die('Erreur détectée: ' . $e->getMessage());
+			die('Erreur détectée lors de la connexion à la base: ' . $e->getMessage());
 			}
 ?>			

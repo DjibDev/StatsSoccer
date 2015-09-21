@@ -109,14 +109,16 @@ function AfficheStatsEquipe($a)
 function AfficheHistoMatchs($a)
 {
 	require_once ('connexion.php');
-					
+	
+	echo '<p><u>Historique des matchs:</u></p>';	
+			
 	$req3=$bdd->query('SELECT e1.nom equipe1, e2.nom equipe2, but_equipe_dom, but_equipe_vis, date, numero
 	FROM equipes e1, equipes e2, matchs, journees
 	WHERE matchs.equipe_dom_id = e1.ID_equipe
 	AND matchs.equipe_vis_id = e2.ID_equipe
 	AND journees.ID_journee = matchs.journee_id
     AND journees.coupe=0
-	AND e1.ID_equipe='.$a.'
+	AND e1.ID_equipe = '.$a.'
 	UNION
 	SELECT e1.nom equipe1, e2.nom equipe2, but_equipe_dom, but_equipe_vis, date, numero
 	FROM equipes e1, equipes e2, matchs, journees
@@ -124,19 +126,18 @@ function AfficheHistoMatchs($a)
 	AND matchs.equipe_vis_id = e2.ID_equipe
 	AND journees.ID_journee = matchs.journee_id
     AND journees.coupe=0
-	AND e2.ID_equipe='.$a.'
+	AND e2.ID_equipe = '.$a.'
     ORDER BY numero ');
-					
-	echo '<p><u>Historique des matchs:</u></p>';					
-					
+				
 	while ($resultats3=$req3->fetch())
 	{
-			echo '<p>'.$resultats3['numero'].'. '.$resultats3['equipe1']. ' - '.$resultats3['equipe2'].'</p>';
+			echo '<p>Bonjour</p>';
+			//echo '<p>'.$resultats3['numero'].'. '.$resultats3['equipe1'].' - '.$resultats3['equipe2'].'</p>';
 	}
 	$req3->closeCursor();
 }
 
-function CreateJPGraphEquipe($a)
+/*function CreateJPGraphEquipe($a)
 {
 	require_once ('jpgraph/jpgraph.php');
 	require_once ('jpgraph/jpgraph_line.php');
@@ -158,13 +159,13 @@ function CreateJPGraphEquipe($a)
 	}
 	$req->closeCursor();
 
-	/*
+	
 	$datay2 = Array();
 	for ($x=0; $x < $nb_journees; $x++)
 	{
 		$datay2[$x]=$x++;
 	}
-	*/
+	
 	
 	// initialisation du graph
 	$graph = new Graph(300,250);
@@ -199,6 +200,6 @@ function CreateJPGraphEquipe($a)
 	// finalisation du graph
 	$graph->Stroke();
 
-}
+} */
 
 ?>					

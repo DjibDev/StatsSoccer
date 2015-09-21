@@ -63,7 +63,6 @@ function CreerFicheStatsEquipe($a)
 			</article>
 			<aside>
 				<?php 
-					require_once ("../fonctions_affiche_stats.php");
 					AfficheHistoMatchs('.$a.');
 				?>	
 			</aside>

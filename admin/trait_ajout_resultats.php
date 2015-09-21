@@ -38,7 +38,7 @@
 			
 			// mise a jour de la table journees, pour passer la journee en cours en 'finished'
 			$req4 = $bdd->prepare('UPDATE journees SET finished=1 
-			WHERE journee_id=? ');
+			WHERE ID_journee=? ');
 			$req4->execute(array($journee_id));
 				
 			// tratement pour l'équipe a domicile
@@ -146,13 +146,15 @@
 		echo '<p class="ok">Enregistrement bien effectué !</p>';
 		echo '<center><p>Souhaitez-vous rentrer d\'autres scores ? </p>';
 		echo '<p><a class="btn" href="admin_resultats.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p>';
-			
+	    
+	    echo '<br>';
+		echo '<p><a class="btn" href="../affiche_classement.php">Nouveaux classements disponibles !</a></p></center>';
+		
 		// appel de la fonction MAJ_classement, pour générer le nouveau classement	et mettre a jour les classement domicile et extérieur
 		require('MAJ_Classement.php');
 		MAJ_Classement();	
 		
-		echo '<br>';
-		echo '<p><a class="btn" href="../affiche_classement.php">Nouveaux classements disponibles !</a></p></center>';
+		
 		
 		
 		?>
