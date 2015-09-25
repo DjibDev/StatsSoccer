@@ -2,7 +2,8 @@
 
 function MAJ_Classement()
 {
-  
+ 
+ try {
 	require ('connexion.php');
 	
 	// requete qui retourne le nombre de journees présentes dans stats_collectives
@@ -92,14 +93,15 @@ function MAJ_Classement()
 		$x++;		
 	}	
 	
-
-}	
-
-
+ }
+	catch (PDOException $e) {
+                die('Exception levée : <br/>Code :'.$e->getCode().'<br />Message :'.$e->getMessage());
+	}		
+	
+}
 
 function MAJ_Classement_domicile()
 {
-  
 	require_once ('connexion.php');
 	
 	// requete qui vide le classement a domicile
@@ -198,12 +200,11 @@ function MAJ_Classement_domicile()
 		$x++;		
 	}	
 
-}	
-
+}
 
 function MAJ_Classement_exterieur()
 {
-  
+	 
 	require_once ('connexion.php');
 	
 	// requete qui vide le classement a l'extérieur
@@ -300,7 +301,6 @@ function MAJ_Classement_exterieur()
 
 		$x++;		
 	}	
-
 
 }	
 

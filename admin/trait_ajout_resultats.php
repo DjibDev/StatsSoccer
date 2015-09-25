@@ -151,11 +151,8 @@
 		echo '<p><a class="btn" href="../affiche_classement.php">Nouveaux classements disponibles !</a></p></center>';
 		
 		// appel de la fonction MAJ_classement, pour générer le nouveau classement	et mettre a jour les classement domicile et extérieur
-		require('MAJ_Classement.php');
-		MAJ_Classement();	
-		
-		
-		
+		require ('MAJ_Classement.php');
+		MAJ_Classement();
 		
 		?>
 		

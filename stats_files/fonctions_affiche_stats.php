@@ -104,13 +104,8 @@ function AfficheStatsEquipe($a)
 					echo '</table>';
 					echo '<br>';
 					
-}
-
-function AfficheHistoMatchs($a)
-{
-	require_once ('connexion.php');
 	
-	echo '<p><u>Historique des matchs:</u></p>';	
+	echo '<p><u>Historique des matchs en championnat:</u></p>';	
 			
 	$req3=$bdd->query('SELECT e1.nom equipe1, e2.nom equipe2, but_equipe_dom, but_equipe_vis, date, numero
 	FROM equipes e1, equipes e2, matchs, journees
@@ -131,8 +126,7 @@ function AfficheHistoMatchs($a)
 				
 	while ($resultats3=$req3->fetch())
 	{
-			echo '<p>Bonjour</p>';
-			//echo '<p>'.$resultats3['numero'].'. '.$resultats3['equipe1'].' - '.$resultats3['equipe2'].'</p>';
+			echo '<p><b>'.$resultats3['numero'].'</b>. '.$resultats3['equipe1'].' - '.$resultats3['equipe2'].': <b>'.$resultats3['but_equipe_dom'].' - '.$resultats3['but_equipe_vis'].'</b></p>';
 	}
 	$req3->closeCursor();
 }

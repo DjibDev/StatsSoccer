@@ -55,17 +55,10 @@ function CreerFicheStatsEquipe($a)
 				include("../banniere_menu_fiche.php"); 
 				?>	
 			<section>
-			<article>
 				<?php
 					require_once ("../fonctions_affiche_stats.php");
 					AfficheStatsEquipe('.$a.');
 				?>
-			</article>
-			<aside>
-				<?php 
-					AfficheHistoMatchs('.$a.');
-				?>	
-			</aside>
 			</section>	
 			</div>
 			</body>

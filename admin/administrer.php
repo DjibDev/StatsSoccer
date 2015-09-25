@@ -13,24 +13,23 @@
 ?>	
 	<section>
 		<article>
-			<fieldset>
-				<legend>Statistiques individuelles</legend>
-				<li><a class="adm" href="admin_ajout_stats_individuelles.php">Ajouter</a></li>	
-				<li><a class="adm" href="admin_stats_modif_player.php">Modifier/Supprimer</a></li>	
-			</fieldset>
-			<br>
-			<fieldset>
+			<fieldset>	
 				<legend>Championnat</legend>
 				<li><a class="adm" href="admin_calendrier.php#ajout_team">Calendrier</a></li>
 				<li><a class="adm" href="admin_resultats.php">Résultats</a></li>
-				<li><a class="adm" href="trait_maj_classements.php">MAJ Classements</a></li>
 			</fieldset>
 			<br>
 			<fieldset>
 				<legend>Coupe</legend>
 				<li><a class="adm" href="admin_calendrier_coupe.php#ajout_team">Calendrier</a></li>
 				<li><a class="adm" href="admin_resultats_coupe.php">Résultats</a></li>
-			</fieldset>						
+			</fieldset>		
+			<br>
+			<fieldset>
+				<legend>Statistiques individuelles</legend>
+				<li><a class="adm" href="admin_ajout_stats_individuelles.php">Ajouter</a></li>	
+				<li><a class="adm" href="admin_stats_modif_player.php">Modifier/Supprimer</a></li>	
+			</fieldset>			
 		</article>		
 			
 		<aside>

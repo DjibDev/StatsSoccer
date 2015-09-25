@@ -25,7 +25,7 @@
 	echo '<h2>Les classements en championnat</h2>';
 	
 	echo '<table border="0" cellspacing=2 cellspadding=2>';
-	echo '<tr class="trcolor0"><td align="center"><a href="#adomicile">A domicile</a></td><td align="center"><a href="#alexterieur">A l\'extérieur</td></tr>';
+	echo '<tr class="trcolor0"><td align="center"><a href="#adomicile">A domicile</a></td><td align="center"><a href="#alexterieur">A l\'extérieur</td><td align="center"><a href="#meill_att">Meilleure attaque</a><td align="center"><a href="#meill_def">Meilleure défense</a></tr>';
 	echo '</table><br>';
 	
 	$req1=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points
