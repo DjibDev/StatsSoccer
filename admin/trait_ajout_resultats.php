@@ -54,7 +54,7 @@
 				$victoire=true;
 				$nul=false;
 				$defaite=false;
-				$points=3;
+				$points=4;
 			}
 			else
 			{
@@ -63,7 +63,7 @@
 					$victoire=false;
 					$nul=true;
 					$defaite=false;
-					$points=1;
+					$points=2;
 				}
 				else
 				{
@@ -71,7 +71,7 @@
 					$victoire=false;
 					$nul=false;
 					$defaite=true;
-					$points=0;
+					$points=1;
 				}	
 			}
 			
@@ -104,7 +104,7 @@
 				$victoire=true;
 				$nul=false;
 				$defaite=false;
-				$points=3;
+				$points=4;
 			}
 			else
 			{
@@ -113,14 +113,14 @@
 					$victoire=false;
 					$nul=true;
 					$defaite=false;
-					$points=1;
+					$points=2;
 				}
 				else
 				{
 					$victoire=false;
 					$nul=false;
 					$defaite=true;
-					$points=0;
+					$points=1;
 				}	
 			}
 			

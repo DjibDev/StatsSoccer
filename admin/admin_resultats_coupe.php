@@ -18,7 +18,7 @@
 	{
 ?>	
 	<section>	
-	<form method="post" action="admin_resultats.php">	
+	<form method="post" action="admin_resultats_coupe.php">	
 		<fieldset>
 		<Legend>Ajout des résultats de la journée pour la Coupe.</Legend>		
 			<label for="journee">Sélectionner la date : </label>

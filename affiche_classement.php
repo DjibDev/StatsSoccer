@@ -182,7 +182,7 @@
 			
 		echo '<h2>Classements individuels</h2>';
 		
-		echo '<caption>Classement des buteurs</caption>';
+		echo '<caption>Classement des buteurs (championnat)</caption>';
 		echo '<table border=2 cellspacing=2 cellspadding=2 >';
 		echo '<tr class=trheadcolor><th></th><th>Pseudo</th><th>Buts</th>';
 		
@@ -209,7 +209,7 @@
 		echo '<br>';
 		
 		
-		echo '<caption>Classement des passeurs</caption>';
+		echo '<caption>Classement des passeurs (championnat)</caption>';
 		echo '<table border=2 cellspacing=2 cellspadding=2 >';
 		echo '<tr class=trheadcolor><th></th><th>Pseudo</th><th>Passes</th>';
 				

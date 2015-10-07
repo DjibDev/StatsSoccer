@@ -244,8 +244,8 @@ CREATE TABLE IF NOT EXISTS `stats_collectives_coupe` (
   `journee_id` int(11) NOT NULL,
   `equipe_id` int(11) NOT NULL,
   PRIMARY KEY (`ID_stat_collec`),
-  KEY `fk2_journee_id` (`journee_id`),
-  KEY `fk_equipe_id` (`equipe_id`)
+  KEY `fk3_journee_id` (`journee_id`),
+  KEY `fk5_equipe_id` (`equipe_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -318,11 +318,11 @@ ALTER TABLE `stats_collectives`
   ADD CONSTRAINT `fk2_journee_id` FOREIGN KEY (`journee_id`) REFERENCES `journees` (`ID_journee`),
   ADD CONSTRAINT `fk3_equipe_id` FOREIGN KEY (`equipe_id`) REFERENCES `equipes` (`ID_equipe`),
 
-
+--
 -- Contraintes pour la table `stats_collectives_coupe`
 --
 ALTER TABLE `stats_collectives_coupe`
-  ADD CONSTRAINT `fk6_journee_id` FOREIGN KEY (`journee_id`) REFERENCES `journees` (`ID_journee`),
+  ADD CONSTRAINT `fk3_journee_id` FOREIGN KEY (`journee_id`) REFERENCES `journees` (`ID_journee`),
   ADD CONSTRAINT `fk5_equipe_id` FOREIGN KEY (`equipe_id`) REFERENCES `equipes_coupe` (`ID_equipe`),
 
 --
