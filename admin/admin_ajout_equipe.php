@@ -19,7 +19,7 @@
 		<?php require_once ('fonctions_utiles.php'); ?>
 		
 			<fieldset>
-				<Legend> Ajouter une équipe</Legend>		
+				<Legend> Ajouter une équipe en Championnat</Legend>		
 				<label for="nom_club">Nom du club :</label>	
 				<input required type="text" name="nom_club" id="nom_club">
 				<br>
@@ -36,7 +36,26 @@
 				<input type="submit" value="Enregistrer"/> 		
 			</fieldset>
 		</form>
-		
+			
+		<form method="post" action="trait_ajout_equipe_coupe.php">	
+			<fieldset>
+				<Legend> Ajouter une équipe pour la coupe</Legend>		
+				<label for="nom_club">Nom du club :</label>	
+				<input required type="text" name="nom_club" id="nom_club">
+				<br>
+				<br>
+				<label for="ville">Ville :</label>	
+				<input type="text" name="ville" id="ville">
+				<br>
+				<br>
+				<label for="stade">Stade :</label>	
+				<input type="text" name="stade" id="stade">
+				<br>
+				<br>	
+				<input type="reset" value="Annuler"/>
+				<input type="submit" value="Enregistrer"/> 		
+			</fieldset>
+		</form>
 	</section>
 	
 </div>		

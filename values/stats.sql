@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mer 16 Septembre 2015 à 11:15
+-- Généré le: Mer 07 Octobre 2015 à 12:03
 -- Version du serveur: 5.5.44
 -- Version de PHP: 5.4.41-0+deb7u1
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `classement` (
   `equipe_id` int(11) NOT NULL,
   PRIMARY KEY (`ID_classement`),
   KEY `fk4_equipe_id` (`equipe_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 -- --------------------------------------------------------
 
@@ -151,7 +151,22 @@ CREATE TABLE IF NOT EXISTS `equipes` (
   `stade` varchar(100) CHARACTER SET utf8 NOT NULL,
   `favorite` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID_equipe`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `equipes_coupe`
+--
+
+CREATE TABLE IF NOT EXISTS `equipes_coupe` (
+  `ID_equipe` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `ville` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `stade` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `favorite` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID_equipe`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -167,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `journees` (
   `coupe` tinyint(1) NOT NULL DEFAULT '0',
   `finished` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID_journee`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=79 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=82 ;
 
 -- --------------------------------------------------------
 
@@ -185,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `matchs` (
   `journee_id` int(11) NOT NULL,
   PRIMARY KEY (`ID_match`),
   KEY `fk_journee_id` (`journee_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=56 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -194,6 +209,29 @@ CREATE TABLE IF NOT EXISTS `matchs` (
 --
 
 CREATE TABLE IF NOT EXISTS `stats_collectives` (
+  `ID_stat_collec` int(11) NOT NULL AUTO_INCREMENT,
+  `victoire` tinyint(1) NOT NULL DEFAULT '0',
+  `defaite` tinyint(1) NOT NULL DEFAULT '0',
+  `nul` tinyint(1) NOT NULL DEFAULT '0',
+  `buts_pour` int(11) NOT NULL DEFAULT '0',
+  `buts_contre` int(11) NOT NULL DEFAULT '0',
+  `diff` int(2) NOT NULL DEFAULT '0',
+  `points` int(1) NOT NULL DEFAULT '0',
+  `domicile` tinyint(1) NOT NULL,
+  `journee_id` int(11) NOT NULL,
+  `equipe_id` int(11) NOT NULL,
+  PRIMARY KEY (`ID_stat_collec`),
+  KEY `fk2_journee_id` (`journee_id`),
+  KEY `fk_equipe_id` (`equipe_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `stats_collectives_coupe`
+--
+
+CREATE TABLE IF NOT EXISTS `stats_collectives_coupe` (
   `ID_stat_collec` int(11) NOT NULL AUTO_INCREMENT,
   `victoire` tinyint(1) NOT NULL DEFAULT '0',
   `defaite` tinyint(1) NOT NULL DEFAULT '0',
@@ -247,7 +285,7 @@ ALTER TABLE `classement`
 -- Contraintes pour la table `classement_coupe`
 --
 ALTER TABLE `classement_coupe`
-  ADD CONSTRAINT `classement_coupe_ibfk_1` FOREIGN KEY (`equipe_id`) REFERENCES `equipes` (`ID_equipe`);
+  ADD CONSTRAINT `classement_coupe_ibfk_1` FOREIGN KEY (`equipe_id`) REFERENCES `equipes_coupe` (`ID_equipe`);
 
 --
 -- Contraintes pour la table `classement_domicile`
@@ -279,7 +317,13 @@ ALTER TABLE `matchs`
 ALTER TABLE `stats_collectives`
   ADD CONSTRAINT `fk2_journee_id` FOREIGN KEY (`journee_id`) REFERENCES `journees` (`ID_journee`),
   ADD CONSTRAINT `fk3_equipe_id` FOREIGN KEY (`equipe_id`) REFERENCES `equipes` (`ID_equipe`),
-  ADD CONSTRAINT `fk_equipe_id` FOREIGN KEY (`equipe_id`) REFERENCES `equipes` (`ID_equipe`);
+
+
+-- Contraintes pour la table `stats_collectives_coupe`
+--
+ALTER TABLE `stats_collectives_coupe`
+  ADD CONSTRAINT `fk6_journee_id` FOREIGN KEY (`journee_id`) REFERENCES `journees` (`ID_journee`),
+  ADD CONSTRAINT `fk5_equipe_id` FOREIGN KEY (`equipe_id`) REFERENCES `equipes_coupe` (`ID_equipe`),
 
 --
 -- Contraintes pour la table `stats_individuelles`

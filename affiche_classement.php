@@ -22,11 +22,13 @@
 	require('connexion.php');
 	
 	echo '<div id="general"></div>';
-	echo '<h2>Les classements en championnat</h2>';
+	echo '<h2>Les classements en championnat - Groupe C</h2>';
 	
+	/*
 	echo '<table border="0" cellspacing=2 cellspadding=2>';
 	echo '<tr class="trcolor0"><td align="center"><a href="#adomicile">A domicile</a></td><td align="center"><a href="#alexterieur">A l\'extérieur</td><td align="center"><a href="#meill_att">Meilleure attaque</a><td align="center"><a href="#meill_def">Meilleure défense</a></tr>';
 	echo '</table><br>';
+	*/
 	
 	$req1=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points
 	FROM equipes, classement
@@ -37,7 +39,7 @@
 	$x=0;
 	echo '<caption>Classement général</caption>';
 	echo '<table border=2 cellspacing=2 cellspadding=2 >';
-	echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th width="30">Bp</th><th>Bc</th><th width="30">Diff</th><th width="30">Stats</th></tr>';
+	echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th width="30">Bp</th><th>Bc</th><th width="30">Diff</th><th width="30">Infos</th></tr>';
 	
 		while ($resultats=$req1->fetch())
 		{		
@@ -72,8 +74,9 @@
 		}
 		$req1->closeCursor();
 		
-		echo '</table><br>';		
 		
+		echo '</table><br>';		
+		/*
 		echo '<div id="adomicile"></div>';
 		
 		
@@ -168,7 +171,7 @@
 		}
 		$req3->closeCursor();
 		
-		echo '</table><br>';	
+		echo '</table><br>';	*/
 		
                 
     ?>    

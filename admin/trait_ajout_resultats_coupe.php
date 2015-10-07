@@ -30,7 +30,7 @@
 			$but_equipe_vis=$_POST['but_vis'.$ligne];
 							
 			// ajout dans la table matchs des résultats									
-			$req = $bdd->prepare('UPDATE matchs SET but_equipe_dom=?, but_equipe_vis=? 
+			$req = $bdd->prepare('UPDATE matchs SET but_equipe_dom=?, but_equipe_vis=?, coupe= "1" 
 			WHERE journee_id=? 
 			AND equipe_dom_id=? 
 			AND equipe_vis_id=? ');
@@ -38,7 +38,8 @@
 			
 			// mise a jour de la table journees, pour passer la journee en cours en 'finished'
 			$req4 = $bdd->prepare('UPDATE journees SET finished=1 
-			WHERE ID_journee=? ');
+			WHERE ID_journee=?
+			AND coupe = "1" ');
 			$req4->execute(array($journee_id));
 				
 			// tratement pour l'équipe a domicile
@@ -75,7 +76,7 @@
 				}	
 			}
 			
-			$req2 = $bdd->prepare("INSERT INTO stats_collectives (victoire,defaite,nul,buts_pour,buts_contre,diff,points,domicile,journee_id,equipe_id) 
+			$req2 = $bdd->prepare("INSERT INTO stats_collectives_coupe (victoire,defaite,nul,buts_pour,buts_contre,diff,points,domicile,journee_id,equipe_id) 
 			VALUES (?,?,?,?,?,?,?,?,?,?)");
 			$req2->bindParam(1, $victoire);
 			$req2->bindParam(2, $defaite); 
@@ -125,7 +126,7 @@
 			}
 			
 			
-			$req3 = $bdd->prepare("INSERT INTO stats_collectives (victoire,defaite,nul,buts_pour,buts_contre,diff,points,domicile,journee_id,equipe_id) 
+			$req3 = $bdd->prepare("INSERT INTO stats_collectives_coupe (victoire,defaite,nul,buts_pour,buts_contre,diff,points,domicile,journee_id,equipe_id) 
 			VALUES (?,?,?,?,?,?,?,?,?,?)");
 			$req3->bindParam(1, $victoire);
 			$req3->bindParam(2, $defaite); 
@@ -146,11 +147,8 @@
 		echo '<p><a class="btn" href="admin_resultats.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p>';
 	    
 		// appel de la fonction MAJ_classement, pour générer le nouveau classement	et mettre a jour les classement domicile et extérieur
-		require_once ('MAJ_Classement.php');
-		MAJ_Classement();
-		
-		echo '<br>';
-		echo '<p><a class="btn" href="../affiche_classement.php">Nouveaux classements disponibles !</a></p></center>';
+		require ('MAJ_Classement.php');
+		MAJ_Classement_Coupe();
 		
 		?>
 		

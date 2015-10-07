@@ -136,6 +136,72 @@ function NbrMatchAtteint()
 }
 
 
+function NbrMatchAtteintCoupe()
+{
+	require ('connexion.php');
+
+	// calcul du nombre de matchs par journee maximum, selon le nombre d'équipes inscrites
+	
+	$reponse2=$bdd->query('SELECT count(*) AS Nb_equipes
+	FROM equipes_coupe');
+	while ($resultats2=$reponse2->fetch())
+	{
+			$nb_equipes=$resultats2['Nb_equipes'];
+	}		
+	$reponse2->closeCursor();
+	
+	$matchs_max=$nb_equipes/2;
+	$matchs_max=floor($matchs_max); // arrondi à l'entier inférieur
+	
+		
+	// calcul du nombre de matchs par journees rentrés
+	$reponse=$bdd->query('SELECT count(*) AS nb, numero, date, ID_journee
+	FROM matchs, journees
+	WHERE journees.ID_journee = matchs.journee_id
+	AND saison="2015/2016"
+	AND journees.coupe="1"
+	GROUP BY ID_journee
+	ORDER BY numero ASC');
+	
+	//mise en tableau des résultat de la requête
+	$tab_match=Array();
+	$i=0;
+	
+	while ($resultats=$reponse->fetch())
+	{
+		if ($resultats['nb'] == $matchs_max) 
+		{	
+			$tab_match[$resultats['ID_journee']]=true;
+		}
+		else
+		{
+			$tab_match[$resultats['ID_journee']]=false;
+		}
+		$i++;
+	}	
+	$reponse->closeCursor();
+	
+	$reponse3=$bdd->query('SELECT numero, date, ID_journee
+	FROM journees
+	WHERE saison="2015/2016"
+	AND coupe="1"
+	ORDER BY numero ASC');
+		
+	while ($resultats3=$reponse3->fetch())
+	{
+		$dateFR=FormatDateFR($resultats3['date']);
+		
+		if ($tab_match[$resultats3['ID_journee']] == true)
+		{	
+			echo '<option value='.$resultats3['ID_journee'].' disabled >Journée N°'.$resultats3['numero'].' - '.$dateFR.'</option>';
+		}
+		else
+		{
+			echo '<option value='.$resultats3['ID_journee'].'>Journée N°'.$resultats3['numero'].' - '.$dateFR.'</option>';
+		}	
+	}
+	$reponse3->closeCursor();
+}
 
 
 function ResultatsDejaRentres()
@@ -168,6 +234,36 @@ function ResultatsDejaRentres()
 							
 	
 }	
+
+function ResultatsDejaRentresCoupe()
+{
+	require ('connexion.php');
+	
+	$req=$bdd->query('SELECT numero, date, ID_journee, finished
+	FROM journees
+	WHERE saison="2015/2016"
+	AND coupe="1"
+	ORDER BY numero ASC');
+	
+	
+	while ($resultats=$req->fetch())
+	{
+		$dateFR=FormatDateFR($resultats['date']);
+				
+		if ($resultats['finished'] == true)
+		{
+				
+				echo '<option value='.$resultats['ID_journee'].' disabled >Journée N°'.$resultats['numero'].' - '.$dateFR.'</option>';
+		}			
+		else
+		{
+				echo '<option value='.$resultats['ID_journee'].'>Journée N°'.$resultats['numero'].' - '.$dateFR.'</option>';
+		}						
+		
+	}
+	$req->closeCursor();
+	
+}
 
 function DoublonStatsPlayer($a,$b)
 {

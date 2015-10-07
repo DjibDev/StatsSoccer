@@ -30,7 +30,7 @@ function AfficheStatsPlayer($a)
 					AND saison = "2015/2016"
 					ORDER BY numero ASC ');
 												
-					echo '<table border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>J.</th><th>Date</th><th>Buts</th><th>Passes Déc.</th><th>Cleansheet</th>
+					echo '<table border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Journée</th><th>Date</th><th>Buts</th><th>Passes Déc.</th><th>Cleansheet</th>
 					<th>Pénalty manqué</th><th>Pénalty arrêté</th><th>Csc</th><th>Faits marquants</th></tr>';						
 					
 					while ($resultats2=$req2->fetch())
@@ -72,6 +72,7 @@ function AfficheStatsEquipe($a)
 					}
 					$req->closeCursor();
 					
+					/*
 					$req2=$bdd->query('SELECT * 
 					FROM stats_collectives, journees, equipes
 					WHERE stats_collectives.equipe_id = '.$a.'
@@ -85,7 +86,7 @@ function AfficheStatsEquipe($a)
 					
 					while ($resultats2=$req2->fetch())
 					{
-						/* le calcul du modulo de "$x" permet d'alterner le resultat : soit "0" soit "1" */
+						// le calcul du modulo de "$x" permet d'alterner le resultat : soit "0" soit "1"
 						$altern=$x % 2;	
 						
 						echo '<tr class=trcolor'.$altern.'><td>'.$resultats2['numero'].'</td>';
@@ -102,7 +103,7 @@ function AfficheStatsEquipe($a)
 					$req2->closeCursor();
 					
 					echo '</table>';
-					echo '<br>';
+					echo '<br>'; */
 					
 	
 	echo '<p><u>Historique des matchs en championnat:</u></p>';	

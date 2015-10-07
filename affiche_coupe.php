@@ -18,12 +18,12 @@
 	include ('fonctions_utiles_users.php');
 	require ('connexion.php');
 
-	echo '<h2>Calendrier et Résultats du Championnat</h2>';
+	echo '<h2>Coupe - Groupe N</h2>';
 			
 	$req=$bdd->query('SELECT numero 
 	FROM journees
 	WHERE saison="2015/2016"
-	AND coupe="0"
+	AND coupe="1"
 	ORDER BY numero ASC
 	LIMIT 0 , 9');
 	
@@ -34,71 +34,11 @@
 	}
 	$req->closeCursor();
 	
-	$req=$bdd->query('SELECT numero 
-	FROM journees
-	WHERE saison="2015/2016"
-	AND coupe="0"
-	ORDER BY numero ASC
-	LIMIT 9 , 9');
-
-	echo '</tr><tr class="trcolor0">';
-	
-	While ($resultats=$req->fetch())
-	{
-			echo '<td><a href="#match'.$resultats['numero'].'">Journée '.$resultats['numero'].'</a></td>';
-	}
-	$req->closeCursor();
-	
-	$req=$bdd->query('SELECT numero 
-	FROM journees
-	WHERE saison="2015/2016"
-	AND coupe="0"
-	ORDER BY numero ASC
-	LIMIT 18 , 9');
-
-	echo '</tr><tr class="trcolor0">';
-	
-	While ($resultats=$req->fetch())
-	{
-			echo '<td><a href="#match'.$resultats['numero'].'">Journée '.$resultats['numero'].'</a></td>';
-	}
-	$req->closeCursor();
-	
-	$req=$bdd->query('SELECT numero 
-	FROM journees
-	WHERE saison="2015/2016"
-	AND coupe="0"
-	ORDER BY numero ASC
-	LIMIT 27 , 9');
-	
-	echo '</tr><tr class="trcolor0">';
-
-	While ($resultats=$req->fetch())
-	{
-			echo '<td><a href="#match'.$resultats['numero'].'">Journée '.$resultats['numero'].'</a></td>';
-	}
-	$req->closeCursor();
-	
-	$req=$bdd->query('SELECT numero 
-	FROM journees
-	WHERE saison="2015/2016"
-	AND coupe="0"
-	ORDER BY numero ASC
-	LIMIT 36 , 9');
-	
-	echo '</tr><tr class="trcolor0">';
-
-	While ($resultats=$req->fetch())
-	{
-			echo '<td><a href="#match'.$resultats['numero'].'">Journée '.$resultats['numero'].'</a></td>';
-	}
-	$req->closeCursor();
 
 	echo '</tr></table></center>';
-	echo '<p>* si une équipe n\'apparait pas, c\'est qu\'elle est exempte.</p>';
+
 	
-	
-	$reponse=$bdd->query('SELECT numero, date FROM journees WHERE saison="2015/2016" AND coupe="0" ORDER BY numero ASC');
+	$reponse=$bdd->query('SELECT numero, date FROM journees WHERE saison="2015/2016" AND coupe="1" ORDER BY numero ASC');
 	
 	
 	while ($resultats=$reponse->fetch())
@@ -116,7 +56,8 @@
 		WHERE numero='.$num_journee.'
 		AND journees.ID_journee=matchs.journee_id
 		AND matchs.equipe_dom_id = e1.ID_equipe
-		AND matchs.equipe_vis_id = e2.ID_equipe');
+		AND matchs.equipe_vis_id = e2.ID_equipe
+		AND journees.coupe = "1" ');
 	
 		while ($resultats2=$reponse2->fetch())
 		{
@@ -149,6 +90,7 @@
 	$reponse->closeCursor();
 
     ?>
+
 
 </section>
 	
