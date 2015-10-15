@@ -25,10 +25,12 @@
 			$poste=$_POST['poste'];
 			$num_maillot=$_POST['num_maillot'];
 			$ID_joueur=$_POST['player'];
+			$nom=$_POST['nom'];
+			$prenom=$_POST['prenom'];
 			
 						
-			$req = $bdd->prepare('UPDATE effectif SET birthday=?, poste=?, num_maillot=? WHERE ID_joueur=? ');
-			$req->execute(array($birthday,$poste,$num_maillot,$ID_joueur)); 
+			$req = $bdd->prepare('UPDATE effectif SET nom= ?, prenom=?, birthday=?, poste=?, num_maillot=? WHERE ID_joueur=? ');
+			$req->execute(array($nom,$prenom,$birthday,$poste,$num_maillot,$ID_joueur)); 
 
 			echo '<p class="ok">Enregistrement bien effectué !</p>';
 			echo '<center><p>Souhaitez-vous modifier une autre joueur ? </p>';
