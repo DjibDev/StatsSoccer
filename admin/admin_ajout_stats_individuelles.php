@@ -29,7 +29,7 @@
 	
 				while ($resultats=$reponse->fetch())
 				{
-					echo '<option value="'.$resultats['ID_joueur'].'">'.$resultats['nom'].' '.$resultats['prenom'].'</option>';
+					echo '<option value="'.$resultats['ID_joueur'].'">'.$resultats['pseudo'].'</option>';
 				}
 				$reponse->closeCursor();
 			?>
