@@ -68,7 +68,7 @@ function AgeAVG()
 	
 	$Age_moyen=$age_total/$nb_elements;
 	
-	return $Age_moyen;
+	return round($Age_moyen,1);
 	
 }	
 

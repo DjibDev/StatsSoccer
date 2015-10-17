@@ -114,6 +114,7 @@ function AfficheStatsEquipe($a)
 	AND matchs.equipe_vis_id = e2.ID_equipe
 	AND journees.ID_journee = matchs.journee_id
     AND journees.coupe=0
+    AND journees.finished=1
 	AND e1.ID_equipe = '.$a.'
 	UNION
 	SELECT e1.nom equipe1, e2.nom equipe2, but_equipe_dom, but_equipe_vis, date, numero
@@ -122,6 +123,7 @@ function AfficheStatsEquipe($a)
 	AND matchs.equipe_vis_id = e2.ID_equipe
 	AND journees.ID_journee = matchs.journee_id
     AND journees.coupe=0
+    AND journees.finished=1
 	AND e2.ID_equipe = '.$a.'
     ORDER BY numero ');
 				
