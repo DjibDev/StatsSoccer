@@ -47,6 +47,7 @@
 			echo '<input type="hidden" name="journee_id" value="'.$journee_id.'" />';
 			
 			echo '<table border="0">';
+			echo '<tr><th>Confrontations</th><th>F.</th><th></th><th></th><th></th><th>F.</th></tr>';
 
 			$ligne=0;
 			
@@ -57,9 +58,11 @@
 				echo '<input type="hidden" name="e1_'.$ligne.'" value="'.$resultats2['equipe_dom_id'].'" >';
 				echo '<input type="hidden" name="e2_'.$ligne.'" value="'.$resultats2['equipe_vis_id'].'" >';
 				echo '<td>'.$resultats2['equi1'].' - '.$resultats2['equi2'].'</td>';
+				echo '<td><input type="checkbox" name="e1_forfait'.$ligne.'"></td>';
 				echo '<td width="30"><b><input type="number" min="0" max=10 name="but_dom'.$ligne.'" required /></td>';
 				echo '<td> - </td>';
 				echo '<td width="30"><input type="number" min="0" max=10 name="but_vis'.$ligne.'" required /></td></b>';
+				echo '<td><input type="checkbox" name="e2_forfait'.$ligne.'"></td>';
 				echo '</tr>';
 				$ligne++;					
 			}

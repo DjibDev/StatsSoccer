@@ -29,7 +29,7 @@
 	
 				while ($resultats=$reponse->fetch())
 				{
-					echo '<option value="'.$resultats['ID_joueur'].'">'.$resultats['nom'].' '.$resultats['prenom'].'</option>';
+					echo '<option value="'.$resultats['ID_joueur'].'">'.$resultats['pseudo'].'</option>';
 				}
 				$reponse->closeCursor();
 			?>
@@ -43,8 +43,7 @@
 				$reponse2=$bdd->query('SELECT numero, date, ID_journee
 				FROM journees
 				WHERE saison = "2015/2016"
-				AND coupe="0"
-				ORDER BY numero ASC');
+				ORDER BY date');
 								
 				while ($resultats2=$reponse2->fetch())
 				{
@@ -119,6 +118,16 @@
 		<td colspan="3" align="left"><TEXTAREA rows="4" cols="60" name="details_faits"></TEXTAREA></td></tr>
 		
 		</table>
+		
+		<table border="0" cellspacing="4">
+		<tr><td align="right"><label for="nettoyage_vestiaires">Nettoyage vestiaires ?</label></td>
+		<td align="left"><input type="checkbox" name="nettoyage_vestiaires"/></td>
+		
+		<td align="right"><label for="lavage_maillots">Lavage maillots ?</label></td>
+		<td align="left"><input type="checkbox" name="lavage_maillots"/></td></tr>
+		
+		</table>
+		
 		<br>
 		<input type="reset" value="Annuler">
 		<input type="submit" value="Enregistrer">

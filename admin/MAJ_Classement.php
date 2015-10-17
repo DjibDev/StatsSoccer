@@ -35,6 +35,7 @@ function MAJ_Classement()
 	
 	while ($x < $nb_equipe)
 	{
+		$nb_forfaits=0;
 		$nb_victoires=0;
 		$nb_nuls=0;
 		$nb_defaites=0;
@@ -46,13 +47,17 @@ function MAJ_Classement()
 			
 			
 		// requete faite par equipe
-		$req4=$bdd->query('SELECT victoire, defaite, nul ,buts_pour, buts_contre, diff, points
+		$req4=$bdd->query('SELECT forfait, victoire, defaite, nul ,buts_pour, buts_contre, diff, points
 		FROM stats_collectives
 		WHERE equipe_id='.$equipe_id.'');
 							
 		while ($resultats4=$req4->fetch())
 		{
-	
+			if ($resultats4['forfait'] == true)
+			{
+				$nb_forfaits=$nb_forfaits+1;
+			}
+			
 			if ($resultats4['victoire'] == true)
 			{
 				$nb_victoires=$nb_victoires+1;
@@ -76,17 +81,18 @@ function MAJ_Classement()
 		$req4->closeCursor(); 
 	
 		//requete pour écrire le nouveau classement	
-		$req5=$bdd->prepare("INSERT INTO classement (nb_journees, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points, equipe_id)
-		VALUES (?,?,?,?,?,?,?,?,?)");
+		$req5=$bdd->prepare("INSERT INTO classement (nb_journees, nb_forfaits, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points, equipe_id)
+		VALUES (?,?,?,?,?,?,?,?,?,?)");
 		$req5->bindParam(1, $nb_journees); 
-		$req5->bindParam(2, $nb_victoires);
-		$req5->bindParam(3, $nb_nuls);
-		$req5->bindParam(4, $nb_defaites); 
-		$req5->bindParam(5, $nb_buts_pour);
-		$req5->bindParam(6, $nb_buts_contre);
-		$req5->bindParam(7, $diff); 
-		$req5->bindParam(8, $points);
-		$req5->bindParam(9, $equipe_id);
+		$req5->bindParam(2, $nb_forfaits);
+		$req5->bindParam(3, $nb_victoires);
+		$req5->bindParam(4, $nb_nuls);
+		$req5->bindParam(5, $nb_defaites); 
+		$req5->bindParam(6, $nb_buts_pour);
+		$req5->bindParam(7, $nb_buts_contre);
+		$req5->bindParam(8, $diff); 
+		$req5->bindParam(9, $points);
+		$req5->bindParam(10, $equipe_id);
 		$req5->execute(); 
 
 		$x++;		
@@ -414,14 +420,20 @@ function MAJ_Classement_players($joueur_id)
 	// calculs cumulatifs par joueur
 	
 	$x=0;
-
+	$cleansheet=0;
+	$maillots=0;
+	$vestiaires=0;
+	
 	while ($x < $nb_journees)
 	{
 		$nb_buts=0;
 		$nb_passes=0;
+		$nb_cleansheets=0;
+		$nb_vestiaires=0;
+		$nb_maillots=0;
 								
 		// requete faite par joueur
-		$req3=$bdd->query('SELECT buts, passes
+		$req3=$bdd->query('SELECT buts, passes, cleansheet, nettoyage_vestiaires, lavage_maillots
 		FROM stats_individuelles
 		WHERE joueur_id='.$joueur_id.' ');
 							
@@ -429,7 +441,28 @@ function MAJ_Classement_players($joueur_id)
 		{
 			$nb_buts=$nb_buts+$resultats3['buts'];
 			$nb_passes=$nb_passes+$resultats3['passes'];
-		
+			
+			if ($resultats3['cleansheet'] == true )
+			{
+				$cleansheet=1;
+			}
+			
+			$nb_cleansheets=$nb_cleansheets+$cleansheet;
+			
+			if ($resultats3['nettoyage_vestiaires'] == true )
+			{
+				$vestiaires=1;
+			}
+			
+			$nb_vestiaires=$nb_vestiaires+$vestiaires;
+			
+			if ($resultats3['lavage_maillots'] == true )
+			{
+				$maillots=1;
+			}
+			
+			$nb_maillots=$nb_maillots+$maillots;
+
 		}
 		$req3->closeCursor(); 
 		
@@ -437,14 +470,44 @@ function MAJ_Classement_players($joueur_id)
 
 	}
 	
-	
+		//force les valeurs a passer NULL si = 0, par soucis d'affichage de propreté d'affichage dans effectif
+		
+		if ($nb_buts == 0)
+		{
+			$nb_buts=NULL;
+		}
+		
+		if ($nb_passes == 0)
+		{
+			$nb_passes=NULL;
+		}
+		
+		if ($nb_cleansheets == 0)
+		{
+			$nb_cleansheets=NULL;
+		}
+		
+		if ($nb_vestiaires == 0)
+		{
+			$nb_vestiaires=NULL;
+		}
+		
+		if ($nb_maillots == 0)
+		{
+			$nb_maillots=NULL;
+		}
+		
+		
 		//requete pour écrire le nouveau classement	joueur	
-		$req5=$bdd->prepare("INSERT INTO classement_players (nb_journees, nb_buts, nb_passes, joueur_id)
-		VALUES (?,?,?,?)");
+		$req5=$bdd->prepare("INSERT INTO classement_players (nb_journees, nb_buts, nb_passes, nb_cleansheets, nb_vestiaires, nb_maillots, joueur_id)
+		VALUES (?,?,?,?,?,?,?)");
 		$req5->bindParam(1, $nb_journees); 
 		$req5->bindParam(2, $nb_buts);
 		$req5->bindParam(3, $nb_passes);
-		$req5->bindParam(4, $joueur_id);
+		$req5->bindParam(4,	$nb_cleansheets);
+		$req5->bindParam(5,	$nb_vestiaires); 
+		$req5->bindParam(6,	$nb_maillots);
+		$req5->bindParam(7, $joueur_id);
 		$req5->execute(); 
 	
 			
