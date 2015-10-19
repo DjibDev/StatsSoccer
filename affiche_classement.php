@@ -17,12 +17,11 @@
 
 <section>	
 	<article>
-	
+	<h2>Le(s) classement(s) en championnat - Groupe C</h2>
 	<?php
 	require('connexion.php');
 	
 	echo '<div id="general"></div>';
-	echo '<h2>Le(s) classement(s) en championnat - Groupe C</h2>';
 	
 	/*
 	echo '<table border="0" cellspacing=2 cellspadding=2>';
@@ -38,7 +37,7 @@
 	
 	$x=0;
 	echo '<caption>Classement général</caption>';
-	echo '<table border=2 cellspacing=2 cellspadding=2 >';
+	echo '<table style="font-size:1em;" border=2 cellspacing=2 cellspadding=2 >';
 	echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th width="30">F</th><th width="30">Bp</th><th>Bc</th><th width="30">Diff</th><th width="30">Infos</th></tr>';
 	
 		while ($resultats=$req1->fetch())
@@ -180,12 +179,11 @@
 		</article>	
 		
 		<aside>
+			<h2>Classements individuels</h2>
 		<?php
-			
-		echo '<h2>Classements individuels</h2>';
-		
+				
 		echo '<caption>Classement des buteurs (championnat)</caption>';
-		echo '<table border=2 cellspacing=2 cellspadding=2 >';
+		echo '<table style="font-size:1em;" border=2 cellspacing=2 cellspadding=2 >';
 		echo '<tr class=trheadcolor><th></th><th>Pseudo</th><th>Buts</th>';
 		
 		$req2=$bdd->query('SELECT pseudo, nb_buts 
@@ -212,7 +210,7 @@
 		
 		
 		echo '<caption>Classement des passeurs (championnat)</caption>';
-		echo '<table border=2 cellspacing=2 cellspadding=2 >';
+		echo '<table style="font-size:1em;" border=2 cellspacing=2 cellspadding=2 >';
 		echo '<tr class=trheadcolor><th></th><th>Pseudo</th><th>Passes</th>';
 				
 		$req3=$bdd->query('SELECT pseudo, nb_passes

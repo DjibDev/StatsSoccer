@@ -31,7 +31,7 @@
 	$altern=$x % 2;
 		
 		
-	echo '<table border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Pseudo</th><th>Age</th><th>Poste</th><th>Buts</th><th>Passes</th><th>CleanSheet</th><th>Vestiaires</th><th>Maillots</th></tr>';
+	echo '<table style="font-size:1em;" border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Pseudo</th><th>Age</th><th>Poste</th><th>Buts</th><th>Passes</th><th>CleanSheet</th><th><img src="images/raclette.png"></th><th><img src="images/maillot.png"></th></tr>';
 	
 	
 	while ($resultats=$reponse->fetch())

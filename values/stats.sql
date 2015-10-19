@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.11.1deb2+deb7u1
+-- version 4.1.14.8
 -- http://www.phpmyadmin.net
 --
--- Client: localhost
--- Généré le: Mer 07 Octobre 2015 à 12:03
--- Version du serveur: 5.5.44
--- Version de PHP: 5.4.41-0+deb7u1
+-- Client :  db592020883.db.1and1.com
+-- Généré le :  Lun 19 Octobre 2015 à 09:59
+-- Version du serveur :  5.5.44-0+deb7u1-log
+-- Version de PHP :  5.4.45-0+deb7u1
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données: `stats`
+-- Base de données :  `db592020883`
 --
 
 -- --------------------------------------------------------
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `classement` (
   `ID_classement` int(11) NOT NULL AUTO_INCREMENT,
+  `nb_forfaits` int(2) NOT NULL,
   `nb_journees` int(2) NOT NULL,
   `nb_victoires` int(2) NOT NULL,
   `nb_nuls` int(2) NOT NULL,
@@ -39,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `classement` (
   `equipe_id` int(11) NOT NULL,
   PRIMARY KEY (`ID_classement`),
   KEY `fk4_equipe_id` (`equipe_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
 
 -- --------------------------------------------------------
 
@@ -60,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `classement_coupe` (
   `equipe_id` int(11) NOT NULL,
   PRIMARY KEY (`ID_classement_coupe`),
   KEY `fk4_equipe_id` (`equipe_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -113,12 +114,15 @@ CREATE TABLE IF NOT EXISTS `classement_exterieur` (
 CREATE TABLE IF NOT EXISTS `classement_players` (
   `ID_classement_players` int(11) NOT NULL AUTO_INCREMENT,
   `nb_journees` int(11) NOT NULL,
-  `nb_buts` int(2) NOT NULL,
-  `nb_passes` int(2) NOT NULL,
+  `nb_buts` int(2) DEFAULT NULL,
+  `nb_passes` int(2) DEFAULT NULL,
+  `nb_cleansheets` int(11) DEFAULT NULL,
+  `nb_vestiaires` int(11) DEFAULT NULL,
+  `nb_maillots` int(11) DEFAULT NULL,
   `joueur_id` int(11) NOT NULL,
   PRIMARY KEY (`ID_classement_players`),
   KEY `fk3_joueur_id` (`joueur_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 -- --------------------------------------------------------
 
@@ -136,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `effectif` (
   `poste` varchar(3) CHARACTER SET utf8 NOT NULL DEFAULT 'XXX',
   `num_maillot` varchar(2) NOT NULL DEFAULT 'NC',
   PRIMARY KEY (`ID_joueur`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 -- --------------------------------------------------------
 
@@ -151,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `equipes` (
   `stade` varchar(100) CHARACTER SET utf8 NOT NULL,
   `favorite` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID_equipe`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 -- --------------------------------------------------------
 
@@ -166,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `equipes_coupe` (
   `stade` varchar(100) CHARACTER SET utf8 NOT NULL,
   `favorite` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID_equipe`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
@@ -182,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `journees` (
   `coupe` tinyint(1) NOT NULL DEFAULT '0',
   `finished` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID_journee`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=82 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=107 ;
 
 -- --------------------------------------------------------
 
@@ -193,14 +197,16 @@ CREATE TABLE IF NOT EXISTS `journees` (
 CREATE TABLE IF NOT EXISTS `matchs` (
   `ID_match` int(11) NOT NULL AUTO_INCREMENT,
   `equipe_dom_id` int(11) NOT NULL,
+  `equipe_dom_forfait` tinyint(1) NOT NULL DEFAULT '0',
   `equipe_vis_id` int(11) NOT NULL,
+  `equipe_vis_forfait` tinyint(1) NOT NULL DEFAULT '0',
   `but_equipe_dom` int(2) NOT NULL DEFAULT '0',
   `but_equipe_vis` int(2) NOT NULL DEFAULT '0',
   `coupe` tinyint(1) NOT NULL DEFAULT '0',
   `journee_id` int(11) NOT NULL,
   PRIMARY KEY (`ID_match`),
   KEY `fk_journee_id` (`journee_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=123 ;
 
 -- --------------------------------------------------------
 
@@ -210,6 +216,7 @@ CREATE TABLE IF NOT EXISTS `matchs` (
 
 CREATE TABLE IF NOT EXISTS `stats_collectives` (
   `ID_stat_collec` int(11) NOT NULL AUTO_INCREMENT,
+  `forfait` tinyint(1) NOT NULL DEFAULT '0',
   `victoire` tinyint(1) NOT NULL DEFAULT '0',
   `defaite` tinyint(1) NOT NULL DEFAULT '0',
   `nul` tinyint(1) NOT NULL DEFAULT '0',
@@ -223,7 +230,7 @@ CREATE TABLE IF NOT EXISTS `stats_collectives` (
   PRIMARY KEY (`ID_stat_collec`),
   KEY `fk2_journee_id` (`journee_id`),
   KEY `fk_equipe_id` (`equipe_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;
 
 -- --------------------------------------------------------
 
@@ -246,7 +253,7 @@ CREATE TABLE IF NOT EXISTS `stats_collectives_coupe` (
   PRIMARY KEY (`ID_stat_collec`),
   KEY `fk3_journee_id` (`journee_id`),
   KEY `fk5_equipe_id` (`equipe_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -265,11 +272,13 @@ CREATE TABLE IF NOT EXISTS `stats_individuelles` (
   `csc` int(2) NOT NULL DEFAULT '0',
   `faits_marquants` tinyint(1) NOT NULL DEFAULT '0',
   `description_faitmarquant` varchar(250) CHARACTER SET utf8 NOT NULL DEFAULT 'néant',
+  `nettoyage_vestiaires` tinyint(4) DEFAULT '0',
+  `lavage_maillots` tinyint(4) DEFAULT '0',
   `journee_id` int(11) NOT NULL,
   PRIMARY KEY (`ID_stat_indiv`),
   KEY `fk_joueur_id` (`joueur_id`),
   KEY `fk2_jounee_id` (`journee_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
 
 --
 -- Contraintes pour les tables exportées
@@ -310,27 +319,6 @@ ALTER TABLE `classement_players`
 --
 ALTER TABLE `matchs`
   ADD CONSTRAINT `fk_journee_id` FOREIGN KEY (`journee_id`) REFERENCES `journees` (`ID_journee`);
-
---
--- Contraintes pour la table `stats_collectives`
---
-ALTER TABLE `stats_collectives`
-  ADD CONSTRAINT `fk2_journee_id` FOREIGN KEY (`journee_id`) REFERENCES `journees` (`ID_journee`),
-  ADD CONSTRAINT `fk3_equipe_id` FOREIGN KEY (`equipe_id`) REFERENCES `equipes` (`ID_equipe`),
-
---
--- Contraintes pour la table `stats_collectives_coupe`
---
-ALTER TABLE `stats_collectives_coupe`
-  ADD CONSTRAINT `fk3_journee_id` FOREIGN KEY (`journee_id`) REFERENCES `journees` (`ID_journee`),
-  ADD CONSTRAINT `fk5_equipe_id` FOREIGN KEY (`equipe_id`) REFERENCES `equipes_coupe` (`ID_equipe`),
-
---
--- Contraintes pour la table `stats_individuelles`
---
-ALTER TABLE `stats_individuelles`
-  ADD CONSTRAINT `fk2_jounee_id` FOREIGN KEY (`journee_id`) REFERENCES `journees` (`ID_journee`),
-  ADD CONSTRAINT `fk_joueur_id` FOREIGN KEY (`joueur_id`) REFERENCES `effectif` (`ID_joueur`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
