@@ -68,10 +68,78 @@ function AfficheStatsEquipe($a)
 						echo '<h2>Fiche stat de '.$resultats['nom'].' </h2>';
 						echo '<p>ville: <b>'.$resultats['ville'].'</b></p>';
 						echo '<p>Stade: <b>'.$resultats['stade'].'</b></p>';
-						echo '<br>';
 					}
 					$req->closeCursor();
 					
+					// requete qui retourne le nombre de victoire de l'équipe
+					$reqv=$bdd->query('SELECT  COUNT(victoire) AS NB_V
+					FROM stats_collectives
+					WHERE  victoire =1 
+					AND equipe_id='.$a.' ');
+										
+					while ($victoire=$reqv->fetch())
+					{
+							$nb_v=$victoire['NB_V'];
+					}
+					$reqv->closeCursor();
+					
+					// requete qui retourne le npmbre de nuls de l'équipe
+					$reqn=$bdd->query('SELECT  COUNT(nul) AS NB_N
+					FROM stats_collectives
+					WHERE  nul =1 
+					AND equipe_id='.$a.' ');
+										
+					while ($nul=$reqn->fetch())
+					{
+							$nb_n=$nul['NB_N'];
+					}
+					$reqn->closeCursor();
+					
+					// requete qui retourne le nombre de défaites de l'équipe
+					$reqd=$bdd->query('SELECT  COUNT(defaite) AS NB_D
+					FROM stats_collectives
+					WHERE  defaite =1 
+					AND equipe_id='.$a.' ');
+										
+					while ($defaite=$reqd->fetch())
+					{
+							$nb_d=$defaite['NB_D'];
+					}
+					$reqd->closeCursor();
+					
+					// requete qui retourne le nombre de forfait de l'équipe
+					$reqf=$bdd->query('SELECT  COUNT(forfait) AS NB_F
+					FROM stats_collectives
+					WHERE  forfait =1 
+					AND equipe_id='.$a.' ');
+										
+					while ($forfait=$reqf->fetch())
+					{
+							$nb_f=$forfait['NB_F'];
+					}
+					$reqf->closeCursor();
+					
+					//requete qui retourne le nombre de journee de l'équipe
+					$reqj=$bdd->query('
+					SELECT COUNT(journee_id) AS NB_J
+					FROM stats_collectives
+					WHERE equipe_id='.$a.' ');
+						
+					while ($journee=$reqj->fetch())
+					{
+							$nb_j=$journee['NB_J'];
+					}
+					$reqj->closeCursor();		
+					
+					$Pourcentage_V= round (($nb_v/$nb_j)*100,2); // arrondi le résultat à 2 decimals
+					$Pourcentage_N= round (($nb_n/$nb_j)*100,2);
+					$Pourcentage_D= round (($nb_d/$nb_j)*100,2);
+					$Pourcentage_F= round (($nb_f/$nb_j)*100,2);
+					
+					echo '<p>Victoire(s): <b>'.$Pourcentage_V.'%</b>.&nbsp;&nbsp;&nbsp; Nul(s): <b>'.$Pourcentage_N.'%</b>.&nbsp;&nbsp;&nbsp; Défaite(s): <b>'.$Pourcentage_D.'%</b>.&nbsp;&nbsp;&nbsp; Forfait(s): <b>'.$Pourcentage_F.'%</b>.</p>';
+					/*echo '<p>Nul(s): <b>'.$Pourcentage_V.'%</b>.</p>';
+					echo '<p>Défaite(s): <b>'.$Pourcentage_V.'%</b>.</p>';
+					echo '<p>Forfait(s): <b>'.$Pourcentage_V.'%</b>.</p>'; */
 					/*
 					$req2=$bdd->query('SELECT * 
 					FROM stats_collectives, journees, equipes
@@ -114,7 +182,7 @@ function AfficheStatsEquipe($a)
 	AND matchs.equipe_vis_id = e2.ID_equipe
 	AND journees.ID_journee = matchs.journee_id
     AND journees.coupe=0
-    AND journees.finished=1
+    AND journees.finished= 1
 	AND e1.ID_equipe = '.$a.'
 	UNION
 	SELECT e1.nom equipe1, e2.nom equipe2, but_equipe_dom, but_equipe_vis, date, numero
@@ -123,7 +191,7 @@ function AfficheStatsEquipe($a)
 	AND matchs.equipe_vis_id = e2.ID_equipe
 	AND journees.ID_journee = matchs.journee_id
     AND journees.coupe=0
-    AND journees.finished=1
+    AND journees.finished= 1
 	AND e2.ID_equipe = '.$a.'
     ORDER BY numero ');
 				
