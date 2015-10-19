@@ -12,13 +12,11 @@
 	include('banniere_menu.php');
 ?>	
 <section>	
-
+<h2>Calendrier et Résultats du Championnat</h2>
 	<?php
   	
 	include ('fonctions_utiles_users.php');
 	require ('connexion.php');
-
-	echo '<h2>Calendrier et Résultats du Championnat</h2>';
 			
 	$req=$bdd->query('SELECT numero 
 	FROM journees

@@ -12,13 +12,11 @@
 	include('banniere_menu.php');
 ?>	
 <section>	
-
+<article>
+	<h2>Coupe - Groupe N</h2>
 	<?php
-  	
-	include ('fonctions_utiles_users.php');
+  	require ('fonctions_utiles_users.php');
 	require ('connexion.php');
-
-	echo '<h2>Coupe - Groupe N</h2>';
 	
 	$req1=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points
 	FROM equipes_coupe, classement_coupe
@@ -149,7 +147,11 @@
 
     ?>
 
-
+</article>
+<aside>
+	<h2>Classements individuels</h2>
+	<p>A venir...</p>
+</aside>
 </section>
 	
 

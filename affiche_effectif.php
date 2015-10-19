@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 
 <head>
 	<title>Les stats des loisirs</title>
@@ -14,23 +14,24 @@
 ?>		
 
 <section>	
-		<article>
-	
-	
+	<article>
+	<h2>L'effectif... Ses Exploits... Ses Devoirs !</h2>
 	<?php
   	
-	include ('fonctions_utiles_users.php');
+	require ('fonctions_utiles_users.php');
 	require ('connexion.php');
 	
-	echo '<h2>L\'effectif</h2>';
-	
-	$reponse=$bdd->query('SELECT * from effectif order by nom ASC');
+	$reponse=$bdd->query('SELECT * 
+	FROM effectif e
+	LEFT JOIN classement_players c
+	ON e.ID_joueur = c.joueur_id 
+	ORDER BY poste');
 	
 	$x=0;
 	$altern=$x % 2;
 		
 		
-	echo '<table border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Pseudo</th><th>Age</th><th>Poste</th><th>Stats</th></tr>';
+	echo '<table border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Pseudo</th><th>Age</th><th>Poste</th><th>Buts</th><th>Passes</th><th>CleanSheet</th><th>Vestiaires</th><th>Maillots</th></tr>';
 	
 	
 	while ($resultats=$reponse->fetch())
@@ -48,12 +49,18 @@
 			{
 				$age=CalculerAge($date_naiss);
 			}
+					
 			
 			echo '<tr class=trcolor'.$altern.'>';
 			echo '<td>'.$resultats['pseudo'].'</td>';
-			echo '<td>'.$age.'</td>';
-			echo '<td>'.$resultats['poste'].'</td>';
-			echo '<td><a href="stats_files/players/stats_player_'.$resultats['ID_joueur'].'.php">Voir</a></td>';
+			echo '<td align="center">'.$age.'</td>';
+			echo '<td align="center">'.$resultats['poste'].'</td>';
+			echo '<td align="center">'.$resultats['nb_buts'].'</td>';
+			echo '<td align="center">'.$resultats['nb_passes'].'</td>'; 
+			echo '<td align="center">'.$resultats['nb_cleansheets'].'</td>';
+			echo '<td align="center">'.$resultats['nb_vestiaires'].'</td>'; 
+			echo '<td align="center">'.$resultats['nb_maillots'].'</td>'; 
+			/*echo '<td><a href="stats_files/players/stats_player_'.$resultats['ID_joueur'].'.php">Voir</a></td>'; */
 			echo '</tr>';
 			$x++;
 	}
