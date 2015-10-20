@@ -45,6 +45,25 @@
 
 		$description_faitmarquant=$_POST['details_faits'];
 		
+		if (isset($_POST['nettoyage_vestiaires']))
+		{
+			$nettoyage_vestiaires=true;
+		}
+		else
+		{
+			$nettoyage_vestiaires=false;
+		}
+		
+		
+		if (isset($_POST['lavage_maillots']))
+		{
+			$lavage_maillots=true;
+		}
+		else
+		{
+			$lavage_maillots=false;
+		}
+		
 		// test si presence d'un doublon
 		$doublon=DoublonStatsPlayer($journee_id,$joueur_id);
 		
@@ -56,7 +75,7 @@
 		else
 		{
 			//requete d'intégration des stats des joueurs.
-			$stmt = $bdd->prepare("INSERT INTO stats_individuelles(joueur_id, buts, passes, cleansheet, peno_rate, peno_arrete, csc, faits_marquants, description_faitmarquant, journee_id) VALUES (?,?,?,?,?,?,?,?,?,?)");
+			$stmt = $bdd->prepare("INSERT INTO stats_individuelles(joueur_id, buts, passes, cleansheet, peno_rate, peno_arrete, csc, faits_marquants, description_faitmarquant, nettoyage_vestiaires, lavage_maillots, journee_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
 			$stmt->bindParam(1, $joueur_id);
 			$stmt->bindParam(2, $buts); 
 			$stmt->bindParam(3, $passes);
@@ -66,7 +85,9 @@
 			$stmt->bindParam(7, $csc); 
 			$stmt->bindParam(8, $faits_marquants); 
 			$stmt->bindParam(9, $description_faitmarquant);
-			$stmt->bindParam(10, $journee_id);
+			$stmt->bindParam(10, $nettoyage_vestiaires);
+			$stmt->bindParam(11, $lavage_maillots);
+			$stmt->bindParam(12, $journee_id);
 			$stmt->execute(); 
 			
 			echo '<p class="ok">Enregistrement bien effectué !</p>';

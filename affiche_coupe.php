@@ -12,10 +12,8 @@
 	include('banniere_menu.php');
 ?>	
 <section>	
-<article>
 	<h2>Coupe - Groupe N</h2>
 	<?php
-  	require ('fonctions_utiles_users.php');
 	require ('connexion.php');
 	
 	$req1=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points
@@ -25,14 +23,15 @@
 	ORDER BY points DESC, diff DESC, nb_buts_pour DESC, nom ASC ');
 	
 	$x=0;
-	echo '<table style="font-size:1em;" border=2 cellspacing=2 cellspadding=2 >';
-	echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th width="30">Bp</th><th>Bc</th><th width="30">Diff</th></tr>';
+	echo '<table border=2 cellspacing=2 cellspadding=2 style=font-size:14px>';
+	echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th width="30">Bp</th><th>Bc</th><th width="30">Diff</th><th>Enjeux</th></tr>';
 	
 		while ($resultats=$req1->fetch())
 		{		
 			// le calcul du modulo de "$x" permet d'alterner le resultat : soit "0" soit "1" 
 			$x++;
 			$altern=$x % 2;
+			
 			
 			// affichage différent si s'agit de l'équipe favorite 
 			
@@ -45,6 +44,23 @@
 				$altern=$x % 2;
 			}
 		
+			if ($x == 1)
+			{
+				$qualif='Qualifié en Coupe Loisir';
+			}
+			else 
+			{
+				if ($x == 2)
+				{
+					$qualif='Qualifié en Challenge Loisir';
+				}
+				else
+				{
+					$qualif=NULL;
+				}
+			}
+	
+				
 			echo '<tr class=trcolor'.$altern.'>';
 			echo '<td>'.$x.'</td>';
 			echo '<td><b>'.$resultats['nom'].'</b></td>';
@@ -55,7 +71,8 @@
 			echo '<td align="center">'.$resultats['nb_defaites'].'</td>';
 			echo '<td align="center">'.$resultats['nb_buts_pour'].'</td>';
 			echo '<td align="center">'.$resultats['nb_buts_contre'].'</td>';
-			echo '<td align="center">'.$resultats['diff'].'</td></tr>';
+			echo '<td align="center">'.$resultats['diff'].'</td>';
+			echo '<td>'.$qualif.'</td></tr>';
 			
 		}
 		$req1->closeCursor();
@@ -82,6 +99,7 @@
 
 	*/
 	
+	require ('fonctions_utiles_users.php');
 	$reponse=$bdd->query('SELECT numero, date FROM journees WHERE saison="2015/2016" AND coupe="1" ORDER BY numero ASC');
 	
 	
@@ -147,11 +165,6 @@
 
     ?>
 
-</article>
-<aside>
-	<h2>Classements individuels</h2>
-	<p>A venir...</p>
-</aside>
 </section>
 	
 

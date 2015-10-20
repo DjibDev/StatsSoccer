@@ -453,12 +453,20 @@ function MAJ_Classement_players($joueur_id)
 			{
 				$vestiaires=1;
 			}
+			else
+			{
+				$vestiaires=0;
+			}
 			
 			$nb_vestiaires=$nb_vestiaires+$vestiaires;
 			
 			if ($resultats3['lavage_maillots'] == true )
 			{
 				$maillots=1;
+			}
+			else
+			{
+				$maillots=0;
 			}
 			
 			$nb_maillots=$nb_maillots+$maillots;

@@ -53,6 +53,11 @@ font-size:18px;
 color:red;
 }
 
+table 
+{
+    font-size:1em;
+}
+
 /* alternance des couleurs des lignes dans résultats du tableau*/
 
 .trheadcolor

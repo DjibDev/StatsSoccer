@@ -132,7 +132,7 @@
 			
 			if ($resultats2['equipe_dom_forfait'] == true)
 			{
-				$e1_forfait='(forfait).';
+				$e1_forfait='<b>(forfait)</b>.';
 			}
 			else
 			{
@@ -141,7 +141,7 @@
 				
 			if 	($resultats2['equipe_vis_forfait'] == true)
 			{
-				$e2_forfait='(forfait).';
+				$e2_forfait='<b>(forfait)</b>.';
 			}
 			else
 			{

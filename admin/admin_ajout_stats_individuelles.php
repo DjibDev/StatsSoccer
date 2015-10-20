@@ -40,7 +40,7 @@
 		<td align="left"><select required name="journee" id="journee">
 			<option selected disabled value="">Sélectionnez</option>
 			<?php	
-				$reponse2=$bdd->query('SELECT numero, date, ID_journee
+				$reponse2=$bdd->query('SELECT numero, date, ID_journee, coupe
 				FROM journees
 				WHERE saison = "2015/2016"
 				ORDER BY date');
@@ -48,7 +48,14 @@
 				while ($resultats2=$reponse2->fetch())
 				{
 					$dateFR=FormatDateFR($resultats2['date']);
-					echo '<option value="'.$resultats2['ID_journee'].'">Journéee n° '.$resultats2['numero'].' - le '.$dateFR.'</option>';
+					if ($resultats2['coupe'] == 1)
+					{
+						echo '<option value="'.$resultats2['ID_journee'].'"> Coupe - Journéee n° '.$resultats2['numero'].' - le '.$dateFR.'</option>';
+					}
+					else
+					{	
+						echo '<option value="'.$resultats2['ID_journee'].'"> Ch. - Journéee n° '.$resultats2['numero'].' - le '.$dateFR.'</option>';
+					}
 				}
 				$reponse2->closeCursor();
 			?>

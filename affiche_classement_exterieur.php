@@ -20,24 +20,23 @@
 	<h2>Le(s) classement(s) en championnat - Groupe C</h2>
 	<?php
 	require('connexion.php');
-	
+
 	echo '<table border="0" cellspacing=2 cellspadding=2>';
-	echo '<tr class="trcolor0"><td align="center"><a href="affiche_classement_domicile.php">A domicile</a></td><td align="center"><a href="affiche_classement_exterieur.php">A l\'extérieur</a></td><td align="center"><a href="affiche_classement_attaque.php">Meilleure attaque</a></td><td align="center"><a href="affiche_classement_defense.php">Meilleure défense</a></td></tr>';
+	echo '<tr class="trcolor0"><td align="center"><a href="affiche_classement.php">Général</a></td><td align="center"><a href="affiche_classement_domicile.php">A domicile</a></td><td align="center"><a href="affiche_classement_attaque.php">Meilleure attaque</a><td align="center"><a href="affiche_classement_defense.php">Meilleure défense</a></td></tr>';
 	echo '</table><br>';
 
 	
-	$req1=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_forfaits, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points
-	FROM equipes, classement
-	WHERE  equipes.ID_equipe = classement.equipe_id
-	AND nb_journees = (SELECT MAX(nb_journees) FROM classement) 
-	ORDER BY points DESC, diff DESC, nb_buts_pour DESC, nom ASC ');
+		$req3=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_forfaits, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points
+		FROM equipes, classement_exterieur
+		WHERE  equipes.ID_equipe = classement_exterieur.equipe_id
+		ORDER BY points DESC, diff DESC, nb_buts_pour DESC, nom ASC ');
 	
-	$x=0;
-	echo '<caption>Classement général</caption>';
-	echo '<table border=2 cellspacing=2 cellspadding=2 >';
-	echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th width="30">F</th><th width="30">Bp</th><th>Bc</th><th width="30">Diff</th><th width="30">Stats.</th></tr>';
+		$x=0;
+		echo '<caption>Classement à l\'extérieur</caption>';
+		echo '<table border=2 cellspacing=2 cellspadding=2 >';
+		echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th>F</th><th width="30">Bp</th><th>Bc</th><th width="30">Diff</th><th width="30">Stats</th></tr>';
 	
-		while ($resultats=$req1->fetch())
+		while ($resultats3=$req3->fetch())
 		{		
 			// le calcul du modulo de "$x" permet d'alterner le resultat : soit "0" soit "1" 
 			$x++;
@@ -45,7 +44,7 @@
 			
 			// affichage différent si s'agit de l'équipe favorite 
 			
-			if ($resultats['favorite'] == true)
+			if ($resultats3['favorite'] == true)
 			{
 				$altern='special';
 			}
@@ -56,25 +55,25 @@
 		
 			echo '<tr class=trcolor'.$altern.'>';
 			echo '<td>'.$x.'</td>';
-			echo '<td><b>'.$resultats['nom'].'</b></td>';
-			echo '<td align="center"><b>'.$resultats['points'].'</b></td>';
-			echo '<td align="center">'.$resultats['nb_journees'].'</td>';
-			echo '<td align="center">'.$resultats['nb_victoires'].'</td>';
-			echo '<td align="center">'.$resultats['nb_nuls'].'</td>';
-			echo '<td align="center">'.$resultats['nb_defaites'].'</td>';
-			echo '<td align="center">'.$resultats['nb_forfaits'].'</td>';
-			echo '<td align="center">'.$resultats['nb_buts_pour'].'</td>';
-			echo '<td align="center">'.$resultats['nb_buts_contre'].'</td>';
-			echo '<td align="center">'.$resultats['diff'].'</td>';			
-			echo '<td align="center"><a href="stats_files/equipes/stats_equipe_'.$resultats['ID_equipe'].'.php">Voir</a></td></tr>';
-			
+			echo '<td><b>'.$resultats3['nom'].'</b></td>';
+			echo '<td align="center"><b>'.$resultats3['points'].'</b></td>';
+			echo '<td align="center">'.$resultats3['nb_journees'].'</td>';
+			echo '<td align="center">'.$resultats3['nb_forfaits'].'</td>';
+			echo '<td align="center">'.$resultats3['nb_victoires'].'</td>';
+			echo '<td align="center">'.$resultats3['nb_nuls'].'</td>';
+			echo '<td align="center">'.$resultats3['nb_defaites'].'</td>';
+			echo '<td align="center">'.$resultats3['nb_buts_pour'].'</td>';
+			echo '<td align="center">'.$resultats3['nb_buts_contre'].'</td>';
+			echo '<td align="center">'.$resultats3['diff'].'</td>';			
+			echo '<td align="center"><a href="stats_files/equipes/stats_equipe_'.$resultats3['ID_equipe'].'.php">Voir</a></td></tr>';
 			
 		}
-		$req1->closeCursor();
+		$req3->closeCursor();
 		
+		echo '</table><br>';
 		
-		echo '</table><br>';		
 
+                
     ?>    
 		</article>	
 		
