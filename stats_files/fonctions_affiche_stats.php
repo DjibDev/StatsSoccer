@@ -176,7 +176,7 @@ function AfficheStatsEquipe($a)
 	
 	echo '<p><u>Historique des matchs en championnat:</u></p>';	
 			
-	$req3=$bdd->query('SELECT e1.nom equipe1, e2.nom equipe2, but_equipe_dom, but_equipe_vis, date, numero
+	$req3=$bdd->query('SELECT e1.nom equipe1, e2.nom equipe2, equipe_dom_forfait, equipe_vis_forfait, but_equipe_dom, but_equipe_vis, date, numero
 	FROM equipes e1, equipes e2, matchs, journees
 	WHERE matchs.equipe_dom_id = e1.ID_equipe
 	AND matchs.equipe_vis_id = e2.ID_equipe
@@ -185,7 +185,7 @@ function AfficheStatsEquipe($a)
     AND journees.finished= 1
 	AND e1.ID_equipe = '.$a.'
 	UNION
-	SELECT e1.nom equipe1, e2.nom equipe2, but_equipe_dom, but_equipe_vis, date, numero
+	SELECT e1.nom equipe1, e2.nom equipe2, equipe_dom_forfait, equipe_vis_forfait, but_equipe_dom, but_equipe_vis, date, numero
 	FROM equipes e1, equipes e2, matchs, journees
 	WHERE matchs.equipe_dom_id = e1.ID_equipe
 	AND matchs.equipe_vis_id = e2.ID_equipe
@@ -194,10 +194,28 @@ function AfficheStatsEquipe($a)
     AND journees.finished= 1
 	AND e2.ID_equipe = '.$a.'
     ORDER BY numero ');
-				
+	
 	while ($resultats3=$req3->fetch())
 	{
-			echo '<p><b>'.$resultats3['numero'].'</b>. '.$resultats3['equipe1'].' - '.$resultats3['equipe2'].': <b>'.$resultats3['but_equipe_dom'].' - '.$resultats3['but_equipe_vis'].'</b></p>';
+		
+			if ($resultats3['equipe_dom_forfait'] == true)
+			{
+				$e1_forfait='(forfait).';
+			}
+			else
+			{
+				$e1_forfait='';
+			}	
+				
+			if 	($resultats3['equipe_vis_forfait'] == true)
+			{
+				$e2_forfait='(forfait).';
+			}
+			else
+			{
+				$e2_forfait='';
+			}	
+			echo '<p><b>'.$resultats3['numero'].'</b>. '.$resultats3['equipe1'].'<i><b> '.$e1_forfait.'</b></i> - '.$resultats3['equipe2'].'<b><i> '.$e2_forfait.'</i></b>: <b>'.$resultats3['but_equipe_dom'].' - '.$resultats3['but_equipe_vis'].'</b></p>';
 	}
 	$req3->closeCursor();
 }
