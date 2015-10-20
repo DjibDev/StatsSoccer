@@ -106,7 +106,7 @@
 		$num_journee=$resultats['numero'];
 		
 		echo '<div id=match'.$num_journee.'></div>';
-		echo '<table cellspacing="4" cellspading="4"><tr class="trheadcolor"><th colspan="3"><a href="#bloc_page"><img src="images/fleche_haut.jpg"></a>&nbsp;&nbsp;&nbsp;<b><u>Journée n° '.$num_journee.' - le '.$dateFR.'</u></b></th></tr>';
+		echo '<table width="600" cellspacing="4" cellspading="4"><tr class="trheadcolor"><th align=left colspan="3"><a href="#bloc_page"><img src="images/fleche_haut.jpg"></a>&nbsp;&nbsp;&nbsp;<b><u>Journée n° '.$num_journee.' - le '.$dateFR.'</u></b></th></tr>';
 	
 				
 		$reponse2=$bdd->query('SELECT e1.nom equi1, e2.nom equi2, e1.favorite fav1, e2.favorite fav2, equipe_dom_forfait, equipe_vis_forfait,but_equipe_dom, but_equipe_vis, finished
@@ -150,17 +150,17 @@
 				
 			if ($resultats2['fav1'] == true)
 			{
-				echo '<tr class="trcolorspecial"><td><b>'.$resultats2['equi1'].'</b><i>'.$e1_forfait.'</i> - '.$resultats2['equi2'].' <i>'.$e2_forfait.'</i></td><td>&nbsp;&nbsp;</td><td>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
+				echo '<tr class="trcolorspecial"><td><b>'.$resultats2['equi1'].'</b><i>'.$e1_forfait.'</i> - '.$resultats2['equi2'].' <i>'.$e2_forfait.'</i></td><td>&nbsp;&nbsp;</td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
 			}
 			else	
 			{
 				if  ($resultats2['fav2'] == true)
 				{
-					echo '<tr class="trcolorspecial"><td>'.$resultats2['equi1'].'<i>'.$e1_forfait.'</i> - <b>'.$resultats2['equi2'].'</b> <i>'.$e2_forfait.'</i></td>&nbsp;&nbsp;<td></td><td>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
+					echo '<tr class="trcolorspecial"><td>'.$resultats2['equi1'].'<i>'.$e1_forfait.'</i> - <b>'.$resultats2['equi2'].'</b> <i>'.$e2_forfait.'</i></td>&nbsp;&nbsp;<td></td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
 				}	
 				else
 				{
-					echo '<tr><td>'.$resultats2['equi1'].'<i>'.$e1_forfait.'</i> - '.$resultats2['equi2'].' <i>'.$e2_forfait.'</i></td><td>&nbsp;&nbsp;</td><td>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
+					echo '<tr><td>'.$resultats2['equi1'].'<i>'.$e1_forfait.'</i> - '.$resultats2['equi2'].' <i>'.$e2_forfait.'</i></td><td>&nbsp;&nbsp;</td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
 				}
 			}		
 			

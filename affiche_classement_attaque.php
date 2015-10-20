@@ -25,7 +25,7 @@
 	echo '<tr class="trcolor0"><td align="center"><a href="affiche_classement.php">Général</a></td><td align="center"><a href="affiche_classement_domicile.php">A domicile</a></td><td align="center"><a href="affiche_classement_exterieur.php">A l\'extérieur</a></td><td align="center"><a href="affiche_classement_defense.php">Meilleure défense</a></td></tr>';
 	echo '</table><br>';
 
-		
+	echo '<caption>Classement - Meilleure Attaque</caption>';	
                 
     ?>    
 		</article>	

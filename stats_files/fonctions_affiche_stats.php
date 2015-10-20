@@ -62,14 +62,19 @@ function AfficheStatsEquipe($a)
 					$req=$bdd->query('SELECT *
 					FROM equipes
 					WHERE ID_equipe= '.$a.' ');
-					
+				
 					while ($resultats=$req->fetch())
 					{
 						echo '<h2>Fiche stat de '.$resultats['nom'].' </h2>';
+						echo '<p><u><b>Informations générales :</b></u></p>';
 						echo '<p>ville: <b>'.$resultats['ville'].'</b></p>';
 						echo '<p>Stade: <b>'.$resultats['stade'].'</b></p>';
 					}
 					$req->closeCursor();
+					
+					echo '<br>';
+					echo '<p><b><u>Statistiques :</u></b></p>';
+					
 					
 					// requete qui retourne le nombre de victoire de l'équipe
 					$reqv=$bdd->query('SELECT  COUNT(victoire) AS NB_V
@@ -119,6 +124,42 @@ function AfficheStatsEquipe($a)
 					}
 					$reqf->closeCursor();
 					
+					//requete qui retourne le nombre de match sans but encaissé (=cleansheet)
+					$reqsbe=$bdd->query('SELECT  COUNT(buts_contre) AS NB_SBE
+					FROM stats_collectives
+					WHERE  buts_contre =0 
+					AND equipe_id='.$a.' ');
+										
+					while ($sbe=$reqsbe->fetch())
+					{
+							$nb_sbe=$sbe['NB_SBE'];
+					}
+					$reqsbe->closeCursor();
+					
+					//requete qui retourne le nombre de match sans but marqué
+					$reqsbm=$bdd->query('SELECT  COUNT(buts_pour) AS NB_SBM
+					FROM stats_collectives
+					WHERE  buts_pour =0 
+					AND equipe_id='.$a.' ');
+										
+					while ($sbm=$reqsbm->fetch())
+					{
+							$nb_sbm=$sbm['NB_SBM'];
+					}
+					$reqsbm->closeCursor();
+					
+					// requete nombre total de buts marqués pour calcul moyenne de but par match
+					$reqb=$bdd->query('SELECT SUM(buts_pour) AS NB_B 
+					FROM stats_collectives 
+					WHERE equipe_id='.$a.'
+					AND forfait=0 ');
+										
+					while ($b=$reqb->fetch())
+					{
+							$nb_b=$b['NB_B'];
+					}
+					$reqb->closeCursor();
+					
 					//requete qui retourne le nombre de journee de l'équipe
 					$reqj=$bdd->query('
 					SELECT COUNT(journee_id) AS NB_J
@@ -131,52 +172,62 @@ function AfficheStatsEquipe($a)
 					}
 					$reqj->closeCursor();		
 					
+					// calcul des differents pourcentages
 					$Pourcentage_V= round (($nb_v/$nb_j)*100,2); // arrondi le résultat à 2 decimals
 					$Pourcentage_N= round (($nb_n/$nb_j)*100,2);
 					$Pourcentage_D= round (($nb_d/$nb_j)*100,2);
 					$Pourcentage_F= round (($nb_f/$nb_j)*100,2);
+					$Pourcentage_SBE= round (($nb_sbe/$nb_j)*100,2);
+					$Pourcentage_SBM= round (($nb_sbm/$nb_j)*100,2);
+					$AVG_buts=round ($nb_b/$nb_j,2);
 					
-					echo '<p>Victoire(s): <b>'.$Pourcentage_V.'%</b>.&nbsp;&nbsp;&nbsp; Nul(s): <b>'.$Pourcentage_N.'%</b>.&nbsp;&nbsp;&nbsp; Défaite(s): <b>'.$Pourcentage_D.'%</b>.&nbsp;&nbsp;&nbsp; Forfait(s): <b>'.$Pourcentage_F.'%</b>.</p>';
-					/*echo '<p>Nul(s): <b>'.$Pourcentage_V.'%</b>.</p>';
-					echo '<p>Défaite(s): <b>'.$Pourcentage_V.'%</b>.</p>';
-					echo '<p>Forfait(s): <b>'.$Pourcentage_V.'%</b>.</p>'; */
-					/*
-					$req2=$bdd->query('SELECT * 
-					FROM stats_collectives, journees, equipes
-					WHERE stats_collectives.equipe_id = '.$a.'
-					AND stats_collectives.equipe_id = equipes.ID_equipe
-					AND stats_collectives.journee_id = journees.ID_journee
-					AND saison = "2015/2016"
-					ORDER BY numero ASC ');
 					
-					echo '<table border="2" cellspacing="4"><tr class=trheadcolor><th>J.</th><th>V.</th><th>N.</th><th>D.</th>
-					<th>Bp</th><th>Bc</th><th>Diff.</th><th>Points</th></tr>';						
 					
-					while ($resultats2=$req2->fetch())
+					echo '<p>Victoire(s): <b class=forme_v>'.$Pourcentage_V.'%</b>.&nbsp;&nbsp;&nbsp; Nul(s): <b class=forme_n>'.$Pourcentage_N.'%</b>.&nbsp;&nbsp;&nbsp; Défaite(s): <b class=forme_d>'.$Pourcentage_D.'%</b>.&nbsp;&nbsp;&nbsp; Forfait(s): <b class=forme_f>'.$Pourcentage_F.'%</b>.</p>';
+					echo '<p>Moyenne Buts/match: <b>'.$AVG_buts.'</b>&nbsp;&nbsp;&nbsp; Match(s) Sans But Encaissé (CleanSheet): <b>'.$Pourcentage_SBE.'%</b>.&nbsp;&nbsp;&nbsp; Match(s) Sans But Marqué: <b>'.$Pourcentage_SBM.'%</b>.</p>';
+					
+					// requete qui affiche la forme de l'équipe
+					$reqforme=$bdd->query('SELECT forfait, victoire, nul ,defaite 
+					FROM stats_collectives 
+					WHERE equipe_id='.$a.'
+					ORDER BY journee_id ');
+					
+					echo '<p font-size=16px>Forme :';					
+					while ($forme=$reqforme->fetch())
 					{
-						// le calcul du modulo de "$x" permet d'alterner le resultat : soit "0" soit "1"
-						$altern=$x % 2;	
-						
-						echo '<tr class=trcolor'.$altern.'><td>'.$resultats2['numero'].'</td>';
-						echo '<td align=center>'.$resultats2['victoire'].'</td>';
-						echo '<td align=center>'.$resultats2['nul'].'</td>';
-						echo '<td align=center>'.$resultats2['defaite'].'</td>';
-						echo '<td align=center>'.$resultats2['buts_pour'].'</td>';
-						echo '<td align=center>'.$resultats2['buts_contre'].'</td>';
-						echo '<td align=center>'.$resultats2['diff'].'</td>';
-						echo '<td align=center>'.$resultats2['points'].'</td></tr>';	
-						$x++;
-											
-					}	
-					$req2->closeCursor();
+						if ($forme['forfait'] == 1) 
+						{
+							echo '<b class=forme_f>F</b>';
+						}
+						else
+						{							
+							if ($forme['victoire'] == 1) 
+							{
+								echo '<b class=forme_v>V</b>';
+							}
+							else
+							{
+								if ($forme['nul'] == 1) 
+								{
+									echo '<b class=forme_n>N</b>';
+								}
+								else
+								{	
+									echo '<b class=forme_d>D</b>';
+								}
+							}
+						}		
+					}
+					$reqforme->closeCursor();
 					
-					echo '</table>';
-					echo '<br>'; */
+					echo '</p>';
 					
+					echo '<br>';
+
 	
-	echo '<p><u>Historique des matchs en championnat:</u></p>';	
+	echo '<p><u><b>Historique des matchs en championnat :</b></u></p>';	
 			
-	$req3=$bdd->query('SELECT e1.nom equipe1, e2.nom equipe2, equipe_dom_forfait, equipe_vis_forfait, but_equipe_dom, but_equipe_vis, date, numero
+	$req3=$bdd->query('SELECT e1.nom equipe1, e2.nom equipe2, equipe_dom_forfait, equipe_vis_forfait, but_equipe_dom, but_equipe_vis, date, numero 
 	FROM equipes e1, equipes e2, matchs, journees
 	WHERE matchs.equipe_dom_id = e1.ID_equipe
 	AND matchs.equipe_vis_id = e2.ID_equipe

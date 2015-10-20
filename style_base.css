@@ -58,6 +58,31 @@ table
     font-size:1em;
 }
 
+/* definit la couleur des caracteres pour victoires, nuls, defaites et forfaits dans la rubrique stats */
+.forme_v
+{
+background-color:#E3DDE2;
+color:green;
+}
+
+.forme_n
+{
+background-color:#E3DDE2;
+color:orange;
+}
+
+.forme_d
+{
+background-color:#E3DDE2;
+color:red;
+}
+
+.forme_f
+{
+background-color:#E3DDE2;
+color:black;
+}
+
 /* alternance des couleurs des lignes dans résultats du tableau*/
 
 .trheadcolor
