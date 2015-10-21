@@ -15,6 +15,7 @@
 
 <section>	
 	<article>
+	<center>
 	<h2>L'effectif... Ses Exploits... Ses Devoirs !</h2>
 	<?php
   	
@@ -70,10 +71,10 @@
 	$reponse->closeCursor();
                 
     ?>
+  		</center>
   		</article>	
 	
 		<aside>
-			<center>
 			<p><i>En quelques chiffres...</i></p>
 			<p>Effectif:<b> <?php echo NombreEffectif(); ?></b></p>
 			<p>Age moyen:<b> <?php echo AgeAVG(); ?></b> </p>
@@ -82,8 +83,6 @@
 			<p><b><?php echo NbMIL(); ?> </b> milieu(x). </p>
 			<p><b><?php echo NbATT(); ?> </b> attaquant(s).</p>
 			<p><b><?php echo NbINC(); ?> </b> inclassable(s).</p>
-			
-			</center>
 		</aside>
 	</section>
 	

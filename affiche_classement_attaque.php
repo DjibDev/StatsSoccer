@@ -17,25 +17,29 @@
 
 <section>	
 	<article>
-	<h2>Le(s) classement(s) en championnat - Groupe C</h2>
-	<?php
-	require('connexion.php');
+	<center>
+		<h2>Le(s) classement(s) en championnat - Groupe C</h2>
+		<?php
+		require('connexion.php');
 	
-	echo '<table border="0" cellspacing=2 cellspadding=2>';
-	echo '<tr class="trcolor0"><td align="center"><a href="affiche_classement.php">Général</a></td><td align="center"><a href="affiche_classement_domicile.php">A domicile</a></td><td align="center"><a href="affiche_classement_exterieur.php">A l\'extérieur</a></td><td align="center"><a href="affiche_classement_defense.php">Meilleure défense</a></td></tr>';
-	echo '</table><br>';
+		echo '<table border="0" cellspacing=2 cellspadding=2>';
+		echo '<tr class="trcolor0"><td align="center"><a href="affiche_classement.php">Général</a></td><td align="center"><a href="affiche_classement_domicile.php">A domicile</a></td><td align="center"><a href="affiche_classement_exterieur.php">A l\'extérieur</a></td><td align="center"><a href="affiche_classement_defense.php">Meilleure défense</a></td></tr>';
+		echo '</table><br>';
 
-	echo '<caption>Classement - Meilleure Attaque</caption>';	
+		echo '<caption>Classement - Meilleure Attaque</caption>';	
                 
     ?>    
-		</article>	
+	</center>
+	</article>	
 		
-		<aside>
-			<h2>Classements individuels</h2>
-		<?php
+	<aside>
+	<center>
+	
+		<h2>Classements individuels</h2>
+		<?php 
 				
-		echo '<caption><u>Classement des buteurs (championnat + coupe + amicaux) : </u></caption>';
-		echo '<table align=center border=2 cellspacing=2 cellspadding=2 >';
+		echo '<caption>Classement - Buteurs</caption>';
+		echo '<table border=2 cellspacing=2 cellspadding=2 >';
 		echo '<tr class=trheadcolor><th></th><th>Pseudo</th><th>Buts</th>';
 		
 		$req2=$bdd->query('SELECT pseudo, nb_buts 
@@ -61,7 +65,7 @@
 		echo '<br>';
 		
 		
-		echo '<caption><u>Classement des passeurs ((championnat + coupe + amicaux) : </u></caption><br>';
+		echo '<caption>Classement - Passeurs</caption><br>';
 		echo '<table align=center border=2 cellspacing=2 cellspadding=2 >';
 		echo '<tr class=trheadcolor><th></th><th>Pseudo</th><th>Passes</th>';
 				
@@ -91,7 +95,7 @@
 		?>
 			
 			
-						
+		</center>				
 		</aside>
 	</section>
 	

@@ -59,27 +59,33 @@ table
 }
 
 /* definit la couleur des caracteres pour victoires, nuls, defaites et forfaits dans la rubrique stats */
-.forme_v
+
+.stats_files
 {
 background-color:#E3DDE2;
+}
+
+.forme_v
+{
+background-color:white;
 color:green;
 }
 
 .forme_n
 {
-background-color:#E3DDE2;
+background-color:white;
 color:orange;
 }
 
 .forme_d
 {
-background-color:#E3DDE2;
+background-color:white;
 color:red;
 }
 
 .forme_f
 {
-background-color:#E3DDE2;
+background-color:white;
 color:black;
 }
 
@@ -87,7 +93,7 @@ color:black;
 
 .trheadcolor
 {
-background-color:#E3DDE2;
+background-color:white;
 color:black;
 }
 
@@ -105,7 +111,7 @@ color:black;
 
 .trcolorspecial
 {
-background-color:#FFDE00;
+background-color:#E3DDE2 ;
 color:black;
 }
 
@@ -205,7 +211,7 @@ article, aside, vignettes
 article
 {
     position: relative;
-    width: 550px;
+    width: 630px;
     margin-right: 15px;
     background-color: white;
     box-shadow: 0px 2px 5px #1c1a19;
@@ -223,7 +229,7 @@ article p
 aside
 {
     position: relative;
-    width: 290px;
+    width: 210px;
     background-color: white;
     box-shadow: 0px 2px 5px #1c1a19;
     border-radius: 5px;

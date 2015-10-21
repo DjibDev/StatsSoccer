@@ -4,7 +4,7 @@ function AfficheStatsPlayer($a)
 {
 					require ('connexion.php');
 					require ('../fonctions_utiles_users.php');
-					
+									
 					$req=$bdd->query('SELECT pseudo, nom , prenom, birthday, poste, num_maillot
 					FROM effectif
 					WHERE ID_joueur= '.$a.' ');
@@ -58,6 +58,8 @@ function AfficheStatsPlayer($a)
 function AfficheStatsEquipe($a)
 {
 					require_once ('connexion.php');
+					
+					echo '<div class="stats_files">';
 					
 					$req=$bdd->query('SELECT *
 					FROM equipes
@@ -269,6 +271,8 @@ function AfficheStatsEquipe($a)
 			echo '<p><b>'.$resultats3['numero'].'</b>. '.$resultats3['equipe1'].'<i><b> '.$e1_forfait.'</b></i> - '.$resultats3['equipe2'].'<b><i> '.$e2_forfait.'</i></b>: <b>'.$resultats3['but_equipe_dom'].' - '.$resultats3['but_equipe_vis'].'</b></p>';
 	}
 	$req3->closeCursor();
+	
+	echo '<br></div>';
 }
 
 /*function CreateJPGraphEquipe($a)

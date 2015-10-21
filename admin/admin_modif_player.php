@@ -11,17 +11,18 @@
 <?php
 	include('banniere_menu.php');
 ?>	
-		
+	
+	
 	<section>	
-				
-		<form method="post" action="trait_modif_player.php">
+		
+		<form name="modif_player" method="post" action="trait_modif_player.php">
 			
 		<?php require_once ('fonctions_utiles.php'); ?>
 		
 		<fieldset>
 		<Legend> Modifier les données des joueurs</Legend>		
 			<label for="player">Sélectionner le nom du joueur : </label>
-			<select required name="player" id="player">
+			<select required name="player" id="player" >
 				<option selected disabled value="">Sélectionnez</option>
 						
 				<?php 
@@ -32,6 +33,7 @@
 				while ($resultats=$reponse->fetch())
 				{
 					echo '<option value="'.$resultats['ID_joueur'].'">'.$resultats['pseudo'].' </option>';
+				
 				}
 			
 				$reponse->closeCursor();
@@ -39,7 +41,7 @@
 				?>
         	
         	</select>
-        	
+     
         	<br>
         	<br>
 			
@@ -164,8 +166,9 @@
 		<input type="submit" value="Enregistrer"/> 		
 		
 		</fieldset>
-		</form>
+		</form>	
 	<br>
+
 	<div id="suppr">
 		<form method="post" action="trait_suppr_player.php">
 		<fieldset>
@@ -181,7 +184,7 @@
 	
 				while ($resultats=$reponse->fetch())
 				{
-					echo '<option value="'.$resultats['ID_joueur'].'">'.$resultats['nom'].' '.$resultats['prenom'].'</option>';
+					echo '<option value="'.$resultats['ID_joueur'].'">'.$resultats['pseudo'].'</option>';
 				}
 			
 				$reponse->closeCursor();

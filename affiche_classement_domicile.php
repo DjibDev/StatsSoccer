@@ -17,6 +17,7 @@
 
 <section>	
 	<article>
+	<center>
 	<h2>Le(s) classement(s) en championnat - Groupe C</h2>
 	<?php
 	require('connexion.php');
@@ -72,15 +73,17 @@
 		
 		echo '</table><br>';	
 	
-		?>    
+		?>  
+		</center>
 		</article>	
 		
 		<aside>
+		<center>
 			<h2>Classements individuels</h2>
 		<?php
 				
-		echo '<caption><u>Classement des buteurs (championnat + coupe + amicaux) : </u></caption>';
-		echo '<table align=center border=2 cellspacing=2 cellspadding=2 >';
+		echo '<caption>Classement - Buteurs</caption>';
+		echo '<table border=2 cellspacing=2 cellspadding=2 >';
 		echo '<tr class=trheadcolor><th></th><th>Pseudo</th><th>Buts</th>';
 		
 		$req2=$bdd->query('SELECT pseudo, nb_buts 
@@ -106,8 +109,8 @@
 		echo '<br>';
 		
 		
-		echo '<caption><u>Classement des passeurs (championnat + coupe + amicaux) : </u></caption><br>';
-		echo '<table align=center border=2 cellspacing=2 cellspadding=2 >';
+		echo '<caption>Classement - Passeurs</caption><br>';
+		echo '<table border=2 cellspacing=2 cellspadding=2 >';
 		echo '<tr class=trheadcolor><th></th><th>Pseudo</th><th>Passes</th>';
 				
 		$req3=$bdd->query('SELECT pseudo, nb_passes
@@ -136,7 +139,7 @@
 		?>
 			
 			
-						
+		</center>				
 		</aside>
 	</section>
 	
