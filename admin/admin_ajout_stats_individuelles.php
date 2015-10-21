@@ -20,8 +20,8 @@
 		<fieldset>
 		<Legend> Entrez les stats par joueur et par journée</Legend>
 		<table border="0" cellspacing="4">
-		<tr><td align="right">
-		<label for="player">Sélectionner le joueur: </label></td>
+		<tr><td align="left">
+		<label for="player">Joueur: </label></td>
 		<td align="left"><select required name="player" id="player">
 			<option selected disabled value="">Sélectionnez</option>
 			<?php 
@@ -35,9 +35,9 @@
 			?>
 		</select></td>
 		<td></td>
-		<td align="right">
-		<label for="journee">Sélectionner la journée: </label></td>
-		<td align="left"><select required name="journee" id="journee">
+		<td align="left">
+		<label for="journee">Journée: </label></td>
+		<td align="left"><select name="journee" id="journee">
 			<option selected disabled value="">Sélectionnez</option>
 			<?php	
 				$reponse2=$bdd->query('SELECT numero, date, ID_journee, coupe
@@ -50,16 +50,17 @@
 					$dateFR=FormatDateFR($resultats2['date']);
 					if ($resultats2['coupe'] == 1)
 					{
-						echo '<option value="'.$resultats2['ID_journee'].'"> Coupe - Journéee n° '.$resultats2['numero'].' - le '.$dateFR.'</option>';
+						echo '<option value="'.$resultats2['ID_journee'].'"> Coupe - J. n° '.$resultats2['numero'].' - le '.$dateFR.'</option>';
 					}
 					else
 					{	
-						echo '<option value="'.$resultats2['ID_journee'].'"> Ch. - Journéee n° '.$resultats2['numero'].' - le '.$dateFR.'</option>';
+						echo '<option value="'.$resultats2['ID_journee'].'"> Ch. - J. n° '.$resultats2['numero'].' - le '.$dateFR.'</option>';
 					}
 				}
 				$reponse2->closeCursor();
 			?>
-		</select></td></tr>
+		</select></td>
+		<td><label for="amical">Amical ?</label></td><td><input type="checkbox" name="amical"></td></tr>
 		</table>
 		<br>
 		<table border="0" cellspacing="4">

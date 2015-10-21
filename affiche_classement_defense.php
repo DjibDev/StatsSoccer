@@ -34,7 +34,7 @@
 			<h2>Classements individuels</h2>
 		<?php
 				
-		echo '<caption><u>Classement des buteurs (championnat + coupe) : </u></caption>';
+		echo '<caption><u>Classement des buteurs (championnat + coupe + amicaux) : </u></caption>';
 		echo '<table align=center border=2 cellspacing=2 cellspadding=2 >';
 		echo '<tr class=trheadcolor><th></th><th>Pseudo</th><th>Buts</th>';
 		
@@ -61,7 +61,7 @@
 		echo '<br>';
 		
 		
-		echo '<caption><u>Classement des passeurs (championnat + coupe) : </u></caption><br>';
+		echo '<caption><u>Classement des passeurs (championnat + coupe + amicaux) : </u></caption><br>';
 		echo '<table align=center border=2 cellspacing=2 cellspadding=2 >';
 		echo '<tr class=trheadcolor><th></th><th>Pseudo</th><th>Passes</th>';
 				
