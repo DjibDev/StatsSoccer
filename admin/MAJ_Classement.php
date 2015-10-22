@@ -289,7 +289,7 @@ function MAJ_Classement_domicile()
 		$req5->bindParam(7, $diff); 
 		$req5->bindParam(8, $points);
 		$req5->bindParam(9, $equipe_id);
-		$req5->execute() or die ( print_r($req5->errorInfo()) );; 
+		$req5->execute();
 
 		$x++;		
 	}	

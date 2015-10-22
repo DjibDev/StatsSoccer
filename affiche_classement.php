@@ -61,7 +61,17 @@
 			echo '<td>'.$x.'</td>';
 			echo '<td><b>'.$resultats['nom'].'</b></td>';
 			echo '<td align="center"><b>'.$resultats['points'].'</b></td>';
-			echo '<td align="center">'.$resultats['nb_journees'].'</td>';
+			
+					// requete qui affiche le nombre de match joué par l'équipe
+					$reqjournee=$bdd->query('SELECT COUNT(*) AS NB_J
+					FROM stats_collectives 
+					WHERE equipe_id='.$id_equipe.' ');
+					while ($resultatsnbj=$reqjournee->fetch())
+					{
+						echo '<td align="center">'.$resultatsnbj['NB_J'].'</td>';
+					}
+					$reqjournee->closeCursor();
+					
 			echo '<td align="center">'.$resultats['nb_victoires'].'</td>';
 			echo '<td align="center">'.$resultats['nb_nuls'].'</td>';
 			echo '<td align="center">'.$resultats['nb_defaites'].'</td>';
