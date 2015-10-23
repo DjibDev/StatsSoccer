@@ -18,95 +18,145 @@
 	include ('fonctions_utiles_users.php');
 	require ('connexion.php');
 			
-	$req=$bdd->query('SELECT numero 
+	$req=$bdd->query('SELECT date, numero 
 	FROM journees
 	WHERE saison="2015/2016"
 	AND coupe="0"
-	ORDER BY numero ASC
+	ORDER BY date ASC
 	LIMIT 0 , 9');
 	
 	echo '<center><table border="0" cellspacing="3"><tr class="trcolor0">';
 	While ($resultats=$req->fetch())
 	{
-			echo '<td><a href="#match'.$resultats['numero'].'">Journée '.$resultats['numero'].'</a></td>';
-	}
+		    if ($resultats['numero'] < 50)
+		    {
+				echo '<td><a href="#match'.$resultats['date'].'">Journée '.$resultats['numero'].'</a></td>';
+			}
+			else
+			{
+				echo '<td bgcolor="black"><a href="#match'.$resultats['date'].'">Reportée</a></td>';
+			}
+	}		
 	$req->closeCursor();
 	
-	$req=$bdd->query('SELECT numero 
+	$req=$bdd->query('SELECT date, numero 
 	FROM journees
 	WHERE saison="2015/2016"
 	AND coupe="0"
-	ORDER BY numero ASC
+	ORDER BY date ASC
 	LIMIT 9 , 9');
 
 	echo '</tr><tr class="trcolor0">';
 	
 	While ($resultats=$req->fetch())
 	{
-			echo '<td><a href="#match'.$resultats['numero'].'">Journée '.$resultats['numero'].'</a></td>';
+			if ($resultats['numero'] < 50)
+		    {
+				echo '<td><a href="#match'.$resultats['date'].'">Journée '.$resultats['numero'].'</a></td>';
+			}
+			else
+			{
+				echo '<td bgcolor="black"><a href="#match'.$resultats['date'].'">Reportée</a></td>';
+			}
 	}
 	$req->closeCursor();
 	
-	$req=$bdd->query('SELECT numero 
+	$req=$bdd->query('SELECT date, numero 
 	FROM journees
 	WHERE saison="2015/2016"
 	AND coupe="0"
-	ORDER BY numero ASC
+	ORDER BY date ASC
 	LIMIT 18 , 9');
 
 	echo '</tr><tr class="trcolor0">';
 	
 	While ($resultats=$req->fetch())
 	{
-			echo '<td><a href="#match'.$resultats['numero'].'">Journée '.$resultats['numero'].'</a></td>';
+			if ($resultats['numero'] < 50)
+		    {
+				echo '<td><a href="#match'.$resultats['date'].'">Journée '.$resultats['numero'].'</a></td>';
+			}
+			else
+			{
+				echo '<td bgcolor="black"><a href="#match'.$resultats['date'].'">Reportée</a></td>';
+			}
 	}
 	$req->closeCursor();
 	
-	$req=$bdd->query('SELECT numero 
+	$req=$bdd->query('SELECT date, numero 
 	FROM journees
 	WHERE saison="2015/2016"
 	AND coupe="0"
-	ORDER BY numero ASC
+	ORDER BY date ASC
 	LIMIT 27 , 9');
 	
 	echo '</tr><tr class="trcolor0">';
 
 	While ($resultats=$req->fetch())
 	{
-			echo '<td><a href="#match'.$resultats['numero'].'">Journée '.$resultats['numero'].'</a></td>';
+			if ($resultats['numero'] < 50)
+		    {
+				echo '<td><a href="#match'.$resultats['date'].'">Journée '.$resultats['numero'].'</a></td>';
+			}
+			else
+			{
+				echo '<td bgcolor="black"><a href="#match'.$resultats['date'].'">Reportée</a></td>';
+			}
 	}
 	$req->closeCursor();
 	
-	$req=$bdd->query('SELECT numero 
+	$req=$bdd->query('SELECT date, numero 
 	FROM journees
 	WHERE saison="2015/2016"
 	AND coupe="0"
-	ORDER BY numero ASC
+	ORDER BY date ASC
 	LIMIT 36 , 9');
 	
 	echo '</tr><tr class="trcolor0">';
 
 	While ($resultats=$req->fetch())
 	{
-			echo '<td><a href="#match'.$resultats['numero'].'">Journée '.$resultats['numero'].'</a></td>';
+			if ($resultats['numero'] < 50)
+		    {
+				echo '<td><a href="#match'.$resultats['date'].'">Journée '.$resultats['numero'].'</a></td>';
+			}
+			else
+			{
+				echo '<td bgcolor="black"><a href="#match'.$resultats['date'].'">Reportée</a></td>';
+			}
 	}
 	$req->closeCursor();
 
 	echo '</tr></table></center>';
-	echo '<p>* si une équipe n\'apparait pas, c\'est qu\'elle est exempte.</p>';
+	echo '<p>* Si une équipe n\'apparait pas, c\'est qu\'elle est exempte.</p>';
+	echo '<p>** Si une confrontation manque, c\'est que le match a été reporté.</p>';
 	
 	
-	$reponse=$bdd->query('SELECT numero, date FROM journees WHERE saison="2015/2016" AND coupe="0" ORDER BY numero ASC');
+	$reponse=$bdd->query('SELECT numero, date 
+	FROM journees 
+	WHERE saison="2015/2016" 
+	AND coupe="0" 
+	ORDER BY date ASC');
 	
 	
 	while ($resultats=$reponse->fetch())
 	{		
 		
 		$dateFR=FormatDateFR($resultats['date']);
+		$date_journee=$resultats['date'];
 		$num_journee=$resultats['numero'];
 		
-		echo '<div id=match'.$num_journee.'></div>';
-		echo '<table width="600" cellspacing="4" cellspading="4"><tr class="trheadcolor"><th align=left colspan="3"><a href="#bloc_page"><img src="images/fleche_haut.jpg"></a>&nbsp;&nbsp;&nbsp;<b><u>Journée n° '.$num_journee.' - le '.$dateFR.'</u></b></th></tr>';
+		if ($num_journee < 50)
+		{
+			$texte='Journée N°'.$num_journee;
+		}
+		else 
+		{
+			$texte='Journée Reportée';
+		}
+			
+		echo '<div id=match'.$date_journee.'></div>';
+		echo '<table width="600" cellspacing="4" cellspading="4"><tr class="trheadcolor"><th align=left colspan="3"><a href="#bloc_page"><img src="images/fleche_haut.jpg"></a>&nbsp;&nbsp;&nbsp;<b><u>'.$texte.' - le '.$dateFR.'</u></b></th></tr>';
 	
 				
 		$reponse2=$bdd->query('SELECT e1.nom equi1, e2.nom equi2, e1.favorite fav1, e2.favorite fav2, equipe_dom_forfait, equipe_vis_forfait,but_equipe_dom, but_equipe_vis, finished
