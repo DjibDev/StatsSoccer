@@ -86,7 +86,7 @@
 					FROM stats_collectives 
 					WHERE equipe_id='.$id_equipe.'
 					ORDER BY journee_id DESC 
-					LIMIT 0 , 4 ');
+					LIMIT 0 , 5 ');
 					
 					$forme_5d='';
 										

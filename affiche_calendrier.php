@@ -18,7 +18,7 @@
 	include ('fonctions_utiles_users.php');
 	require ('connexion.php');
 			
-	$req=$bdd->query('SELECT date, numero 
+	$req=$bdd->query('SELECT date, numero, finished
 	FROM journees
 	WHERE saison="2015/2016"
 	AND coupe="0"
@@ -28,9 +28,15 @@
 	echo '<center><table border="0" cellspacing="3"><tr class="trcolor0">';
 	While ($resultats=$req->fetch())
 	{
-		    if ($resultats['numero'] < 50)
+		$td_bgcolor=''; 
+		if ($resultats['finished'] == true)
+		{
+			$td_bgcolor='bgcolor="grey"'; // affiche en fond gris les journées terminées
+		}	
+			
+		   if ($resultats['numero'] < 50)
 		    {
-				echo '<td><a href="#match'.$resultats['date'].'">Journée '.$resultats['numero'].'</a></td>';
+				echo '<td '.$td_bgcolor.'><a href="#match'.$resultats['date'].'">Journée '.$resultats['numero'].'</a></td>';
 			}
 			else
 			{
@@ -39,7 +45,7 @@
 	}		
 	$req->closeCursor();
 	
-	$req=$bdd->query('SELECT date, numero 
+	$req=$bdd->query('SELECT date, numero, finished
 	FROM journees
 	WHERE saison="2015/2016"
 	AND coupe="0"
@@ -50,9 +56,15 @@
 	
 	While ($resultats=$req->fetch())
 	{
-			if ($resultats['numero'] < 50)
+		$td_bgcolor=''; 
+		if ($resultats['finished'] == true)
+		{
+			$td_bgcolor='bgcolor="grey"'; // affiche en fond gris les journées terminées
+		}	
+			
+		   if ($resultats['numero'] < 50)
 		    {
-				echo '<td><a href="#match'.$resultats['date'].'">Journée '.$resultats['numero'].'</a></td>';
+				echo '<td '.$td_bgcolor.'><a href="#match'.$resultats['date'].'">Journée '.$resultats['numero'].'</a></td>';
 			}
 			else
 			{
@@ -61,7 +73,7 @@
 	}
 	$req->closeCursor();
 	
-	$req=$bdd->query('SELECT date, numero 
+	$req=$bdd->query('SELECT date, numero, finished
 	FROM journees
 	WHERE saison="2015/2016"
 	AND coupe="0"
@@ -72,9 +84,15 @@
 	
 	While ($resultats=$req->fetch())
 	{
-			if ($resultats['numero'] < 50)
+		$td_bgcolor=''; 
+		if ($resultats['finished'] == true)
+		{
+			$td_bgcolor='bgcolor="grey"'; // affiche en fond gris les journées terminées
+		}	
+			
+		   if ($resultats['numero'] < 50)
 		    {
-				echo '<td><a href="#match'.$resultats['date'].'">Journée '.$resultats['numero'].'</a></td>';
+				echo '<td '.$td_bgcolor.'><a href="#match'.$resultats['date'].'">Journée '.$resultats['numero'].'</a></td>';
 			}
 			else
 			{
@@ -83,7 +101,7 @@
 	}
 	$req->closeCursor();
 	
-	$req=$bdd->query('SELECT date, numero 
+	$req=$bdd->query('SELECT date, numero, finished
 	FROM journees
 	WHERE saison="2015/2016"
 	AND coupe="0"
@@ -94,9 +112,15 @@
 
 	While ($resultats=$req->fetch())
 	{
-			if ($resultats['numero'] < 50)
+		$td_bgcolor=''; 
+		if ($resultats['finished'] == true)
+		{
+			$td_bgcolor='bgcolor="grey"'; // affiche en fond gris les journées terminées
+		}	
+			
+		   if ($resultats['numero'] < 50)
 		    {
-				echo '<td><a href="#match'.$resultats['date'].'">Journée '.$resultats['numero'].'</a></td>';
+				echo '<td '.$td_bgcolor.'><a href="#match'.$resultats['date'].'">Journée '.$resultats['numero'].'</a></td>';
 			}
 			else
 			{
@@ -105,7 +129,7 @@
 	}
 	$req->closeCursor();
 	
-	$req=$bdd->query('SELECT date, numero 
+	$req=$bdd->query('SELECT date, numero, finished
 	FROM journees
 	WHERE saison="2015/2016"
 	AND coupe="0"
@@ -116,9 +140,15 @@
 
 	While ($resultats=$req->fetch())
 	{
-			if ($resultats['numero'] < 50)
+		$td_bgcolor=''; 
+		if ($resultats['finished'] == true)
+		{
+			$td_bgcolor='bgcolor="grey"'; // affiche en fond gris les journées terminées
+		}	
+			
+		   if ($resultats['numero'] < 50)
 		    {
-				echo '<td><a href="#match'.$resultats['date'].'">Journée '.$resultats['numero'].'</a></td>';
+				echo '<td '.$td_bgcolor.'><a href="#match'.$resultats['date'].'">Journée '.$resultats['numero'].'</a></td>';
 			}
 			else
 			{
@@ -132,7 +162,7 @@
 	echo '<p>** Si une confrontation manque, c\'est que le match a été reporté.</p>';
 	
 	
-	$reponse=$bdd->query('SELECT numero, date 
+	$reponse=$bdd->query('SELECT numero, date
 	FROM journees 
 	WHERE saison="2015/2016" 
 	AND coupe="0" 
