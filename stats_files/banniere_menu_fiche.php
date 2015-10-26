@@ -6,7 +6,7 @@
 				<a class="btn" href="../../affiche_coupe.php">Coupe</a>
 				<a class="btn" href="../../affiche_classement.php">Classements</a>
 				<a class="btn" href="../../affiche_effectif.php">Effectif</a>
-				<a class="btn" href="http://jgefootlb.free.fr">Forum</a>
+				<a class="btn" href="#forum">Forum</a>
 				<a class="btn" href="../../admin/administrer.php">Administrer</a></p>
 		</div>
 </div>
