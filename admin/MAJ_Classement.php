@@ -304,6 +304,9 @@ function MAJ_Classement_domicile()
 
 function MAJ_Classement_exterieur()
 {
+
+	require_once ('connexion.php');
+
 	// requete qui vide le classement a l'extérieur
 	$reqdelc=$bdd->prepare('DELETE FROM classement_exterieur ');
 	$reqdelc->execute();
@@ -407,7 +410,6 @@ function MAJ_Classement_exterieur()
 	}	
 
 }	
-
 
 function MAJ_Classement_players($joueur_id)
 {

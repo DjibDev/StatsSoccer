@@ -10,8 +10,11 @@
 <div id="bloc_page">
 <?php
 	include('banniere_menu.php');
-	include ('MAJ_Classement.php');	
-	MAJ_Classement_exterieur();
+	
+	
+	require ('MAJ_Classement.php');	
+	MAJ_Classement_domicile();
+	
 ?>
 </div>
 </body>

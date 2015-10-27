@@ -33,9 +33,9 @@
 		ORDER BY points DESC, diff DESC, nb_buts_pour DESC, nom ASC ');
 	
 		$x=0;
-		echo '<caption>Classement - A l\'Extérieur</caption>';
+		echo '<caption>Classement - Extérieur</caption>';
 		echo '<table border=2 cellspacing=2 cellspadding=2 >';
-		echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th>F</th><th width="30">Bp</th><th>Bc</th><th width="30">Diff</th><th width="30">Stats</th></tr>';
+		echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th>F</th><th width="30">Bp</th><th>Bc</th><th width="30">Diff</th></tr>';
 	
 		while ($resultats3=$req3->fetch())
 		{		
@@ -59,14 +59,13 @@
 			echo '<td><b>'.$resultats3['nom'].'</b></td>';
 			echo '<td align="center"><b>'.$resultats3['points'].'</b></td>';
 			echo '<td align="center">'.$resultats3['nb_journees'].'</td>';
-			echo '<td align="center">'.$resultats3['nb_forfaits'].'</td>';
 			echo '<td align="center">'.$resultats3['nb_victoires'].'</td>';
 			echo '<td align="center">'.$resultats3['nb_nuls'].'</td>';
 			echo '<td align="center">'.$resultats3['nb_defaites'].'</td>';
+			echo '<td align="center">'.$resultats3['nb_forfaits'].'</td>';
 			echo '<td align="center">'.$resultats3['nb_buts_pour'].'</td>';
 			echo '<td align="center">'.$resultats3['nb_buts_contre'].'</td>';
-			echo '<td align="center">'.$resultats3['diff'].'</td>';			
-			echo '<td align="center"><a href="stats_files/equipes/stats_equipe_'.$resultats3['ID_equipe'].'.php">Voir</a></td></tr>';
+			echo '<td align="center">'.$resultats3['diff'].'</td></tr>';			
 			
 		}
 		$req3->closeCursor();
