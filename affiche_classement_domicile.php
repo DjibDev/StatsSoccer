@@ -23,7 +23,7 @@
 	require('connexion.php');
 	
 	echo '<table border="0" cellspacing=2 cellspadding=2>';
-	echo '<tr class="trcolor0"><td align="center"><a href="affiche_classement.php">Général</a></td><td align="center"><a href="affiche_classement_exterieur.php">A l\'extérieur</a></td><td align="center"><a href="affiche_classement_attaque.php">Meilleure attaque</a></td><td align="center"><a href="affiche_classement_defense.php">Meilleure défense</a></td></tr>';
+	echo '<tr class="trcolor0"><td align="center"><a href="affiche_classement.php">Général</a></td><td align="center"><a href="affiche_classement_exterieur.php">Extérieur</a></td><td align="center"><a href="affiche_classement_attaque.php">Attaque</a></td><td align="center"><a href="affiche_classement_defense.php">Défense</a></td></tr>';
 	echo '</table><br>';
 	
 		$req2=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_forfaits, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points

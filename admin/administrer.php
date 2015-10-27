@@ -17,6 +17,7 @@
 				<legend>Championnat</legend>
 				<li><a class="adm" href="admin_calendrier.php#ajout_team">Calendrier</a></li>
 				<li><a class="adm" href="admin_resultats.php">Résultats</a></li>
+				<li><a class="adm" href="admin_maj_classement.php">MAJ Classement</a></li>
 			</fieldset>
 			<br>
 			<fieldset>

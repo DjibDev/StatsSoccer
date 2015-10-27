@@ -7,17 +7,12 @@
 </head>
 
 <body>
-	
 <div id="bloc_page">
 <?php
 	include('banniere_menu.php');
-
-	require ('MAJ_Classement.php');
-	MAJ_Classement_domicile();
-
-	echo '<p class=ok>Mise à jour du classement à domicile bien realisée</p>';
-
+	include ('MAJ_Classement.php');	
+	MAJ_Classement_exterieur();
 ?>
-
+</div>
 </body>
 </html>

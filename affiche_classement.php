@@ -23,7 +23,7 @@
 	require('connexion.php');
 	
 	echo '<table border="0" cellspacing=2 cellspadding=2>';
-	echo '<tr class="trcolor0"><td align="center"><a href="affiche_classement_domicile.php">A domicile</a></td><td align="center"><a href="affiche_classement_exterieur.php">A l\'extérieur</a></td><td align="center"><a href="affiche_classement_attaque.php">Meilleure attaque</a></td><td align="center"><a href="affiche_classement_defense.php">Meilleure défense</a></td></tr>';
+	echo '<tr class="trcolor0"><td align="center"><a href="affiche_classement_domicile.php">Domicile</a></td><td align="center"><a href="affiche_classement_exterieur.php">Extérieur</a></td><td align="center"><a href="affiche_classement_attaque.php">Attaque</a></td><td align="center"><a href="affiche_classement_defense.php">Défense</a></td></tr>';
 	echo '</table><br>';
 	
 	echo '<p>Victoire: <b class=forme_v>4pts</b>. - Nul: <b class=forme_n>2pts</b>. - Défaite: <b class=forme_d>1pt</b>. - Forfait: <b class=forme_f>0pt</b>.</p>';
