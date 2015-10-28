@@ -37,7 +37,7 @@
 	$x=0;
 	echo '<caption>Classement - Général</caption>';
 	echo '<table border=2 cellspacing=2 cellspadding=2 >';
-	echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th width="30">F</th><th width="30">Bp</th><th>Bc</th><th width="30">Diff</th><th width="30">Stats.</th><th title="Les 5 derniers matchs du + récent au - récent.">Forme</th></tr>';
+	echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th width="30">F</th><th width="30">Bp</th><th width="30">Bc</th><th width="30">Diff</th><th width="30">Stats.</th><th width="30" title="Les 5 derniers matchs du + récent au - récent.">Forme</th></tr>';
 	
 		while ($resultats=$req1->fetch())
 		{		
