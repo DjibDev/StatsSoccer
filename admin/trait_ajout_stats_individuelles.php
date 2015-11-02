@@ -41,9 +41,9 @@
 				
 			$buts=$_POST['buts'];
 			$passes=$_POST['passes'];
-			
-		
+					
 			$cleansheet=false;
+			
 			if (isset($_POST['clean']))
 			{
 				$cleansheet=true;

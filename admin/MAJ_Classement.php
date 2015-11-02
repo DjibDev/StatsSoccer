@@ -458,6 +458,10 @@ function MAJ_Classement_players($joueur_id)
 			{
 				$cleansheet=1;
 			}
+			else 
+			{
+				$cleansheet=0;
+			}	
 			
 			$nb_cleansheets=$nb_cleansheets+$cleansheet;
 			
