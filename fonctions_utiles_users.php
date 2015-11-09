@@ -18,6 +18,32 @@ function FormatDateFR($dateMySQL)
     return $dateFR;
 }
 
+function BirthdayCountdown($birthday)
+{	
+	$annee = date('Y'); // année d'aujourd'hui
+	$mois = date('m'); // mois d'aujourd'hui
+	$jour= date('d'); // jour d'aujourd'hui
+	$birth_j=substr($birthday,8,2); // extraction du jour de naissance
+	$birth_m=substr($birthday,5,2); // extraction du mois de naissance
+	
+	if ($mois > $birth_m)
+	{
+		$next_birth = mktime(8, 0, 0, $m, $j, ++$annee);
+	}
+	else
+	{
+		if ($mois < $birth_m) && ($jour < $birth_j)
+		{
+			$next_birth = mktime(8, 0, 0, $m, $j, $annee);
+		}	
+		else
+		
+		
+	$tps_restant = $next_birth - time(); // Différence entre date de l'année prochaine et maintenant.
+	$jours_restants=$tps_restant/86400;
+	return $jour.'-'.$mois.'-'.$annee;
+}
+
 function NombreEffectif()
 {
 	require('connexion.php');
