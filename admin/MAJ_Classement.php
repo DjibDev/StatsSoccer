@@ -47,11 +47,12 @@ function MAJ_Classement()
 			
 			
 		// requete faite par equipe
-		$req4=$bdd->query('SELECT forfait, victoire, defaite, nul ,buts_pour, buts_contre, diff, points
+		$req4=$bdd->prepare('SELECT forfait, victoire, defaite, nul ,buts_pour, buts_contre, diff, points
 		FROM stats_collectives
 		WHERE equipe_id='.$equipe_id.'');
+		$req4->execute();
 							
-		while ($resultats4=$req4->fetch())
+		while ($resultats4= $req4->fetch())
 		{
 			if ($resultats4['forfait'] == true)
 			{
@@ -146,11 +147,12 @@ function MAJ_Classement_Coupe()
 			
 			
 		// requete faite par equipe
-		$req4=$bdd->query('SELECT victoire, defaite, nul ,buts_pour, buts_contre, diff, points
+		$req4=$bdd->prepare('SELECT victoire, defaite, nul ,buts_pour, buts_contre, diff, points
 		FROM stats_collectives_coupe
 		WHERE equipe_id='.$equipe_id.'');
+		$req4->execute();
 							
-		while ($resultats4=$req4->fetch())
+		while ($resultats4= $req4->fetch())
 		{
 	
 			if ($resultats4['victoire'] == true)
@@ -196,7 +198,7 @@ function MAJ_Classement_Coupe()
 
 function MAJ_Classement_domicile()
 {
-	require_once ('connexion.php');
+	require('connexion.php');
 	
 	// requete qui vide le classement a domicile
 	$reqdeld=$bdd->prepare('DELETE FROM classement_domicile ');
@@ -234,12 +236,13 @@ function MAJ_Classement_domicile()
 			
 			
 		// requete faite par equipe
-		$reqdom=$bdd->query('SELECT forfait, victoire, defaite, nul ,buts_pour, buts_contre, diff, points
+		$reqdom=$bdd->prepare('SELECT forfait, victoire, defaite, nul ,buts_pour, buts_contre, diff, points
 		FROM stats_collectives
 		WHERE equipe_id='.$equipe_id.'
 		AND domicile=true ');
+		$reqdom->execute();
 							
-		while ($resultatsdom=$reqdom->fetch())
+		while ($resultatsdom= $reqdom->fetch())
 		{
 			if ($resultatsdom['forfait'] == true)
 			{
@@ -270,10 +273,11 @@ function MAJ_Classement_domicile()
 		$reqdom->closeCursor(); 
 		
 		// requete pour définir le nombre de journées que cette equipe a joué à domicile
-		$reqnbj=$bdd->query('SELECT count(*) AS nb_journees
+		$reqnbj=$bdd->prepare('SELECT count(*) AS nb_journees
 		FROM stats_collectives
 		WHERE equipe_id='.$equipe_id.'
 		AND domicile=true ');
+		$reqnbj->execute();
 		
 		while ($resultatsnbj=$reqnbj->fetch())
 		{
@@ -305,7 +309,7 @@ function MAJ_Classement_domicile()
 function MAJ_Classement_exterieur()
 {
 
-	require_once ('connexion.php');
+	require ('connexion.php');
 
 	// requete qui vide le classement a l'extérieur
 	$reqdelc=$bdd->prepare('DELETE FROM classement_exterieur ');
@@ -343,12 +347,13 @@ function MAJ_Classement_exterieur()
 			
 			
 		// requete faite par equipe
-		$reqext=$bdd->query('SELECT forfait, victoire, defaite, nul ,buts_pour, buts_contre, diff, points
+		$reqext=$bdd->prepare('SELECT forfait, victoire, defaite, nul ,buts_pour, buts_contre, diff, points
 		FROM stats_collectives
 		WHERE equipe_id='.$equipe_id.'
 		AND domicile=false ');
+		$reqext->execute();
 							
-		while ($resultatsext=$reqext->fetch())
+		while ($resultatsext= $reqext->fetch())
 		{
 			
 			if ($resultatsext['forfait'] == true)
@@ -379,10 +384,11 @@ function MAJ_Classement_exterieur()
 		$reqext->closeCursor(); 
 		
 		// requete pour définir le nombre de journées que cette equipe a joué à l'extérieur
-		$reqnbj=$bdd->query('SELECT count(*) AS nb_journees
+		$reqnbj=$bdd->prepare('SELECT count(*) AS nb_journees
 		FROM stats_collectives
 		WHERE equipe_id='.$equipe_id.'
 		AND domicile=false ');
+		$reqnbj->execute();
 		
 		while ($resultatsnbj=$reqnbj->fetch())
 		{

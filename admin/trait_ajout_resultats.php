@@ -34,12 +34,12 @@
 			//vérifier si le forfait est sélectionné
 			if (isset($_POST['e1_forfait'.$ligne]))
 			{
-				$equipe_dom_forfait=TRUE
+				$equipe_dom_forfait=TRUE;
 			}
 			
 			if (isset($_POST['e2_forfait'.$ligne]))
 			{
-				$equipe_vis_forfait=TRUE
+				$equipe_vis_forfait=TRUE;
 			}
 			
 			
@@ -187,6 +187,8 @@
 		// appel de la fonction MAJ_classement, pour générer le nouveau classement	et mettre a jour les classement domicile et extérieur
 		require_once ('MAJ_Classement.php');
 		MAJ_Classement();
+		MAJ_Classement_domicile();
+		MAJ_Classement_exterieur();
 		
 		echo '<br>';
 		echo '<p><a class="btn" href="../affiche_classement.php">Nouveaux classements disponibles !</a></p></center>';

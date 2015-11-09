@@ -17,8 +17,6 @@
 				<legend>Championnat</legend>
 				<li><a class="adm" href="admin_calendrier.php#ajout_team">Calendrier</a></li>
 				<li><a class="adm" href="admin_resultats.php">Résultats</a></li>
-				<li><a class="adm" href="admin_maj_classement_domicile.php">MAJ Classement Domicile</a></li>
-				<li><a class="adm" href="admin_maj_classement_exterieur.php">MAJ Classement Extérieur</a></li>
 			</fieldset>
 			<br>
 			<fieldset>
