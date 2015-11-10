@@ -21,27 +21,20 @@ function FormatDateFR($dateMySQL)
 function BirthdayCountdown($birthday)
 {	
 	$annee = date('Y'); // année d'aujourd'hui
-	$mois = date('m'); // mois d'aujourd'hui
-	$jour= date('d'); // jour d'aujourd'hui
 	$birth_j=substr($birthday,8,2); // extraction du jour de naissance
 	$birth_m=substr($birthday,5,2); // extraction du mois de naissance
+	$next_birth = mktime(0, 0, 0, $birth_m, $birth_j, $annee);
 	
-	if ($mois > $birth_m)
+	//Si l'anniversaire est déjà passé dans l'année, alors le prochaine est calculé sur l'année prochaine
+	if ($next_birth < time())
 	{
-		$next_birth = mktime(8, 0, 0, $m, $j, ++$annee);
+		$next_birth = mktime(0, 0, 0, $birth_m, $birth_j, ++$annee);
 	}
-	else
-	{
-		if ($mois < $birth_m) && ($jour < $birth_j)
-		{
-			$next_birth = mktime(8, 0, 0, $m, $j, $annee);
-		}	
-		else
 		
-		
-	$tps_restant = $next_birth - time(); // Différence entre date de l'année prochaine et maintenant.
-	$jours_restants=$tps_restant/86400;
-	return $jour.'-'.$mois.'-'.$annee;
+	$tps_restant = $next_birth - time();
+	$jours_restants=$tps_restant/86400; // il faut retirer les secondes, minutes et heures 60*60*24
+	$arron_jours= round($jours_restants,0);
+	return $arron_jours;
 }
 
 function NombreEffectif()

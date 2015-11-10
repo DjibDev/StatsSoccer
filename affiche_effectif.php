@@ -32,7 +32,7 @@
 	$altern=$x % 2;
 		
 		
-	echo '<table style="font-size:1em;" border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Pseudo</th><th>Age</th><th>Poste</th><th>Buts</th><th>Passes</th><th>CleanSheet</th><th><img src="images/raclette.png"></th><th><img src="images/maillot.png"></th><th>Birthday !</th></tr>';
+	echo '<table style="font-size:1em;" border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Pseudo</th><th>Age</th><th>Poste</th><th>Buts</th><th>Passes</th><th>CleanSheet</th><th><img src="images/raclette.png"/></th><th><img src="images/maillot.png"/></th><th><img src="images/biere_pression.png"/></th></tr>';
 	
 	
 	while ($resultats=$reponse->fetch())
@@ -64,7 +64,7 @@
 			echo '<td align="center">'.$resultats['nb_cleansheets'].'</td>';
 			echo '<td align="center">'.$resultats['nb_vestiaires'].'</td>'; 
 			echo '<td align="center">'.$resultats['nb_maillots'].'</td>'; 
-			echo '<td align="center">'.$birthday_countdown.'</td>';
+			echo '<td align="center">j-'.$birthday_countdown.'</td>';
 			echo '</tr>';
 			$x++;
 	}
