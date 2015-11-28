@@ -26,9 +26,9 @@
 	echo '<tr class="trcolor0"><td align="center"><a href="affiche_classement_domicile.php">Domicile</a></td><td align="center"><a href="affiche_classement_exterieur.php">Extérieur</a></td><td align="center"><a href="affiche_classement_attaque.php">Attaque</a></td><td align="center"><a href="affiche_classement_defense.php">Défense</a></td></tr>';
 	echo '</table><br>';
 	
-	echo '<p>Victoire: <b class=forme_v>4pts</b>. - Nul: <b class=forme_n>2pts</b>. - Défaite: <b class=forme_d>1pt</b>. - Forfait: <b class=forme_f>0pt</b>.</p>';
+	echo '<p>Victoire: <b class=forme_v>4pts</b>. - Nul: <b class=forme_n>2pts</b>. - Défaite: <b class=forme_d>1pt</b>. - Forfait: <b class=forme_f>0pt</b>. - Pénalité: <b class=forme_p>0pt</b>.</p>';
 	
-	$req1=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_forfaits, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points
+	$req1=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_forfaits, nb_penalites, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points
 	FROM equipes, classement
 	WHERE  equipes.ID_equipe = classement.equipe_id
 	AND nb_journees = (SELECT MAX(nb_journees) FROM classement) 
@@ -37,7 +37,7 @@
 	$x=0;
 	echo '<caption>Classement - Général</caption>';
 	echo '<table border=2 cellspacing=2 cellspadding=2 >';
-	echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th width="30">F</th><th width="30">Bp</th><th width="30">Bc</th><th width="30">Diff</th><th width="30">Stats.</th><th width="30" title="Les 5 derniers matchs du + récent au - récent.">Forme</th></tr>';
+	echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th width="30">F</th><th width="30">Pé.</th><th width="30">Bp</th><th width="30">Bc</th><th width="30">Diff</th><th width="30">Stats.</th><th width="30" title="Les 5 derniers matchs du + récent au - récent.">Forme</th></tr>';
 	
 		while ($resultats=$req1->fetch())
 		{		
@@ -76,13 +76,14 @@
 			echo '<td align="center">'.$resultats['nb_nuls'].'</td>';
 			echo '<td align="center">'.$resultats['nb_defaites'].'</td>';
 			echo '<td align="center">'.$resultats['nb_forfaits'].'</td>';
+			echo '<td align="center">'.$resultats['nb_penalites'].'</td>';
 			echo '<td align="center">'.$resultats['nb_buts_pour'].'</td>';
 			echo '<td align="center">'.$resultats['nb_buts_contre'].'</td>';
 			echo '<td align="center">'.$resultats['diff'].'</td>';			
 			echo '<td align="center"><a href="stats_files/equipes/stats_equipe_'.$resultats['ID_equipe'].'.php">Voir</a></td>';
 					
 					// requete qui affiche la forme de l'équipe
-					$reqforme=$bdd->query('SELECT forfait, victoire, nul ,defaite 
+					$reqforme=$bdd->query('SELECT forfait, penalite, victoire, nul ,defaite 
 					FROM stats_collectives 
 					WHERE equipe_id='.$id_equipe.'
 					ORDER BY journee_id DESC 
@@ -110,7 +111,14 @@
 								}
 								else
 								{	
-									$forme_5d=$forme_5d.'<b class=forme_d>D</b>';
+									if ($forme['penalite'] == 1) 
+									{
+										$forme_5d=$forme_5d.'<b class=forme_p>P</b>';
+									}
+									else
+									{
+										$forme_5d=$forme_5d.'<b class=forme_d>D</b>';
+									}
 								}
 							}
 						}		

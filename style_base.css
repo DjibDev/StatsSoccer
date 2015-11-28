@@ -89,6 +89,12 @@ background-color:white;
 color:black;
 }
 
+.forme_p
+{
+background-color:white;
+color:purple;
+}
+
 /* alternance des couleurs des lignes dans résultats du tableau*/
 
 .trheadcolor
