@@ -59,9 +59,9 @@
 				echo '<input type="hidden" name="e2_'.$ligne.'" value="'.$resultats2['equipe_vis_id'].'" >';
 				echo '<td>'.$resultats2['equi1'].' - '.$resultats2['equi2'].'</td>';
 				echo '<td><input type="checkbox" name="e1_forfait'.$ligne.'"></td>';
-				echo '<td width="30"><b><input type="number" min="0" max=10 name="but_dom'.$ligne.'" required /></td>';
+				echo '<td width="30"><b><input type="number" min="0" max=20 name="but_dom'.$ligne.'" required /></td>';
 				echo '<td> - </td>';
-				echo '<td width="30"><input type="number" min="0" max=10 name="but_vis'.$ligne.'" required /></td></b>';
+				echo '<td width="30"><input type="number" min="0" max=20 name="but_vis'.$ligne.'" required /></td></b>';
 				echo '<td><input type="checkbox" name="e2_forfait'.$ligne.'"></td>';
 				echo '</tr>';
 				$ligne++;					
