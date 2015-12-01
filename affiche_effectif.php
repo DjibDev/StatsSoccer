@@ -26,7 +26,7 @@
 	FROM effectif e
 	LEFT JOIN classement_players c
 	ON e.ID_joueur = c.joueur_id 
-	ORDER BY poste');
+	ORDER BY nb_buts DESC, nb_passes DESC, pseudo ASC');
 	
 	$x=0;
 	$altern=$x % 2;
@@ -54,6 +54,21 @@
 				$birthday_countdown=BirthdayCountdown($date_naiss);
 			}
 					
+			if (($birthday_countdown < 30) || ($birthday_countdown == 366))
+			{
+				if (($birthday_countdown < 1) || ($birthday_countdown == 366))
+				{
+					$texte_birthday='<td bgcolor="orange" align="center" width="30"><marquee><b>Jour J !</b></marquee></td>';
+				}
+				else
+				{	
+					$texte_birthday='<td align="center" width="30"><marquee><b>J-'.$birthday_countdown.'</b></marquee></td>';
+				}	
+			}	
+			else
+			{
+				$texte_birthday='<td align="center">J-'.$birthday_countdown.'</td>';
+			}	
 			
 			echo '<tr class=trcolor'.$altern.'>';
 			echo '<td>'.$resultats['pseudo'].'</td>';
@@ -64,7 +79,7 @@
 			echo '<td align="center">'.$resultats['nb_cleansheets'].'</td>';
 			echo '<td align="center">'.$resultats['nb_vestiaires'].'</td>'; 
 			echo '<td align="center">'.$resultats['nb_maillots'].'</td>'; 
-			echo '<td align="center">j-'.$birthday_countdown.'</td>';
+			echo $texte_birthday;
 			echo '</tr>';
 			$x++;
 	}
@@ -88,7 +103,7 @@
 			<p><b><?php echo NbINC(); ?> </b> inclassable(s).</p>
 		</aside>
 	</section>
-	
+		<?php include ('footer.php'); ?>
 
 </body>
 </html>

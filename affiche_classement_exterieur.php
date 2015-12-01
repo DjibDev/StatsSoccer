@@ -144,6 +144,7 @@
 		</center>				
 		</aside>
 	</section>
+		<?php include ('footer.php'); ?>
 	
 
 </body>

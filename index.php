@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 
 <head>
 	<title>Les stats des loisirs</title>
@@ -14,17 +14,29 @@
 ?>	
 	<section>	
 		<article>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+			<p style="background-color:#A7EA95">Le site a vocation de présenter des statistiques simples de la saison (et faire réviser son concepteur !).
+			Il sera complété et agrémenté au fil du temps. 
 			<br>
-			<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+			<br>
+			Remarque importante: aucune donnée personnelle concernant l'effectif, telle que le nom, le prénom, l'email ou la date de naissance, n'est divulguée. Seuls les pseudos et âges apparaissent.
+			Néanmoins, si vous avez une réclamation, contactez votre administrateur préféré !
+			<br>
+			
+			<br>Le site a été entièrement conçu avec un éditeur de texte, et est écrit en PHP/HTML5, utilise les feuilles de style CSS, ainsi qu'une base de donnée MySQL.
+			Pour ceux que ça intéresse, les sources du site sont disponibles <a href=https://github.com/DjibDev/StatsSoccer>ici</a>.
+			<br>
+			<br>
+			
 		</article>	
 		<aside>
 			<center>
+				<br><br>
 				<a href="http://jgefoot.com"><img src="images/petit_logo.png"/></a>
+				<br><br>
 			</center>
 		</aside>
 	</section>
-	
+	<?php include ('../footer.php'); ?>
 </div>		
 		
 
