@@ -189,7 +189,7 @@
 		echo '<table width="600" cellspacing="4" cellspading="4"><tr class="trheadcolor"><th align=left colspan="3"><a href="#bloc_page"><img src="images/fleche_haut.jpg"></a>&nbsp;&nbsp;&nbsp;<b><u>'.$texte.' - le '.$dateFR.'</u></b></th></tr>';
 	
 				
-		$reponse2=$bdd->query('SELECT e1.nom equi1, e2.nom equi2, e1.favorite fav1, e2.favorite fav2, equipe_dom_forfait, equipe_vis_forfait,but_equipe_dom, but_equipe_vis, finished
+		$reponse2=$bdd->query('SELECT e1.nom equi1, e2.nom equi2, e1.favorite fav1, e2.favorite fav2, equipe_dom_forfait, equipe_dom_penalite, equipe_vis_forfait, equipe_vis_penalite, but_equipe_dom, but_equipe_vis, finished
 		FROM matchs, journees, equipes e1, equipes e2
 		WHERE numero='.$num_journee.'
 		AND journees.ID_journee=matchs.journee_id
@@ -212,35 +212,50 @@
 			
 			if ($resultats2['equipe_dom_forfait'] == true)
 			{
-				$e1_forfait='<b>(forfait)</b>.';
+				$e1_msg='<b>(forfait)</b>.';
 			}
 			else
 			{
-				$e1_forfait='';
-			}	
+				if ($resultats2['equipe_dom_penalite'] == true)
+				{
+					$e1_msg='<b>(Pénalité)</b>.';
+				}
+				else
+				{
+					$e1_msg='';
+				}
+			}		
 				
 			if 	($resultats2['equipe_vis_forfait'] == true)
 			{
-				$e2_forfait='<b>(forfait)</b>.';
+				$e2_msg='<b>(forfait)</b>.';
 			}
 			else
 			{
-				$e2_forfait='';
+				if ($resultats2['equipe_vis_penalite'] == true)
+				{
+					$e2_msg='<b>(Pénalité)</b>.';
+				}
+				else
+				{
+					$e2_msg='';
+				}	
 			}	
+			
 				
 			if ($resultats2['fav1'] == true)
 			{
-				echo '<tr class="trcolorspecial"><td><b>'.$resultats2['equi1'].'</b><i>'.$e1_forfait.'</i> - '.$resultats2['equi2'].' <i>'.$e2_forfait.'</i></td><td>&nbsp;&nbsp;</td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
+				echo '<tr class="trcolorspecial"><td><b>'.$resultats2['equi1'].'</b><i>'.$e1_msg.'</i> - '.$resultats2['equi2'].' <i>'.$e2_msg.'</i></td><td>&nbsp;&nbsp;</td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
 			}
 			else	
 			{
 				if  ($resultats2['fav2'] == true)
 				{
-					echo '<tr class="trcolorspecial"><td>'.$resultats2['equi1'].'<i>'.$e1_forfait.'</i> - <b>'.$resultats2['equi2'].'</b> <i>'.$e2_forfait.'</i></td>&nbsp;&nbsp;<td></td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
+					echo '<tr class="trcolorspecial"><td>'.$resultats2['equi1'].'<i>'.$e1_msg.'</i> - <b>'.$resultats2['equi2'].'</b> <i>'.$e2_msg.'</i></td>&nbsp;&nbsp;<td></td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
 				}	
 				else
 				{
-					echo '<tr><td>'.$resultats2['equi1'].'<i>'.$e1_forfait.'</i> - '.$resultats2['equi2'].' <i>'.$e2_forfait.'</i></td><td>&nbsp;&nbsp;</td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
+					echo '<tr><td>'.$resultats2['equi1'].'<i>'.$e1_msg.'</i> - '.$resultats2['equi2'].' <i>'.$e2_msg.'</i></td><td>&nbsp;&nbsp;</td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
 				}
 			}		
 			

@@ -30,6 +30,8 @@
 			$but_equipe_vis=$_POST['but_vis'.$ligne];
 			$equipe_dom_forfait=FALSE;
 			$equipe_vis_forfait=FALSE;
+			$equipe_dom_penalite=FALSE;
+			$equipe_vis_penalite=FALSE;
 			
 			//vérifier si le forfait est sélectionné
 			if (isset($_POST['e1_forfait'.$ligne]))
@@ -42,13 +44,24 @@
 				$equipe_vis_forfait=TRUE;
 			}
 			
+			//vérifier si la penalité par reserve est sélectionnée
+			
+			if (isset($_POST['e1_penalite'.$ligne]))
+			{
+				$equipe_dom_penalite=TRUE;
+			}
+			
+			if (isset($_POST['e2_penalite'.$ligne]))
+			{
+				$equipe_vis_penalite=TRUE;
+			}
 			
 			// ajout dans la table matchs des résultats									
-			$req = $bdd->prepare('UPDATE matchs SET equipe_dom_forfait=?, equipe_vis_forfait=?, but_equipe_dom=?, but_equipe_vis=? 
+			$req = $bdd->prepare('UPDATE matchs SET equipe_dom_forfait=?, equipe_dom_penalite=?, equipe_vis_forfait=?, equipe_vis_penalite=?, but_equipe_dom=?, but_equipe_vis=? 
 			WHERE journee_id=? 
 			AND equipe_dom_id=? 
 			AND equipe_vis_id=? ');
-			$req->execute(array($equipe_dom_forfait, $equipe_vis_forfait, $but_equipe_dom, $but_equipe_vis, $journee_id, $equipe_dom_id, $equipe_vis_id));
+			$req->execute(array($equipe_dom_forfait, $equipe_dom_penalite, $equipe_vis_forfait, $equipe_vis_penalite, $but_equipe_dom, $but_equipe_vis, $journee_id, $equipe_dom_id, $equipe_vis_id));
 			
 			// mise a jour de la table journees, pour passer la journee en cours en 'finished'
 			$req4 = $bdd->prepare('UPDATE journees SET finished=1 
@@ -63,8 +76,9 @@
 			$diff=$buts_pour-$buts_contre;
 			$domicile=true;
 			$forfait= $equipe_dom_forfait;
+			$penalite=$equipe_dom_penalite;
 			
-			if ($forfait == true)
+			if (($forfait == true) || ($penalite == true))
 			{
 				$victoire=false;
 				$nul=false;
@@ -100,19 +114,20 @@
 				}
 			}	
 			
-			$req2 = $bdd->prepare("INSERT INTO stats_collectives (forfait,victoire,defaite,nul,buts_pour,buts_contre,diff,points,domicile,journee_id,equipe_id) 
-			VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+			$req2 = $bdd->prepare("INSERT INTO stats_collectives (forfait,penalite,victoire,defaite,nul,buts_pour,buts_contre,diff,points,domicile,journee_id,equipe_id) 
+			VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
 			$req2->bindParam(1, $forfait);
-			$req2->bindParam(2, $victoire);
-			$req2->bindParam(3, $defaite); 
-			$req2->bindParam(4, $nul);
-			$req2->bindParam(5, $buts_pour);
-			$req2->bindParam(6, $buts_contre); 
-			$req2->bindParam(7, $diff);
-			$req2->bindParam(8, $points);
-			$req2->bindParam(9, $domicile); 
-			$req2->bindParam(10, $journee_id);
-			$req2->bindParam(11, $equipe_id);
+			$req2->bindParam(2, $penalite);
+			$req2->bindParam(3, $victoire);
+			$req2->bindParam(4, $defaite); 
+			$req2->bindParam(5, $nul);
+			$req2->bindParam(6, $buts_pour);
+			$req2->bindParam(7, $buts_contre); 
+			$req2->bindParam(8, $diff);
+			$req2->bindParam(9, $points);
+			$req2->bindParam(10, $domicile); 
+			$req2->bindParam(11, $journee_id);
+			$req2->bindParam(12, $equipe_id);
 			$req2->execute();
 			
 			
@@ -125,8 +140,9 @@
 			$diff=$buts_pour-$buts_contre;
 			$domicile=false;
 			$forfait= $equipe_vis_forfait;
+			$penalite=$equipe_vis_penalite;
 			
-			if ($forfait == true)
+			if (($forfait == true) || ($penalite == true))
 			{
 				$victoire=false;
 				$nul=false;
@@ -163,19 +179,20 @@
 			}	
 			
 			
-			$req3 = $bdd->prepare("INSERT INTO stats_collectives (forfait,victoire,defaite,nul,buts_pour,buts_contre,diff,points,domicile,journee_id,equipe_id) 
-			VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+			$req3 = $bdd->prepare("INSERT INTO stats_collectives (forfait,penalite,victoire,defaite,nul,buts_pour,buts_contre,diff,points,domicile,journee_id,equipe_id) 
+			VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
 			$req3->bindParam(1, $forfait);
-			$req3->bindParam(2, $victoire);
-			$req3->bindParam(3, $defaite); 
-			$req3->bindParam(4, $nul);
-			$req3->bindParam(5, $buts_pour);
-			$req3->bindParam(6, $buts_contre); 
-			$req3->bindParam(7, $diff);
-			$req3->bindParam(8, $points);
-			$req3->bindParam(9, $domicile); 
-			$req3->bindParam(10, $journee_id);
-			$req3->bindParam(11, $equipe_id);
+			$req3->bindParam(2, $penalite);
+			$req3->bindParam(3, $victoire);
+			$req3->bindParam(4, $defaite); 
+			$req3->bindParam(5, $nul);
+			$req3->bindParam(6, $buts_pour);
+			$req3->bindParam(7, $buts_contre); 
+			$req3->bindParam(8, $diff);
+			$req3->bindParam(9, $points);
+			$req3->bindParam(10, $domicile); 
+			$req3->bindParam(11, $journee_id);
+			$req3->bindParam(12, $equipe_id);
 			$req3->execute();
 
 	}

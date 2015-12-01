@@ -126,6 +126,18 @@ function AfficheStatsEquipe($a)
 					}
 					$reqf->closeCursor();
 					
+					// requete qui retourne le nombre de match a penalité (= reserve deposée) de l'équipe
+					$reqp=$bdd->query('SELECT  COUNT(penalite) AS NB_P
+					FROM stats_collectives
+					WHERE  penalite = 1 
+					AND equipe_id='.$a.' ');
+										
+					while ($penalite=$reqp->fetch())
+					{
+							$nb_p=$penalite['NB_P'];
+					}
+					$reqp->closeCursor();
+					
 					//requete qui retourne le nombre de match sans but encaissé (=cleansheet)
 					$reqsbe=$bdd->query('SELECT  COUNT(buts_contre) AS NB_SBE
 					FROM stats_collectives
@@ -179,17 +191,18 @@ function AfficheStatsEquipe($a)
 					$Pourcentage_N= round (($nb_n/$nb_j)*100,2);
 					$Pourcentage_D= round (($nb_d/$nb_j)*100,2);
 					$Pourcentage_F= round (($nb_f/$nb_j)*100,2);
+					$Pourcentage_P=	round (($nb_p/$nb_j)*100,2);
 					$Pourcentage_SBE= round (($nb_sbe/$nb_j)*100,2);
 					$Pourcentage_SBM= round (($nb_sbm/$nb_j)*100,2);
 					$AVG_buts=round ($nb_b/$nb_j,2);
 					
 					
 					
-					echo '<p>Victoire(s): <b class=forme_v>'.$Pourcentage_V.'%</b>.&nbsp;&nbsp;&nbsp; Nul(s): <b class=forme_n>'.$Pourcentage_N.'%</b>.&nbsp;&nbsp;&nbsp; Défaite(s): <b class=forme_d>'.$Pourcentage_D.'%</b>.&nbsp;&nbsp;&nbsp; Forfait(s): <b class=forme_f>'.$Pourcentage_F.'%</b>.</p>';
+					echo '<p>Victoire(s): <b class=forme_v>'.$Pourcentage_V.'%</b>.&nbsp;&nbsp;&nbsp; Nul(s): <b class=forme_n>'.$Pourcentage_N.'%</b>.&nbsp;&nbsp;&nbsp; Défaite(s): <b class=forme_d>'.$Pourcentage_D.'%</b>.&nbsp;&nbsp;&nbsp; Forfait(s): <b class=forme_f>'.$Pourcentage_F.'%</b>..&nbsp;&nbsp;&nbsp; Pénalité(s): <b class=forme_p>'.$Pourcentage_P.'%</b>.</p>';
 					echo '<p>Moyenne Buts/match: <b>'.$AVG_buts.'</b>&nbsp;&nbsp;&nbsp; Match(s) Sans But Encaissé (CleanSheet): <b>'.$Pourcentage_SBE.'%</b>.&nbsp;&nbsp;&nbsp; Match(s) Sans But Marqué: <b>'.$Pourcentage_SBM.'%</b>.</p>';
 					
 					// requete qui affiche la forme de l'équipe
-					$reqforme=$bdd->query('SELECT forfait, victoire, nul ,defaite 
+					$reqforme=$bdd->query('SELECT forfait, penalite, victoire, nul ,defaite 
 					FROM stats_collectives 
 					WHERE equipe_id='.$a.'
 					ORDER BY journee_id ');
@@ -214,9 +227,16 @@ function AfficheStatsEquipe($a)
 									echo '<b class=forme_n>N</b>';
 								}
 								else
-								{	
-									echo '<b class=forme_d>D</b>';
-								}
+								{
+									if ($forme['penalite'] == 1)
+									{	
+										echo '<b class=forme_p>P</b>';
+									}
+									else
+									{
+										echo '<b class=forme_d>D</b>';
+									}
+								}		
 							}
 						}		
 					}

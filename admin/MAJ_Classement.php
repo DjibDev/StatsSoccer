@@ -36,6 +36,7 @@ function MAJ_Classement()
 	while ($x < $nb_equipe)
 	{
 		$nb_forfaits=0;
+		$nb_penalites=0;
 		$nb_victoires=0;
 		$nb_nuls=0;
 		$nb_defaites=0;
@@ -47,7 +48,7 @@ function MAJ_Classement()
 			
 			
 		// requete faite par equipe
-		$req4=$bdd->prepare('SELECT forfait, victoire, defaite, nul ,buts_pour, buts_contre, diff, points
+		$req4=$bdd->prepare('SELECT forfait, penalite, victoire, defaite, nul ,buts_pour, buts_contre, diff, points
 		FROM stats_collectives
 		WHERE equipe_id='.$equipe_id.'');
 		$req4->execute();
@@ -57,6 +58,11 @@ function MAJ_Classement()
 			if ($resultats4['forfait'] == true)
 			{
 				$nb_forfaits=$nb_forfaits+1;
+			}
+			
+			if ($resultats4['penalite'] == true)
+			{
+				$nb_penalites=$nb_penalites+1;
 			}
 			
 			if ($resultats4['victoire'] == true)
@@ -82,18 +88,19 @@ function MAJ_Classement()
 		$req4->closeCursor(); 
 	
 		//requete pour écrire le nouveau classement	
-		$req5=$bdd->prepare("INSERT INTO classement (nb_journees, nb_forfaits, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points, equipe_id)
-		VALUES (?,?,?,?,?,?,?,?,?,?)");
+		$req5=$bdd->prepare("INSERT INTO classement (nb_journees, nb_forfaits, nb_penalites, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points, equipe_id)
+		VALUES (?,?,?,?,?,?,?,?,?,?,?)");
 		$req5->bindParam(1, $nb_journees); 
 		$req5->bindParam(2, $nb_forfaits);
-		$req5->bindParam(3, $nb_victoires);
-		$req5->bindParam(4, $nb_nuls);
-		$req5->bindParam(5, $nb_defaites); 
-		$req5->bindParam(6, $nb_buts_pour);
-		$req5->bindParam(7, $nb_buts_contre);
-		$req5->bindParam(8, $diff); 
-		$req5->bindParam(9, $points);
-		$req5->bindParam(10, $equipe_id);
+		$req5->bindParam(3, $nb_penalites);
+		$req5->bindParam(4, $nb_victoires);
+		$req5->bindParam(5, $nb_nuls);
+		$req5->bindParam(6, $nb_defaites); 
+		$req5->bindParam(7, $nb_buts_pour);
+		$req5->bindParam(8, $nb_buts_contre);
+		$req5->bindParam(9, $diff); 
+		$req5->bindParam(10, $points);
+		$req5->bindParam(11, $equipe_id);
 		$req5->execute(); 
 
 		$x++;		
@@ -225,6 +232,7 @@ function MAJ_Classement_domicile()
 	while ($x < $nb_equipe_dom)
 	{
 		$nb_forfaits=0;
+		$nb_penalites=0;
 		$nb_victoires=0;
 		$nb_nuls=0;
 		$nb_defaites=0;
@@ -236,7 +244,7 @@ function MAJ_Classement_domicile()
 			
 			
 		// requete faite par equipe
-		$reqdom=$bdd->prepare('SELECT forfait, victoire, defaite, nul ,buts_pour, buts_contre, diff, points
+		$reqdom=$bdd->prepare('SELECT forfait, penalite, victoire, defaite, nul ,buts_pour, buts_contre, diff, points
 		FROM stats_collectives
 		WHERE equipe_id='.$equipe_id.'
 		AND domicile=true ');
@@ -247,6 +255,11 @@ function MAJ_Classement_domicile()
 			if ($resultatsdom['forfait'] == true)
 			{
 				$nb_forfaits=$nb_forfaits+1;
+			}
+				
+			if ($resultatsdom['penalite'] == true)
+			{
+				$nb_penalites=$nb_penalites+1;
 			}
 	
 			if ($resultatsdom['victoire'] == true)
@@ -287,18 +300,19 @@ function MAJ_Classement_domicile()
 		
 		//requete pour écrire le nouveau classement
 		
-		$reqinsertclad=$bdd->prepare("INSERT INTO classement_domicile (nb_journees, nb_victoires, nb_forfaits, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points, equipe_id)
-		VALUES (?,?,?,?,?,?,?,?,?,?)");
+		$reqinsertclad=$bdd->prepare("INSERT INTO classement_domicile (nb_journees, nb_victoires, nb_forfaits, nb_penalites, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points, equipe_id)
+		VALUES (?,?,?,?,?,?,?,?,?,?,?)");
 		$reqinsertclad->bindParam(1, $nb_journees);
 		$reqinsertclad->bindParam(2, $nb_victoires);
 		$reqinsertclad->bindParam(3, $nb_forfaits);
-		$reqinsertclad->bindParam(4, $nb_nuls);
-		$reqinsertclad->bindParam(5, $nb_defaites); 
-		$reqinsertclad->bindParam(6, $nb_buts_pour);
-		$reqinsertclad->bindParam(7, $nb_buts_contre);
-		$reqinsertclad->bindParam(8, $diff); 
-		$reqinsertclad->bindParam(9, $points);
-		$reqinsertclad->bindParam(10, $equipe_id);
+		$reqinsertclad->bindParam(4, $nb_penalites);
+		$reqinsertclad->bindParam(5, $nb_nuls);
+		$reqinsertclad->bindParam(6, $nb_defaites); 
+		$reqinsertclad->bindParam(7, $nb_buts_pour);
+		$reqinsertclad->bindParam(8, $nb_buts_contre);
+		$reqinsertclad->bindParam(9, $diff); 
+		$reqinsertclad->bindParam(10, $points);
+		$reqinsertclad->bindParam(11, $equipe_id);
 		$reqinsertclad->execute();
 
 		$x++;		
@@ -336,6 +350,7 @@ function MAJ_Classement_exterieur()
 	while ($x < $nb_equipe_ext)
 	{
 		$nb_forfaits=0;
+		$nb_penalites=0;
 		$nb_victoires=0;
 		$nb_nuls=0;
 		$nb_defaites=0;
@@ -347,7 +362,7 @@ function MAJ_Classement_exterieur()
 			
 			
 		// requete faite par equipe
-		$reqext=$bdd->prepare('SELECT forfait, victoire, defaite, nul ,buts_pour, buts_contre, diff, points
+		$reqext=$bdd->prepare('SELECT forfait, penalite, victoire, defaite, nul ,buts_pour, buts_contre, diff, points
 		FROM stats_collectives
 		WHERE equipe_id='.$equipe_id.'
 		AND domicile=false ');
@@ -359,6 +374,11 @@ function MAJ_Classement_exterieur()
 			if ($resultatsext['forfait'] == true)
 			{
 				$nb_forfaits=$nb_forfaits+1;
+			}
+			
+			if ($resultatsext['penalite'] == true)
+			{
+				$nb_penalites=$nb_penalites+1;
 			}
 	
 			if ($resultatsext['victoire'] == true)
@@ -398,18 +418,19 @@ function MAJ_Classement_exterieur()
 	
 		//requete pour écrire le nouveau classement extérieur
 		
-		$reqinsertclae=$bdd->prepare("INSERT INTO classement_exterieur (nb_journees, nb_forfaits, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points, equipe_id)
-		VALUES (?,?,?,?,?,?,?,?,?,?)");
+		$reqinsertclae=$bdd->prepare("INSERT INTO classement_exterieur (nb_journees, nb_forfaits, nb_penalites, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points, equipe_id)
+		VALUES (?,?,?,?,?,?,?,?,?,?,?)");
 		$reqinsertclae->bindParam(1, $nb_journees); 
 		$reqinsertclae->bindParam(2, $nb_forfaits); 
-		$reqinsertclae->bindParam(3, $nb_victoires);
-		$reqinsertclae->bindParam(4, $nb_nuls);
-		$reqinsertclae->bindParam(5, $nb_defaites); 
-		$reqinsertclae->bindParam(6, $nb_buts_pour);
-		$reqinsertclae->bindParam(7, $nb_buts_contre);
-		$reqinsertclae->bindParam(8, $diff); 
-		$reqinsertclae->bindParam(9, $points);
-		$reqinsertclae->bindParam(10, $equipe_id);
+		$reqinsertclae->bindParam(3, $nb_penalites); 
+		$reqinsertclae->bindParam(4, $nb_victoires);
+		$reqinsertclae->bindParam(5, $nb_nuls);
+		$reqinsertclae->bindParam(6, $nb_defaites); 
+		$reqinsertclae->bindParam(7, $nb_buts_pour);
+		$reqinsertclae->bindParam(8, $nb_buts_contre);
+		$reqinsertclae->bindParam(9, $diff); 
+		$reqinsertclae->bindParam(10, $points);
+		$reqinsertclae->bindParam(11, $equipe_id);
 		$reqinsertclae->execute(); 
 
 		$x++;		
