@@ -32,7 +32,7 @@
 		echo '<table border=2 cellspacing=2 cellspadding=2 >';
 		echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th width="30">F</th><th width="30">Pé</th><th width="30">Bp</th><th width="30">Bc</th><th width="30">Diff</th></tr>';
 	
-		$req1=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_forfaits, nb_penalite,nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points
+		$req1=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_forfaits, nb_penalites,nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points
 		FROM equipes, classement
 		WHERE  equipes.ID_equipe = classement.equipe_id
 		AND nb_journees = (SELECT MAX(nb_journees) FROM classement) 

@@ -16,7 +16,7 @@
 
 		<?php
 		
-		if (isset($_POST['player']))
+		if (isset($_POST['joueur_id']))
 		{
 				
 			require ('connexion.php');
@@ -24,16 +24,20 @@
 			$birthday=$_POST['annee'].'-'.$_POST['mois'].'-'.$_POST['jour'];
 			$poste=$_POST['poste'];
 			$num_maillot=$_POST['num_maillot'];
-			$ID_joueur=$_POST['player'];
+			$ID_joueur=$_POST['joueur_id'];
 			$nom=$_POST['nom'];
 			$prenom=$_POST['prenom'];
+			$email=$_POST['email'];
+			$pseudo=$_POST['pseudo'];
 			
 						
-			$req = $bdd->prepare('UPDATE effectif SET nom= ?, prenom=?, birthday=?, poste=?, num_maillot=? WHERE ID_joueur=? ');
-			$req->execute(array($nom,$prenom,$birthday,$poste,$num_maillot,$ID_joueur)); 
+			$req = $bdd->prepare('UPDATE effectif SET nom= ?, prenom=?, birthday=?, email=?, poste=?, num_maillot=? WHERE ID_joueur=? ');
+			$req->execute(array($nom,$prenom,$birthday,$email,$poste,$num_maillot,$ID_joueur)); 
 
+			
+			echo '<center>';
 			echo '<p class="ok">Enregistrement bien effectué !</p>';
-			echo '<center><p>Souhaitez-vous modifier une autre joueur ? </p>';
+			echo '<p>Souhaitez-vous modifier une autre joueur ? </p>';
 			echo '<p><a class="btn" href="admin_modif_player.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p></center>';
 		}
 		
