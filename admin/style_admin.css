@@ -219,6 +219,11 @@ form#myform input[type=submit], input[type=reset]
 	background-color:#426A38; 
 }
 
+form#myform input[type="number"] 
+{
+   width:40px;
+}
+
 footer
 {
 	position: relative;

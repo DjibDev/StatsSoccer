@@ -15,7 +15,7 @@
 
 <div id="ajout_team">	
 		<section>		
-		<form method="post" action="trait_ajout_calendrier_coupe.php">	
+		<form method="post" action="trait_ajout_calendrier_coupe.php" id="myform">	
 		<fieldset>
 		<Legend>Ajout d'une confrontation dans le coupe</Legend>		
 			<label for="journee">Sélectionner la date : </label>
@@ -28,8 +28,8 @@
            	</select>
            	<br>
            	<br>
-            <label for="equipe1">Domicile</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="equipe2">Extérieur</label><br>
-         	<select required size="21" name="equipe1" id="equipe1">
+            <label for="equipe1">Domicile</label>
+         	<select required name="equipe1" id="equipe1">
 				<option selected disabled value="">Sélectionnez</option>
 						
 				<?php 
@@ -46,8 +46,8 @@
 				
 				?>
            	</select>
-           	<span class="marge"></span>
-			<select required size="21" name="equipe2" id="equipe2">
+           	<label for="equipe2">Extérieur</label>
+           	<select required  name="equipe2" id="equipe2">
 				<option selected disabled value="">Sélectionnez</option>
 						
 				<?php 
@@ -66,12 +66,14 @@
            	</select>
 			<br>
 			<br>
+			<center>
 			<input type="reset" value="Annuler"/>
 			<input type="submit" value="Ajouter"/> 	
+			</center>
         </fieldset>
 		</form>
 		<br>
-		<form method="post" action="trait_suppr_calendrier_coupe.php">	
+		<form method="post" action="trait_suppr_calendrier_coupe.php" id="myform">	
 		<fieldset>
 		<Legend>Supprimer tous les matchs d'une journée</Legend>		
 			<label for="journee_suppr">Sélectionner la date : </label>
@@ -98,8 +100,10 @@
 			</select>
 			<br>
 			<br>
+			<center>
 			<input type="reset" value="Annuler"/>
 			<input type="submit" value="Supprimer"/> 	
+			</center>
         </fieldset>
         </form>
 		</section>

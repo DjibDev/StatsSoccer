@@ -43,11 +43,13 @@
 			AND matchs.equipe_dom_id = e1.ID_equipe
 			AND matchs.equipe_vis_id = e2.ID_equipe');
 			
-			echo '<form method="post" action="trait_ajout_resultats_coupe.php">';
+			echo '<form method="post" action="trait_ajout_resultats_coupe.php" id="myform">';
+			echo '<fieldset>';
+			echo '<Legend>Ajout des résultats de la journée</Legend>';	
 			echo '<input type="hidden" name="journee_id" value="'.$journee_id.'" />';
 			
 			echo '<table border="0">';
-
+			echo '<tr><th>Confrontations</th><th>Pé.</th><th>F.</th><th></th><th></th><th></th><th>Pé.</th></th><th>F.</th></tr>';
 			$ligne=0;
 			
 			while ($resultats2=$reponse2->fetch())
@@ -57,9 +59,13 @@
 				echo '<input type="hidden" name="e1_'.$ligne.'" value="'.$resultats2['equipe_dom_id'].'" >';
 				echo '<input type="hidden" name="e2_'.$ligne.'" value="'.$resultats2['equipe_vis_id'].'" >';
 				echo '<td>'.$resultats2['equi1'].' - '.$resultats2['equi2'].'</td>';
-				echo '<td width="30"><b><input type="number" min="0" max=10 name="but_dom'.$ligne.'" required /></td>';
+				echo '<td><input type="checkbox" name="e1_penalite'.$ligne.'"></td>';
+				echo '<td><input type="checkbox" name="e1_forfait'.$ligne.'"></td>';
+				echo '<td width="30"><b><input type="number" min="0" max=20 name="but_dom'.$ligne.'" required /></td>';
 				echo '<td> - </td>';
-				echo '<td width="30"><input type="number" min="0" max=10 name="but_vis'.$ligne.'" required /></td></b>';
+				echo '<td width="30"><input type="number" min="0" max=20 name="but_vis'.$ligne.'" required /></td></b>';
+				echo '<td><input type="checkbox" name="e2_penalite'.$ligne.'"></td>';
+				echo '<td><input type="checkbox" name="e2_forfait'.$ligne.'"></td>';
 				echo '</tr>';
 				$ligne++;					
 			}
@@ -67,8 +73,11 @@
 			
 			echo '</table>';
 			echo '<br>';
+			echo '<center>';
 			echo '<input type="reset" value="Annuler" />&nbsp;&nbsp;';
-			echo '<input type="submit" value="Enregistrer" />'; 	
+			echo '<input type="submit" value="Enregistrer" />'; 
+			echo '</center>';
+			echo '</fieldset>';	
 			echo '</form>';
 				
 	}

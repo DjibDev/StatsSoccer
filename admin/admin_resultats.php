@@ -43,11 +43,13 @@
 			AND matchs.equipe_dom_id = e1.ID_equipe
 			AND matchs.equipe_vis_id = e2.ID_equipe');
 			
-			echo '<form method="post" action="trait_ajout_resultats.php">';
+			echo '<form method="post" action="trait_ajout_resultats.php" id="myform">';
+			echo '<fieldset>';
+			echo '<Legend>Ajout des résultats de la journée</Legend>';	
 			echo '<input type="hidden" name="journee_id" value="'.$journee_id.'" />';
 			
 			echo '<table border="0">';
-			echo '<tr><th>Confrontations</th><th>P</th><th>F.</th><th></th><th></th><th></th><th>P</th></th><th>F.</th></tr>';
+			echo '<tr><th>Confrontations</th><th>Pé.</th><th>F.</th><th></th><th></th><th></th><th>Pé.</th></th><th>F.</th></tr>';
 
 			$ligne=0;
 			
@@ -72,8 +74,11 @@
 			
 			echo '</table>';
 			echo '<br>';
+			echo '<center>';
 			echo '<input type="reset" value="Annuler" />&nbsp;&nbsp;';
 			echo '<input type="submit" value="Enregistrer" />'; 	
+			echo '</center>';
+			echo '</fieldset>';
 			echo '</form>';
 				
 	}

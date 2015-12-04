@@ -124,7 +124,7 @@
 		<td align="left"><input type="checkbox" name="faits"/></td>
 		
 		<td align="right"><label for="détails_faits">Détails du(es) fait(s) marquant(s)</label></td>
-		<td colspan="3" align="left"><TEXTAREA rows="4" cols="60" name="details_faits"></TEXTAREA></td></tr>
+		<td colspan="3" align="left"><TEXTAREA rows="4" cols="40" name="details_faits"></TEXTAREA></td></tr>
 		
 		</table>
 		
