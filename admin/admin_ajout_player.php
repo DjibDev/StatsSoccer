@@ -14,7 +14,7 @@
 		
 	<section>	
 								
-		<form method="post" action="trait_ajout_player.php">
+		<form method="post" action="trait_ajout_player.php" id="myform">
 			
 		<?php require_once ('fonctions_utiles.php'); ?>
 		
@@ -25,25 +25,22 @@
 				<label for="prenom">Prénom :</label>	
 				<input required type="text" name="prenom" id="prenom" />
 				<br>
-				<br>
 				<label for="pseudo">Pseudo* :</label>	
 				<input required type="text" name="pseudo" id="pseudo">
 				<label for="pseudo">Email :</label>
 				<input type="email" name="user_email" value="no_email@email.fr" />
-			<br>
-			<br>
-			
-			<label for="poste">Poste : </label>
-        	<select name="poste" id="poste">
-				<option selected value="XXX">Sélectionnez</option>
-				<option value="GAR">Gardien</option>
-				<option value="DEF">Défenseur</option>
-				<option value="MIL">Milieu</option>
-				<option value="ATT">Attaquant</option>
-        	</select>
-			
-			<label for="jour">Date de naissance : </label>
-			<select name="jour" id="jour">
+				<br>
+				<label for="poste">Poste : </label>
+				<select name="poste" id="poste">
+					<option selected value="XXX">Sélectionnez</option>
+					<option value="GAR">Gardien</option>
+					<option value="DEF">Défenseur</option>
+					<option value="MIL">Milieu</option>
+					<option value="ATT">Attaquant</option>
+				</select>
+				<br>
+				<label for="jour">Date de naissance : </label>
+				<select name="jour" id="jour">
 					<option selected value="00">Sélectionnez</option>
 					<option value="01">01</option>
 					<option value="02">02</option>
@@ -128,7 +125,6 @@
 		</select>
 			
 		<br>
-		<br>
 		
 		<label for="num_maillot">Numéro de maillot :</label>	
 		<select name="num_maillot" id="num_maillot">
@@ -138,10 +134,10 @@
 		
 		<br>
 		<br>
-		
+		<center>
 		<input type="reset" value="Annuler"/>
 		<input type="submit" value="Enregistrer"/> 		
-		
+		</center>
 		</fieldset>
 		</form>
 		

@@ -16,13 +16,13 @@
 ?>			
 
 	<section>	
-		<form method="post" action="trait_ajout_stats_individuelles.php">
+		<form method="post" action="trait_ajout_stats_individuelles.php" id="myform">
 		<fieldset>
 		<Legend> Entrez les stats par joueur et par journée</Legend>
 		<table border="0" cellspacing="4">
 		<tr><td align="left">
-		<label for="player">Joueur: </label></td>
-		<td align="left"><select required name="player" id="player">
+		<label for="player">Joueur: </label>
+		<select required name="player" id="player">
 			<option selected disabled value="">Sélectionnez</option>
 			<?php 
 				$reponse=$bdd->query('SELECT * from effectif order by nom ASC');
@@ -34,10 +34,10 @@
 				$reponse->closeCursor();
 			?>
 		</select></td>
-		<td></td>
+		</tr>
 		<td align="left">
-		<label for="journee">Journée: </label></td>
-		<td align="left"><select name="journee" id="journee">
+		<label for="journee">Journée: </label>
+		<select name="journee" id="journee">
 			<option selected disabled value="">Sélectionnez</option>
 			<?php	
 				$reponse2=$bdd->query('SELECT numero, date, ID_journee, coupe
@@ -59,8 +59,9 @@
 				}
 				$reponse2->closeCursor();
 			?>
-		</select></td>
-		<td><label for="amical">Amical ?</label></td><td><input type="checkbox" name="amical"></td></tr>
+		</select>
+		<label for="amical">Amical ?</label><input type="checkbox" name="amical">
+		</tr>
 		</table>
 		<br>
 		<table border="0" cellspacing="4">
@@ -137,8 +138,10 @@
 		</table>
 		
 		<br>
+		<center>
 		<input type="reset" value="Annuler">
 		<input type="submit" value="Enregistrer">
+		</center>
 		</fieldset>		
 		</form>
 	</section>

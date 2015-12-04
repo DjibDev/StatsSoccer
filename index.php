@@ -15,7 +15,7 @@
 	<section>	
 		<article>
 			<p style="background-color:#A7EA95">
-			<br>Le site a vocation de présenter des statistiques de la saison de football.
+			<br>Le site a vocation de gérer et présenter les statistiques d'une saison de football.
 			<br>
 			<br>
 			Remarque importante: aucune donnée personnelle concernant l'effectif, telle que le nom, le prénom, l'email ou la date de naissance, n'est divulguée. Seuls les pseudos et âges apparaissent.

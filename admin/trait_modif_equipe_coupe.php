@@ -16,10 +16,10 @@
 
 		<?php
 		
-		if (isset($_POST['equipe']))
+		if (isset($_POST['team_coupe']))
 		{
 			// test si la case equipe a suivre a été cochée
-			if (isset($_POST['equipe_fav']))
+			if (isset($_POST['equipe_fav_coupe']))
 			{
 					$favorite=true;
 			}
@@ -30,13 +30,14 @@
 			
 			require ('connexion.php');
 			
-			$ville=$_POST['ville'];
-			$stade=$_POST['stade'];
-			$ID_equipe=$_POST['equipe'];
+			$ville=$_POST['ville_coupe'];
+			$stade=$_POST['stade_coupe'];
+			$nom=$_POST['nom_coupe'];
+			$ID_equipe=$_POST['team_coupe'];
 			
 						
-			$req = $bdd->prepare('UPDATE equipes_coupe SET ville=?, stade=?, favorite=? WHERE ID_equipe=? ');
-			$req->execute(array($ville,$stade,$favorite,$ID_equipe)); 
+			$req = $bdd->prepare('UPDATE equipes_coupe SET nom=?, ville=?, stade=?, favorite=? WHERE ID_equipe=? ');
+			$req->execute(array($nom,$ville,$stade,$favorite,$ID_equipe)); 
 
 			echo '<p class="ok">Enregistrement bien effectué !</p>';
 			echo '<center><p>Souhaitez-vous modifier une autre équipe ? </p>';

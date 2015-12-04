@@ -15,19 +15,21 @@
 		<article>
 			<fieldset>	
 				<legend>Championnat</legend>
-				<li><a class="adm" href="admin_calendrier.php#ajout_team">Calendrier</a></li>
-				<li><a class="adm" href="admin_resultats.php">Résultats</a></li>
+				<li><a class="adm" href="admin_journees_champ.php">Définir les journees de championnat</a></li>
+				<li><a class="adm" href="admin_calendrier.php#ajout_team">Définir les rencontres</a></li>
+				<li><a class="adm" href="admin_resultats.php">Rentrer les résultats</a></li>
 			</fieldset>
 			<br>
 			<fieldset>
 				<legend>Coupe</legend>
-				<li><a class="adm" href="admin_calendrier_coupe.php#ajout_team">Calendrier</a></li>
-				<li><a class="adm" href="admin_resultats_coupe.php">Résultats</a></li>
+				<li><a class="adm" href="admin_journees_coupe.php">Définir les journees de coupe</a></li>
+				<li><a class="adm" href="admin_calendrier_coupe.php#ajout_team">Définir les rencontres</a></li>
+				<li><a class="adm" href="admin_resultats_coupe.php">Rentrer les résultats</a></li>
 			</fieldset>		
 			<br>
 			<fieldset>
 				<legend>Statistiques individuelles</legend>
-				<li><a class="adm" href="admin_ajout_stats_individuelles.php">Ajouter</a></li>	
+				<li><a class="adm" href="admin_ajout_stats_individuelles.php">Ajouter une ou plusieurs stats joueurs</a></li>	
 			</fieldset>			
 		</article>		
 			
@@ -43,9 +45,16 @@
 				<li><a class="adm" href="admin_ajout_equipe.php">Ajouter</a></li>	
 				<li><a class="adm" href="admin_modif_equipe.php">Modifier/Supprimer</a></li>
 			</fieldset>
-		</aside>	
-
-	</section>	
+		</aside>
+		<br>
+		<br>
+		<article>
+			<fieldset>
+				<legend>Réinitialiser la base</legend>
+				<li><a class="nok" href="admin_reset_bdd.php">Supprimer toutes les données</a></li>
+			</fieldset>
+		</article>	
+		</section>
 	<?php include ('../footer.php'); ?>
 </div>		
 	

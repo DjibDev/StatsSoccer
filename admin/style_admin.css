@@ -199,6 +199,25 @@ aside
 margin-left: 50em;
 }
 
+form#myform label 
+{ 
+	display:inline-block; 
+	width:200px; 
+	text-align: right;
+    font-weight:bold;
+    font-size: 0.9em
+}
+
+form#myform input 
+{ 
+	display:inline-block; 
+}
+
+form#myform input[type=submit], input[type=reset]
+{ 
+	color:#fff; 
+	background-color:#426A38; 
+}
 
 footer
 {

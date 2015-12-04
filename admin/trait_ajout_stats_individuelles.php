@@ -22,7 +22,7 @@
 		if (isset($_POST['journee']) && (isset ($_POST['amical'])))
 		{
 			echo '<center><p class="nok">Enregistrement impossible ! <br>Veuillez selectionner soit une journée soit un match amical, mais pas les deux !</p>';
-			echo '<p><a class="btn" href="administrer.php">Retour</a></p></center>';
+			echo '<p><a class="btn" href="admin_ajout_stats_individuelles.php">Retour</a></p></center>';
 		}
 		else
 		{
@@ -120,7 +120,7 @@
 	else
 	{
 			echo '<center><p class="nok">Enregistrement impossible ! <br>Veuillez selectionner une journée ou un match amical !</p>';
-			echo '<p><a class="btn" href="administrer.php">Retour</a></p></center>';
+			echo '<p><a class="btn" href="admin_ajout_stats_individuelles.php">Retour</a></p></center>';
 	}
 	
 	?>

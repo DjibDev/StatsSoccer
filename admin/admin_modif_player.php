@@ -29,7 +29,7 @@
 						
 				<?php 
 			
-				$reponse=$bdd->query('SELECT * from effectif order by nom ASC');
+				$reponse=$bdd->query('SELECT * FROM effectif order by nom ASC');
 	
 				while ($resultats=$reponse->fetch())
 				{
@@ -54,39 +54,38 @@
 			$req_pl=$bdd->query('SELECT * 
 			FROM effectif
 			WHERE ID_joueur='.$joueur_id.' ');
-					
-			echo '<fieldset>';
-			echo '<Legend> Modifier les données des joueurs</Legend>';		
-			echo '<form method="post" action="trait_modif_player.php">';
-			echo '<input type="hidden" name="joueur_id" value="'.$joueur_id.'" />';
-			
+				
+			echo '<form method="post" action="trait_modif_player.php" id="myform">';		
 						
 			while ($result_pl=$req_pl->fetch())
 			{	
-
+				echo '<fieldset>';
+				echo '<Legend> Modifier les données de <b>'.$result_pl['pseudo'].'</b></Legend>';		
+				echo '<input type="hidden" name="joueur_id" value="'.$joueur_id.'" />';
+				
 				// découpage du birthday en jour, mois, année séparés
 				// format date : aaaa-mm-jj
 				$decoupe=explode('-',$result_pl['birthday']);
 				$a=$decoupe[0];
 				$m=$decoupe[1];
 				$j=$decoupe[2];
-				
-				echo '<label for="pseudo">Pseudo :</label>';	
-				echo '<input type="text" name="pseudo" id="pseudo" value="'.$result_pl['pseudo'].'"/>';
-				
+							
 				echo '<label for="nom">Nom :</label>';	
 				echo '<input type="text" name="nom" id="nom" value="'.$result_pl['nom'].'"/>';
 				
 				echo '<label for="prenom">Prénom :</label>';	
 				echo '<input type="text" name="prenom" id="prenom" value="'.$result_pl['prenom'].'"/>';	
-				echo '<br><br>';
+				echo '<br>';
+				
+				echo '<label for="pseudo">Pseudo :</label>';	
+				echo '<input type="text" name="pseudo" id="pseudo" value="'.$result_pl['pseudo'].'"/>';
 				
 				echo '<label for="email">Email :</label>';	
 				echo '<input type="email" name="email" id="email" value="'.$result_pl['email'].'"/>';	
-				echo '<br><br>';
+				echo '<br>';
 				?>
 				
-				<label for="poste">Poste : </label>
+				<label for="poste">Poste :</label>
 				<select name="poste" id="poste">
 					  	<option value="GAR" <?php if ($result_pl['poste'] == "GAR") { echo 'selected';} ?> >Gardien</option>
 						<option value="DEF" <?php if ($result_pl['poste'] == "DEF") { echo 'selected';} ?> >Défenseur</option>
@@ -94,7 +93,7 @@
 						<option value="ATT" <?php if ($result_pl['poste'] == "ATT") { echo 'selected';} ?> >Attaquant</option>
 						<option value="XXX" <?php if ($result_pl['poste'] == "XXX") { echo 'selected';} ?> >Inclassable</option>
         	   	</select>
-        		<br><br>
+        		<br>
 
 				<label for="jour">Date de naissance : </label>
 				<select name="jour" id="jour">
@@ -181,19 +180,21 @@
 		</select>
 			
 		<br>
-		<br>
 		<?php
-				echo '<label for="num_maillot">Numéro de maillot :</label>';
-				echo '<select name="num_maillot" id="num_maillot" value="'.$result_pl['num_maillot'].'"/>';
+				echo '<label for="num_maillot_actuel">N° de maillot actuel: </label>';
+				echo '<input type=text" size="2" name="num_maillot_actuel" value="'.$result_pl['num_maillot'].'" disabled/>';
+				echo '<label for="num_maillot">N° de maillot dispo: </label>';
+				echo '<select name="num_maillot" id="num_maillot" />';
 				NumMaillotDispo();
 				echo '</select>';
 		?>		
 				
 		<br>
 		<br>
-		
+		<center>
 		<input type="reset" value="Annuler"/>
 		<input type="submit" value="Enregistrer"/> 		
+		</center>
 		
 		</fieldset>
 		</form>	
@@ -205,7 +206,7 @@
 	<br>
 
 	<div id="suppr">
-		<form method="post" action="trait_suppr_player.php">
+		<form method="post" action="trait_suppr_player.php" id="myform">
 		<fieldset>
 		<Legend>Supprimer un joueur</Legend>		
 			<label for="player">Nom du joueur : </label>
@@ -229,9 +230,10 @@
         	</select>
 			
 			<br>
-			<br>
+			<center>
 				<input type="reset" value="Annuler"/>
 				<input type="submit" value="Supprimer"/> 	
+			</center>	
 			</fieldset>
 			</form>
 			</div>

@@ -31,8 +31,8 @@
 			$pseudo=$_POST['pseudo'];
 			
 						
-			$req = $bdd->prepare('UPDATE effectif SET nom= ?, prenom=?, birthday=?, email=?, poste=?, num_maillot=? WHERE ID_joueur=? ');
-			$req->execute(array($nom,$prenom,$birthday,$email,$poste,$num_maillot,$ID_joueur)); 
+			$req = $bdd->prepare('UPDATE effectif SET pseudo=?, nom= ?, prenom=?, birthday=?, email=?, poste=?, num_maillot=? WHERE ID_joueur=? ');
+			$req->execute(array($pseudo,$nom,$prenom,$birthday,$email,$poste,$num_maillot,$ID_joueur)); 
 
 			
 			echo '<center>';
