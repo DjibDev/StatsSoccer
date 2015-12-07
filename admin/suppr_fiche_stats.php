@@ -22,5 +22,38 @@ function SupprStatsEquipe($a)
 
 }
 
+function SupprAllStats()
+{
+		/* Fichiers à supprimer sous dossier players */
+		
+		$folder="..\stats_files\players";
+        $dossier=opendir($folder);
+
+        while ($fichier = readdir($dossier))
+        {
+                if ($fichier != "." && $fichier != "..")
+                {
+                        $Vidage= $folder.$fichier;
+                        unlink($Vidage);
+                }
+        }
+        closedir($dossier);
+		
+		/* Fichiers à supprimer sous dossier equipes */
+		
+		$folder="..\stats_files\equipes";
+        $dossier=opendir($folder);
+
+        while ($fichier = readdir($dossier))
+        {
+                if ($fichier != "." && $fichier != "..")
+                {
+                        $Vidage= $folder.$fichier;
+                        unlink($Vidage);
+                }
+        }
+
+        closedir($dossier);
+}
 
 ?>

@@ -290,7 +290,14 @@ function DoublonStatsPlayer($a,$b)
 	}	
 }
 
-
+function save_database($user,$password,$host,$dbname) 
+{
+        $folder = 'backup/sql/save_';
+        $realpath = str_replace(__FILE__,'',realpath(__FILE__));
+        $filename = date("Y-m-d_H:i:s").'.sql';
+        $file = $realpath.$folder.$filename;
+        exec('mysqldump --user='.$user.' --password='.$password.' --host='.$host.' '.$dbname.' > '.$file);
+}
 
 
 ?> 
