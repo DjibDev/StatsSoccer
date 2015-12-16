@@ -56,7 +56,7 @@
 				}
 				else
 				{
-					$qualif=NULL;
+					$qualif='Eliminé';
 				}
 			}
 	
@@ -79,28 +79,9 @@
 		
 		
 		echo '</table><br>';	
-	/*		
-	$req=$bdd->query('SELECT numero 
-	FROM journees
-	WHERE saison="2015/2016"
-	AND coupe="1"
-	ORDER BY numero ASC
-	LIMIT 0 , 9');
-	
-	echo '<center><table border="0" cellspacing="3"><tr class="trcolor0">';
-	While ($resultats2=$req->fetch())
-	{
-			echo '<td><a href="#match'.$resultats2['numero'].'">Journée '.$resultats2['numero'].'</a></td>';
-	}
-	$req->closeCursor();
-	
-
-	echo '</tr></table></center>';
-
-	*/
 	
 	require ('fonctions_utiles_users.php');
-	$reponse=$bdd->query('SELECT numero, date FROM journees WHERE saison="2015/2016" AND coupe="1" ORDER BY numero ASC');
+	$reponse=$bdd->query('SELECT numero, date FROM journees WHERE coupe="1" ORDER BY numero ASC');
 	
 	
 	while ($resultats=$reponse->fetch())
@@ -110,7 +91,7 @@
 		$num_journee=$resultats['numero'];
 		
 		echo '<div id=match'.$num_journee.'></div>';
-		echo '<table cellspacing="4" cellspading="4"><tr class="trheadcolor"><th colspan="3"><a href="#bloc_page"><img src="images/fleche_haut.jpg"></a>&nbsp;&nbsp;&nbsp;<b><u>Journée n° '.$num_journee.' - le '.$dateFR.'</u></b></th></tr>';
+		echo '<table width="600" cellspacing="4" cellspading="4"><tr align="left" class="trheadcolor"><th colspan="3"><a href="#bloc_page"><img src="images/fleche_haut.jpg"></a>&nbsp;&nbsp;&nbsp;<b><u>Journée n° '.$num_journee.' - le '.$dateFR.'</u></b></th></tr>';
 	
 				
 		$reponse2=$bdd->query('SELECT e1.nom equi1, e2.nom equi2, e1.favorite fav1, e2.favorite fav2, but_equipe_dom, but_equipe_vis, finished 
@@ -138,17 +119,17 @@
 			
 			if ($resultats2['fav1'] == true)
 			{ 
-				echo '<tr class="trcolorspecial"><td><b>'.$resultats2['equi1'].'</b> - '.$resultats2['equi2'].'</td><td>&nbsp;&nbsp;</td><td>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
+				echo '<tr class="trcolorspecial"><td width="500"><b>'.$resultats2['equi1'].'</b> - '.$resultats2['equi2'].'</td><td>&nbsp;&nbsp;</td><td>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
 			}
 			else	
 			{
 				if  ($resultats2['fav2'] == true)
 				{
-					echo '<tr class="trcolorspecial"><td>'.$resultats2['equi1'].' - <b>'.$resultats2['equi2'].'</b></td>&nbsp;&nbsp;<td></td><td>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
+					echo '<tr class="trcolorspecial"><td width="500">'.$resultats2['equi1'].' - <b>'.$resultats2['equi2'].'</b></td>&nbsp;&nbsp;<td></td><td>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
 				}	
 				else
 				{
-					echo '<tr><td>'.$resultats2['equi1'].' - '.$resultats2['equi2'].'</td><td>&nbsp;&nbsp;</td><td>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
+					echo '<tr><td width="500">'.$resultats2['equi1'].' - '.$resultats2['equi2'].'</td><td>&nbsp;&nbsp;</td><td>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
 				}
 			}		
 			

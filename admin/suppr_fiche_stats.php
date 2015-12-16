@@ -24,7 +24,7 @@ function SupprStatsEquipe($a)
 
 function SupprAllStats()
 {
-		/* Fichiers à supprimer sous dossier players */
+		/* Fichiers à supprimer sous le dossier players */
 		
 		$folder="..\stats_files\players";
         $dossier=opendir($folder);
@@ -39,7 +39,7 @@ function SupprAllStats()
         }
         closedir($dossier);
 		
-		/* Fichiers à supprimer sous dossier equipes */
+		/* Fichiers à supprimer sous le dossier equipes */
 		
 		$folder="..\stats_files\equipes";
         $dossier=opendir($folder);

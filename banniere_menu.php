@@ -1,5 +1,5 @@
 <div id="banniere_image">
-		<h1>Saison 2015-2016</h1>	
+		<h1>Saison <?php require ('admin/fonctions_utiles.php'); AfficheSaisonBanniere(); ?></h1>	
 		<div id="banniere_description">	
 			<center>
 				<a class="btn" href="index.php">Home</a>

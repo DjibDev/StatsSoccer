@@ -1,6 +1,6 @@
 <?php
 
-
+/*
 function CalculerAge($date)
 {
 //On déclare les dates à comparer
@@ -18,7 +18,7 @@ function FormatDateFR($dateMySQL)
     $dateFR=date("d/m/Y",$dateMySQL);
     return $dateFR;
 }
-
+*/
 
 function NumMaillotDispo()
 {
@@ -90,7 +90,6 @@ function NbrMatchAtteint()
 	$reponse=$bdd->query('SELECT count(*) AS nb, numero, date, ID_journee
 	FROM matchs, journees
 	WHERE journees.ID_journee = matchs.journee_id
-	AND saison="2015/2016"
 	AND journees.coupe="0"
 	GROUP BY ID_journee
 	ORDER BY numero ASC');
@@ -115,8 +114,7 @@ function NbrMatchAtteint()
 	
 	$reponse3=$bdd->query('SELECT numero, date, ID_journee
 	FROM journees
-	WHERE saison="2015/2016"
-	AND coupe="0"
+	WHERE coupe="0"
 	ORDER BY numero ASC');
 		
 	while ($resultats3=$reponse3->fetch())
@@ -158,7 +156,6 @@ function NbrMatchAtteintCoupe()
 	$reponse=$bdd->query('SELECT count(*) AS nb, numero, date, ID_journee
 	FROM matchs, journees
 	WHERE journees.ID_journee = matchs.journee_id
-	AND saison="2015/2016"
 	AND journees.coupe="1"
 	GROUP BY ID_journee
 	ORDER BY numero ASC');
@@ -183,8 +180,7 @@ function NbrMatchAtteintCoupe()
 	
 	$reponse3=$bdd->query('SELECT numero, date, ID_journee
 	FROM journees
-	WHERE saison="2015/2016"
-	AND coupe="1"
+	WHERE coupe="1"
 	ORDER BY numero ASC');
 		
 	while ($resultats3=$reponse3->fetch())
@@ -210,8 +206,7 @@ function ResultatsDejaRentres()
 	
 	$req=$bdd->query('SELECT numero, date, ID_journee, finished
 	FROM journees
-	WHERE saison="2015/2016"
-	AND coupe="0"
+	WHERE coupe="0"
 	ORDER BY numero ASC');
 	
 	
@@ -241,8 +236,7 @@ function ResultatsDejaRentresCoupe()
 	
 	$req=$bdd->query('SELECT numero, date, ID_journee, finished
 	FROM journees
-	WHERE saison="2015/2016"
-	AND coupe="1"
+	WHERE coupe="1"
 	ORDER BY numero ASC');
 	
 	
@@ -299,5 +293,21 @@ function save_database($user,$password,$host,$dbname)
         exec('mysqldump --user='.$user.' --password='.$password.' --host='.$host.' '.$dbname.' > '.$file);
 }
 
+function AfficheSaisonBanniere()
+{
+	require_once('connexion.php');
+
+	$saison='';
+
+	$req_saison=$bdd->query('SELECT distinct(saison) as Num FROM journees');
+	
+	while ($num_saison=$req_saison->fetch())
+	{
+
+		$saison=$num_saison['Num'];
+	}	
+
+	echo $saison;
+}
 
 ?> 
