@@ -1,24 +1,11 @@
 <?php
 
-/*
-function CalculerAge($date)
-{
-//On déclare les dates à comparer
-$dateNais = new DateTime($date);
-$dateJour = new DateTime();
-
-//On calcule la différence
-$difference = $dateNais->diff($dateJour);
-return $difference->format('%y');
-} 
-
 function FormatDateFR($dateMySQL)
 {
     $dateMySQL=strtotime($dateMySQL);
     $dateFR=date("d/m/Y",$dateMySQL);
     return $dateFR;
 }
-*/
 
 function NumMaillotDispo()
 {
@@ -286,28 +273,72 @@ function DoublonStatsPlayer($a,$b)
 
 function save_database($user,$password,$host,$dbname) 
 {
-        $folder = 'backup/sql/save_';
+        $folder = 'backup/save_';
         $realpath = str_replace(__FILE__,'',realpath(__FILE__));
         $filename = date("Y-m-d_H:i:s").'.sql';
         $file = $realpath.$folder.$filename;
         exec('mysqldump --user='.$user.' --password='.$password.' --host='.$host.' '.$dbname.' > '.$file);
 }
 
-function AfficheSaisonBanniere()
+function SupprBdd()
 {
-	require_once('connexion.php');
-
-	$saison='';
-
-	$req_saison=$bdd->query('SELECT distinct(saison) as Num FROM journees');
 	
-	while ($num_saison=$req_saison->fetch())
+	require_once ('suppr_fiche_stats.php');
+	require ('connexion.php');
+			
+	// sauvegarde de la base avant suppression
+	$user="root";
+	$password="root";
+	$host="localhost";
+	$dbname="stats";
+	save_database($user,$password,$host,$dbname);
+			
+	// suppression des fiches stats equipes et players
+	SupprAllStats();
+	
+	// suppression de la base 
+	$req = $bdd->prepare('DROP DATABASE IF EXISTS stats');
+	$req->execute(); 
+	
+	try
 	{
-
-		$saison=$num_saison['Num'];
-	}	
-
-	echo $saison;
+		$bdd = new PDO('mysql:host='.$host, $user, $password);
+	}
+	catch (Exception $e)
+	{
+		die('Erreur détectée: ' . $e->getMessage());
+	}
+	
+	// creation de la nouvelle base mais vide
+	$creation_base = 'CREATE DATABASE IF NOT EXISTS `stats` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci';
+	$bdd->prepare($creation_base)->execute();
+	
+	
+	echo '<center><p class="ok"> La base de données a été INTEGRALEMENT supprimée.</p>';
+	echo '<p>Une sauvegarde a, nénamoins, bien été effectuée.</p></center>';
+	
 }
+
+function CreateBdd()
+{	
+	$mysqlDatabaseName ='stats';
+	$mysqlUserName ='root';
+	$mysqlPassword ='root';
+	$mysqlHostName ='localhost';
+	$mysqlImportFilename ='../database/stats.sql';
+
+	$command='mysql -h' .$mysqlHostName .' -u' .$mysqlUserName .' -p' .$mysqlPassword .' ' .$mysqlDatabaseName .' < ' .$mysqlImportFilename;
+	exec($command,$output=array(),$worked);
+	switch($worked)
+	{
+    case 0:
+		echo '<center><p class="ok">La nouvelle saison est créée, il vous reste a créer les équipes et définir les rencontres</p></center>';
+        break;
+    case 1:
+        echo '<center><pclass="nok">Une erreur s\'est rpoduite lors de la creation de la nouvelle base, veuillez contacter votre administrateur</p></center>';
+        break;
+	}
+}	
+		
 
 ?> 

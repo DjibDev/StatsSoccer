@@ -15,7 +15,7 @@
 		<article>
 			<fieldset>	
 				<legend>Championnat</legend>
-				<li><a class="adm" href="admin_journees_champ.php">Créer un nouveau Championnat</a></li>
+				<li><a class="adm" href="admin_journees_champ.php"><b>Nouvelle saison !</b></a></li>
 				<li><a class="adm" href="admin_calendrier.php#ajout_team">Définir les rencontres</a></li>
 				<li><a class="adm" href="admin_resultats.php">Rentrer les résultats</a></li>
 			</fieldset>
@@ -51,7 +51,7 @@
 		<article>
 			<fieldset>
 				<legend>Réinitialiser la base</legend>
-				<li><a href="admin_reset_bdd.php">Supprimer toutes les données</a></li>
+				<li><a href="admin_reset_bdd.php"><b>Supprimer toutes les données</b></a></li>
 			</fieldset>
 		</article>	
 		</section>

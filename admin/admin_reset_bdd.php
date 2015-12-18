@@ -35,27 +35,9 @@
 		}
 		else
 		{
-			require_once ('connexion.php');
 			require_once ('fonctions_utiles.php');
-			require_once ('suppr_fiche_stats.php');
+			SupprBdd();
 			
-			// sauvegarde de la base avant suppression
-			$user="root";
-			$password="root";
-			$host="localhost";
-			$dbname="stats";
-			save_database($user,$password,$host,$dbname);
-			
-			// suppression des fiches stats equipes et players
-			SupprAllStats();
-			
-			// suppression de la base 
-			//$req = $bdd->prepare('DROP DATABASE IF EXISTS stats');
-			//$req->execute(); 
-			
-			echo '<center><p class="ok"> La base de données a été INTEGRALEMENT supprimée.</p>';
-			echo '<p>Une sauvegarde a, nénamoins, bien été effectuée.</p></center>';
-		
 		}
 
 		?>

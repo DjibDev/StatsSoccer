@@ -23,7 +23,7 @@
 				<option selected disabled value="">Sélectionnez</option>
 				<?php 
 				require ('fonctions_utiles.php');
-				NbrMatchAtteint();
+				NbrMatchAtteint();	
 				?>
            	</select>
            	<br>
