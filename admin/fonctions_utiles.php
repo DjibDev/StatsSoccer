@@ -315,7 +315,7 @@ function SupprBdd()
 	
 	
 	echo '<center><p class="ok"> La base de données a été INTEGRALEMENT supprimée.</p>';
-	echo '<p>Une sauvegarde a, nénamoins, bien été effectuée.</p></center>';
+	echo '<p>Une sauvegarde a nénamoins été effectuée.</p></center>';
 	
 }
 
@@ -332,7 +332,7 @@ function CreateBdd()
 	switch($worked)
 	{
     case 0:
-		echo '<center><p class="ok">La nouvelle saison est créée, il vous reste a créer les équipes et définir les rencontres</p></center>';
+		echo '<center><p class="ok">La nouvelle saison est créée, il vous reste a créer les équipes et définir les rencontres.</p></center>';
         break;
     case 1:
         echo '<center><pclass="nok">Une erreur s\'est rpoduite lors de la creation de la nouvelle base, veuillez contacter votre administrateur</p></center>';
@@ -340,21 +340,25 @@ function CreateBdd()
 	}
 }	
 		
-function AjoutJourneesBase($tab_journees,$saison,$coupe)
+function AjoutJourneesBase($tab_journees,$s,$c)
 {
 	require ('connexion.php');
 	
 	$requete='INSERT INTO journees (date, saison, numero, coupe, finished) VALUES';
 	$req_values=' ';
+	$len_tab=count($tab_journees);
 	$numero=1;
 	
-	foreach ($tab_journees as $value)
+	for ($x=0; $x < $len_tab; $x++)
 	{
-		$req_values=$req_values.'('.$values.','.$saison.','.$numero.','. $coupe.', 0),';
+		$req_values=$req_values.'('.$tab_journees[$x].', '.$s.', '.$numero.', '. $c.', false),';
 		$numero++;
 	}	
 	
-	echo $requete.$req_values;
+	$req_complete=$requete.$req_values; // concaténation de la requete
+	$long_req=strlen($req_complete);
+	$format_req=substr($req_complete,0,($long_req-1)); // retire la derniere virgule
 	
+	echo $format_req;
 }	
 ?> 

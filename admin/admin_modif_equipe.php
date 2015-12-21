@@ -10,6 +10,7 @@
 	<div id="bloc_page">
 <?php
 	include('banniere_menu.php');
+	require ('connexion.php');
 ?>	
 		
 	<section>	
@@ -19,7 +20,7 @@
 	if (!isset($_POST['equipe']))
 	{
 	?>
-		<form method="post" action="admin_modif_equipe.php">	
+		<form method="post" action="admin_modif_equipe.php" id="myform">	
 		<fieldset>
 		<Legend> Modifier les données des clubs (championnat)</Legend>		
 			<label for="equipe">Sélectionner le nom du club : </label>
@@ -27,8 +28,7 @@
 				<option selected disabled value="">Sélectionnez</option>
 						
 				<?php 
-				require ('connexion.php');
-				
+								
 				$reponse=$bdd->query('SELECT ID_equipe, nom
 				 FROM equipes ORDER bY nom ASC');
 	
@@ -50,8 +50,7 @@
 	{				
 			$team=$_POST['equipe'];
 			
-			require_once ('connexion.php');
-						
+									
 			$req_equip=$bdd->query('SELECT * 
 			FROM equipes
 			WHERE ID_equipe='.$team.' ');
@@ -106,8 +105,7 @@
 				<option selected disabled value="">Sélectionnez</option>
 						
 				<?php 
-				require ('connexion.php');
-				
+								
 				$reponse2=$bdd->query('SELECT ID_equipe, nom
 				 FROM equipes_coupe ORDER bY nom ASC');
 	
@@ -129,8 +127,7 @@
 	{				
 			$team_coupe=$_POST['equipe_coupe'];
 			
-			require_once ('connexion.php');
-						
+									
 			$req_equip_coupe=$bdd->query('SELECT * 
 			FROM equipes_coupe
 			WHERE ID_equipe='.$team_coupe.' ');
@@ -185,8 +182,7 @@
 				<option selected disabled value="">Sélectionnez</option>
 						
 			<?php 
-				require ('connexion.php');
-			
+							
 				$reponse=$bdd->query('SELECT * from equipes order by nom ASC');
 	
 				while ($resultats=$reponse->fetch())
@@ -215,8 +211,7 @@
 				<option selected disabled value="">Sélectionnez</option>
 						
 			<?php 
-				require ('connexion.php');
-			
+							
 				$reponse=$bdd->query('SELECT * from equipes_coupe order by nom ASC');
 	
 				while ($resultats=$reponse->fetch())

@@ -14,15 +14,13 @@
 	<section>
 		<article>
 			<fieldset>	
-				<legend>Championnat</legend>
-				<li><a class="adm" href="admin_journees_champ.php"><b>Nouvelle saison !</b></a></li>
+				<legend>Championnat - saison <?php echo AfficheSaisonBanniere(); ?></legend>
 				<li><a class="adm" href="admin_calendrier.php#ajout_team">Définir les rencontres</a></li>
 				<li><a class="adm" href="admin_resultats.php">Rentrer les résultats</a></li>
 			</fieldset>
 			<br>
 			<fieldset>
-				<legend>Coupe</legend>
-				<li><a class="adm" href="admin_journees_coupe.php">Créer une nouvelle coupe</a></li>
+				<legend>Coupe - saison <?php echo AfficheSaisonBanniere(); ?></legend>
 				<li><a class="adm" href="admin_calendrier_coupe.php#ajout_team">Définir les rencontres</a></li>
 				<li><a class="adm" href="admin_resultats_coupe.php">Rentrer les résultats</a></li>
 			</fieldset>		
@@ -41,7 +39,7 @@
 			</fieldset>
 			<br>
 			<fieldset>
-				<legend>Equipe</legend>
+				<legend>Equipes</legend>
 				<li><a class="adm" href="admin_ajout_equipe.php">Ajouter</a></li>	
 				<li><a class="adm" href="admin_modif_equipe.php">Modifier/Supprimer</a></li>
 			</fieldset>
@@ -50,7 +48,9 @@
 		<br>
 		<article>
 			<fieldset>
-				<legend>Réinitialiser la base</legend>
+				<legend>Saison</legend>
+				<li><a class="adm" href="admin_journees_champ.php"><b>Nouvelle saison</b></a></li>
+				<li><a class="adm" href="admin_journees_coupe.php"><b>Nouvelle coupe</b></a></li>
 				<li><a href="admin_reset_bdd.php"><b>Supprimer toutes les données</b></a></li>
 			</fieldset>
 		</article>	

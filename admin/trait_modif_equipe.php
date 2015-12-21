@@ -34,8 +34,7 @@
 			$stade=$_POST['stade'];
 			$nom=$_POST['nom'];
 			$ID_equipe=$_POST['team'];
-			
-						
+									
 			$req = $bdd->prepare('UPDATE equipes SET nom=?, ville=?, stade=?, favorite=? WHERE ID_equipe=? ');
 			$req->execute(array($nom,$ville,$stade,$favorite,$ID_equipe)); 
 
