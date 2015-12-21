@@ -20,7 +20,7 @@
 		
 		if (!(isset($_POST['number_j'])))
 		{
-			echo '<form method="post" action="admin_journees_champ.php" id="myform">';
+			echo '<form method="post" action="trait_nouveau_champ.php" id="myform">';
 			echo '<fieldset>';
 			echo '<Legend>Création d\'un nouveau championnat</Legend>';
 			echo '<label for="saison">Prochaine saison :</label>';
@@ -39,10 +39,7 @@
 			echo '</fieldset>';
 			echo '</form>';
 		}
-		else
-		{
-			header ('Location : trait_nouveau_champ.php');
-		}
+	
 	?>		
 	</section>
 		<?php include ('../footer.php'); ?>

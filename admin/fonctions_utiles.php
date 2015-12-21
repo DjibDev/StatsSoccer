@@ -340,5 +340,21 @@ function CreateBdd()
 	}
 }	
 		
-
+function AjoutJourneesBase($tab_journees,$saison,$coupe)
+{
+	require ('connexion.php');
+	
+	$requete='INSERT INTO journees (date, saison, numero, coupe, finished) VALUES';
+	$req_values=' ';
+	$numero=1;
+	
+	foreach ($tab_journees as $value)
+	{
+		$req_values=$req_values.'('.$values.','.$saison.','.$numero.','. $coupe.', 0),';
+		$numero++;
+	}	
+	
+	echo $requete.$req_values;
+	
+}	
 ?> 
