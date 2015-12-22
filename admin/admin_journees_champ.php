@@ -32,10 +32,12 @@
 			echo '<label for="number_j">Nombre de journées :</label>';
 			echo '<input type="number" required min="1" max="99" name="number_j" id="number_j"/><br><br>';
 			echo '<label for="sav_effectif">Souhaitez-vous reconduire le même effectif ?</label>&nbsp;&nbsp;&nbsp;';
-			echo 'Oui <input type="radio" name="sav_effectif" id="sav_effectif" checked/>';
-			echo 'Non <input type="radio" name="sav_effectif" id="sav_effectif"/>';
+			echo 'Oui <input type="radio" name="sav_effectif" id="sav_effectif" value="oui" checked/>';
+			echo 'Non <input type="radio" name="sav_effectif" id="sav_effectif" value="non"/>';
 			echo '<br>';
-			echo '<center><input type="submit" value="Créer !"></center>';
+			echo '<center>';
+			echo '<input type="reset" value="Effacer">&nbsp;';
+			echo '<input type="submit" value="Créer !"></center>';
 			echo '</fieldset>';
 			echo '</form>';
 		}

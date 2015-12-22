@@ -280,6 +280,48 @@ function save_database($user,$password,$host,$dbname)
         exec('mysqldump --user='.$user.' --password='.$password.' --host='.$host.' '.$dbname.' > '.$file);
 }
 
+function SaveEffectif($user,$password,$host,$dbname,$saison)
+{
+	require ('connexion.php');
+	$folder = 'backup/effectif/effectif_';
+    $realpath = str_replace(__FILE__,'',realpath(__FILE__));
+    $filename = $saison.'.sql';
+    $file = $realpath.$folder.$filename;
+    exec('mysqldump --user='.$user.' --password='.$password.' --host='.$host.' '.$dbname.' effectif > '.$file);
+    
+}
+
+function ReloadEffectif($user,$password,$host,$dbname,$saison)
+{
+	require ('connexion.php');
+	$folder = 'backup/effectif/effectif_';
+    $realpath = str_replace(__FILE__,'',realpath(__FILE__));
+    $filename = $saison.'.sql';
+    $file = $realpath.$folder.$filename;
+    exec('mysqldump --user='.$user.' --password='.$password.' --host='.$host.' '.$dbname.' < '.$file);
+    
+}
+
+function SupprFichierEffectif()
+{
+	// Fichiers à supprimer sous le dossier equipes
+	$dossier_traite = "backup/effectif";
+	$repertoire = opendir($dossier_traite); // On définit le répertoire dans lequel on souhaite travailler.
+
+	while (false !== ($fichier = readdir($repertoire))) // On lit chaque fichier du répertoire dans la boucle.
+	{
+		$chemin = $dossier_traite."/".$fichier; // On définit le chemin du fichier à effacer.
+
+		// Si le fichier n'est pas un répertoire…
+		if ($fichier != ".." AND $fichier != "." AND !is_dir($fichier))
+		{
+		      unlink($chemin); // On efface.
+
+		}
+	}
+	closedir($repertoire); // Ne pas oublier de fermer le dossier
+}	
+
 function SupprBdd()
 {
 	
