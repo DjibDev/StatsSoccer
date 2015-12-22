@@ -20,8 +20,7 @@
 			
 	$req=$bdd->query('SELECT date, numero, finished
 	FROM journees
-	WHERE saison="2015/2016"
-	AND coupe="0"
+	WHERE coupe="0"
 	ORDER BY date ASC
 	LIMIT 0 , 9');
 	
@@ -47,8 +46,7 @@
 	
 	$req=$bdd->query('SELECT date, numero, finished
 	FROM journees
-	WHERE saison="2015/2016"
-	AND coupe="0"
+	WHERE coupe="0"
 	ORDER BY date ASC
 	LIMIT 9 , 9');
 
@@ -75,8 +73,7 @@
 	
 	$req=$bdd->query('SELECT date, numero, finished
 	FROM journees
-	WHERE saison="2015/2016"
-	AND coupe="0"
+	WHERE coupe="0"
 	ORDER BY date ASC
 	LIMIT 18 , 9');
 
@@ -103,8 +100,7 @@
 	
 	$req=$bdd->query('SELECT date, numero, finished
 	FROM journees
-	WHERE saison="2015/2016"
-	AND coupe="0"
+	WHERE coupe="0"
 	ORDER BY date ASC
 	LIMIT 27 , 9');
 	
@@ -131,8 +127,7 @@
 	
 	$req=$bdd->query('SELECT date, numero, finished
 	FROM journees
-	WHERE saison="2015/2016"
-	AND coupe="0"
+	WHERE coupe="0"
 	ORDER BY date ASC
 	LIMIT 36 , 9');
 	
@@ -164,8 +159,7 @@
 	
 	$reponse=$bdd->query('SELECT numero, date
 	FROM journees 
-	WHERE saison="2015/2016" 
-	AND coupe="0" 
+	WHERE coupe="0" 
 	ORDER BY date ASC');
 	
 	

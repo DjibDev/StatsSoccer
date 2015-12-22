@@ -24,7 +24,7 @@
 			echo '<fieldset>';
 			echo '<Legend>Création d\'un nouveau championnat</Legend>';
 			echo '<label for="saison">Prochaine saison :</label>';
-			echo '<select name="saison">';
+			echo '<select name="saison" required>';
 			echo '<option value="" disabled selected >Sélectionnez</option>';
 			echo '<option value="'.$current_saison.'">'.$current_saison.'</option>';
 			echo '<option value="'.$saison_future.'">'.$saison_future.'</option>';

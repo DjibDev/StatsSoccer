@@ -24,36 +24,40 @@ function SupprStatsEquipe($a)
 
 function SupprAllStats()
 {
-		/* Fichiers à supprimer sous le dossier players */
-		
-		$folder="..\stats_files\players";
-        $dossier=opendir($folder);
+	// Fichiers à supprimer sous le dossier equipes
+	$dossier_traite = "../stats_files/equipes";
+	$repertoire = opendir($dossier_traite); // On définit le répertoire dans lequel on souhaite travailler.
 
-        while ($fichier = readdir($dossier))
-        {
-                if ($fichier != "." && $fichier != "..")
-                {
-                        $Vidage= $folder.$fichier;
-                        unlink($Vidage);
-                }
-        }
-        closedir($dossier);
-		
-		/* Fichiers à supprimer sous le dossier equipes */
-		
-		$folder="..\stats_files\equipes";
-        $dossier=opendir($folder);
+	while (false !== ($fichier = readdir($repertoire))) // On lit chaque fichier du répertoire dans la boucle.
+	{
+		$chemin = $dossier_traite."/".$fichier; // On définit le chemin du fichier à effacer.
 
-        while ($fichier = readdir($dossier))
-        {
-                if ($fichier != "." && $fichier != "..")
-                {
-                        $Vidage= $folder.$fichier;
-                        unlink($Vidage);
-                }
-        }
+		// Si le fichier n'est pas un répertoire…
+		if ($fichier != ".." AND $fichier != "." AND !is_dir($fichier))
+		{
+		      unlink($chemin); // On efface.
 
-        closedir($dossier);
+		}
+	}
+	closedir($repertoire); // Ne pas oublier de fermer le dossier
+	
+	
+	// Fichiers à supprimer sous le dossier players
+	$dossier_traite = "../stats_files/players";
+	$repertoire = opendir($dossier_traite); // On définit le répertoire dans lequel on souhaite travailler.
+
+	while (false !== ($fichier = readdir($repertoire))) // On lit chaque fichier du répertoire dans la boucle.
+	{
+		$chemin = $dossier_traite."/".$fichier; // On définit le chemin du fichier à effacer.
+
+		// Si le fichier n'est pas un répertoire…
+		if ($fichier != ".." AND $fichier != "." AND !is_dir($fichier))
+		{
+		      unlink($chemin); // On efface.
+
+		}
+	}
+	closedir($repertoire); // Ne pas oublier de fermer le dossier
 }
 
 ?>

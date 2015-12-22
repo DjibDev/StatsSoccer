@@ -340,25 +340,27 @@ function CreateBdd()
 	}
 }	
 		
-function AjoutJourneesBase($tab_journees,$s,$c)
+function AjoutJourneesBase($tab_journees,$saison,$coupe)
 {
 	require ('connexion.php');
 	
 	$requete='INSERT INTO journees (date, saison, numero, coupe, finished) VALUES';
 	$req_values=' ';
-	$len_tab=count($tab_journees);
+	$len_tab=count($tab_journees); // calcul du nombre d'elements dans tableau
 	$numero=1;
 	
 	for ($x=0; $x < $len_tab; $x++)
 	{
-		$req_values=$req_values.'('.$tab_journees[$x].', '.$s.', '.$numero.', '. $c.', false),';
+		$req_values=$req_values.'("'.$tab_journees[$x].'", "'.$saison.'", '.$numero.', '. $coupe.', false),';
 		$numero++;
 	}	
 	
 	$req_complete=$requete.$req_values; // concaténation de la requete
-	$long_req=strlen($req_complete);
-	$format_req=substr($req_complete,0,($long_req-1)); // retire la derniere virgule
+	$long_req=strlen($req_complete); // calcul de la longeur de chaine
+	$format_req=substr($req_complete,0,($long_req-1)); // retire la derniere virgule = sous chaine de base - le dernier caractere
+
+	$req_insert=$bdd->prepare($format_req); 
+	$req_insert->execute(); // execution de la requete d'insertion
 	
-	echo $format_req;
 }	
 ?> 

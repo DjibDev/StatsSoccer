@@ -15,7 +15,6 @@
 	<section>	
 	<?php
 
-	global $saison;
 	$saison=$_POST['saison'];
 	
 	if (!($_POST['j_1']))
@@ -23,10 +22,11 @@
 		echo '<form method="post" action="trait_nouveau_champ.php" id="myform">';
 		echo '<fieldset>';
 		echo '<legend>Ajouter les dates au calendrier de la saison '.$saison.'</legend>';
-		
+		echo '<input type="hidden" name="saison_select" value="'.$saison.'">';
+				
 		for ($ligne=1; $ligne <= $_POST['number_j']; $ligne++)
 		{
-			echo '<label for="j_'.$ligne.'">Journée '.$ligne.' </label>';
+			echo '<label for="j_'.$ligne.'">Journée '.$ligne.' &nbsp; ==>&nbsp;</label>';
 			echo '<input type="date" name="j_'.$ligne.'" required ><br>';
 		}	
 		
@@ -52,13 +52,15 @@
 			$x++;
 		}	
 		
+		echo $saison;
+		
 		require('fonctions_utiles.php');
 		// nettoyage de la base précedente + creation de la nouvelle
 		SupprBdd();
 		CreateBdd();
-		
+	
 		// ajout des journées dans la nouvelle base
-		AjoutJourneesBase($tab_journees, $saison, 'false');
+		AjoutJourneesBase($tab_journees, $_POST['saison_select'], 'false');
 		
 	}	
 	

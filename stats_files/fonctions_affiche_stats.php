@@ -27,7 +27,6 @@ function AfficheStatsPlayer($a)
 					WHERE stats_individuelles.joueur_id = '.$a.'
 					AND stats_individuelles.joueur_id = effectif.ID_joueur
 					AND stats_individuelles.journee_id = journees.ID_journee
-					AND saison = "2015/2016"
 					ORDER BY numero ASC ');
 												
 					echo '<table border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Journée</th><th>Date</th><th>Buts</th><th>Passes Déc.</th><th>Cleansheet</th>
