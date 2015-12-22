@@ -18,7 +18,7 @@
 <section>	
 	<article>
 	<center>
-	<h2>Les classements en championnat - Groupe C</h2>
+	<h2>Les classements en championnat</h2>
 	<?php
 	require('connexion.php');
 	

@@ -48,9 +48,9 @@
 		<br>
 		<article>
 			<fieldset>
-				<legend>Saison</legend>
+				<legend>Gestion de la base</legend>
 				<li><a class="adm" href="admin_journees_champ.php"><b>Nouvelle saison</b></a></li>
-				<li><a class="adm" href="admin_journees_coupe.php"><b>Nouvelle coupe</b></a></li>
+				<li><a class="adm" href="#"><b>Nouvelle coupe</b></a></li>
 				<li><a href="admin_reset_bdd.php"><b>Supprimer toutes les données</b></a></li>
 			</fieldset>
 		</article>	

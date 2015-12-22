@@ -291,14 +291,25 @@ function SaveEffectif($user,$password,$host,$dbname,$saison)
     
 }
 
-function ReloadEffectif($user,$password,$host,$dbname,$saison)
+function ReloadEffectif($saison)
 {
-	require ('connexion.php');
-	$folder = 'backup/effectif/effectif_';
-    $realpath = str_replace(__FILE__,'',realpath(__FILE__));
-    $filename = $saison.'.sql';
-    $file = $realpath.$folder.$filename;
-    exec('mysqldump --user='.$user.' --password='.$password.' --host='.$host.' '.$dbname.' < '.$file);
+	$mysqlDatabaseName ='stats';
+	$mysqlUserName ='root';
+	$mysqlPassword ='root';
+	$mysqlHostName ='localhost';
+	$mysqlImportFilename ='backup/effectif/effectif_'.$saison.'.sql';
+
+	$command='mysql -h' .$mysqlHostName .' -u' .$mysqlUserName .' -p' .$mysqlPassword .' ' .$mysqlDatabaseName .' < ' .$mysqlImportFilename;
+	exec($command,$output=array(),$worked);
+	switch($worked)
+	{
+    case 0:
+		echo '<center><p class="ok">L\'effectif a correctement été rechargé dans la base.</p></center>';
+        break;
+    case 1:
+        echo '<center><pclass="nok">Une erreur s\'est rpoduite lors de lu rechargement de l\'effectif, veuillez contacter votre administrateur</p></center>';
+        break;
+	}
     
 }
 
@@ -357,7 +368,7 @@ function SupprBdd()
 	
 	
 	echo '<center><p class="ok"> La base de données a été INTEGRALEMENT supprimée.</p>';
-	echo '<p>Une sauvegarde a nénamoins été effectuée.</p></center>';
+	echo '<p>Une sauvegarde a néanmoins été effectuée.</p></center>';
 	
 }
 

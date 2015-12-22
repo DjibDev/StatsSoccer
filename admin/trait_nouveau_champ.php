@@ -18,19 +18,7 @@
 
 	$saison=$_POST['saison'];
 	
-	// si lutilisateur souhaite reconduire le même effectif dans la saison future, alors on sauvegarde le fichier effectif
-	if ($_POST['sav_effectif'] == "oui")
-	{
-			$sub_saison=substr($saison,0,4); // ne garder que la premiere "année" de la saison
-			$user="root";
-			$password="root";
-			$host="localhost";
-			$dbname="stats";
-			SaveEffectif($user,$password,$host,$dbname,$sub_saison); //appel de la fonction qui permet d'exporter les valeurs de la table effectif dans un fichier avant suppression
-		
-	}	
-	
-	
+
 	if (!($_POST['j_1']))
 	{	
 		echo '<form method="post" action="trait_nouveau_champ.php" id="myform">';
@@ -41,6 +29,14 @@
 		if ($_POST['sav_effectif'] == "oui")
 		{
 			echo '<input type="hidden" name="effectif_idem" value="oui">';	
+			
+			// si lutilisateur souhaite reconduire le même effectif dans la saison future, alors on sauvegarde le fichier effectif
+			$sub_saison=substr($saison,0,4); // ne garder que la premiere "année" de la saison
+			$user="root";
+			$password="root";
+			$host="localhost";
+			$dbname="stats";
+			SaveEffectif($user,$password,$host,$dbname,$sub_saison); //appel de la fonction qui permet d'exporter les valeurs de la table effectif dans un fichier avant suppression
 		}			
 		
 		for ($ligne=1; $ligne <= $_POST['number_j']; $ligne++)
@@ -75,17 +71,16 @@
 		SupprBdd();
 		CreateBdd();
 		
-		// on recharge le fichier d'effectif précedement sauvegardé
-		if (!(empty($_POST['effectif_idem'])))
+		if ($_POST['effectif_idem'] == "oui")
 		{
+			// on recharge le fichier d'effectif précedement sauvegardé
 			$sub_saison=substr($_POST['saison_select'],0,4); // ne garder que la premiere "année" de la saison
-			$user="root";
-			$password="root";
-			$host="localhost";
-			$dbname="stats";
-			ReloadEffectif($user,$password,$host,$dbname,$sub_saison);
+			ReloadEffectif($sub_saison);
 		}	
-	
+
+		// suppression du fichier effectif
+		SupprFichierEffectif();
+
 		// ajout des journées dans la nouvelle base
 		AjoutJourneesBase($tab_journees, $_POST['saison_select'], 'false');
 		

@@ -12,7 +12,7 @@
 	include('banniere_menu.php');
 ?>	
 <section>	
-	<h2>Coupe - Groupe N</h2>
+	<h2>Coupe</h2>
 	<?php
 	require ('connexion.php');
 	
