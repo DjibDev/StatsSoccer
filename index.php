@@ -30,9 +30,9 @@
 		</article>	
 		<aside>
 			<center>
-				<br><br>
-				<h1><i>Logo !</i></h1>
-				<br><br><br>
+				<br>
+				<img src="images/ballon.jpg" >
+				<br>
 			</center>
 		</aside>
 	</section>

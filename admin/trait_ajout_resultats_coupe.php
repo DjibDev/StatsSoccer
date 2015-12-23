@@ -28,13 +28,40 @@
 			$equipe_vis_id=$_POST['e2_'.$ligne];
 			$but_equipe_dom=$_POST['but_dom'.$ligne];
 			$but_equipe_vis=$_POST['but_vis'.$ligne];
+			$equipe_dom_forfait=FALSE;
+			$equipe_vis_forfait=FALSE;
+			$equipe_dom_penalite=FALSE;
+			$equipe_vis_penalite=FALSE;
+			
+			//vérifier si le forfait est sélectionné
+			if (isset($_POST['e1_forfait'.$ligne]))
+			{
+				$equipe_dom_forfait=TRUE;
+			}
+			
+			if (isset($_POST['e2_forfait'.$ligne]))
+			{
+				$equipe_vis_forfait=TRUE;
+			}
+			
+			//vérifier si la penalité par reserve est sélectionnée
+			
+			if (isset($_POST['e1_penalite'.$ligne]))
+			{
+				$equipe_dom_penalite=TRUE;
+			}
+			
+			if (isset($_POST['e2_penalite'.$ligne]))
+			{
+				$equipe_vis_penalite=TRUE;
+			}
 							
 			// ajout dans la table matchs des résultats									
-			$req = $bdd->prepare('UPDATE matchs SET but_equipe_dom=?, but_equipe_vis=?, coupe= "1" 
+			$req = $bdd->prepare('UPDATE matchs SET equipe_dom_forfait=?, equipe_dom_penalite=?, equipe_vis_forfait=?, equipe_vis_penalite=?, but_equipe_dom=?, but_equipe_vis=? , coupe=1
 			WHERE journee_id=? 
 			AND equipe_dom_id=? 
 			AND equipe_vis_id=? ');
-			$req->execute(array($but_equipe_dom, $but_equipe_vis,$journee_id,$equipe_dom_id,$equipe_vis_id));
+			$req->execute(array($equipe_dom_forfait, $equipe_dom_penalite, $equipe_vis_forfait, $equipe_vis_penalite, $but_equipe_dom, $but_equipe_vis, $journee_id, $equipe_dom_id, $equipe_vis_id));
 			
 			// mise a jour de la table journees, pour passer la journee en cours en 'finished'
 			$req4 = $bdd->prepare('UPDATE journees SET finished=1 
@@ -49,46 +76,61 @@
 			$buts_contre=$but_equipe_vis;
 			$diff=$buts_pour-$buts_contre;
 			$domicile=true;
+			$forfait= $equipe_dom_forfait;
+			$penalite=$equipe_dom_penalite;
 			
-			if ($diff > "O")
+			if (($forfait == true) || ($penalite == true))
 			{
-				$victoire=true;
+				$victoire=false;
 				$nul=false;
 				$defaite=false;
-				$points=4;
+				$points=0;	
 			}
 			else
 			{
-				if ($diff == "0")
+				if ($diff > "O")
 				{
-					$victoire=false;
-					$nul=true;
+					$victoire=true;
+					$nul=false;
 					$defaite=false;
-					$points=2;
+					$points=4;
 				}
 				else
 				{
+					if ($diff == "0")
+					{
+						$victoire=false;
+						$nul=true;
+						$defaite=false;
+						$points=2;
+					}
+					else
+					{
 					
-					$victoire=false;
-					$nul=false;
-					$defaite=true;
-					$points=1;
-				}	
-			}
+						$victoire=false;
+						$nul=false;
+						$defaite=true;
+						$points=1;
+					}	
+				}
+			}		
+					
 			
-			$req2 = $bdd->prepare("INSERT INTO stats_collectives_coupe (victoire,defaite,nul,buts_pour,buts_contre,diff,points,domicile,journee_id,equipe_id) 
-			VALUES (?,?,?,?,?,?,?,?,?,?)");
-			$req2->bindParam(1, $victoire);
-			$req2->bindParam(2, $defaite); 
-			$req2->bindParam(3, $nul);
-			$req2->bindParam(4, $buts_pour);
-			$req2->bindParam(5, $buts_contre); 
-			$req2->bindParam(6, $diff);
-			$req2->bindParam(7, $points);
-			$req2->bindParam(8, $domicile); 
-			$req2->bindParam(9, $journee_id);
-			$req2->bindParam(10, $equipe_id);
-			$req2->execute();
+			$req3 = $bdd->prepare("INSERT INTO stats_collectives_coupe (forfait,penalite,victoire,defaite,nul,buts_pour,buts_contre,diff,points,domicile,journee_id,equipe_id) 
+			VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+			$req3->bindParam(1, $forfait);
+			$req3->bindParam(2, $penalite);
+			$req3->bindParam(3, $victoire);
+			$req3->bindParam(4, $defaite); 
+			$req3->bindParam(5, $nul);
+			$req3->bindParam(6, $buts_pour);
+			$req3->bindParam(7, $buts_contre); 
+			$req3->bindParam(8, $diff);
+			$req3->bindParam(9, $points);
+			$req3->bindParam(10, $domicile); 
+			$req3->bindParam(11, $journee_id);
+			$req3->bindParam(12, $equipe_id);
+			$req3->execute();
 			
 			
 		
@@ -99,45 +141,62 @@
 			$buts_contre=$but_equipe_dom;
 			$diff=$buts_pour-$buts_contre;
 			$domicile=false;
+			$forfait= $equipe_vis_forfait;
+			$penalite=$equipe_vis_penalite;
 			
-			if ($diff > "O")
+			
+			
+			if (($forfait == true) || ($penalite == true))
 			{
-				$victoire=true;
+				$victoire=false;
 				$nul=false;
 				$defaite=false;
-				$points=4;
+				$points=0;	
 			}
 			else
 			{
-				if ($diff == "0")
+				if ($diff > "O")
 				{
-					$victoire=false;
-					$nul=true;
+					$victoire=true;
+					$nul=false;
 					$defaite=false;
-					$points=2;
+					$points=4;
 				}
 				else
 				{
-					$victoire=false;
-					$nul=false;
-					$defaite=true;
-					$points=1;
-				}	
+					if ($diff == "0")
+					{
+						$victoire=false;
+						$nul=true;
+						$defaite=false;
+						$points=2;
+					}
+					else
+					{
+					
+						$victoire=false;
+						$nul=false;
+						$defaite=true;
+						$points=1;
+					}	
+				}
 			}
 			
 			
-			$req3 = $bdd->prepare("INSERT INTO stats_collectives_coupe (victoire,defaite,nul,buts_pour,buts_contre,diff,points,domicile,journee_id,equipe_id) 
-			VALUES (?,?,?,?,?,?,?,?,?,?)");
-			$req3->bindParam(1, $victoire);
-			$req3->bindParam(2, $defaite); 
-			$req3->bindParam(3, $nul);
-			$req3->bindParam(4, $buts_pour);
-			$req3->bindParam(5, $buts_contre); 
-			$req3->bindParam(6, $diff);
-			$req3->bindParam(7, $points);
-			$req3->bindParam(8, $domicile); 
-			$req3->bindParam(9, $journee_id);
-			$req3->bindParam(10, $equipe_id);
+			$req3 = $bdd->prepare("INSERT INTO stats_collectives_coupe (forfait,penalite,victoire,defaite,nul,buts_pour,buts_contre,diff,points,domicile,journee_id,equipe_id) 
+			VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+			$req3->bindParam(1, $forfait);
+			$req3->bindParam(2, $penalite);
+			$req3->bindParam(3, $victoire);
+			$req3->bindParam(4, $defaite); 
+			$req3->bindParam(5, $nul);
+			$req3->bindParam(6, $buts_pour);
+			$req3->bindParam(7, $buts_contre); 
+			$req3->bindParam(8, $diff);
+			$req3->bindParam(9, $points);
+			$req3->bindParam(10, $domicile); 
+			$req3->bindParam(11, $journee_id);
+			$req3->bindParam(12, $equipe_id);
 			$req3->execute();
 
 		}

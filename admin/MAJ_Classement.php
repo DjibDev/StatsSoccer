@@ -143,6 +143,8 @@ function MAJ_Classement_Coupe()
 	
 	while ($x < $nb_equipe)
 	{
+		$nb_forfaits=0;
+		$nb_penalites=0;
 		$nb_victoires=0;
 		$nb_nuls=0;
 		$nb_defaites=0;
@@ -154,14 +156,24 @@ function MAJ_Classement_Coupe()
 			
 			
 		// requete faite par equipe
-		$req4=$bdd->prepare('SELECT victoire, defaite, nul ,buts_pour, buts_contre, diff, points
+		$req4=$bdd->prepare('SELECT forfait, penalite, victoire, defaite, nul ,buts_pour, buts_contre, diff, points
 		FROM stats_collectives_coupe
 		WHERE equipe_id='.$equipe_id.'');
 		$req4->execute();
 							
 		while ($resultats4= $req4->fetch())
 		{
-	
+			
+			if ($resultats4['forfait'] == true)
+			{
+				$nb_forfaits=$nb_forfaits+1;
+			}
+			
+			if ($resultats4['penalite'] == true)
+			{
+				$nb_penalites=$nb_penalites+1;
+			}
+			
 			if ($resultats4['victoire'] == true)
 			{
 				$nb_victoires=$nb_victoires+1;
@@ -185,17 +197,19 @@ function MAJ_Classement_Coupe()
 		$req4->closeCursor(); 
 	
 		//requete pour écrire le nouveau classement	
-		$req5=$bdd->prepare("INSERT INTO classement_coupe (nb_journees, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points, equipe_id)
-		VALUES (?,?,?,?,?,?,?,?,?)");
+		$req5=$bdd->prepare("INSERT INTO classement_coupe (nb_journees, nb_forfaits, nb_penalites, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points, equipe_id)
+		VALUES (?,?,?,?,?,?,?,?,?,?,?)");
 		$req5->bindParam(1, $nb_journees); 
-		$req5->bindParam(2, $nb_victoires);
-		$req5->bindParam(3, $nb_nuls);
-		$req5->bindParam(4, $nb_defaites); 
-		$req5->bindParam(5, $nb_buts_pour);
-		$req5->bindParam(6, $nb_buts_contre);
-		$req5->bindParam(7, $diff); 
-		$req5->bindParam(8, $points);
-		$req5->bindParam(9, $equipe_id);
+		$req5->bindParam(2, $nb_forfaits);
+		$req5->bindParam(3, $nb_penalites);
+		$req5->bindParam(4, $nb_victoires);
+		$req5->bindParam(5, $nb_nuls);
+		$req5->bindParam(6, $nb_defaites); 
+		$req5->bindParam(7, $nb_buts_pour);
+		$req5->bindParam(8, $nb_buts_contre);
+		$req5->bindParam(9, $diff); 
+		$req5->bindParam(10, $points);
+		$req5->bindParam(11, $equipe_id);
 		$req5->execute(); 
 
 		$x++;		
