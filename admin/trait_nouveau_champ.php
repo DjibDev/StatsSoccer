@@ -81,10 +81,8 @@
 		// suppression du fichier effectif
 		SupprFichierEffectif();
 
-		// ajout des journées dans la nouvelle base
-		AjoutJourneesBase($tab_journees, $_POST['saison_select'], 'false');
-		
-		
+		// ajout des journées "championnat" dans la nouvelle base
+		AjoutJourneesBase($tab_journees, $_POST['saison_select'], 'false');	
 		
 	}	
 	

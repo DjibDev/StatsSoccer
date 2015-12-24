@@ -416,4 +416,36 @@ function AjoutJourneesBase($tab_journees,$saison,$coupe)
 	$req_insert->execute(); // execution de la requete d'insertion
 	
 }	
+
+function SupprCoupe()
+{
+	require ('connexion.php');
+
+	$req_suppr_class_coupe=$bdd->query('DELETE FROM classement_coupe');
+	$req_suppr_class_coupe->execute();
+
+	echo '<center><p class="ok"> Le classement coupe a bien été supprimé.</p>';
+
+	$req_suppr_stats_coupe=$bdd->query('DELETE FROM stats_collectives_coupe');
+	$req_suppr_stats_coupe->execute();
+
+	echo '<center><p class="ok"> Les stats collectives coupe ont bien été supprimées.</p>';
+
+	$req_suppr_equipes_coupe=$bdd->query('DELETE FROM equipes_coupe');
+	$req_suppr_equipes_coupe->execute();
+
+	echo '<center><p class="ok"> Les equipes coupe ont bien été supprimées.</p>';
+
+	$req_suppr_matchs_coupe=$bdd->query('DELETE FROM matchs WHERE coupe=1');
+	$req_suppr_matchs_coupe->execute();
+
+	echo '<center><p class="ok"> Les matchs de coupe ont bien été supprimés.</p>';
+
+	$req_suppr_journees_coupe=$bdd->query('DELETE FROM journees WHERE coupe=1');
+	$req_suppr_journees_coupe->execute();
+
+	echo '<center><p class="ok"> Les journées de coupe ont bien été supprimées.</p>'; 
+
+}
+
 ?> 

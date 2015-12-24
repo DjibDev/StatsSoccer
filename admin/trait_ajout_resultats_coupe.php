@@ -203,7 +203,7 @@
 				
 		echo '<p class="ok">Enregistrement bien effectué !</p>';
 		echo '<center><p>Souhaitez-vous rentrer d\'autres scores ? </p>';
-		echo '<p><a class="btn" href="admin_resultats.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p>';
+		echo '<p><a class="btn" href="admin_resultats_coupe.php">Oui</a> - <a class="btn" href=administrer.php>Non</a></p>';
 	    
 		// appel de la fonction MAJ_classement_Coupe, pour générer le nouveau classement	et mettre a jour les classement domicile et extérieur
 		require_once ('MAJ_Classement.php');
