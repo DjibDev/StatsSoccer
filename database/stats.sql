@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mer 16 Décembre 2015 à 10:55
+-- Généré le: Jeu 24 Décembre 2015 à 15:13
 -- Version du serveur: 5.5.46
 -- Version de PHP: 5.4.45-0+deb7u2
 
@@ -19,6 +19,21 @@ SET time_zone = "+00:00";
 --
 -- Base de données: `stats`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `baremes`
+--
+
+CREATE TABLE IF NOT EXISTS `baremes` (
+  `pts_forfait` int(1) NOT NULL,
+  `pts_penalite` int(1) NOT NULL,
+  `pts_victoire` int(1) NOT NULL,
+  `pts_nul` int(1) NOT NULL,
+  `pts_defaite` int(1) NOT NULL,
+  `coupe` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -193,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `journees` (
   `coupe` tinyint(1) NOT NULL DEFAULT '0',
   `finished` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID_journee`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=108 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=110 ;
 
 -- --------------------------------------------------------
 

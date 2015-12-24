@@ -448,4 +448,18 @@ function SupprCoupe()
 
 }
 
+
+function RemplirBareme($v,$n,$d,$f,$p,$c) // permet de remplir le bareme selon les parametres victoire, nul, défaite, forfait, pénalité et coupe
+{
+
+	require ('connexion.php');
+
+	$requete=('INSERT INTO baremes (pts_victoire, pts_nul, pts_defaite, pts_forfait, pts_penalite, coupe) VALUES ');
+	$values=' ('.$v.','.$n.','.$d.','.$f.','.$p.','.$c.')';
+	$req_complete=$requete.$values;
+	$req_insert_bareme=$bdd->prepare($req_complete);
+	$req_insert_bareme->execute();
+
+
+}
 ?> 
