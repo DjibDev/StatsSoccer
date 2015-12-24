@@ -35,6 +35,19 @@ color:#E3DDE2;
 font-family: Verdana;
 }
 
+.accueil
+{
+background: #A7EA95;
+background-image: -webkit-linear-gradient(top, #A7EA95, #426A38);
+background-image: -moz-linear-gradient(top, #A7EA95, #426A38);
+background-image: -ms-linear-gradient(top, #A7EA95, #426A38);
+background-image: -o-linear-gradient(top, #A7EA95, #426A38);
+background-image: linear-gradient(to bottom, #A7EA95, #426A38);
+font-size: 13px;
+color:#000;
+font-family: Verdana;
+}
+
 p
 {
 font-size: 14px;
