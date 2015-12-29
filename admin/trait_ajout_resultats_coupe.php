@@ -78,40 +78,55 @@
 			$domicile=true;
 			$forfait= $equipe_dom_forfait;
 			$penalite=$equipe_dom_penalite;
+
+			// rappatriement du bareme de la coupe
+
+			$req_bareme=$bdd->query('SELECT * FROM baremes WHERE coupe=1');
+			$result_bareme=$req_bareme->fetch();
 			
-			if (($forfait == true) || ($penalite == true))
+			if ($forfait == true) 
 			{
 				$victoire=false;
 				$nul=false;
 				$defaite=false;
-				$points=0;	
+				$points=$result_bareme['pts_forfait'];	
 			}
 			else
 			{
-				if ($diff > "O")
+				if ($penalite == true) 
 				{
-					$victoire=true;
+					$victoire=false;
 					$nul=false;
 					$defaite=false;
-					$points=4;
+					$points=$result_bareme['pts_penalite'];	
 				}
 				else
 				{
-					if ($diff == "0")
+					if ($diff > "O")
 					{
-						$victoire=false;
-						$nul=true;
+						$victoire=true;
+						$nul=false;
 						$defaite=false;
-						$points=2;
+						$points=$result_bareme['pts_victoire'];	
 					}
 					else
 					{
+						if ($diff == "0")
+						{
+							$victoire=false;
+							$nul=true;
+							$defaite=false;
+							$points=$result_bareme['pts_nul'];	
+						}
+						else
+						{
 					
-						$victoire=false;
-						$nul=false;
-						$defaite=true;
-						$points=1;
-					}	
+							$victoire=false;
+							$nul=false;
+							$defaite=true;
+							$points=$result_bareme['pts_defaite'];	
+						}	
+					}
 				}
 			}		
 					
@@ -146,41 +161,51 @@
 			
 			
 			
-			if (($forfait == true) || ($penalite == true))
+			if ($forfait == true) 
 			{
 				$victoire=false;
 				$nul=false;
 				$defaite=false;
-				$points=0;	
+				$points=$result_bareme['pts_forfait'];	
 			}
 			else
 			{
-				if ($diff > "O")
+				if ($penalite == true) 
 				{
-					$victoire=true;
+					$victoire=false;
 					$nul=false;
 					$defaite=false;
-					$points=4;
+					$points=$result_bareme['pts_penalite'];	
 				}
 				else
 				{
-					if ($diff == "0")
+					if ($diff > "O")
 					{
-						$victoire=false;
-						$nul=true;
+						$victoire=true;
+						$nul=false;
 						$defaite=false;
-						$points=2;
+						$points=$result_bareme['pts_victoire'];	
 					}
 					else
 					{
+						if ($diff == "0")
+						{
+							$victoire=false;
+							$nul=true;
+							$defaite=false;
+							$points=$result_bareme['pts_nul'];	
+						}
+						else
+						{
 					
-						$victoire=false;
-						$nul=false;
-						$defaite=true;
-						$points=1;
-					}	
+							$victoire=false;
+							$nul=false;
+							$defaite=true;
+							$points=$result_bareme['pts_defaite'];	
+						}	
+					}
 				}
-			}
+			}		
 			
 			
 			$req3 = $bdd->prepare("INSERT INTO stats_collectives_coupe (forfait,penalite,victoire,defaite,nul,buts_pour,buts_contre,diff,points,domicile,journee_id,equipe_id) 

@@ -18,7 +18,7 @@
 	<?php
 
 	require ('connexion.php');
-	
+
 	$journee_id=$_POST['journee_id'];
 			
 	for ($ligne=0; $ligne < 10;$ligne++)
@@ -67,7 +67,7 @@
 			$req4 = $bdd->prepare('UPDATE journees SET finished=1 
 			WHERE ID_journee=? ');
 			$req4->execute(array($journee_id));
-				
+
 			// tratement pour l'équipe a domicile
 				
 			$equipe_id=$equipe_dom_id;
@@ -78,41 +78,56 @@
 			$forfait= $equipe_dom_forfait;
 			$penalite=$equipe_dom_penalite;
 			
-			if (($forfait == true) || ($penalite == true))
+			// rappatriement du bareme du championnat
+
+			$req_bareme=$bdd->query('SELECT * FROM baremes WHERE coupe=0');
+			$result_bareme=$req_bareme->fetch();
+
+			if ($forfait == true) 
 			{
 				$victoire=false;
 				$nul=false;
 				$defaite=false;
-				$points=0;	
+				$points=$result_bareme['pts_forfait'];	
 			}
 			else
 			{
-				if ($diff > "O")
+				if ($penalite == true) 
 				{
-					$victoire=true;
+					$victoire=false;
 					$nul=false;
 					$defaite=false;
-					$points=4;
+					$points=$result_bareme['pts_penalite'];	
 				}
 				else
 				{
-					if ($diff == "0")
+					if ($diff > "O")
 					{
-						$victoire=false;
-						$nul=true;
+						$victoire=true;
+						$nul=false;
 						$defaite=false;
-						$points=2;
+						$points=$result_bareme['pts_victoire'];	
 					}
 					else
 					{
+						if ($diff == "0")
+						{
+							$victoire=false;
+							$nul=true;
+							$defaite=false;
+							$points=$result_bareme['pts_nul'];	
+						}
+						else
+						{
 					
-						$victoire=false;
-						$nul=false;
-						$defaite=true;
-						$points=1;
-					}	
+							$victoire=false;
+							$nul=false;
+							$defaite=true;
+							$points=$result_bareme['pts_defaite'];	
+						}	
+					}
 				}
-			}	
+			}		
 			
 			$req2 = $bdd->prepare("INSERT INTO stats_collectives (forfait,penalite,victoire,defaite,nul,buts_pour,buts_contre,diff,points,domicile,journee_id,equipe_id) 
 			VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -142,41 +157,52 @@
 			$forfait= $equipe_vis_forfait;
 			$penalite=$equipe_vis_penalite;
 			
-			if (($forfait == true) || ($penalite == true))
+			if ($forfait == true) 
 			{
 				$victoire=false;
 				$nul=false;
 				$defaite=false;
-				$points=0;	
+				$points=$result_bareme['pts_forfait'];	
 			}
 			else
 			{
-				if ($diff > "O")
+				if ($penalite == true) 
 				{
-					$victoire=true;
+					$victoire=false;
 					$nul=false;
 					$defaite=false;
-					$points=4;
+					$points=$result_bareme['pts_penalite'];	
 				}
 				else
 				{
-					if ($diff == "0")
+					if ($diff > "O")
 					{
-						$victoire=false;
-						$nul=true;
+						$victoire=true;
+						$nul=false;
 						$defaite=false;
-						$points=2;
+						$points=$result_bareme['pts_victoire'];	
 					}
 					else
 					{
+						if ($diff == "0")
+						{
+							$victoire=false;
+							$nul=true;
+							$defaite=false;
+							$points=$result_bareme['pts_nul'];	
+						}
+						else
+						{
 					
-						$victoire=false;
-						$nul=false;
-						$defaite=true;
-						$points=1;
-					}	
+							$victoire=false;
+							$nul=false;
+							$defaite=true;
+							$points=$result_bareme['pts_defaite'];	
+						}	
+					}
 				}
-			}	
+			}		
+			
 			
 			
 			$req3 = $bdd->prepare("INSERT INTO stats_collectives (forfait,penalite,victoire,defaite,nul,buts_pour,buts_contre,diff,points,domicile,journee_id,equipe_id) 
