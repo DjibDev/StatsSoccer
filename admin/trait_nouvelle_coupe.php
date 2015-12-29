@@ -25,6 +25,11 @@
 		echo '<fieldset>';
 		echo '<legend>Ajouter les dates de oucpe au calendrier de la saison '.$saison.'</legend>';
 		echo '<input type="hidden" name="saison_select" value="'.$saison.'">';
+		echo '<input type="hidden" name="pts_victoire" value="'.$_POST['victoire'].'">';
+		echo '<input type="hidden" name="pts_nul" value="'.$_POST['nul'].'">';
+		echo '<input type="hidden" name="pts_defaite" value="'.$_POST['defaite'].'">';
+		echo '<input type="hidden" name="pts_forfait" value="'.$_POST['forfait'].'">';
+		echo '<input type="hidden" name="pts_penalite" value="'.$_POST['penalite'].'">';
 		
 		for ($ligne=1; $ligne <= $_POST['number_j']; $ligne++)
 		{
@@ -56,7 +61,15 @@
 		
 		// nettoyage des données de l'ancienne coupe
 		SupprCoupe();
-	
+		
+		$v=$_POST['pts_victoire'];
+		$n=$_POST['pts_nul'];
+		$d=$_POST['pts_defaite'];
+		$f=$_POST['pts_forfait'];
+		$p=$_POST['pts_penalite'];
+		$c='true'; // ce n'est pas le bareme pour la coupe mais le championnat
+
+		RemplirBareme($v,$n,$d,$f,$p,$c);
 
 		// ajout des journées "coupe" dans la nouvelle base
 		AjoutJourneesBase($tab_journees, $_POST['saison_select'], 'true');

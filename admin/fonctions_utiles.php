@@ -459,7 +459,7 @@ function RemplirBareme($v,$n,$d,$f,$p,$c) // permet de remplir le bareme selon l
 	$req_complete=$requete.$values;
 	$req_insert_bareme=$bdd->prepare($req_complete);
 	$req_insert_bareme->execute();
+} 
 
 
-}
 ?> 
