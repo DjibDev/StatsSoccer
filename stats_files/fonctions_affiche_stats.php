@@ -57,6 +57,7 @@ function AfficheStatsPlayer($a)
 function AfficheStatsEquipe($a)
 {
 					require_once ('connexion.php');
+					require ('../../fonctions_utiles_users.php');
 					
 					echo '<div class="stats_files">';
 					
@@ -265,7 +266,7 @@ function AfficheStatsEquipe($a)
     AND journees.coupe=0
     AND journees.finished= 1
 	AND e2.ID_equipe = '.$a.'
-    ORDER BY numero ');
+    ORDER BY date ');
 	
 	while ($resultats3=$req3->fetch())
 	{
@@ -301,8 +302,16 @@ function AfficheStatsEquipe($a)
 					$e2_msg='';
 				}
 			}		
-			
-			echo '<p><b>'.$resultats3['numero'].'</b>. '.$resultats3['equipe1'].'<i><b> '.$e1_msg.'</b></i> - '.$resultats3['equipe2'].'<b><i> '.$e2_msg.'</i></b>: <b>'.$resultats3['but_equipe_dom'].' - '.$resultats3['but_equipe_vis'].'</b></p>';
+			if ($resultats3['numero'] < 99)
+			{
+				$numero_j=$resultats3['numero'];
+			}
+			else
+			{
+				$numero_j='Reportée';
+			}	
+				echo '<p><b>Journée '.$numero_j.',</b> le '.FormatDateFR($resultats3['date']).' ....... '.$resultats3['equipe1'].'<i><b> '.$e1_msg.'</b></i> - '.$resultats3['equipe2'].'<b><i> '.$e2_msg.'</i></b>: <b>'.$resultats3['but_equipe_dom'].' - '.$resultats3['but_equipe_vis'].'</b></p>';
+				
 	}
 	$req3->closeCursor();
 	
