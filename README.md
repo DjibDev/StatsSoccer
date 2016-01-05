@@ -1,2 +1,2 @@
 # StatsSoccer
-Used to share statistics players and  statistics team for local soccer championship. Php5/Mysql HTML5 CSS3
+Used to manage a championship of amateur soccer, and generates statistics of teams and individual. Php5/Mysql HTML5 CSS3
