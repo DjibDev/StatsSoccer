@@ -14,29 +14,99 @@
 ?>	
 	<section>	
 		<article>
-			<p class="accueil">
-			<br>Le site a vocation de gérer et présenter les statistiques d'une saison de football.
+			
+			<h2 align="center">Derniers résultats</h2>
+
+			<?php 
+			require ('connexion.php');
+			require ('fonctions_utiles_users.php');
+			
+		$reponse=$bdd->query('SELECT max(date) as DerJ FROM journees WHERE finished=1');
+		$result=$reponse->fetch();
+		echo '<p align="center"><u>Le '.FormatDateFR($result['DerJ']).'</u></p>';
+		echo '<table align="center">';
+						
+		$reponse2=$bdd->query('SELECT e1.nom equi1, e2.nom equi2, e1.favorite fav1, e2.favorite fav2, equipe_dom_forfait, equipe_dom_penalite, equipe_vis_forfait, equipe_vis_penalite, but_equipe_dom, but_equipe_vis, finished
+		FROM matchs, journees, equipes e1, equipes e2
+		WHERE date=(SELECT max(date) FROM journees WHERE finished=1)
+		AND journees.ID_journee=matchs.journee_id
+		AND matchs.equipe_dom_id = e1.ID_equipe
+		AND matchs.equipe_vis_id = e2.ID_equipe');
+	
+		while ($resultats2=$reponse2->fetch())
+		{
+			
+				$but_dom=$resultats2['but_equipe_dom'];
+				$but_vis=$resultats2['but_equipe_vis'];
+			
+			
+			if ($resultats2['equipe_dom_forfait'] == true)
+			{
+				$e1_msg='<b>(forfait)</b>.';
+			}
+			else
+			{
+				if ($resultats2['equipe_dom_penalite'] == true)
+				{
+					$e1_msg='<b>(Pénalité)</b>.';
+				}
+				else
+				{
+					$e1_msg='';
+				}
+			}		
+				
+			if 	($resultats2['equipe_vis_forfait'] == true)
+			{
+				$e2_msg='<b>(forfait)</b>.';
+			}
+			else
+			{
+				if ($resultats2['equipe_vis_penalite'] == true)
+				{
+					$e2_msg='<b>(Pénalité)</b>.';
+				}
+				else
+				{
+					$e2_msg='';
+				}	
+			}	
+			
+				
+			if ($resultats2['fav1'] == true)
+			{
+				echo '<tr class="trcolorspecial"><td width="200"><b>'.$resultats2['equi1'].'</b> <i>'.$e1_msg.'</i> - '.$resultats2['equi2'].' <i>'.$e2_msg.'</i></td><td>&nbsp;&nbsp;</td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
+			}
+			else	
+			{
+				if  ($resultats2['fav2'] == true)
+				{
+					echo '<tr class="trcolorspecial"><td width="200">'.$resultats2['equi1'].' <i>'.$e1_msg.'</i> - <b>'.$resultats2['equi2'].'</b> <i>'.$e2_msg.'</i></td>&nbsp;&nbsp;<td></td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
+				}	
+				else
+				{
+					echo '<tr><td width="200">'.$resultats2['equi1'].' <i>'.$e1_msg.'</i> - '.$resultats2['equi2'].' <i>'.$e2_msg.'</i></td><td>&nbsp;&nbsp;</td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
+				}
+			}		
+			
+		}
+		$reponse2->closeCursor(); 
+
+		
+		echo '</table>';
+				
+			?>
 			<br>
 			<br>
-			Remarque importante: aucune donnée personnelle concernant l'effectif, telle que le nom, le prénom, l'email ou la date de naissance, n'est divulguée. Seuls les pseudos et âges apparaissent.
-			Néanmoins, si vous avez une réclamation, contactez votre administrateur préféré !
+			<br>
 			<br>
 			
-			<br>Le site a été entièrement conçu avec un éditeur de texte, et est écrit en PHP/HTML5, utilise les feuilles de style CSS, ainsi qu'une base de donnée MySQL.
-			Pour ceux que ça intéresse, les sources du site sont disponibles <a href=https://github.com/DjibDev/StatsSoccer>ici</a>.
-			<br>
-			<br>
-			</p>
 		</article>	
 		<aside>
 			<center>
-				<br>
-				<br>
-				<br>
-				<img src="images/ballon.png">
-				<br>
-				<br>
-				<br>
+				<br><br>
+				<a href="http://jgefoot.com"><img src="images/petit_logo.png"/></a>
+				<br><br>
 			</center>
 		</aside>
 	</section>
