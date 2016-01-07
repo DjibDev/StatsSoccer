@@ -25,9 +25,12 @@
 	echo '<table border="0" cellspacing=2 cellspadding=2>';
 	echo '<tr class="trcolor0"><td align="center"><a href="affiche_classement_domicile.php">Domicile</a></td><td align="center"><a href="affiche_classement_exterieur.php">Extérieur</a></td><td align="center"><a href="affiche_classement_attaque.php">Attaque</a></td><td align="center"><a href="affiche_classement_defense.php">Défense</a></td></tr>';
 	echo '</table><br>';
-	
-	echo '<p>Victoire: <b class=forme_v>4pts</b>. - Nul: <b class=forme_n>2pts</b>. - Défaite: <b class=forme_d>1pt</b>. - Forfait: <b class=forme_f>0pt</b>. - Pénalité: <b class=forme_p>0pt</b>.</p>';
-	
+	$affiche_bareme=$bdd->query('SELECT * FROM baremes WHERE coupe=0');
+	$result_bareme=$affiche_bareme->fetch();
+
+	echo '<p>Victoire: <b class=forme_v>'.$result_bareme['pts_victoire'].'pts</b>. - Nul: <b class=forme_n>'.$result_bareme['pts_nul'].'pt(s)</b>. - Défaite: <b class=forme_d>'.$result_bareme['pts_defaite'].'pt(s)</b>. - Forfait: <b class=forme_f>'.$result_bareme['pts_forfait'].'pt(s)</b>. - Pénalité: <b class=forme_p>'.$result_bareme['pts_penalite'].'pt(s)</b>.</p>';
+	$affiche_bareme->CloseCursor();
+
 	$req1=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_forfaits, nb_penalites, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points
 	FROM equipes, classement
 	WHERE  equipes.ID_equipe = classement.equipe_id
