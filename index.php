@@ -77,17 +77,17 @@
 				
 			if ($resultats2['fav1'] == true)
 			{
-				echo '<tr class="trcolorspecial"><td width="200"><b>'.$resultats2['equi1'].'</b> <i>'.$e1_msg.'</i> - '.$resultats2['equi2'].' <i>'.$e2_msg.'</i></td><td>&nbsp;&nbsp;</td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
+				echo '<tr class="trcolorspecial"><td width="400"><b>'.$resultats2['equi1'].'</b> <i>'.$e1_msg.'</i> - '.$resultats2['equi2'].' <i>'.$e2_msg.'</i></td><td>&nbsp;&nbsp;</td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
 			}
 			else	
 			{
 				if  ($resultats2['fav2'] == true)
 				{
-					echo '<tr class="trcolorspecial"><td width="200">'.$resultats2['equi1'].' <i>'.$e1_msg.'</i> - <b>'.$resultats2['equi2'].'</b> <i>'.$e2_msg.'</i></td>&nbsp;&nbsp;<td></td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
+					echo '<tr class="trcolorspecial"><td width="400">'.$resultats2['equi1'].' <i>'.$e1_msg.'</i> - <b>'.$resultats2['equi2'].'</b> <i>'.$e2_msg.'</i></td>&nbsp;&nbsp;<td></td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
 				}	
 				else
 				{
-					echo '<tr><td width="200">'.$resultats2['equi1'].' <i>'.$e1_msg.'</i> - '.$resultats2['equi2'].' <i>'.$e2_msg.'</i></td><td>&nbsp;&nbsp;</td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
+					echo '<tr><td width="400">'.$resultats2['equi1'].' <i>'.$e1_msg.'</i> - '.$resultats2['equi2'].' <i>'.$e2_msg.'</i></td><td>&nbsp;&nbsp;</td><td align=center>'.$but_dom.'</b> - '.$but_vis.'</td></tr>';
 				}
 			}		
 			
@@ -96,7 +96,6 @@
 
 		
 		echo '</table>';
-		echo '<br>';
 		echo '<br>';
 		echo '<h2 align="center">Matchs à venir</h2>';
 
@@ -147,8 +146,9 @@
 				<br><br>
 				<a href="http://jgefoot.com"><img src="images/petit_logo.png"/></a>
 				<br><br>
-				<br>
 				<br><br>
+				<br><br>
+				<br><br><br>
 				<a href="http://jgefoot.com"><img src="images/ballon.png"/></a>
 				<br><br>
 				<br><br>

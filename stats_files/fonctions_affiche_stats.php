@@ -202,10 +202,11 @@ function AfficheStatsEquipe($a)
 					echo '<p>Moyenne Buts/match: <b>'.$AVG_buts.'</b>&nbsp;&nbsp;&nbsp; Match(s) Sans But Encaissé (CleanSheet): <b>'.$Pourcentage_SBE.'%</b>.&nbsp;&nbsp;&nbsp; Match(s) Sans But Marqué: <b>'.$Pourcentage_SBM.'%</b>.</p>';
 					
 					// requete qui affiche la forme de l'équipe
-					$reqforme=$bdd->query('SELECT forfait, penalite, victoire, nul ,defaite 
-					FROM stats_collectives 
-					WHERE equipe_id='.$a.'
-					ORDER BY journee_id ');
+					$reqforme=$bdd->query('SELECT forfait, penalite, victoire, nul , defaite 
+					FROM stats_collectives, journees
+					WHERE stats_collectives.equipe_id='.$a.' 
+					AND stats_collectives.journee_id=journees.ID_journee
+					ORDER BY date');
 					
 					echo '<p font-size=16px>Forme :';					
 					while ($forme=$reqforme->fetch())

@@ -86,10 +86,11 @@
 			echo '<td align="center"><a href="stats_files/equipes/stats_equipe_'.$resultats['ID_equipe'].'.php">Voir</a></td>';
 					
 					// requete qui affiche la forme de l'équipe
-					$reqforme=$bdd->query('SELECT forfait, penalite, victoire, nul ,defaite 
-					FROM stats_collectives 
-					WHERE equipe_id='.$id_equipe.'
-					ORDER BY journee_id DESC 
+					$reqforme=$bdd->query('SELECT forfait, penalite, victoire, nul , defaite 
+					FROM stats_collectives, journees
+					WHERE stats_collectives.equipe_id='.$id_equipe.' 
+					AND stats_collectives.journee_id=journees.ID_journee
+					ORDER BY date DESC
 					LIMIT 0 , 5 ');
 					
 					$forme_5d='';
