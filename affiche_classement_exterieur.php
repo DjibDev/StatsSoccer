@@ -92,8 +92,7 @@
 		FROM classement_players, effectif
 		WHERE classement_players.joueur_id = effectif.ID_joueur
 		AND nb_buts > "0"
-		ORDER BY nb_buts DESC, pseudo ASC
-		LIMIT 0, 10 ');
+		ORDER BY nb_buts DESC, pseudo ASC ');
 		
 		$x=0;
 		while ($resultats2=$req2->fetch())
@@ -119,8 +118,7 @@
 		FROM classement_players, effectif 
 		WHERE classement_players.joueur_id = effectif.ID_joueur
 		AND nb_passes > "0"
-		ORDER BY nb_passes DESC, pseudo ASC
-		LIMIT 0, 10 ');
+		ORDER BY nb_passes DESC, pseudo ASC ');
 		
 		$x=0;
 		
