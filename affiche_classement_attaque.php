@@ -91,64 +91,7 @@
 	<aside>
 	<center>
 	
-		<h2>Classements individuels</h2>
-		<?php 
-				
-		echo '<caption>Classement - Buteurs</caption>';
-		echo '<table border=2 cellspacing=2 cellspadding=2 >';
-		echo '<tr class=trheadcolor><th></th><th>Pseudo</th><th>Buts</th>';
-		
-		$req2=$bdd->query('SELECT pseudo, nb_buts 
-		FROM classement_players, effectif
-		WHERE classement_players.joueur_id = effectif.ID_joueur
-		AND nb_buts > "0"
-		ORDER BY nb_buts DESC, pseudo ASC ');
-		
-		$x=0;
-		while ($resultats2=$req2->fetch())
-		{
-			$x++;
-			$altern=$x % 2;
-			echo '<tr class=trcolor'.$altern.'>';
-			echo '<td>'.$x.'</td>';
-			echo '<td><b>'.$resultats2['pseudo'].'</b></td>';
-			echo '<td align="center"><b>'.$resultats2['nb_buts'].'</b></td></tr>';
-		}
-		$req2->closeCursor();
-		
-		echo '</table>';
-		echo '<br>';
-		
-		
-		echo '<caption>Classement - Passeurs</caption><br>';
-		echo '<table align=center border=2 cellspacing=2 cellspadding=2 >';
-		echo '<tr class=trheadcolor><th></th><th>Pseudo</th><th>Passes</th>';
-				
-		$req3=$bdd->query('SELECT pseudo, nb_passes
-		FROM classement_players, effectif 
-		WHERE classement_players.joueur_id = effectif.ID_joueur
-		AND nb_passes > "0"
-		ORDER BY nb_passes DESC, pseudo ASC');
-		
-		$x=0;
-		
-		while ($resultats3=$req3->fetch())
-		{
-			$x++;
-			$altern=$x % 2;
-			echo '<tr class=trcolor'.$altern.'>';
-			echo '<td>'.$x.'</td>';
-			echo '<td><b>'.$resultats3['pseudo'].'</b></td>';
-			echo '<td align="center"><b>'.$resultats3['nb_passes'].'</b></td></tr>';
-		
-		}
-		$req3->closeCursor();
-		
-		echo '</table>';
-		
-		?>
-			
-			
+		<?php include ('class_ind.php'); ?>			
 		</center>				
 		</aside>
 	</section>
