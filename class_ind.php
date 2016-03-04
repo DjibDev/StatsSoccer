@@ -31,12 +31,12 @@
 			}	
 			else
 			{
-				$position=strval($x);
+				$position=strval($x); // permet de caster la variable qui est un integer en string
 			}	
 
 			$altern=$x % 2;
 
-			$class_buteurs[$indice]=$aff_but['nb_buts'];
+			$class_buteurs[$indice]=$aff_but['nb_buts'];  // remplit le tableau de l'element suivant
 
 			echo '<tr class=trcolor'.$altern.'>';
 			echo '<td align="center">'.$position.'</td>';
@@ -85,7 +85,7 @@
 
 			$altern=$x % 2;
 
-			$class_passeurs[$indice]=$aff_pass['nb_passes'];
+			$class_passeurs[$indice]=$aff_pass['nb_passes']; // remplit le tableau de l'element suivant
 
 			echo '<tr class=trcolor'.$altern.'>';
 			echo '<td align="center">'.$position.'</td>';
