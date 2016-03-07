@@ -17,6 +17,7 @@
 				<legend>Championnat - Saison <?php echo AfficheSaisonBanniere(); ?></legend>
 				<li><a class="adm" href="admin_calendrier.php#ajout_team">Définir les rencontres</a></li>
 				<li><a class="adm" href="admin_resultats.php">Rentrer les résultats</a></li>
+				<li><a class="adm" href="admin_gestion_reports.php">Gestion des matchs reportés</a></li>
 			</fieldset>
 			<br>
 			<fieldset>
@@ -34,7 +35,7 @@
 				<legend>Gestion de la base</legend>
 				<li><a class="adm" href="admin_journees_champ.php">Nouvelle saison</a></li>
 				<li><a class="adm" href="admin_journees_coupe.php">Nouvelle coupe</a></li>
-				<li><a href="admin_reset_bdd.php">Supprimer toutes les données</a></li>
+				<li><a href="admin_reset_bdd.php">Sauvegarder et supprimer toutes les données</a></li>
 			</fieldset>	
 		</article>		
 			
