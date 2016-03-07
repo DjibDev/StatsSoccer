@@ -17,7 +17,11 @@
 	if (!isset($_POST['journee']))
 	{
 ?>	
-	<section>	
+	<section>
+	<p>Y-a-t-il un ou plusieurs matchs reportés ? </p>
+	<p>Si oui, merci de traiter <b><a href="admin_gestion_reports.php">ICI</a></b>
+	 les reports avant de rentrer les autres résultats de la journée.</p>
+	 <br>	
 	<form method="post" action="admin_resultats.php">	
 		<fieldset>
 		<Legend>Ajout des résultats de la journée</Legend>		
