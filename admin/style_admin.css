@@ -213,7 +213,7 @@ form#myform input
 	display:inline-block; 
 }
 
-form#myform input[type=submit], input[type=reset]
+form#myform input[type=submit], input[type=reset], input[type=button]
 { 
 	color:#fff; 
 	background-color:#426A38; 

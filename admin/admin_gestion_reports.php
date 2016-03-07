@@ -22,7 +22,8 @@
 
 	<form method="post" action="admin_gestion_reports.php">	
 		<fieldset>
-		<Legend>Sélectionnez la journée à modifier</Legend>		
+		<Legend>Gestion des reports - étape 1/3</Legend>
+			<br>		
 			<label for="journee">Sélectionner la date : </label>
 			<select required name="journee" id="journee" onchange="submit();">
 				<option selected disabled value="">Sélectionnez</option>	
@@ -47,7 +48,7 @@
 			
 			echo '<form method="post" action="trait_gestion_reports.php" id="myform">';
 			echo '<fieldset>';
-			echo '<Legend>Gestion des reports</Legend>';	
+			echo '<Legend>Gestion des reports - étape 2/3</Legend>';	
 			echo '<input type="hidden" name="journee_id" value="'.$journee_id.'" />';
 
 			echo '<table border="0">';
@@ -73,7 +74,7 @@
 			echo '</table>';
 			echo '<br>';
 			echo '<center>';
-			echo '<input type="reset" value="Annuler" />&nbsp;&nbsp;';
+			echo '<input type="button" value="Retour" onclick="history.go(-1)"/>&nbsp;&nbsp;';
 			echo '<input type="submit" value="Etape suivante >" />'; 	
 			echo '</center>';
 			echo '</fieldset>';
