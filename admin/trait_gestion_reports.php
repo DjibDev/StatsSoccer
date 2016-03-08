@@ -17,10 +17,7 @@
 
 <?php	
 
-	if (!(isset($_POST['valid_report'])))
-	{	
-
-		echo '<form method="post" action="trait_gestion_reports.php" id="myform">';
+		echo '<form method="post" action="trait2_gestion_reports.php" id="myform">';
 		echo '<fieldset>';
 		echo '<Legend>Gestion des reports - étape 3/3</Legend>';
 		echo '<br>';
@@ -31,7 +28,6 @@
 		for ($ligne=0; $ligne < 10; $ligne++)
 		{	
 			$report=$_POST['report_'.$ligne]; 
-			$auj=date('d/m/Y');
 
 			if ($report == "oui")   // si la case oui a été cochée pour ce match alors on traite le report
 			{	
@@ -40,12 +36,12 @@
 				$equipe_vis=$_POST['e2_'.$ligne];
 				echo '<tr>';
 				echo '<td>'.$equipe_dom.' - '.$equipe_vis.'</td>';			
-				echo '<td><select required name="journee" id="journee">';
+				echo '<td><select name="journee_dispo" id="journee">';
 				echo '<option selected disabled value="">Sélectionnez</option>';	
 				NbrMatchAtteint(); // cette fonction permet d'afficher uniquement les journées incompletes
            		echo '</select></td>';
            		echo '<td></td>';
-           		echo '<td><input type="date" size="8" name="journee_new" value="'.$auj.'"></td>';
+           		echo '<td><input type="text" size=8 name"journee_new"></td>';
            		echo '<tr>';
 			}
 		}		
@@ -58,15 +54,6 @@
 		echo '</center>';
 		echo '</fieldset>';
 		echo '</form>';
-		
-			    //$suppr_match='DELETE FROM matchs WHERE ID_match='.$match_id.' ';
-			   	//$bdd->exec($suppr_match);	
-
-	}
-	else
-	{
-
-	}	
 
 ?>	
 		
