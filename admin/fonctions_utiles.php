@@ -1,5 +1,12 @@
 <?php
 
+function FormatDateMySQL($datefr)
+{
+    $datefr=strtotime($datefr);
+    $dateMySQL=date("YYYY-mm-dd",$datefr);
+    return $dateMySQL;
+}
+
 function FormatDateFR($dateMySQL)
 {
     $dateMySQL=strtotime($dateMySQL);
