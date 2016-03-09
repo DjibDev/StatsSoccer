@@ -60,7 +60,6 @@ function AgeAVG()
 	
 	$indice=0;
 	$tab_Age=Array(); // tableau qui contiendra tous les ages calculés
-	$Age_moyen=0; // initialisation de la variable 
 	
 	// recuperation des date de naissance, calcul age , et mise en tableau
 	$req=$bdd->query('SELECT birthday 
@@ -85,9 +84,17 @@ function AgeAVG()
 			$age_total=$age_total+$tab_Age[$x];
 	}	
 	
-	$Age_moyen=$age_total/$nb_elements;
+	$decimal=$age_total/$nb_elements;
+	$decimal_arrondi=round($decimal,2);
+	$age_annee=floor($decimal_arrondi);
+	$decimal_mois=$decimal_arrondi-$age_annee;
+	$age_mois=$decimal_mois*12;
+	$age_mois_arondi=round($age_mois);
+
+	$age_moyen_complet=$age_annee.' ans et '.$age_mois_arondi.' mois.';
 	
-	return round($Age_moyen,1);
+	return $age_moyen_complet;
+
 	
 }	
 
