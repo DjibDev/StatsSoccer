@@ -70,7 +70,7 @@
 				$ligne++;					
 			}
 			$reponse2->closeCursor(); 
-		
+
 			echo '</table>';
 			echo '<br>';
 			echo '<center>';
