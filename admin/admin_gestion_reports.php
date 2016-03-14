@@ -40,7 +40,7 @@
 	{
 			$journee_id=$_POST['journee'];
 			
-			$reponse2=$bdd->query('SELECT e1.nom equi1, e2.nom equi2, ID_match
+			$reponse2=$bdd->query('SELECT e1.ID_equipe e1_id, e2.ID_equipe e2_id, e1.nom equi1, e2.nom equi2, ID_match
 			FROM matchs, equipes e1, equipes e2
 			WHERE matchs.journee_id='.$journee_id.'
 			AND matchs.equipe_dom_id = e1.ID_equipe
@@ -64,6 +64,8 @@
 				echo '<td>'.$resultats2['equi1'].' - '.$resultats2['equi2'].'</td>';
 				echo '<input type="hidden" name="e1_'.$ligne.'" value="'.$resultats2['equi1'].'" >';
 				echo '<input type="hidden" name="e2_'.$ligne.'" value="'.$resultats2['equi2'].'" >';
+				echo '<input type="hidden" name="e1_id_'.$ligne.'" value="'.$resultats2['e1_id'].'" >';
+				echo '<input type="hidden" name="e2_id_'.$ligne.'" value="'.$resultats2['e2_id'].'" >';
 				echo '<td  align="center"><input type="radio" name="report_'.$ligne.'" value="oui"> Oui</td>';
 				echo '<td  align="center"><input type="radio" name="report_'.$ligne.'" value="non" checked > Non</td>';
 				echo '</tr>';

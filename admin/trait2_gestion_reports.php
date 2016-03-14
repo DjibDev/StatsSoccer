@@ -23,7 +23,14 @@ echo '<p>On denombre '.$nb_ligne.' report(s) de match(s)</p>';
 
 for ($ligne=0; $ligne < $nb_ligne; $ligne++)
 {
-			echo '<p>Match reporté N° '.$ligne.' : identifié sous id '.$_POST['match_id_'.$ligne].': '.$_POST['equipe_dom_'.$ligne].' - '.$_POST['equipe_vis_'.$ligne].'</p>'; 
+			$num_match=$ligne+1;
+			$equipe_dom_id=$_POST['equipe_dom_id_'.$ligne];
+			$equipe_vis_id=$_POST['equipe_vis_id_'.$ligne];
+			$equipe_dom=$_POST['equipe_dom_'.$ligne];
+			$equipe_vis=$_POST['equipe_vis_'.$ligne];
+			$match_id=$_POST['match_id_'.$ligne];
+
+			echo '<p><u>Match reporté N° '.$num_match.'</u> :<b> '.$equipe_dom.' (id: '.$equipe_dom_id.') - '.$equipe_vis.'  (id: '.$equipe_vis_id.').</b></p>'; 
 
 			if (!(empty($_POST['journee_dispo_'.$ligne])) && (!(empty($_POST['journee_new_'.$ligne]))))
 			{
@@ -76,13 +83,24 @@ for ($ligne=0; $ligne < $nb_ligne; $ligne++)
 						}	
 
 					}
+
+
+					echo '<p> sera remis le: <b>'.$_POST['journee_dispo_'.$ligne].'</b></p>';
+
+					$journee_id=$_POST['journee_dispo_'.$ligne];
+
+					AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id); // fonction qui permet d'ajouter le match dans la journee
+
+					SupprMatch($match_id); // fonction qui supprime le match dont l'id est passé en parametre
+	
+
 				}
 
 			}
-	}
+}
 			
 ?>	
-		
+	
 	</section>
 	<?php include ('../footer.php'); ?>
 </div>

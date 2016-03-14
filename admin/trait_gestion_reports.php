@@ -38,12 +38,17 @@
 				$match_id=$_POST['match_'.$ligne];
 				$equipe_dom=$_POST['e1_'.$ligne];
 				$equipe_vis=$_POST['e2_'.$ligne];
+				$equipe_dom_id=$_POST['e1_id_'.$ligne];
+				$equipe_vis_id=$_POST['e2_id_'.$ligne];
+				
 				echo '<tr>';
 				echo '<td>'.$equipe_dom.' - '.$equipe_vis.'</td>';	
 				echo '<input type="hidden" name="equipe_dom_'.$ligne.'" value="'.$equipe_dom.'">';	
-				echo '<input type="hidden" name="equipe_vis_'.$ligne.'" value="'.$equipe_vis.'">';	
+				echo '<input type="hidden" name="equipe_vis_'.$ligne.'" value="'.$equipe_vis.'">';
+				echo '<input type="hidden" name="equipe_dom_id_'.$ligne.'" value="'.$equipe_dom_id.'">';	
+				echo '<input type="hidden" name="equipe_vis_id_'.$ligne.'" value="'.$equipe_vis_id.'">';		
 				echo '<input type="hidden" name="match_id_'.$ligne.'" value="'.$match_id.'">';	
-				echo '<td><select name="journee_dispo_"'.$ligne.'" id="journee">';
+				echo '<td><select name="journee_dispo_'.$ligne.'" id="journee">';
 				echo '<option selected disabled value="">Sélectionnez</option>';	
 				NbrMatchAtteint(); // cette fonction permet d'afficher uniquement les journées incompletes
            		echo '</select></td>';

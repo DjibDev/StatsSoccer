@@ -417,12 +417,53 @@ function AjoutJourneesBase($tab_journees,$saison,$coupe)
 	
 	$req_complete=$requete.$req_values; // concaténation de la requete
 	$long_req=strlen($req_complete); // calcul de la longeur de chaine
-	$format_req=substr($req_complete,0,($long_req-1)); // retire la derniere virgule = sous chaine de base - le dernier caractere
+	$format_req=substr($req_complete,0,($long_req-1)); // retire la derniere virgule = (sous chaine de base - le dernier caractere)
 
 	$req_insert=$bdd->prepare($format_req); 
 	$req_insert->execute(); // execution de la requete d'insertion
 	
 }	
+
+function AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id)
+{
+	require ('connexion.php');
+
+	//vérification de l'absence de doublon avant MAJ de la base
+	$tab_equipe_dom=array();
+	$tab_equipe_vis=array();
+	$x=0;
+
+	$req_existant=$bdd->query('SELECT equipe_dom_id, equipe_vis_id WHERE journee_id='.$journee_id.' ');
+	
+	while ($result_existant=$req_existant->fetch())
+	{
+		$tab_equipe_dom[$x]=$result_existant['equipe_dom_id'];
+		$tab_equipe_vis[$x]=$result_existant['equipe_vis_id'];
+		$x++;
+	}	
+	$req_existant->closeCursor();
+
+	if ((in_array($tab_equipe_dom, $equipe_dom_id)) || (in_array($tab_equipe_vis, $equipe_vis_id))))
+	{
+			echo '<p class="nok">Opération annulée car au moins une des 2 équipes sont présentes sur cette journée</p>';
+	}
+	else
+	{
+		$requete='INSERT INTO matchs (equipe_dom_id, equipe_vis_id, coupe, )journee_id) VALUES ';
+		$req_values =$req_values.'('.$equipe_dom_id.','.$equipe_vis_id.', false,'.$journee_id.')';	
+	
+		$req_complete=$requete.$req_values; // concaténation de la requete
+		$req_insert=$bdd->prepare($req_complete); 
+		$req_insert->execute(); // execution de la requete d'insertion
+	}
+}	
+
+function SupprMatch($match_id)
+{
+	require ('connexion.php');
+	$suppr_match=$bdd->query('DELETE FROM matchs WHERE ID_match='.$match_id.' ');
+	$suppr_match->execute();	
+}
 
 function SupprCoupe()
 {
