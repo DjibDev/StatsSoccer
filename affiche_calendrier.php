@@ -12,7 +12,7 @@
 	include('banniere_menu.php');
 ?>	
 <section>	
-<h2>Calendrier et Résultats du Championnat</h2>
+<h2 align="center">Calendrier et Résultats du Championnat</h2>
 	<?php
   	
 	include ('fonctions_utiles_users.php');
@@ -152,9 +152,9 @@
 	}
 	$req->closeCursor();
 
-	echo '</tr></table></center>';
+	echo '</tr></table>';
 	echo '<p>* Si une équipe n\'apparait pas, c\'est qu\'elle est exempte.</p>';
-	echo '<p>** Si une confrontation manque, c\'est que le match a été reporté.</p>';
+	echo '<p>** Si une confrontation manque, c\'est que le match a été reporté ou sous réserve.</p></center>';
 	
 	
 	$reponse=$bdd->query('SELECT numero, date
@@ -180,7 +180,7 @@
 		}
 			
 		echo '<div id=match'.$date_journee.'></div>';
-		echo '<table width="600" cellspacing="4" cellspading="4"><tr class="trheadcolor"><th align=left colspan="3"><a href="#bloc_page"><img src="images/fleche_haut.jpg"></a>&nbsp;&nbsp;&nbsp;<b><u>'.$texte.' - le '.$dateFR.'</u></b></th></tr>';
+		echo '<table align="center" width="600" cellspacing="4" cellspading="4"><tr class="trheadcolor"><th align=left colspan="3"><a href="#bloc_page"><img src="images/fleche_haut.jpg"></a>&nbsp;&nbsp;&nbsp;<b><u>'.$texte.' - le '.$dateFR.'</u></b></th></tr>';
 	
 				
 		$reponse2=$bdd->query('SELECT e1.nom equi1, e2.nom equi2, e1.favorite fav1, e2.favorite fav2, equipe_dom_forfait, equipe_dom_penalite, equipe_vis_forfait, equipe_vis_penalite, but_equipe_dom, but_equipe_vis, finished

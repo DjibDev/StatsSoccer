@@ -28,7 +28,7 @@ function AfficheStatsPlayer($a)
 					AND stats_individuelles.joueur_id = effectif.ID_joueur
 					AND stats_individuelles.journee_id = journees.ID_journee
 					ORDER BY numero ASC ');
-												
+						
 					echo '<table border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Journée</th><th>Date</th><th>Buts</th><th>Passes Déc.</th><th>Cleansheet</th>
 					<th>Pénalty manqué</th><th>Pénalty arrêté</th><th>Csc</th><th>Faits marquants</th></tr>';						
 					
@@ -51,7 +51,7 @@ function AfficheStatsPlayer($a)
 					$req2->closeCursor();
 					
 					echo '</table>';
-					
+
 }
 
 function AfficheStatsEquipe($a)
@@ -67,7 +67,7 @@ function AfficheStatsEquipe($a)
 				
 					while ($resultats=$req->fetch())
 					{
-						echo '<h2>Fiche stat de '.$resultats['nom'].' </h2>';
+						echo '<h2 align="center">Fiche stat de '.$resultats['nom'].' </h2>';
 						echo '<p><u><b>Informations générales :</b></u></p>';
 						echo '<p>ville: <b>'.$resultats['ville'].'</b></p>';
 						echo '<p>Stade: <b>'.$resultats['stade'].'</b></p>';
@@ -316,7 +316,11 @@ function AfficheStatsEquipe($a)
 	}
 	$req3->closeCursor();
 	
-	echo '<br></div>';
+	echo '<br>';
+	echo '</div>';
+
+
+
 }
 
 /*function CreateJPGraphEquipe($a)

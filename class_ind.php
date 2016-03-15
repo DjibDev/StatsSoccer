@@ -1,11 +1,14 @@
 <?php
 		require ('connexion.php');
 
-		echo '<h2>Classements individuels</h2>';
-				
-		echo '<caption>Classement - Buteurs</caption>';
+		echo '<h2 align="center">Classements individuels</h2>';
+		
+		echo '<table align="center">';  // super tableau qui englobe les sous tableaux
+		echo '<tr><td>';
+
 		echo '<table border=2 cellspacing=2 cellspadding=2 >';
-		echo '<tr class=trheadcolor><th></th><th>Pseudo</th><th>Buts</th>';
+		echo '<tr><th colspan="3">Classement - Buteurs</th></tr>';
+		echo '<tr><th>Rang</th><th>Pseudo</th><th>Buts</th></tr>';
 		
 		$req_but=$bdd->query('SELECT pseudo, nb_buts 
 		FROM classement_players, effectif
@@ -39,9 +42,9 @@
 			$class_buteurs[$indice]=$aff_but['nb_buts'];  // remplit le tableau de l'element suivant
 
 			echo '<tr class=trcolor'.$altern.'>';
-			echo '<td align="center">'.$position.'</td>';
-			echo '<td><b>'.$aff_but['pseudo'].'</b></td>';
-			echo '<td align="center"><b>'.$nb_buts_current.'</b></td></tr>';
+			echo '<td width="50" align="center">'.$position.'</td>';
+			echo '<td width="100"><b>'.$aff_but['pseudo'].'</b></td>';
+			echo '<td width="50" align="center"><b>'.$nb_buts_current.'</b></td></tr>';
 
 			$x++;
 			$indice++;
@@ -50,11 +53,14 @@
 		$req_but->closeCursor();
 
 		echo '</table>';
-		echo '<br>';
-		
-		echo '<caption>Classement - Passeurs</caption><br>';
+
+		echo '</td>';
+		echo '<td width="200"></td>';
+		echo '<td>';
+
 		echo '<table border=2 cellspacing=2 cellspadding=2 >';
-		echo '<tr class=trheadcolor><th></th><th>Pseudo</th><th>Passes</th>';
+		echo '<tr><th colspan="3">Classement - Passeurs</th></tr>';
+		echo '<tr><th>Rang</th><th>Pseudo</th><th>Passes</th></tr>';
 				
 		$req_pass=$bdd->query('SELECT pseudo, nb_passes
 		FROM classement_players, effectif 
@@ -88,9 +94,9 @@
 			$class_passeurs[$indice]=$aff_pass['nb_passes']; // remplit le tableau de l'element suivant
 
 			echo '<tr class=trcolor'.$altern.'>';
-			echo '<td align="center">'.$position.'</td>';
-			echo '<td><b>'.$aff_pass['pseudo'].'</b></td>';
-			echo '<td align="center"><b>'.$nb_pass_current.'</b></td></tr>';
+			echo '<td width="50" align="center">'.$position.'</td>';
+			echo '<td width="100"><b>'.$aff_pass['pseudo'].'</b></td>';
+			echo '<td width="50" align="center"><b>'.$nb_pass_current.'</b></td></tr>';
 
 			$x++;
 			$indice++;
@@ -99,5 +105,7 @@
 		$req_pass->closeCursor();
 		
 		echo '</table>';
-		
+
+		echo '</td></tr>';
+		echo '</table>';   
 ?>

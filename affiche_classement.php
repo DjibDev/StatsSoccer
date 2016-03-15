@@ -16,7 +16,7 @@
 		
 
 <section>	
-	<article>
+
 	<center>
 	<h2>Les classements en championnat</h2>
 	<?php
@@ -139,15 +139,7 @@
 
     ?>    
 		</center>
-		</article>	
-		
-		<aside>
-		<center>
-		
-		<?php include ('class_ind.php'); ?>			
-		
-		</center>			
-		</aside>
+
 	</section>
 	<?php include ('footer.php'); ?>
 </body>

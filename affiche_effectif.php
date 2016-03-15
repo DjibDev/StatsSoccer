@@ -12,9 +12,7 @@
 <?php
 	include('banniere_menu.php');
 ?>		
-
-<section>	
-	<article>
+<article>
 	<center>
 	<h2>L'effectif... Ses Exploits... Ses Devoirs !</h2>
 	<?php
@@ -32,7 +30,7 @@
 	$altern=$x % 2;
 		
 		
-	echo '<table style="font-size:1em;" border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Pseudo</th><th>Age</th><th>Poste</th><th>Buts</th><th>Passes</th><th>CleanSheet</th><th><img src="images/raclette.png"/></th><th><img src="images/maillot.png"/></th><th><img src="images/biere_pression.png"/></th></tr>';
+	echo '<table style="font-size:1em;" border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Pseudo</th><th>Age</th><th>Poste</th><th>Buts</th><th>Passes</th><th>CleanSheets</th><th><img src="images/raclette.png"/></th><th><img src="images/maillot.png"/></th><th><img src="images/biere_pression.png"/></th></tr>';
 	
 	
 	while ($resultats=$reponse->fetch())
@@ -95,14 +93,14 @@
 		<aside>
 			<p><i>En quelques chiffres...</i></p>
 			<p>Effectif:<b> <?php echo NombreEffectif(); ?></b></p>
-			<p>Âge moyen:<br><b> <?php echo AgeAVG(); ?></b> </p>
+			<p>Âge moyen:<b> <?php echo AgeAVG(); ?></b> </p>
 			<p><b><?php echo NbGAR(); ?> </b> gardien(s).</p>
 			<p><b><?php echo NbDEF(); ?> </b> défenseur(s). </p>
 			<p><b><?php echo NbMIL(); ?> </b> milieu(x). </p>
 			<p><b><?php echo NbATT(); ?> </b> attaquant(s).</p>
 			<p><b><?php echo NbINC(); ?> </b> inclassable(s).</p>
 		</aside>
-	</section>
+	<br>	
 		<?php include ('footer.php'); ?>
 
 </body>

@@ -12,13 +12,14 @@
 	include('banniere_menu.php');
 ?>	
 <section>	
-	<h2>Coupe</h2>
+	<h2 align="center">Coupe</h2>
 	<?php
 	require ('connexion.php');
 	
 	$affiche_bareme=$bdd->query('SELECT * FROM baremes WHERE coupe=1');
 	$result_bareme=$affiche_bareme->fetch();
 
+	echo '<center>';
 	echo '<p>Victoire: <b class=forme_v>'.$result_bareme['pts_victoire'].'pts</b>. - Nul: <b class=forme_n>'.$result_bareme['pts_nul'].'pt(s)</b>. - Défaite: <b class=forme_d>'.$result_bareme['pts_defaite'].'pt(s)</b>. - Forfait: <b class=forme_f>'.$result_bareme['pts_forfait'].'pt(s)</b>. - Pénalité: <b class=forme_p>'.$result_bareme['pts_penalite'].'pt(s)</b>.</p>';
 	$affiche_bareme->CloseCursor();
 
@@ -191,7 +192,7 @@
 	$reponse->closeCursor();
 
     ?>
-
+    </center>
 </section>
 		<?php include ('footer.php'); ?>
 

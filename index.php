@@ -12,7 +12,6 @@
 <?php
 	include('banniere_menu.php');
 ?>	
-	<section>	
 		<article>
 	<?php
 	require ('connexion.php');
@@ -154,7 +153,7 @@
 				<br><br>
 			</center>
 		</aside>
-	</section>
+		<br>
 	<?php include ('footer.php'); ?>
 </div>		
 		

@@ -429,34 +429,83 @@ function AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id)
 	require ('connexion.php');
 
 	//vérification de l'absence de doublon avant MAJ de la base
-	$tab_equipe_dom=array();
-	$tab_equipe_vis=array();
+	$tab_equipe_id=array();
 	$x=0;
 
-	$req_existant=$bdd->query('SELECT equipe_dom_id, equipe_vis_id WHERE journee_id='.$journee_id.' ');
+	$req_existant=$bdd->query('SELECT equipe_dom_id, equipe_vis_id FROM matchs WHERE journee_id='.$journee_id.' ');
 	
 	while ($result_existant=$req_existant->fetch())
 	{
-		$tab_equipe_dom[$x]=$result_existant['equipe_dom_id'];
-		$tab_equipe_vis[$x]=$result_existant['equipe_vis_id'];
+		$tab_equipe_id[$x]=$result_existant['equipe_dom_id'];
+		$x++;
+		$tab_equipe_id[$x]=$result_existant['equipe_vis_id'];
 		$x++;
 	}	
 	$req_existant->closeCursor();
 
-	if ((in_array($tab_equipe_dom, $equipe_dom_id)) || (in_array($tab_equipe_vis, $equipe_vis_id))))
+	if ((in_array($equipe_dom_id, $tab_equipe_id, true)) || (in_array($equipe_vis_id, $tab_equipe_id, true)))
 	{
-			echo '<p class="nok">Opération annulée car au moins une des 2 équipes sont présentes sur cette journée</p>';
+		return false;
 	}
 	else
 	{
-		$requete='INSERT INTO matchs (equipe_dom_id, equipe_vis_id, coupe, )journee_id) VALUES ';
-		$req_values =$req_values.'('.$equipe_dom_id.','.$equipe_vis_id.', false,'.$journee_id.')';	
-	
-		$req_complete=$requete.$req_values; // concaténation de la requete
-		$req_insert=$bdd->prepare($req_complete); 
-		$req_insert->execute(); // execution de la requete d'insertion
+
+		$coupe=false;
+		$stmt = $bdd->prepare("INSERT INTO matchs (equipe_dom_id, equipe_vis_id, coupe, journee_id) VALUES (?,?,?,?)");
+		$stmt->bindParam(1, $equipe_dom_id);
+		$stmt->bindParam(2, $equipe_vis_id);
+		$stmt->bindParam(3, $coupe);
+		$stmt->bindParam(4, $journee_id);
+		$stmt->execute();
+
+		return true;
 	}
 }	
+
+function DateJourneeMatch($match_id)
+{
+	//requete qui retourne la date (en format FR) de la journee auquelle le match passé en parametre appartient (id)
+	require ('connexion.php');
+
+	$date_journee='';
+
+	$req_j=$bdd->query('SELECT DISTINCT(date) FROM journees j 
+	INNER JOIN matchs m ON j.ID_journee = m.journee_id 
+	AND m.journee_id ='.$match_id.' ');
+
+	while ($result_j=$req_j->fetch())
+	{
+		$date_journee=$result_j['date'];
+	}	
+	$req_j->CloseCursor();
+
+	$date_journee=FormatDateFR($date_journee);  // appel de la fontion pour remlettre la date en format FR
+
+	return $date_journee;
+
+}
+
+function DateJournee($journee_id)
+{
+	//requete qui retourne la date (en format FR) de la journee auquelle le match passé en parametre appartient (id)
+	require ('connexion.php');
+
+	$date_journee='';
+
+	$req_j=$bdd->query('SELECT date FROM journees
+	WHERE ID_journee='.$journee_id.'');
+
+	while ($result_j=$req_j->fetch())
+	{
+		$date_journee=$result_j['date'];
+	}	
+	$req_j->CloseCursor();
+
+	$date_journee=FormatDateFR($date_journee);  // appel de la fontion pour remlettre la date en format FR
+
+	return $date_journee;
+
+}
 
 function SupprMatch($match_id)
 {
@@ -502,7 +551,7 @@ function RemplirBareme($v,$n,$d,$f,$p,$c) // permet de remplir le bareme selon l
 
 	require ('connexion.php');
 
-	$requete=('INSERT INTO baremes (pts_victoire, pts_nul, pts_defaite, pts_forfait, pts_penalite, coupe) VALUES ');
+	$requete='INSERT INTO baremes (pts_victoire, pts_nul, pts_defaite, pts_forfait, pts_penalite, coupe) VALUES ';
 	$values=' ('.$v.','.$n.','.$d.','.$f.','.$p.','.$c.')';
 	$req_complete=$requete.$values;
 	$req_insert_bareme=$bdd->prepare($req_complete);
