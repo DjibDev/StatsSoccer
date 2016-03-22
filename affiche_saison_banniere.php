@@ -6,7 +6,7 @@ function AfficheSaisonBanniere()
 
 	$saison=date('Y').'/'.(date('Y')+1);
 
-	$req_saison=$bdd->prepare('SELECT min (distinct(saison)) as Num FROM journees');
+	$req_saison=$bdd->prepare('SELECT DISTINCT(saison) AS Num FROM journees');
 	$req_saison->execute();
 	
 	while ($num_saison=$req_saison->fetch())
@@ -14,7 +14,8 @@ function AfficheSaisonBanniere()
 
 		$saison=$num_saison['Num'];
 	}	
-
+	$req_saison->CloseCursor();
+	
 	return $saison;
 }
 

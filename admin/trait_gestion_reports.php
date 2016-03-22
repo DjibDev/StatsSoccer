@@ -53,7 +53,7 @@
 				NbrMatchAtteint(); // cette fonction permet d'afficher uniquement les journées incompletes
            		echo '</select></td>';
            		echo '<td></td>';
-           		echo '<td><input type="text" size=8 name="journee_new_"'.$ligne.'" id="journee_new"></td>';
+           		echo '<td><input type="text" size=8 name="journee_new_'.$ligne.'" id="journee_new"></td>';
            		echo '<tr>';
            		$nb_report++;
 			}

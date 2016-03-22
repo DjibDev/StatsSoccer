@@ -3,7 +3,7 @@
 function FormatDateMySQL($datefr)
 {
     $datefr=strtotime($datefr);
-    $dateMySQL=date("YYYY-mm-dd",$datefr);
+    $dateMySQL=date("Y-m-d",$datefr);
     return $dateMySQL;
 }
 
@@ -431,6 +431,7 @@ function AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id)
 	//vérification de l'absence de doublon avant MAJ de la base
 	$tab_equipe_id=array();
 	$x=0;
+	$success=false;
 
 	$req_existant=$bdd->query('SELECT equipe_dom_id, equipe_vis_id FROM matchs WHERE journee_id='.$journee_id.' ');
 	
@@ -443,9 +444,9 @@ function AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id)
 	}	
 	$req_existant->closeCursor();
 
-	if ((in_array($equipe_dom_id, $tab_equipe_id, true)) || (in_array($equipe_vis_id, $tab_equipe_id, true)))
+	if ((in_array($equipe_dom_id, $tab_equipe_id)) || (in_array($equipe_vis_id, $tab_equipe_id)))
 	{
-		return false;
+		$success=false;
 	}
 	else
 	{
@@ -458,8 +459,10 @@ function AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id)
 		$stmt->bindParam(4, $journee_id);
 		$stmt->execute();
 
-		return true;
+		$success=true;
 	}
+
+	return $success;
 }	
 
 function DateJourneeMatch($match_id)
@@ -507,11 +510,45 @@ function DateJournee($journee_id)
 
 }
 
+function CreerJournee($date,$coupe)
+{
+	require_once ('../affiche_saison_banniere.php');
+	$saison=AfficheSaisonBanniere();
+
+	// remise de la date en format MySQL AAAA-MM-JJ
+	$date=FormatDateMySQL($date);
+	echo $date;
+
+	require ('connexion.php');
+
+	$max_num_j=$bdd->query('SELECT MAX(numero) AS N_max 
+	FROM journees 
+	WHERE coupe=false ');
+
+	while ($result_num_max=$max_num_j->fetch())
+	{
+			$numero_new=$result_num_max['N_max'];	
+	}	
+	$max_num_j->CloseCursor();
+
+	$numero_new++;
+
+	$insert_J = $bdd->prepare("INSERT INTO journees (date, saison, numero, coupe) VALUES (?,?,?,?)");
+	$insert_J->bindParam(1, $date);
+	$insert_J->bindParam(2, $saison);
+	$insert_J->bindParam(3, $numero_new);
+	$insert_J->bindParam(4, $coupe);
+	$insert_J->execute();
+
+
+}
+
 function SupprMatch($match_id)
 {
 	require ('connexion.php');
-	$suppr_match=$bdd->query('DELETE FROM matchs WHERE ID_match='.$match_id.' ');
-	$suppr_match->execute();	
+
+		$suppr_match=$bdd->query('DELETE FROM matchs WHERE ID_match='.$match_id.' ');
+		$suppr_match->execute();	
 }
 
 function SupprCoupe()

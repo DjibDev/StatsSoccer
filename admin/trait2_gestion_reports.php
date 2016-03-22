@@ -58,6 +58,7 @@ for ($ligne=0; $ligne < $nb_ligne; $ligne++)
 					if (!(empty($_POST['journee_new_'.$ligne])))
 					{
 
+
 						$regex_date='#[0-3]{1}\d{1}+[\/]{1}[0-1]{1}\d{1}[\/][2]{1}[0-1]{1}\d{1}\d{1}#'; // date qui doit etre comprise entre 01/01/2000 et 31/12/2199
 						
 						if (!(preg_match($regex_date, $_POST['journee_new_'.$ligne])))
@@ -71,37 +72,40 @@ for ($ligne=0; $ligne < $nb_ligne; $ligne++)
 						}
 						else
 						{
-								//require_once('../affiche_saison_banniere.php');
-								//$saison=AfficheSaisonBanniere(); // fonction qui retourne la saison en cours format "aaaa/aaaa"
-								 echo '<p> recap:</p>';
-								 echo $_POST['journee_new_'.$ligne];
+								$coupe=false;
+								$date=$_POST['journee_new_'.$ligne];
+								echo '<p class="Tabgauche"> Le match sera remis le: ';
+								echo '<b>'.$date.'</b></p>';
 
-								//AjoutJourneesBase($tab_journees, $saison, 'false') // fonction qui permet d'ajouter une journée dans la base
+								require_once ('fonctions_utiles.php');
+								CreerJournee($date,$coupe); // fonction qui permet d'ajouter une journée dans la base
 								//$suppr_match='DELETE FROM matchs WHERE ID_match='.$match_id.' ';
 			   					//$bdd->exec($suppr_match);	
+
 						
 						}	
 
 					}
-
-
-					$journee_id=$_POST['journee_dispo_'.$ligne];
-
-
-					if (AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id)) // fonction qui permet d'ajouter le match dans la journee
-					{
-						SupprMatch($match_id); // fonction qui supprime le match dont l'id est passé en parametre
-						echo '<p> sera remis le: <b>'.DateJournee($journee_id).'</b></p>';	
-					}
 					else
-					{
-						echo '<p class="nok">Opération annulée car au moins une des 2 équipes est déjà enregistrée sur cette journée !! </p>';
-						echo '<center>';
-						echo '<form id="myform">';
-						echo '<input type="button" value="Retour" onclick="history.go(-1)"/>';
-						echo '</form>';
-						echo '</center>';
-					} 
+					{	
+
+						$journee_id=$_POST['journee_dispo_'.$ligne];
+
+						if (AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id) == true) // fonction qui permet d'ajouter le match dans la journee
+						{
+							SupprMatch($match_id); // fonction qui supprime le match dont l'id est passé en parametre
+							echo '<p> sera remis le: <b>'.DateJournee($journee_id).'</b></p>';		
+						}
+						else
+						{
+							echo '<p class="nok">Opération annulée car au moins une des 2 équipes est déjà enregistrée sur cette journée !! </p>';
+							echo '<center>';
+							echo '<form id="myform">';
+							echo '<input type="button" value="Retour" onclick="history.go(-1)"/>';
+							echo '</form>';
+							echo '</center>';
+						}
+					}	 
 
 
 				}

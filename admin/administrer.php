@@ -28,7 +28,8 @@
 			<br>
 			<fieldset>
 				<legend>Statistiques Individuelles</legend>
-				<li><a class="adm" href="admin_ajout_stats_individuelles.php">Ajouter une ou plusieurs stats joueurs</a></li>	
+				<li><a class="adm" href="admin_ajout_stats_individuelles.php">Ajouter une ou plusieurs stats joueurs</a></li>
+				<li><a class="adm" href="admin_modif_stats_individuelles.php">Modifier une ou plusieurs stats joueurs</a></li>	
 			</fieldset>		
 			<br>
 			<fieldset>
