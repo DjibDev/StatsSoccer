@@ -490,7 +490,7 @@ function DateJourneeMatch($match_id)
 
 function DateJournee($journee_id)
 {
-	//requete qui retourne la date (en format FR) de la journee auquelle le match passé en parametre appartient (id)
+	//requete qui retourne la date (en format FR) de la journee selon l'ID journée passé en parametre
 	require ('connexion.php');
 
 	$date_journee='';
@@ -510,37 +510,69 @@ function DateJournee($journee_id)
 
 }
 
-function CreerJournee($date,$coupe)
+
+function CreerJournee($date,$coupe)       // permet de créer une nouvelle journée, pricipalement pour les reports de matchs, retourne true ou false
 {
 	require_once ('../affiche_saison_banniere.php');
-	$saison=AfficheSaisonBanniere();
+	$saison=AfficheSaisonBanniere(); 
 
 	// remise de la date en format MySQL AAAA-MM-JJ
 	$date=FormatDateMySQL($date);
-	echo $date;
 
-	require ('connexion.php');
+	// test si la date rentrée exsite deja dans la base
+	$tab_date_exist=array();
 
-	$max_num_j=$bdd->query('SELECT MAX(numero) AS N_max 
-	FROM journees 
-	WHERE coupe=false ');
+	require ('connexion.php'); 
 
-	while ($result_num_max=$max_num_j->fetch())
+	$req_check_date=$bdd->query('SELECT date FROM journees');
+	
+	$x=0;
+
+	while ($result_check_date=$req_check_date->fetch())
 	{
-			$numero_new=$result_num_max['N_max'];	
+
+			$tab_date_exist[$x]=$result_check_date['date'];
+			$x++;
+
 	}	
-	$max_num_j->CloseCursor();
+	$req_check_date->CloseCursor();
 
-	$numero_new++;
+	foreach ($tab_date_exist as $value) 
+	{
+		echo ' '.$value;
+	}
 
-	$insert_J = $bdd->prepare("INSERT INTO journees (date, saison, numero, coupe) VALUES (?,?,?,?)");
-	$insert_J->bindParam(1, $date);
-	$insert_J->bindParam(2, $saison);
-	$insert_J->bindParam(3, $numero_new);
-	$insert_J->bindParam(4, $coupe);
-	$insert_J->execute();
+	if (in_array($date, $tab_date_exist))
+	{
+		$success=false;
+	}	
+	else
+	{	
+		require ('connexion.php');
 
+		$max_num_j=$bdd->query('SELECT MAX(numero) AS N_max 
+		FROM journees 
+		WHERE coupe=false ');
 
+		while ($result_num_max=$max_num_j->fetch())
+		{
+			$numero_new=$result_num_max['N_max'];	
+		}	
+		$max_num_j->CloseCursor();
+
+		$numero_new++;
+
+		$insert_J = $bdd->prepare("INSERT INTO journees (date, saison, numero, coupe) VALUES (?,?,?,?)");
+		$insert_J->bindParam(1, $date);
+		$insert_J->bindParam(2, $saison);
+		$insert_J->bindParam(3, $numero_new);
+		$insert_J->bindParam(4, $coupe);
+		$insert_J->execute();
+
+		$success=true;
+	}	
+
+	return $success; 
 }
 
 function SupprMatch($match_id)

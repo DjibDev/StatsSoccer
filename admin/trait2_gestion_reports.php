@@ -77,8 +77,21 @@ for ($ligne=0; $ligne < $nb_ligne; $ligne++)
 								echo '<p class="Tabgauche"> Le match sera remis le: ';
 								echo '<b>'.$date.'</b></p>';
 
-								require_once ('fonctions_utiles.php');
-								CreerJournee($date,$coupe); // fonction qui permet d'ajouter une journée dans la base
+								//focntion qui va permettre d'ajouter une nouvelle journee si celle ci n'existe pas déja
+								if (CreerJournee($date,$coupe) == true)
+								{
+									echo '<p>SUCCES !</p>';
+								}
+								else
+								{
+									echo '<center>';
+									echo '<p class="nok">La date saisie existe déjà en base !</p>';
+									echo '<form id="myform">';
+									echo '<input type="button" value="Retour" onclick="history.go(-1)"/>';
+									echo '</form>';
+									echo '</center>';
+								}	
+
 								//$suppr_match='DELETE FROM matchs WHERE ID_match='.$match_id.' ';
 			   					//$bdd->exec($suppr_match);	
 

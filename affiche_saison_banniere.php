@@ -4,7 +4,7 @@ function AfficheSaisonBanniere()
 {
 	require ('connexion.php');
 
-	$saison=date('Y').'/'.(date('Y')+1);
+	$saison='En attente de création d\'une nouvelle saison...';
 
 	$req_saison=$bdd->prepare('SELECT DISTINCT(saison) AS Num FROM journees');
 	$req_saison->execute();
@@ -12,7 +12,7 @@ function AfficheSaisonBanniere()
 	while ($num_saison=$req_saison->fetch())
 	{
 
-		$saison=$num_saison['Num'];
+		$saison='Saison '.$num_saison['Num'];
 	}	
 	$req_saison->CloseCursor();
 	
