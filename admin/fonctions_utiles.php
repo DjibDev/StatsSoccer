@@ -3,7 +3,7 @@
 function FormatDateMySQL($datefr)
 {
     $datefr=strtotime($datefr);
-    $dateMySQL=date("Y-m-d",$datefr);
+    $dateMySQL=date("Y-d-m",$datefr);
     return $dateMySQL;
 }
 
@@ -424,7 +424,7 @@ function AjoutJourneesBase($tab_journees,$saison,$coupe)
 	
 }	
 
-function AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id)
+function AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id, $coupe)
 {
 	require ('connexion.php');
 
@@ -444,25 +444,29 @@ function AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id)
 	}	
 	$req_existant->closeCursor();
 
-	if ((in_array($equipe_dom_id, $tab_equipe_id)) || (in_array($equipe_vis_id, $tab_equipe_id)))
-	{
-		$success=false;
+	foreach ($tab_equipe_id as $value) {
+		echo $value.'<br>';
 	}
-	else
+
+	if (!(in_array($equipe_dom_id, $tab_equipe_id)) && (!(in_array($equipe_vis_id, $tab_equipe_id))))
 	{
 
-		$coupe=false;
-		$stmt = $bdd->prepare("INSERT INTO matchs (equipe_dom_id, equipe_vis_id, coupe, journee_id) VALUES (?,?,?,?)");
-		$stmt->bindParam(1, $equipe_dom_id);
-		$stmt->bindParam(2, $equipe_vis_id);
-		$stmt->bindParam(3, $coupe);
-		$stmt->bindParam(4, $journee_id);
-		$stmt->execute();
+		$insert_m = $bdd->prepare("INSERT INTO matchs (equipe_dom_id, equipe_vis_id, coupe, journee_id) VALUES (?,?,?,?)");
+		$insert_m->bindParam(1, $equipe_dom_id);
+		$insert_m->bindParam(2, $equipe_vis_id);
+		$insert_m->bindParam(3, $coupe);
+		$insert_m->bindParam(4, $journee_id);
+		$insert_m->execute();
 
 		$success=true;
 	}
+	else
+	{
+		$success=false;
+	}	
 
 	return $success;
+	
 }	
 
 function DateJourneeMatch($match_id)
@@ -511,8 +515,12 @@ function DateJournee($journee_id)
 }
 
 
-function CreerJournee($date,$coupe)       // permet de créer une nouvelle journée, pricipalement pour les reports de matchs, retourne true ou false
+function CreerJournee($date,$coupe)       // permet de créer une nouvelle journée, pricipalement pour les reports de matchs, retourne l'id de la journee si tout est ok
 {
+
+	// intialisation de la variable
+	$id_data=null;
+
 	require_once ('../affiche_saison_banniere.php');
 	$saison=AfficheSaisonBanniere(); 
 
@@ -537,16 +545,7 @@ function CreerJournee($date,$coupe)       // permet de créer une nouvelle journ
 	}	
 	$req_check_date->CloseCursor();
 
-	foreach ($tab_date_exist as $value) 
-	{
-		echo ' '.$value;
-	}
-
-	if (in_array($date, $tab_date_exist))
-	{
-		$success=false;
-	}	
-	else
+	if (!(in_array($date, $tab_date_exist)))
 	{	
 		require ('connexion.php');
 
@@ -569,15 +568,16 @@ function CreerJournee($date,$coupe)       // permet de créer une nouvelle journ
 		$insert_J->bindParam(4, $coupe);
 		$insert_J->execute();
 
-		$success=true;
+		$id_data = $bdd->lastInsertId();
+
 	}	
 
-	return $success; 
+	return $id_data; 
 }
 
 function SupprMatch($match_id)
 {
-	require ('connexion.php');
+		require ('connexion.php');
 
 		$suppr_match=$bdd->query('DELETE FROM matchs WHERE ID_match='.$match_id.' ');
 		$suppr_match->execute();	

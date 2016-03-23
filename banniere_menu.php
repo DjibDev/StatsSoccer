@@ -1,5 +1,21 @@
 <div id="banniere_image">
-		<h1><?php require ('affiche_saison_banniere.php'); echo AfficheSaisonBanniere(); ?></h1>	
+		<h1>Saison 
+		<?php 
+
+				require ('affiche_saison_banniere.php'); 
+				$num_saison=AfficheSaisonBanniere();
+				
+				if ($num_saison != null) 
+				{ 
+						echo $num_saison; 
+				}
+				else
+				{
+						echo 'En attente de création d\'une nouvelle saison...';		
+				} 
+		?>
+
+		</h1>	
 		<p align="right"><a href="admin/administrer.php">Administrer</a></p>
 		<div id="banniere_description">	
 			<center>

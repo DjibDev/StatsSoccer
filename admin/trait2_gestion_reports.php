@@ -74,13 +74,25 @@ for ($ligne=0; $ligne < $nb_ligne; $ligne++)
 						{
 								$coupe=false;
 								$date=$_POST['journee_new_'.$ligne];
-								echo '<p class="Tabgauche"> Le match sera remis le: ';
-								echo '<b>'.$date.'</b></p>';
 
-								//focntion qui va permettre d'ajouter une nouvelle journee si celle ci n'existe pas déja
-								if (CreerJournee($date,$coupe) == true)
-								{
-									echo '<p>SUCCES !</p>';
+
+								//fonction qui va permettre d'ajouter une nouvelle journee si celle ci n'existe pas déja
+								$journee_id=CreerJournee($date,$coupe);
+								
+								if ($journee_id != null)	
+								{	
+										if (AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id,$coupe) == true)// fonction qui permet d'ajouter le match dans la journee
+										{
+											//SupprMatch($match_id); // fonction qui supprime le match dont l'id est passé en parametre
+											echo '<p> sera remis le: <b>'.DateJournee($journee_id).'</b></p>';	
+											echo '<p class="Tabgauche"> Le match sera remis le: ';
+											echo '<b>'.$date.'</b></p>';	
+										}
+										else
+										{
+											echo '<p class="nok"> Une erreur s\'est produite lors de lenregistrement du match, veuillez recommencer ultérieurement</p>';
+										}	
+
 								}
 								else
 								{
@@ -92,8 +104,6 @@ for ($ligne=0; $ligne < $nb_ligne; $ligne++)
 									echo '</center>';
 								}	
 
-								//$suppr_match='DELETE FROM matchs WHERE ID_match='.$match_id.' ';
-			   					//$bdd->exec($suppr_match);	
 
 						
 						}	
@@ -103,10 +113,12 @@ for ($ligne=0; $ligne < $nb_ligne; $ligne++)
 					{	
 
 						$journee_id=$_POST['journee_dispo_'.$ligne];
+						$coupe=false;
+						require_once ('fonctions_utiles.php');
 
-						if (AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id) == true) // fonction qui permet d'ajouter le match dans la journee
+						if (AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id, $coupe))// fonction qui permet d'ajouter le match dans la journee
 						{
-							SupprMatch($match_id); // fonction qui supprime le match dont l'id est passé en parametre
+							//SupprMatch($match_id); // fonction qui supprime le match dont l'id est passé en parametre
 							echo '<p> sera remis le: <b>'.DateJournee($journee_id).'</b></p>';		
 						}
 						else

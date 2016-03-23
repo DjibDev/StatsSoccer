@@ -25,7 +25,7 @@
 		echo '<br>';
 
 		echo '<table border="0">';
-		echo '<tr><th width="500">Match(s) reporté(s)</th><th>Dates disponibles</th><th width="50"></th><th width="50">Nouvelle date</th></tr>';
+		echo '<tr><th width="500">Match(s) reporté(s)</th><th>Dates disponibles</th><th width="50"></th><th width="50">Nouvelle date (format JJ/MM/AAAA)</th></tr>';
 
 		$nb_report=0;  // par defaut pas de report de match
 
