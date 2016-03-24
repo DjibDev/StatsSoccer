@@ -2,17 +2,32 @@
 
 function AfficheSaisonBanniere()
 {
-	require ('connexion.php');
+	$mysqlDatabaseName ='stats';
+	$mysqlUserName ='root';
+	$mysqlPassword ='root';
+	$mysqlHostName ='localhost';
+	$mysqlImportFilename ='../database/stats.sql';
 
-	$req_saison=$bdd->query('SELECT saison 
-		FROM journees 
-		WHERE ID_journee= (SELECT MIN(ID_journee) FROM journees)');
-
-	while ($num_saison=$req_saison->fetch())
+	$command='mysql -h' .$mysqlHostName .' -u' .$mysqlUserName .' -p' .$mysqlPassword .' ' .$mysqlDatabaseName .' < ' .$mysqlImportFilename;
+	exec($command,$output=array(),$worked);
+	switch($worked)
 	{
-		$saison=$num_saison['saison'];
-	}	
-	$req_saison->CloseCursor();
+		case 0:
+				$req_saison=$bdd->query('SELECT saison 
+				FROM journees 
+				WHERE ID_journee= (SELECT MIN(ID_journee) FROM journees)');
+
+				while ($num_saison=$req_saison->fetch())
+				{
+					$saison=$num_saison['saison'];
+				}	
+				$req_saison->CloseCursor();
+		break;		
+
+		case 1:	$saison=null;
+		break;
+
+	}
 	
 	return $saison;
 }

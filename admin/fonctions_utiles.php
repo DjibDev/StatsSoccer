@@ -393,7 +393,7 @@ function CreateBdd()
 	{
     case 0:
 		echo '<center><p class="ok">La nouvelle saison est créée, il vous reste a créer les équipes et définir les rencontres.</p></center>';
-        break;
+        	break;
     case 1:
         echo '<center><pclass="nok">Une erreur s\'est rpoduite lors de la creation de la nouvelle base, veuillez contacter votre administrateur</p></center>';
         break;
@@ -431,7 +431,7 @@ function AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id, $coupe)
 	//vérification de l'absence de doublon avant MAJ de la base
 	$tab_equipe_id=array();
 	$x=0;
-	$success=false;
+	$success=true;
 
 	$req_existant=$bdd->query('SELECT equipe_dom_id, equipe_vis_id FROM matchs WHERE journee_id='.$journee_id.' ');
 	
@@ -444,26 +444,15 @@ function AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id, $coupe)
 	}	
 	$req_existant->closeCursor();
 
-	foreach ($tab_equipe_id as $value) {
-		echo $value.'<br>';
-	}
-
-	if (!(in_array($equipe_dom_id, $tab_equipe_id)) && (!(in_array($equipe_vis_id, $tab_equipe_id))))
-	{
-
-		$insert_m = $bdd->prepare("INSERT INTO matchs (equipe_dom_id, equipe_vis_id, coupe, journee_id) VALUES (?,?,?,?)");
-		$insert_m->bindParam(1, $equipe_dom_id);
-		$insert_m->bindParam(2, $equipe_vis_id);
-		$insert_m->bindParam(3, $coupe);
-		$insert_m->bindParam(4, $journee_id);
-		$insert_m->execute();
-
-		$success=true;
-	}
-	else
-	{
+	if (in_array($equipe_dom_id, $tab_equipe_id))
+	{	
 		$success=false;
-	}	
+	}
+	
+	if	(in_array($equipe_vis_id, $tab_equipe_id))
+	{	
+		$success=false;
+	}
 
 	return $success;
 	

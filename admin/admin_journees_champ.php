@@ -16,6 +16,11 @@
 	<?php
 	
 		$current_saison=AfficheSaisonBanniere();
+
+		if ($current_saison == null)
+		{
+			$current_saison=date('Y').'/'.(date('Y')+1);
+		}	
 		$saison_future='20'.(substr($current_saison,2,2)+1).'/20'.(substr($current_saison,7,2)+1);
 		
 		if (!(isset($_POST['number_j'])))

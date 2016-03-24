@@ -7,7 +7,7 @@
 				
 				if ($num_saison != null) 
 				{ 
-						echo $num_saison; 
+						echo 'Saison '.$num_saison; 
 				}
 				else
 				{

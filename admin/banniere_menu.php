@@ -1,5 +1,5 @@
 <div id="banniere_image">
-		<h1>Saison 
+		<h1>
 		<?php 
 
 				require ('../affiche_saison_banniere.php'); 
@@ -7,7 +7,7 @@
 				
 				if ($num_saison != null) 
 				{ 
-						echo $num_saison; 
+						echo 'Saison '.$num_saison; 
 				}
 				else
 				{

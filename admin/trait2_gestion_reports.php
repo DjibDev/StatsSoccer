@@ -76,23 +76,21 @@ for ($ligne=0; $ligne < $nb_ligne; $ligne++)
 								$date=$_POST['journee_new_'.$ligne];
 
 
-								//fonction qui va permettre d'ajouter une nouvelle journee si celle ci n'existe pas déja
+								//fonction qui va permettre d'ajouter une nouvelle journee si celle ci n'existe pas déja, et retourne l'ID de la journée créée
 								$journee_id=CreerJournee($date,$coupe);
-								
+
 								if ($journee_id != null)	
 								{	
-										if (AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id,$coupe) == true)// fonction qui permet d'ajouter le match dans la journee
-										{
-											//SupprMatch($match_id); // fonction qui supprime le match dont l'id est passé en parametre
-											echo '<p> sera remis le: <b>'.DateJournee($journee_id).'</b></p>';	
-											echo '<p class="Tabgauche"> Le match sera remis le: ';
-											echo '<b>'.$date.'</b></p>';	
-										}
-										else
-										{
-											echo '<p class="nok"> Une erreur s\'est produite lors de lenregistrement du match, veuillez recommencer ultérieurement</p>';
-										}	
+									$insert_m = $bdd->prepare("INSERT INTO matchs (equipe_dom_id, equipe_vis_id, coupe, journee_id) VALUES (?,?,?,?)");
+									$insert_m->bindParam(1, $equipe_dom_id);
+									$insert_m->bindParam(2, $equipe_vis_id);
+									$insert_m->bindParam(3, $coupe);
+									$insert_m->bindParam(4, $journee_id);
+									$insert_m->execute();
 
+									echo '==> sera remis le: <b>'.DateJournee($journee_id).'</b></p>';	
+
+									SupprMatch($match_id); // fonction qui supprime le match dont l'id est passé en parametre
 								}
 								else
 								{
@@ -103,8 +101,6 @@ for ($ligne=0; $ligne < $nb_ligne; $ligne++)
 									echo '</form>';
 									echo '</center>';
 								}	
-
-
 						
 						}	
 
@@ -114,12 +110,17 @@ for ($ligne=0; $ligne < $nb_ligne; $ligne++)
 
 						$journee_id=$_POST['journee_dispo_'.$ligne];
 						$coupe=false;
-						require_once ('fonctions_utiles.php');
-
+						
 						if (AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id, $coupe))// fonction qui permet d'ajouter le match dans la journee
 						{
-							//SupprMatch($match_id); // fonction qui supprime le match dont l'id est passé en parametre
-							echo '<p> sera remis le: <b>'.DateJournee($journee_id).'</b></p>';		
+							$insert_m = $bdd->prepare("INSERT INTO matchs (equipe_dom_id, equipe_vis_id, coupe, journee_id) VALUES (?,?,?,?)");
+							$insert_m->bindParam(1, $equipe_dom_id);
+							$insert_m->bindParam(2, $equipe_vis_id);
+							$insert_m->bindParam(3, $coupe);
+							$insert_m->bindParam(4, $journee_id);
+							$insert_m->execute();
+							SupprMatch($match_id); // fonction qui supprime le match dont l'id est passé en parametre
+							echo '==> sera remis le: <b>'.DateJournee($journee_id).'</b></p>';		
 						}
 						else
 						{
