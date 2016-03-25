@@ -2,8 +2,8 @@
 
 function FormatDateMySQL($datefr)
 {
-    $datefr=strtotime($datefr);
-    $dateMySQL=date("Y-d-m",$datefr);
+    
+    $dateMySQL=substr($datefr,-4).'-'.substr($datefr, -6, 2).'-'.substr($datefr, 0, 2);
     return $dateMySQL;
 }
 
@@ -13,6 +13,23 @@ function FormatDateFR($dateMySQL)
     $dateFR=date("d/m/Y",$dateMySQL);
     return $dateFR;
 }
+
+function FormatDateSaisie($date)
+{
+	// date qui doit etre comprise entre 01/01/2000 et 31/12/2199
+	$regex_date='#^[0-3]{1}\d{1}+[\/]{1}[0-1]{1}\d{1}[\/][2]{1}[0-1]{1}\d{1}\d{1}$#'; 
+
+	if (preg_match($regex_date, $date))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}	
+
+}
+
 
 function NumMaillotDispo()
 {
@@ -515,7 +532,7 @@ function CreerJournee($date,$coupe)       // permet de créer une nouvelle journ
 
 	// remise de la date en format MySQL AAAA-MM-JJ
 	$date=FormatDateMySQL($date);
-
+	
 	// test si la date rentrée exsite deja dans la base
 	$tab_date_exist=array();
 
@@ -534,13 +551,20 @@ function CreerJournee($date,$coupe)       // permet de créer une nouvelle journ
 	}	
 	$req_check_date->CloseCursor();
 
+	foreach ($tab_date_exist as $value) {
+		echo ' '.$value;
+	}
+	echo '<br>'.$saison;
+	echo '<br>'.$date;
+
 	if (!(in_array($date, $tab_date_exist)))
 	{	
 		require ('connexion.php');
+		echo $date;
 
 		$max_num_j=$bdd->query('SELECT MAX(numero) AS N_max 
 		FROM journees 
-		WHERE coupe=false ');
+		WHERE coupe='.$coupe.' ');
 
 		while ($result_num_max=$max_num_j->fetch())
 		{

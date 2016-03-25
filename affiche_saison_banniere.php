@@ -2,18 +2,14 @@
 
 function AfficheSaisonBanniere()
 {
-	$mysqlDatabaseName ='stats';
-	$mysqlUserName ='root';
-	$mysqlPassword ='root';
-	$mysqlHostName ='localhost';
-	$mysqlImportFilename ='../database/stats.sql';
 
-	$command='mysql -h' .$mysqlHostName .' -u' .$mysqlUserName .' -p' .$mysqlPassword .' ' .$mysqlDatabaseName .' < ' .$mysqlImportFilename;
-	exec($command,$output=array(),$worked);
-	switch($worked)
-	{
-		case 0:
-				$req_saison=$bdd->query('SELECT saison 
+	require ('connexion.php');
+
+	try
+      {
+      			$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    			$req_saison=$bdd->query('SELECT saison 
 				FROM journees 
 				WHERE ID_journee= (SELECT MIN(ID_journee) FROM journees)');
 
@@ -22,13 +18,15 @@ function AfficheSaisonBanniere()
 					$saison=$num_saison['saison'];
 				}	
 				$req_saison->CloseCursor();
-		break;		
 
-		case 1:	$saison=null;
-		break;
-
-	}
+      }
+      
+    catch(Exception $e)
+     {
+            $saison=null;
+     }
 	
+		
 	return $saison;
 }
 

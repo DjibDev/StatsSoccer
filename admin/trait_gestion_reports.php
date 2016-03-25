@@ -25,7 +25,7 @@
 		echo '<br>';
 
 		echo '<table border="0">';
-		echo '<tr><th width="500">Match(s) reporté(s)</th><th>Dates disponibles</th><th width="50"></th><th width="50">Nouvelle date (format JJ/MM/AAAA)</th></tr>';
+		echo '<tr><th width="400">Match(s) reporté(s)</th><th>Dates disponibles</th><th width="50"></th><th width="200">Nouvelle date (format jj/mm/aaaa)</th></tr>';
 
 		$nb_report=0;  // par defaut pas de report de match
 
@@ -53,7 +53,7 @@
 				NbrMatchAtteint(); // cette fonction permet d'afficher uniquement les journées incompletes
            		echo '</select></td>';
            		echo '<td></td>';
-           		echo '<td><input type="text" size=8 name="journee_new_'.$ligne.'" id="journee_new"></td>';
+           		echo '<td align="center"><input type="text" size=10 name="journee_new_'.$ligne.'" id="journee_new"></td>';
            		echo '<tr>';
            		$nb_report++;
 			}

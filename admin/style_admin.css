@@ -157,6 +157,11 @@ font-size: 0.8em;
 border: 0;
 } 
 
+th, td, form
+{
+     font-size: 0.8em;
+}
+
 article, aside
 {
     display: inline-block;

@@ -57,11 +57,9 @@ for ($ligne=0; $ligne < $nb_ligne; $ligne++)
 					
 					if (!(empty($_POST['journee_new_'.$ligne])))
 					{
-
-
-						$regex_date='#[0-3]{1}\d{1}+[\/]{1}[0-1]{1}\d{1}[\/][2]{1}[0-1]{1}\d{1}\d{1}#'; // date qui doit etre comprise entre 01/01/2000 et 31/12/2199
+						$verif_date= FormatDateSaisie($_POST['journee_new_'.$ligne]);// fontion qui permet de vérifier la saisie de la date jj/mm/aaaa
 						
-						if (!(preg_match($regex_date, $_POST['journee_new_'.$ligne])))
+						if (!($verif_date))
 						{
 							echo '<center>';
 							echo '<p class="nok">La date saisie n\'est pas conforme !</p>';
@@ -78,6 +76,7 @@ for ($ligne=0; $ligne < $nb_ligne; $ligne++)
 
 								//fonction qui va permettre d'ajouter une nouvelle journee si celle ci n'existe pas déja, et retourne l'ID de la journée créée
 								$journee_id=CreerJournee($date,$coupe);
+								echo $journee_id;
 
 								if ($journee_id != null)	
 								{	
