@@ -70,12 +70,12 @@ for ($ligne=0; $ligne < $nb_ligne; $ligne++)
 						}
 						else
 						{
-								$coupe=false;
+								$coupe=0;
 								$date=$_POST['journee_new_'.$ligne];
 
 
 								//fonction qui va permettre d'ajouter une nouvelle journee si celle ci n'existe pas déja, et retourne l'ID de la journée créée
-								$journee_id=CreerJournee($date,$coupe);
+								$journee_id=CreerJournee($date,$coupe);	
 								echo $journee_id;
 
 								if ($journee_id != null)	
@@ -108,7 +108,7 @@ for ($ligne=0; $ligne < $nb_ligne; $ligne++)
 					{	
 
 						$journee_id=$_POST['journee_dispo_'.$ligne];
-						$coupe=false;
+						$coupe=0;
 						
 						if (AjoutMatchJournee($journee_id, $equipe_dom_id, $equipe_vis_id, $coupe))// fonction qui permet d'ajouter le match dans la journee
 						{
@@ -136,7 +136,8 @@ for ($ligne=0; $ligne < $nb_ligne; $ligne++)
 				}
 
 			}
-}
+
+}			
 			
 ?>	
 	

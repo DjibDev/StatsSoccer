@@ -55,7 +55,7 @@
 			echo '<tr><th width="500">Confrontations</th><th align="center" colspan="2" >Reporté ?</th></tr>';
 
 			$ligne=0;
-			
+
 			while ($resultats2=$reponse2->fetch())
 			{	
 				
@@ -72,10 +72,13 @@
 				$ligne++;					
 			}
 			$reponse2->closeCursor(); 
-
+			
+			$nb_matchs=$ligne+1;
+			
 			echo '</table>';
 			echo '<br>';
 			echo '<center>';
+			echo '<input type="hidden" name=nb_matchs value="'.$nb_matchs.'">';
 			echo '<input type="button" value="Retour" onclick="history.go(-1)"/>&nbsp;&nbsp;';
 			echo '<input type="submit" value="Etape suivante >" />'; 	
 			echo '</center>';

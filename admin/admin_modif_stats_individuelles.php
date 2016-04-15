@@ -13,43 +13,54 @@
 	include('banniere_menu.php');
 	require('connexion.php');
 	require('fonctions_utiles.php');
-		
+?>
+	<section>
+
+	<?php		
 	if (!(isset($_POST['player'])))
 	{
-?>	
-	
-	<section>	
-		
-		<form name="modif_stats_ind" method="post" action="admin_modif_stats_individuelles.php" id="myform">
-		<fieldset>
-		<Legend> Modifier les stats d'un joueur</Legend>		
-			<label for="player">Joueur : </label>
-			<select required name="player" id="player">
-				<option selected disabled value="">Sélectionnez</option>
-						
-				<?php 
-			
+		echo '<form method="post" action="admin_modif_stats_individuelles.php" id="myform">';
+		echo '<fieldset>';
+		echo '<Legend> Modifier les stats d\'un joueur</Legend>';		
+		echo '<label for="player">Joueur : </label>';
+		echo '<select required name="player" id="player" onchange="submit()">';
+		echo '<option selected disabled value="">Sélectionnez</option>';
+									
 				$req_pl=$bdd->query('SELECT * FROM effectif ORDER BY nom ASC');
 	
 				while ($result_pl=$req_pl->fetch())
 				{
 					echo '<option value="'.$result_pl['ID_joueur'].'">'.$result_pl['pseudo'].' </option>';
-				
+			
 				}
 			
 				$req_pl->closeCursor();
 				
-				?>
-        	
-        	</select>
-        	<br>
-        	<label for="journee">Journée : </label>
-			<select name="journee" id="journee">
-				<option selected disabled value="">Sélectionnez</option>
-						
-				<?php 
+
+        echo '</select>';
+        echo '</fieldset>';
+        echo '</form>';
+
+     }
+     else
+     {		
+    		$player_id=$_POST['player'];
+ 			$pseudo=RetournePseudo($player_id);
+
+ 			echo '<form method="post" action="trait_modif_stats_individuelles.php" id="myform">';
+			echo '<fieldset>';
+			echo '<Legend>Modifications des stats de '.$pseudo.' </Legend>';
+			echo '<input type="hidden" name="pseudo_id" value="'.$player_id.'">';
+			echo '<br>';
+        	echo '<label for="journee">Journée : </label>';
+			echo '<select name="journee_test" onchange="submit()">';
+			echo '<option selected disabled value="">Sélectionnez</option>';
 			
-				$req_j=$bdd->query('SELECT * FROM journees order by date ASC');
+				$req_j=$bdd->query('SELECT *
+									FROM stats_individuelles, journees
+									WHERE joueur_id ='.$player_id.'
+									AND stats_individuelles.journee_id = journees.ID_journee
+									ORDER BY date ASC ');
 
 				$type_journee='';
 	
@@ -71,70 +82,15 @@
 				}
 				$req_j->closeCursor();
 				
-				?>
-        	
-        	</select>
-        	<br><br>
-        	<center>
-        	<input type="reset" value="Effacer"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Visualiser"/>
-      		</center>
-        </fieldset>
-        </form>	
-    <?php   
-     	}
-     	else
-     	{
-
-			$joueur_id=$_POST['player'];
-			$journee_id=$_POST['journee'];
-
-			
-			$req_stats=$bdd->query('SELECT * FROM stats_individuelles 
-			WHERE joueur_id='.$joueur_id.'
-			AND journee_id='.$journee_id.' ');
-				
-			echo '<form method="post" action="trait_modif_stats_individuelles.php" id="myform">';		
-			echo '<fieldset>';			
-			
-			while ($result_stats=$req_stats->fetch())
-			{	
-
-				echo '<input type="hidden" name="joueur_id" value="'.$joueur_id.'" />';
-				
-				echo '<label for="buts">Buts :</label>';	
-				echo '<input type="number" name="buts" id="buts" value="'.$result_stats['buts'].'"/>';
-				
-				echo '<label for="passes">Passes :</label>';	
-				echo '<input type="number" name="passes" id="passes" value="'.$result_stats['passes'].'"/>';	
-				
-				//echo '<label for="cleansheet">Cleansheet :</label>';	
-				//echo '<input type="number" name="cleansheet" id="cleansheet" value="'.$result_stats['cleansheet'].'"/>';
-				
-				echo '<label for="peno_rate">Péno. raté :</label>';	
-				echo '<input type="number" name="peno_rate" id="peno_rate" value="'.$result_stats['peno_rate'].'"/>';
-
-				echo '<label for="peno_arrete">Péno. arreté :</label>';	
-				echo '<input type="number" name="peno_arrete" id="peno_arrete" value="'.$result_stats['peno_arrete'].'"/>';
-
-				echo '<label for="csc">CSC :</label>';	
-				echo '<input type="number" name="csc" id="csc" value="'.$result_stats['csc'].'"/>';
-
-			}
-			$req_stats->CloseCursor();	
-				
-		?>		
-
-		<br>
-		<center>
-		<input type="reset" value="Annuler"/>
-		<input type="submit" value="Enregistrer"/> 		
-		</center>
-		
-		</fieldset>
-		</form>
-		<?php 
-		}	
-		?>
+			echo '</select>';
+        	echo '<br><br>';
+        	echo '<center>';
+        	echo '<input type="button" value="Retour" onclick="history.go(-1)"/>';
+      		echo '</center>';
+      		echo '</fieldset>';
+        	echo '</form>';
+	}	
+	?>
 
 	</section>
 	<?php include ('../footer.php'); ?>
@@ -143,4 +99,4 @@
 		
 	
 </body>
-</html> 
+</html>

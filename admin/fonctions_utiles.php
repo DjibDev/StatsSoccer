@@ -1,9 +1,10 @@
 <?php
 
+// tranbsfforme une date en format jj/mm/aaaa en aaaa-mm-jj
 function FormatDateMySQL($datefr)
 {
     
-    $dateMySQL=substr($datefr,-4).'-'.substr($datefr, -6, 2).'-'.substr($datefr, 0, 2);
+    $dateMySQL=substr($datefr,-4).'-'.substr($datefr, 3, 2).'-'.substr($datefr, 0, 2);
     return $dateMySQL;
 }
 
@@ -30,6 +31,24 @@ function FormatDateSaisie($date)
 
 }
 
+function RetournePseudo($id_joueur)
+{
+	require ('connexion.php');
+	
+	$pseudo='PSEUDO NON TROUVE';
+
+	$req_eff=$bdd->query('SELECT pseudo 
+							FROM effectif
+							WHERE ID_joueur='.$id_joueur.' ');
+								
+	while ($aff_pseudo=$req_eff->fetch())
+	{
+		$pseudo=$aff_pseudo['pseudo'];
+	}	
+	$req_eff->closeCursor();
+
+	return $pseudo;
+}
 
 function NumMaillotDispo()
 {
@@ -521,7 +540,7 @@ function DateJournee($journee_id)
 }
 
 
-function CreerJournee($date,$coupe)       // permet de créer une nouvelle journée, pricipalement pour les reports de matchs, retourne l'id de la journee si tout est ok
+function CreerJournee($date, $coupe)       // permet de créer une nouvelle journée, pricipalement pour les reports de matchs, retourne l'id de la journee si tout est ok
 {
 
 	// intialisation de la variable
@@ -551,17 +570,9 @@ function CreerJournee($date,$coupe)       // permet de créer une nouvelle journ
 	}	
 	$req_check_date->CloseCursor();
 
-	foreach ($tab_date_exist as $value) {
-		echo ' '.$value;
-	}
-	echo '<br>'.$saison;
-	echo '<br>'.$date;
 
 	if (!(in_array($date, $tab_date_exist)))
 	{	
-		require ('connexion.php');
-		echo $date;
-
 		$max_num_j=$bdd->query('SELECT MAX(numero) AS N_max 
 		FROM journees 
 		WHERE coupe='.$coupe.' ');

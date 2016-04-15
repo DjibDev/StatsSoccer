@@ -16,8 +16,6 @@
 	<section>	
 
 <?php	
-		$nb_report=0;  // par defaut pas de report de match
-		$nb_report=$ligne;
 		
 		echo '<form method="post" action="trait2_gestion_reports.php" id="myform">';
 		echo '<fieldset>';
@@ -28,8 +26,9 @@
 		echo '<tr><th width="400">Match(s) reporté(s)</th><th>Dates disponibles</th><th width="50"></th><th width="200">Nouvelle date (format jj/mm/aaaa)</th></tr>';
 
 		$nb_report=0;  // par defaut pas de report de match
-
-		for ($ligne=0; $ligne < 10; $ligne++)
+		$max_ligne=$_POST['nb_matchs'];
+		
+		for ($ligne=0; $ligne < $max_ligne; $ligne++)
 		{	
 			$report=$_POST['report_'.$ligne]; 
 
