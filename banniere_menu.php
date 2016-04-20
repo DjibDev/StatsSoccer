@@ -16,7 +16,6 @@
 		?>
 
 		</h1>	
-		<p align="right"><a href="admin/administrer.php">Administrer</a></p>
 		<div id="banniere_description">	
 			<center>
 				<a class="btn" href="index.php">Home</a>

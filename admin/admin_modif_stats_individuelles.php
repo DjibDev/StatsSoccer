@@ -49,7 +49,7 @@
 
  			echo '<form method="post" action="trait_modif_stats_individuelles.php" id="myform">';
 			echo '<fieldset>';
-			echo '<Legend>Modifications des stats de '.$pseudo.' </Legend>';
+			echo '<Legend>Modifications des stats de <b>'.$pseudo.'</b> </Legend>';
 			echo '<input type="hidden" name="pseudo_id" value="'.$player_id.'">';
 			echo '<br>';
         	echo '<label for="journee">Journée : </label>';
@@ -77,7 +77,7 @@
 
 					$date_fr=FormatDateFR($result_j['date']);
 					
-					echo '<option value="'.$resul_j['ID_journee'].'">Journée de '.$type_journee.' N°'.$result_j['numero'].' le '.$date_fr.'</option>';
+					echo '<option value="'.$result_j['ID_journee'].'">Journée de '.$type_journee.' N°'.$result_j['numero'].' le '.$date_fr.'</option>';
 				
 				}
 				$req_j->closeCursor();
