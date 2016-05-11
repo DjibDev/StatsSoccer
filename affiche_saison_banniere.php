@@ -4,7 +4,8 @@ function AfficheSaisonBanniere()
 {
 
 	require ('connexion.php');
-
+	$saison=null;
+	
 	try
       {
       			$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

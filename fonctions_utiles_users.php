@@ -65,7 +65,7 @@ function AgeAVG()
 	$req=$bdd->query('SELECT birthday 
 	FROM effectif
 	WHERE birthday != "0000-00-00" ');
-	
+		
 	while ($resultat=$req->fetch())
 	{
 				$tab_Age[$indice]=CalculerAge($resultat['birthday']);
@@ -74,25 +74,31 @@ function AgeAVG()
 	}	
 	$req->closeCursor();
 	
-	$nb_elements=$indice; // le nombre d'élements dans le tableau correspond a la derniere valeur de l'indice +1
+	if ($indice != 0)
+	{ 
+		$nb_elements=$indice+1; // le nombre d'élements dans le tableau correspond a la derniere valeur de l'indice +1
+		$age_total=0; // initialisation de la variable
 	
-	$age_total=0; // initialisation de la variable
-	
-	// boucle qui permet d'additionner tous les ages
-	for ($x=0; $x <= $nb_elements; $x++)
-	{
+		// boucle qui permet d'additionner tous les ages
+		for ($x=0; $x < $nb_elements; $x++)
+		{
 			$age_total=$age_total+$tab_Age[$x];
-	}	
+		}	
 	
-	$decimal=$age_total/$nb_elements;
-	$decimal_arrondi=round($decimal,2);
-	$age_annee=floor($decimal_arrondi);
-	$decimal_mois=$decimal_arrondi-$age_annee;
-	$age_mois=$decimal_mois*12;
-	$age_mois_arondi=round($age_mois);
+		$decimal=$age_total/$nb_elements;
+		$decimal_arrondi=round($decimal,2);
+		$age_annee=floor($decimal_arrondi);
+		$decimal_mois=$decimal_arrondi-$age_annee;
+		$age_mois=$decimal_mois*12;
+		$age_mois_arondi=round($age_mois);
 
-	$age_moyen_complet=$age_annee.' ans et '.$age_mois_arondi.' mois.';
+		$age_moyen_complet=$age_annee.' ans et '.$age_mois_arondi.' mois.';
 	
+	}
+	else
+	{
+		$age_moyen_complet='N.C.';
+	}
 	return $age_moyen_complet;
 
 	
