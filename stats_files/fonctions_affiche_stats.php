@@ -338,7 +338,7 @@ function AfficheStatsEquipe($a)
 	WHERE stats_collectives.equipe_id = equipes.ID_equipe
 	AND equipes.ID_equipe = '.$a.' ');
 	
-	while ($resultats=$req->fetch())
+	while ($resultats=$req->fetch())	
 	{
 		$nb_journees=$resultats['nb_journees'];
 		$nom_equipe=$resultats['nom'];

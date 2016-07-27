@@ -10,13 +10,8 @@
 				<p>Dernière mise à jour le 
 					<?php 
 					
-					$getLastModDir = filemtime("modifs.txt"); 
-					
-					if (date("d/m/Y",$getLastModDir) == "01/01/1970")
-					{
-						$getLastModDir = filemtime("../modifs.txt"); 
-					}	
-						echo date("d/m/Y.", $getLastModDir);
+					$getLastModDir = filemtime("../modifs.txt"); 
+					echo date("d/m/Y.", $getLastModDir);
 							
 					?></p></td>
 			</tr>	

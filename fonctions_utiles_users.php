@@ -76,7 +76,7 @@ function AgeAVG()
 	
 	if ($indice != 0)
 	{ 
-		$nb_elements=$indice+1; // le nombre d'élements dans le tableau correspond a la derniere valeur de l'indice +1
+		$nb_elements=count($tab_Age); // le nombre d'élements dans le tableau 
 		$age_total=0; // initialisation de la variable
 	
 		// boucle qui permet d'additionner tous les ages

@@ -142,7 +142,7 @@ for ($ligne=0; $ligne < $nb_ligne; $ligne++)
 ?>	
 	
 	</section>
-	<?php include ('../footer.php'); ?>
+	<?php include ('footer.php'); ?>
 </div>
 </body>
 </html>	

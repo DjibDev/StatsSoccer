@@ -21,18 +21,25 @@
 		<?php 
 
 		echo '<h2 align="center">Derniers résultats</h2>';
-			
+
 		$reponse=$bdd->query('SELECT MAX(date) as DerJ FROM journees WHERE finished=1');
-		$result=$reponse->fetch();
-		echo '<p align="center"><u><b>Le '.FormatDateFR($result['DerJ']).'</b></u></p>';
-		echo '<table align="center">';
+
+		while ($result=$reponse->fetch()) {	
+				$der_res=FormatDateFR($result['DerJ']);
+			}
+			$reponse->CloseCursor();
+
+	if ($der_res != '01/01/1970')
+	{
+				echo '<p align="center"><u><b>Le '.$der_res.'</b></u></p>';
+				echo '<table align="center">';
 						
-		$reponse2=$bdd->query('SELECT e1.nom equi1, e2.nom equi2, e1.favorite fav1, e2.favorite fav2, equipe_dom_forfait, equipe_dom_penalite, equipe_vis_forfait, equipe_vis_penalite, but_equipe_dom, but_equipe_vis, finished
-		FROM matchs, journees, equipes e1, equipes e2
-		WHERE date=(SELECT MAX(date) FROM journees WHERE finished=1)
-		AND journees.ID_journee=matchs.journee_id
-		AND matchs.equipe_dom_id = e1.ID_equipe
-		AND matchs.equipe_vis_id = e2.ID_equipe');
+			$reponse2=$bdd->query('SELECT e1.nom equi1, e2.nom equi2, e1.favorite fav1, e2.favorite fav2, equipe_dom_forfait, equipe_dom_penalite, equipe_vis_forfait, equipe_vis_penalite, but_equipe_dom, but_equipe_vis, finished
+			FROM matchs, journees, equipes e1, equipes e2
+			WHERE date=(SELECT MAX(date) FROM journees WHERE finished=1)
+			AND journees.ID_journee=matchs.journee_id
+			AND matchs.equipe_dom_id = e1.ID_equipe
+			AND matchs.equipe_vis_id = e2.ID_equipe');
 	
 		while ($resultats2=$reponse2->fetch())
 		{
@@ -95,12 +102,23 @@
 
 		
 		echo '</table>';
+	}
+	else {
+			echo '<p align="center"><b><i>Information non communiquée</b></i></p>';
+	}
 		echo '<br>';
 		echo '<h2 align="center">Matchs à venir</h2>';
 
-		$req=$bdd->query('SELECT MIN(date) as DerJ FROM journees WHERE finished=0');
-		$result2=$req->fetch();
-		echo '<p align="center"><b><u>Le '.FormatDateFR($result2['DerJ']).'</b></u></p>';
+		$req=$bdd->query('SELECT MIN(date) as ProJ FROM journees WHERE finished=0');
+
+			while ($result2=$req->fetch()) {	
+				$match_venir=FormatDateFR($result2['ProJ']);
+			}
+			$req->CloseCursor();
+
+	if ($match_venir != '01/01/1970')
+	{
+		echo '<p align="center"><b><u>Le '.$match_venir.'</b></u></p>';
 		echo '<table align="center">';
 						
 		$req2=$bdd->query('SELECT e1.nom equi1, e2.nom equi2, e1.favorite fav1, e2.favorite fav2, finished
@@ -135,7 +153,10 @@
 
 		
 		echo '</table>';
-				
+	}
+	else {
+			echo '<p align="center"><b><i>Information non communiquée</b></i></p>';
+	}		
 			?>
 			<br>
 	
@@ -143,12 +164,12 @@
 		<aside>
 			<center>
 				<br><br>
-				<a href="http://jgefoot.com"><img src="images/petit_logo.png"/></a>
+				<a href="#"><img src="images/petit_logo.png"/></a>
 				<br><br>
 				<br><br>
 				<br><br>
 				<br><br><br>
-				<a href="http://jgefoot.com"><img src="images/ballon.png"/></a>
+				<a href="#"><img src="images/ballon.png"/></a>
 				<br><br>
 				<br><br>
 			</center>

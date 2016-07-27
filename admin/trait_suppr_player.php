@@ -7,6 +7,7 @@
 	</head>
 	
 <body>	
+<div id="bloc_page">
 <?php
 	include('banniere_menu.php');
 ?>	
@@ -41,7 +42,7 @@
 
 		?>
 	</section>
-	<?php include ('../footer.php'); ?>
+	<?php include ('footer.php'); ?>
 </div>
 </body>
 </html>	
