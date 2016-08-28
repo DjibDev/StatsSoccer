@@ -36,6 +36,7 @@
 				<legend>Gestion de la base</legend>
 				<li><a class="adm" href="admin_journees_champ.php">Nouvelle saison</a></li>
 				<li><a class="adm" href="admin_journees_coupe.php">Nouvelle coupe</a></li>
+				<li><a class="adm" href="../archives.php">Archiver la saison en cours</a></li>
 				<li><a href="admin_reset_bdd.php">Sauvegarder et supprimer toutes les données</a></li>
 			</fieldset>	
 		</article>		

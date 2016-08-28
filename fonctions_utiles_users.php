@@ -1,4 +1,30 @@
-﻿<?php
+﻿
+<?php
+
+function EtatDuRepertoire($MonRepertoire)
+{
+  $fichierTrouve=0;
+  if (is_dir($MonRepertoire))
+  {
+    if ($dh = opendir($MonRepertoire))
+     {
+      while (($file = readdir($dh)) !== false && $fichierTrouve==0)
+      {
+       if ($file!="." && $file!=".." ) $fichierTrouve=1;
+       }
+      closedir($dh);
+     }
+  }else echo ("Le répertoire n'existe pas");
+  
+  if( $fichierTrouve==0) 
+  {
+	  return false;
+  }
+  else
+  {
+	  return true;
+  }
+}
 
 function CalculerAge($date)
 {

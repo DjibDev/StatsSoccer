@@ -4,7 +4,7 @@ function CreerArchive($saison)
 {
 			// création du fichier archive de la saison passée en parametre
 			$filename='../archives/saison_'.$a.'.php';
-			$fichier_stats = fopen($filename,"a+") or die("Impossible de créer le fichier archive !"); 
+			$fichier_archive= fopen($filename,"a+") or die("Impossible de créer le fichier archive !"); 
 			
 			$script_complet='<html>
 			<head>
@@ -15,12 +15,12 @@ function CreerArchive($saison)
 			<body>
 			<div id="bloc_page">
 				<?php 
-				include("../banniere_menu_fiche.php"); 
+				include("../../banniere_menu.php"); 
 				?>	
 			<section>
 				<?php
-					require_once ("../fonctions_affiche_stats.php");
-					AfficheStatsEquipe('.$saison.');
+					require_once ("../fonctions_affiche_archives.php");
+					AfficheArchives('.$saison.');
 				?>
 			</section>	
 			</div>
@@ -28,9 +28,9 @@ function CreerArchive($saison)
 			</html>';
 			
 			// écriture dans le fichier
-			fputs($fichier_stats, $script_complet);
+			fputs($fichier_archive, $script_complet);
 			// fermeture du fichier
-			fclose($fichier_stats); 
+			fclose($fichier_archive); 
 
 }
 
