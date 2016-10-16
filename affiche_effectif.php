@@ -2,7 +2,7 @@
 
 <head>
 	<title>Les stats des loisirs</title>
-	<meta charset="utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 	<link rel="stylesheet" href="style_base.css"/>
 </head>
 
@@ -24,13 +24,14 @@
 	FROM effectif e
 	LEFT JOIN classement_players c
 	ON e.ID_joueur = c.joueur_id 
-	ORDER BY nb_buts DESC, nb_passes DESC, pseudo ASC');
+	WHERE actif=1
+	ORDER BY pseudo ASC ');
 	
 	$x=0;
 	$altern=$x % 2;
 		
 		
-	echo '<table style="font-size:1em;" border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Pseudo</th><th>Age</th><th>Poste</th><th>Buts</th><th>Passes</th><th>CleanSheets</th><th><img src="images/raclette.png"/></th><th><img src="images/maillot.png"/></th><th><img src="images/biere_pression.png"/></th></tr>';
+	echo '<table style="font-size:1em;" border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Pseudo</th><th>Age</th><th>Poste</th><th>Buts</th><th>Passes</th><th><img src="images/fait2match.jpg" title="...est coupable d\'un fait de match...bouh !! "/></th><th><img src="images/raclette.png" title="...a fait les vestiaires !"/></th><th><img src="images/maillot.png" title="...a lavé les maillots !"/></th><th><img src="images/biere_pression.png" title="...ne va pas tarder à payer son coup !"/></th></tr>';
 	
 	
 	while ($resultats=$reponse->fetch())
@@ -52,29 +53,37 @@
 				$birthday_countdown=BirthdayCountdown($date_naiss);
 			}
 					
-			if (($birthday_countdown < 30) || ($birthday_countdown == 366))
+			if ($birthday_countdown == "N.C.")
 			{
-				if (($birthday_countdown < 1) || ($birthday_countdown == 366))
-				{
-					$texte_birthday='<td bgcolor="orange" align="center" width="30"><marquee><b>Jour J !</b></marquee></td>';
-				}
-				else
-				{	
-					$texte_birthday='<td align="center" width="30"><marquee><b>J-'.$birthday_countdown.'</b></marquee></td>';
-				}	
+				$texte_birthday='<td align="center">N.C.</td>';
 			}	
 			else
-			{
-				$texte_birthday='<td align="center">J-'.$birthday_countdown.'</td>';
-			}	
+			{	if (($birthday_countdown < 30) || ($birthday_countdown == 366))
+				{
+					if (($birthday_countdown < 1 ) || ($birthday_countdown == 366))
+					{
+						$texte_birthday='<td bgcolor="orange" align="center" width="30"><marquee><b>Jour J !</b></marquee></td>';
+					}
+					else
+					{	
+						$texte_birthday='<td align="center" width="30"><marquee><b>J-'.$birthday_countdown.'</b></marquee></td>';
+					}	
+				}	
+				else
+				{
+					$texte_birthday='<td align="center">J-'.$birthday_countdown.'</td>';
+				}
+			}		
 			
 			echo '<tr class=trcolor'.$altern.'>';
-			echo '<td>'.$resultats['pseudo'].'</td>';
+			echo '<td>';
+			echo utf8_decode($resultats['pseudo']);
+			echo '</td>';
 			echo '<td align="center">'.$age.'</td>';
 			echo '<td align="center">'.$resultats['poste'].'</td>';
 			echo '<td align="center">'.$resultats['nb_buts'].'</td>';
 			echo '<td align="center">'.$resultats['nb_passes'].'</td>'; 
-			echo '<td align="center">'.$resultats['nb_cleansheets'].'</td>';
+			echo '<td align="center">'.$resultats['nb_faits_marquants'].'</td>';
 			echo '<td align="center">'.$resultats['nb_vestiaires'].'</td>'; 
 			echo '<td align="center">'.$resultats['nb_maillots'].'</td>'; 
 			echo $texte_birthday;

@@ -42,7 +42,7 @@ function NombreEffectif()
 	require('connexion.php');
 	
 	$Nb_player=0;
-	$req=$bdd->query('SELECT count(*) AS Nb_player FROM effectif ');
+	$req=$bdd->query('SELECT count(*) AS Nb_player FROM effectif  where actif=1');
 	
 	while ($resultat=$req->fetch())
 	{
@@ -64,7 +64,7 @@ function AgeAVG()
 	// recuperation des date de naissance, calcul age , et mise en tableau
 	$req=$bdd->query('SELECT birthday 
 	FROM effectif
-	WHERE birthday != "0000-00-00" ');
+	WHERE birthday != "0000-00-00" 	AND actif=1' );
 		
 	while ($resultat=$req->fetch())
 	{
@@ -110,9 +110,10 @@ function NbGAR()
 
 	$nb_gardien=0; // initialisation de la variable 
 	
-	$req=$bdd->query('SELECT count(*) AS Nb_gardien 
+	$req=$bdd->query('SELECT count(*) AS Nb_gardien
 	FROM effectif
-	WHERE poste = "GAR" ');
+	WHERE poste = "GAR" 
+	AND actif=1 ');
 	
 	while ($resultat=$req->fetch())
 	{
@@ -132,7 +133,8 @@ function NbDEF()
 	
 	$req=$bdd->query('SELECT count(*) AS Nb_defenseur 
 	FROM effectif
-	WHERE poste = "DEF" ');
+	WHERE poste = "DEF" 
+	AND actif=1 ');
 	
 	while ($resultat=$req->fetch())
 	{
@@ -152,7 +154,8 @@ function NbMIL()
 	
 	$req=$bdd->query('SELECT count(*) AS Nb_milieu
 	FROM effectif
-	WHERE poste = "MIL" ');
+	WHERE poste = "MIL" 
+	AND actif=1 ');
 	
 	while ($resultat=$req->fetch())
 	{
@@ -172,7 +175,8 @@ function NbATT()
 	
 	$req=$bdd->query('SELECT count(*) AS Nb_attaquant
 	FROM effectif
-	WHERE poste = "ATT" ');
+	WHERE poste = "ATT" 
+	AND actif=1 ');
 	
 	while ($resultat=$req->fetch())
 	{
@@ -192,7 +196,8 @@ function NbINC()
 	
 	$req=$bdd->query('SELECT count(*) AS Nb_inclassable
 	FROM effectif
-	WHERE poste = "XXX" ');
+	WHERE poste = "XXX" 
+	AND actif=1 ');
 	
 	while ($resultat=$req->fetch())
 	{

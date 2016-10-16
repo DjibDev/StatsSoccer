@@ -1,4 +1,4 @@
-<div id="banniere_image">
+﻿<div id="banniere_image">
 		<h1>Saison 
 		<?php 
 
@@ -22,7 +22,8 @@
 				<a class="btn" href="../../affiche_coupe.php">Coupe</a>
 				<a class="btn" href="../../affiche_classement.php">Classements</a>
 				<a class="btn" href="../../affiche_effectif.php">Effectif</a>
-				<a class="btn" href="#forum">Forum</a>
+				<a class="btn" href="../../affiche_stats_joueurs.php">Stats Joueurs</a>
+				<a class="btn" href="#">Forum</a>
 			</center>	
 		</div>
 </div>

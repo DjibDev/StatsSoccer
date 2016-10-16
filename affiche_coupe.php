@@ -20,7 +20,7 @@
 	$result_bareme=$affiche_bareme->fetch();
 
 	echo '<center>';
-	echo '<p>Victoire: <b class=forme_v>'.$result_bareme['pts_victoire'].'pts</b>. - Nul: <b class=forme_n>'.$result_bareme['pts_nul'].'pt(s)</b>. - Défaite: <b class=forme_d>'.$result_bareme['pts_defaite'].'pt(s)</b>. - Forfait: <b class=forme_f>'.$result_bareme['pts_forfait'].'pt(s)</b>. - Pénalité: <b class=forme_p>'.$result_bareme['pts_penalite'].'pt(s)</b>.</p>';
+	echo '<p>Victoire: <b class=forme_v>'.$result_bareme['pts_victoire'].'pts</b>. - Nul: <b class=forme_n>'.$result_bareme['pts_nul'].'pt(s)</b>. - Défaite: <b class=forme_d>'.$result_bareme['pts_defaite'].'pt(s)</b>. - Forfait: <b class=forme_f>'.$result_bareme['pts_forfait'].'pt (-3 buts)</b>. - Pénalité: <b class=forme_p>'.$result_bareme['pts_penalite'].'pt (-3 buts)</b>.</p>';
 	$affiche_bareme->CloseCursor();
 
 	$req1=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_forfaits, nb_penalites, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points
@@ -96,13 +96,14 @@
 		echo '</table><br>';	
 	
 	require ('fonctions_utiles_users.php');
-	$reponse=$bdd->query('SELECT numero, date FROM journees WHERE coupe="1" ORDER BY numero ASC');
+	$reponse=$bdd->query('SELECT numero, date FROM journees WHERE coupe="1" ORDER BY date ASC');
 	
 	
 	while ($resultats=$reponse->fetch())
 	{		
 		
 		$dateFR=FormatDateFR($resultats['date']);
+		$date=$resultats['date'];
 		$num_journee=$resultats['numero'];
 		
 		echo '<div id=match'.$num_journee.'></div>';
@@ -111,11 +112,10 @@
 				
 		$reponse2=$bdd->query('SELECT e1.nom equi1, e2.nom equi2, e1.favorite fav1, e2.favorite fav2, equipe_dom_forfait, equipe_dom_penalite, equipe_vis_forfait, equipe_vis_penalite, but_equipe_dom, but_equipe_vis, finished 
 		FROM matchs, journees, equipes_coupe e1, equipes_coupe e2
-		WHERE numero='.$num_journee.'
-		AND journees.ID_journee=matchs.journee_id
+		WHERE journees.ID_journee=matchs.journee_id
+		AND journees.date="'.$date.'"
 		AND matchs.equipe_dom_id = e1.ID_equipe
-		AND matchs.equipe_vis_id = e2.ID_equipe
-		AND journees.coupe = "1" ');
+		AND matchs.equipe_vis_id = e2.ID_equipe ');
 	
 		while ($resultats2=$reponse2->fetch())
 		{

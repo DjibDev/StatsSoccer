@@ -473,7 +473,7 @@ function MAJ_Classement_players($joueur_id)
 	// calculs cumulatifs par joueur
 	
 	$x=0;
-	$cleansheet=0;
+	$faits_marquants=0;
 	$maillots=0;
 	$vestiaires=0;
 	
@@ -481,12 +481,12 @@ function MAJ_Classement_players($joueur_id)
 	{
 		$nb_buts=0;
 		$nb_passes=0;
-		$nb_cleansheets=0;
+		$nb_faits_marquants=0;
 		$nb_vestiaires=0;
 		$nb_maillots=0;
 								
 		// requete faite par joueur
-		$req3=$bdd->query('SELECT buts, passes, cleansheet, nettoyage_vestiaires, lavage_maillots
+		$req3=$bdd->query('SELECT buts, passes, faits_marquants, nettoyage_vestiaires, lavage_maillots
 		FROM stats_individuelles
 		WHERE joueur_id='.$joueur_id.' ');
 							
@@ -504,8 +504,17 @@ function MAJ_Classement_players($joueur_id)
 				$cleansheet=0;
 			}	
 			
-			$nb_cleansheets=$nb_cleansheets+$cleansheet;
-			
+			if ($resultats3['faits_marquants'] == true )
+			{
+				$faits_marquants=1;
+			}
+			else 
+			{
+				$faits_marquants=0;
+			}	
+
+			$nb_faits_marquants=$nb_faits_marquants+$faits_marquants;
+
 			if ($resultats3['nettoyage_vestiaires'] == true )
 			{
 				$vestiaires=1;
@@ -547,9 +556,9 @@ function MAJ_Classement_players($joueur_id)
 			$nb_passes=NULL;
 		}
 		
-		if ($nb_cleansheets == 0)
+		if ($nb_faits_marquants == 0)
 		{
-			$nb_cleansheets=NULL;
+			$nb_faits_marquants=NULL;
 		}
 		
 		if ($nb_vestiaires == 0)
@@ -564,12 +573,12 @@ function MAJ_Classement_players($joueur_id)
 		
 		
 		//requete pour écrire le nouveau classement	joueur	
-		$req5=$bdd->prepare("INSERT INTO classement_players (nb_journees, nb_buts, nb_passes, nb_cleansheets, nb_vestiaires, nb_maillots, joueur_id)
+		$req5=$bdd->prepare("INSERT INTO classement_players (nb_journees, nb_buts, nb_passes, nb_faits_marquants, nb_vestiaires, nb_maillots, joueur_id)
 		VALUES (?,?,?,?,?,?,?)");
 		$req5->bindParam(1, $nb_journees); 
 		$req5->bindParam(2, $nb_buts);
 		$req5->bindParam(3, $nb_passes);
-		$req5->bindParam(4,	$nb_cleansheets);
+		$req5->bindParam(4,	$nb_faits_marquants);
 		$req5->bindParam(5,	$nb_vestiaires); 
 		$req5->bindParam(6,	$nb_maillots);
 		$req5->bindParam(7, $joueur_id);

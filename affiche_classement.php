@@ -28,7 +28,7 @@
 	$affiche_bareme=$bdd->query('SELECT * FROM baremes WHERE coupe=0');
 	$result_bareme=$affiche_bareme->fetch();
 
-	echo '<p>Victoire: <b class=forme_v>'.$result_bareme['pts_victoire'].'pts</b>. - Nul: <b class=forme_n>'.$result_bareme['pts_nul'].'pt(s)</b>. - Défaite: <b class=forme_d>'.$result_bareme['pts_defaite'].'pt(s)</b>. - Forfait: <b class=forme_f>'.$result_bareme['pts_forfait'].'pt(s)</b>. - Pénalité: <b class=forme_p>'.$result_bareme['pts_penalite'].'pt(s)</b>.</p>';
+	echo '<p>Victoire: <b class=forme_v>'.$result_bareme['pts_victoire'].'pts</b>. - Nul: <b class=forme_n>'.$result_bareme['pts_nul'].'pt(s)</b>. - Défaite: <b class=forme_d>'.$result_bareme['pts_defaite'].'pt(s)</b>. - Forfait: <b class=forme_f>'.$result_bareme['pts_forfait'].'pt (- 3 buts)</b>. - Pénalité: <b class=forme_p>'.$result_bareme['pts_penalite'].'pt (-3 buts)</b>.</p>';
 	$affiche_bareme->CloseCursor();
 
 	$req1=$bdd->query('SELECT ID_equipe, nom, favorite, nb_journees, nb_forfaits, nb_penalites, nb_victoires, nb_nuls, nb_defaites, nb_buts_pour, nb_buts_contre, diff, points

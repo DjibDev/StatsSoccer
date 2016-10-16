@@ -56,7 +56,7 @@
 			$faits_marquants=false;
 			if (isset($_POST['faits']))
 			{
-				$cleansheet=true;
+				$faits_marquants=true;
 			}
 
 			$description_faitmarquant=$_POST['details_faits'];

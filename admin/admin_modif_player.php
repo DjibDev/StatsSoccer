@@ -69,7 +69,15 @@
 				$a=$decoupe[0];
 				$m=$decoupe[1];
 				$j=$decoupe[2];
-							
+
+				?>	
+				<label for="actif">Statut :</label>	
+				<input type="checkbox" name="actif" id="actif" value="'.$result_pl['actif'].'" <?php if ($result_pl['actif'] == true) { echo 'checked';} ?> /> Activé
+				<input type="checkbox" name="actif" id="actif" value="'.$result_pl['actif'].'" <?php if ($result_pl['actif'] == false) { echo 'checked';} ?> /> Désactivé
+
+				<?php
+				echo '<br>';
+				echo '<br>';
 				echo '<label for="nom">Nom :</label>';	
 				echo '<input type="text" name="nom" id="nom" value="'.$result_pl['nom'].'"/>';
 				
@@ -97,6 +105,7 @@
 
 				<label for="jour">Date de naissance : </label>
 				<select name="jour" id="jour">
+					<option value="00" <?php if ($j == "00") { echo 'selected';} ?> >jour</option>
 					<option value="01" <?php if ($j == "01") { echo 'selected';} ?> >01</option>
 					<option value="02" <?php if ($j == "02") { echo 'selected';} ?> >02</option>
 					<option value="03" <?php if ($j == "03") { echo 'selected';} ?> >03</option>
@@ -131,6 +140,7 @@
 			</select> 
 
 			<select name="mois" id="mois">
+					<option value="00" <?php if ($m == "00") { echo 'selected';} ?> >mois</option>
 					<option value="01" <?php if ($m == "01") { echo 'selected';} ?> >Janvier</option>
 					<option value="02" <?php if ($m == "02") { echo 'selected';} ?> >Février</option>
 					<option value="03" <?php if ($m == "03") { echo 'selected';} ?> >Mars</option>
@@ -146,6 +156,7 @@
 			</select>
 			
 			<select name="annee" id="annee">
+				<option value="0000" <?php if ($a == "0000") { echo 'selected';} ?> >année</option>
 				<option value="1970" <?php if ($a == "1970") { echo 'selected';} ?> >1970</option>
 				<option value="1971" <?php if ($a == "1971") { echo 'selected';} ?> >1971</option>
 				<option value="1972" <?php if ($a == "1972") { echo 'selected';} ?> >1972</option>

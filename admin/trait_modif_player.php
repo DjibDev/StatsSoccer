@@ -20,7 +20,7 @@
 		{
 				
 			require ('connexion.php');
-			
+			$actif= $_POST['actif'];
 			$birthday=$_POST['annee'].'-'.$_POST['mois'].'-'.$_POST['jour'];
 			$poste=$_POST['poste'];
 			$num_maillot=$_POST['num_maillot'];
@@ -31,8 +31,8 @@
 			$pseudo=$_POST['pseudo'];
 			
 						
-			$req = $bdd->prepare('UPDATE effectif SET pseudo=?, nom= ?, prenom=?, birthday=?, email=?, poste=?, num_maillot=? WHERE ID_joueur=? ');
-			$req->execute(array($pseudo,$nom,$prenom,$birthday,$email,$poste,$num_maillot,$ID_joueur)); 
+			$req = $bdd->prepare('UPDATE effectif SET pseudo=?, nom= ?, prenom=?, birthday=?, email=?, poste=?, num_maillot=? $actif=? WHERE ID_joueur=? ');
+			$req->execute(array($pseudo,$nom,$prenom,$birthday,$email,$poste,$num_maillot,$actif,$ID_joueur)); 
 
 			
 			echo '<center>';
