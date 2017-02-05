@@ -30,7 +30,7 @@
 	ORDER BY points DESC, diff DESC, nb_buts_pour DESC, nom ASC ');
 	
 	$x=0;
-	echo '<table border=2 cellspacing=2 cellspadding=2 style=font-size:14px>';
+	echo '<table>';
 	echo '<tr class=trheadcolor><th></th><th></th><th width="30">Pts</th><th width="30">J</th><th width="30">V</th><th width="30">N</th><th width="30">D</th><th width="30">F</th><th width="30">Pé.</th><th width="30">Bp</th><th>Bc</th><th width="30">Diff</th><th>Enjeux</th></tr>';
 	
 		while ($resultats=$req1->fetch())
@@ -70,7 +70,7 @@
 	
 				
 			echo '<tr class=trcolor'.$altern.'>';
-			echo '<td>'.$x.'</td>';
+			echo '<td width="30px" align="center">'.$x.'</td>';
 			echo '<td><b>'.$resultats['nom'].'</b></td>';
 			echo '<td align="center"><b>'.$resultats['points'].'</b></td>';
 					

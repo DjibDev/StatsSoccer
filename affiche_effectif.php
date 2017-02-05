@@ -1,4 +1,4 @@
-﻿<html>
+<html>
 
 <head>
 	<title>Les stats des loisirs</title>
@@ -31,7 +31,7 @@
 	$altern=$x % 2;
 		
 		
-	echo '<table style="font-size:1em;" border=2 cellspacing=2 cellspadding=2><tr class=trheadcolor><th>Pseudo</th><th>Age</th><th>Poste</th><th>Buts</th><th>Passes</th><th><img src="images/fait2match.jpg" title="...est coupable d\'un fait de match...bouh !! "/></th><th><img src="images/raclette.png" title="...a fait les vestiaires !"/></th><th><img src="images/maillot.png" title="...a lavé les maillots !"/></th><th><img src="images/biere_pression.png" title="...ne va pas tarder à payer son coup !"/></th></tr>';
+	echo '<table style="font-size:1,2em;" border=1 cellspacing=2 cellspadding=5><tr class=trheadcolor><th>Pseudo</th><th>Age</th><th>Poste</th><th>Buts</th><th>Passes</th><th><img src="images/fait2match.jpg" title="...est coupable d\'un fait de match...bouh !! "/></th><th><img src="images/raclette.png" title="...a fait les vestiaires !"/></th><th><img src="images/maillot.png" title="...a lavé les maillots !"/></th><th><img src="images/biere_pression.png" title="...ne va pas tarder à payer son coup !"/></th></tr>';
 	
 	
 	while ($resultats=$reponse->fetch())

@@ -66,10 +66,7 @@ font-size:18px;
 color:red;
 }
 
-table 
-{
-    font-size:1em;
-}
+
 
 /* definit la couleur des caracteres pour victoires, nuls, defaites et forfaits dans la rubrique stats */
 
@@ -110,10 +107,24 @@ color:purple;
 
 /* alternance des couleurs des lignes dans résultats du tableau*/
 
+table {
+    border-collapse:collapse;
+
+}
+table td{
+    padding: 5px 10px 5px 1px;
+}
+
+table td a{
+    text-decoration: none;
+}
+
+
 .trheadcolor
 {
 background-color:white;
 color:black;
+border: 0px;
 }
 
 .trcolor0
@@ -195,7 +206,7 @@ font-size: 0.8em;
   background-image: linear-gradient(to bottom, #A7EA95, #426A38);
   -webkit-border-radius: 30;
   -moz-border-radius: 30;
-  border-radius: 30px;
+  border-radius: 5px;
   font-family: Arial;
   color: #ffffff;
   font-size: 12px;

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 		require ('connexion.php');
 
 		echo '<h2 align="center">Classements individuels</h2>';
@@ -6,9 +6,8 @@
 		echo '<table align="center">';  // super tableau qui englobe les sous tableaux
 		echo '<tr><td>';
 
-		echo '<table border=2 cellspacing=2 cellspadding=2 >';
+		echo '<table>';
 		echo '<tr><th colspan="3">Classement - Buteurs</th></tr>';
-		echo '<tr><th>Rang</th><th>Pseudo</th><th>Buts</th></tr>';
 		
 		$req_but=$bdd->query('SELECT pseudo, nb_buts 
 		FROM classement_players, effectif
@@ -60,9 +59,8 @@
 		echo '<td width="100"></td>';
 		echo '<td>';
 
-		echo '<table border=2 cellspacing=2 cellspadding=2 >';
+		echo '<table>';
 		echo '<tr><th colspan="3">Classement - Passeurs</th></tr>';
-		echo '<tr><th>Rang</th><th>Pseudo</th><th>Passes</th></tr>';
 				
 		$req_pass=$bdd->query('SELECT pseudo, nb_passes
 		FROM classement_players, effectif 
@@ -114,9 +112,9 @@
 		echo '<td width="100"></td>';
 		echo '<td>';
 
-		echo '<table border=2 cellspacing=2 cellspadding=2 >';
+		echo '<table>';
 		echo '<tr><th colspan="3">Classement - Faits de match</th></tr>';
-		echo '<tr><th>Rang</th><th>Pseudo</th><th>Faits de match</th></tr>';
+
 				
 		$req_faits=$bdd->query('SELECT pseudo, nb_faits_marquants
 		FROM classement_players, effectif 
